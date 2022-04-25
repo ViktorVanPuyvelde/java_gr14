@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.fxml.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.graphics.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/mysql-connector-java-8.0.23.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/org.json/json-20220320.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

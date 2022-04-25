@@ -1,28 +1,18 @@
 package domein;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.List;
 
 public class CategorieController
 {
-	public final String PERSISTENCE_UNIT_NAME = "GR14";
-	private EntityManager em;
-	private EntityManagerFactory emf;
+	private CategorieBeheerder cb = new CategorieBeheerder();
 
-	public CategorieController()
+	public List<String> geefCategorien()
 	{
-		initializePersistentie();
+		return cb.geefAlleCategorienJPA().stream().map(Categorie::toString).toList();
 	}
 
-	public void initializePersistentie()
+	public void close()
 	{
-		openPersistentie();
-	}
-
-	public void openPersistentie()
-	{
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		em = emf.createEntityManager();
+		cb.closePersistentie();
 	}
 }
