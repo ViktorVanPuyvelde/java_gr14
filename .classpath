@@ -6,19 +6,80 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/eclipselink.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/jakarta.persistence_2.2.3.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/jakarta.persistence.source_2.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17.0.0.1/lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/org.json/json-20220320.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/mysql-connector-java-8.0.23.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/Enterprise Web Development-Java/jars/jpaJARS/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/jakarta.persistence_2.2.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.base.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.controls.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.fxml.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.graphics.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/json-20220320.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/auth0-1.40.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/failsafe-2.4.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-annotations-2.13.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-core-2.13.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-databind-2.13.2.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jakarta.persistence.source_2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/java-jwt-3.19.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-common-1.4.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-jdk7-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-jdk8-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/logging-interceptor-4.9.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/mysql-connector-java-8.0.23.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/okhttp-4.9.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/okio-2.8.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/vikto/.m2/repository/org/eclipse/persistence/eclipselink/2.7.10/eclipselink-2.7.10.jar" sourcepath="C:/Users/vikto/.m2/repository/org/eclipse/persistence/eclipselink/2.7.10/eclipselink-2.7.10-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.eclipse.persistence"/>
+			<attribute name="maven.artifactId" value="eclipselink"/>
+			<attribute name="maven.version" value="2.7.10"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/vikto/.m2/repository/org/eclipse/persistence/jakarta.persistence/2.2.3/jakarta.persistence-2.2.3.jar" sourcepath="C:/Users/vikto/.m2/repository/org/eclipse/persistence/jakarta.persistence/2.2.3/jakarta.persistence-2.2.3-sources.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.eclipse.persistence"/>
+			<attribute name="maven.artifactId" value="jakarta.persistence"/>
+			<attribute name="maven.version" value="2.2.3"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/eclipselink.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

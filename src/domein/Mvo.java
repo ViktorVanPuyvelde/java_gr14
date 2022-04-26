@@ -18,8 +18,8 @@ public class Mvo implements CRUD {
 	 * @param datasource
 	 */
 	public Mvo(String name, Datasource datasource) {
-		// TODO - implement Mvo.Mvo
-		throw new UnsupportedOperationException();
+		this.setName(name);
+		
 	}
 
 	/**
@@ -55,6 +55,14 @@ public class Mvo implements CRUD {
 	public void delete() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

@@ -2,8 +2,8 @@ package util;
 
 import javax.persistence.AttributeConverter;
 
-import org.eclipse.persistence.exceptions.JSONException;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 public class JSONArrayConverter implements AttributeConverter<JSONArray, String>
 {
