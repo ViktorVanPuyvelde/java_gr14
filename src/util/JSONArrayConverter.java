@@ -1,12 +1,10 @@
 package util;
 
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
 import org.eclipse.persistence.exceptions.JSONException;
 import org.json.JSONArray;
 
-@Converter
 public class JSONArrayConverter implements AttributeConverter<JSONArray, String>
 {
 	@Override
