@@ -44,10 +44,11 @@ public class Categorie implements CRUD, Serializable
 	 * @param iconName
 	 * @param roles
 	 */
-	public Categorie(String name, String iconName, List<String> roles)
+	public Categorie(String name, String iconName, JSONArray roles)
 	{
-		// TODO - implement Categorie.Categorie
-		throw new UnsupportedOperationException();
+		setName(name);
+		setIconName(iconName);
+		setRoles(roles);
 	}
 
 	protected Categorie()
