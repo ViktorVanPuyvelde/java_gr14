@@ -11,6 +11,13 @@ package domein;
 
 public class DomeinController {
 
+	public DomeinController() {
+		
+	}
+	
+	
+	
+
 	//private CoördinatorApplicatie appManager;
 //	private User coordinator;
 //	
@@ -47,56 +54,5 @@ public class DomeinController {
 //	    System.out.println("Afgemeld");
 //	}
 	
-	
-//
-//	/**
-//	 * 
-//	 * @param type
-//	 */
-//	public List<E> toonOverzichtEntity(String type) {
-//		// TODO - implement DomeinController.toonOverzichtEntity
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	/**
-//	 * 
-//	 * @param type
-//	 * @param id
-//	 * @param attributen
-//	 */
-//	public void updateEntity(String type, String id, List<String> attributen) {
-//		// TODO - implement DomeinController.updateEntity
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	/**
-//	 * 
-//	 * @param type
-//	 * @param id
-//	 */
-//	public void deteteEntity(String type, String id) {
-//		// TODO - implement DomeinController.deteteEntity
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	/**
-//	 * 
-//	 * @param type
-//	 * @param attributen
-//	 */
-//	public void createEntity(String type, List<String> attributen) {
-//		// TODO - implement DomeinController.createEntity
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void validateer() {
-//		// TODO - implement DomeinController.validateer
-//		throw new UnsupportedOperationException();
-//	}
-//
-//	public void updateApp() {
-//		// TODO - implement DomeinController.updateApp
-//		throw new UnsupportedOperationException();
-//	}
 	
 }

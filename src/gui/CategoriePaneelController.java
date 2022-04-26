@@ -77,7 +77,7 @@ public class CategoriePaneelController extends GridPane{
 		rolItemList.add("rol 1");
 		rolItemList.add("rol 2");
 		
-		//fill with non-binded Mvo's
+		//fill with Mvo's
 		mvoItemList.forEach(mvo -> cat_Mvo_List.getItems().add(mvo.getName()));
 		
 		

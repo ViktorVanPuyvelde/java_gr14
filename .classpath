@@ -51,5 +51,140 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/mysql-connector-java-8.0.27.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/eclipselink.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jakarta.persistence.source_2.2.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jakarta.persistence_2.2.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jstl-1.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/ExternanLibs/jars/standard-1.1.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/javax.persistence.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/auth0-1.41.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/failsafe-2.4.1.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-annotations-2.13.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-core-2.13.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-databind-2.13.2.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/java-jwt-3.19.1.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-1.4.10.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-jdk7-1.4.10.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-jdk8-1.4.10.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/logging-interceptor-4.9.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/okhttp-4.9.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/okio-2.8.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/annotations-13.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/java-dotenv-5.2.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-1.4.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-common-1.4.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
