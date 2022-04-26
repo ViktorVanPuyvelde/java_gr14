@@ -38,4 +38,9 @@ public class CategorieBeheerder
 	{
 		return em.createNamedQuery("Categorie.alleCategoriën", Categorie.class).getResultList();
 	}
+
+	public void addCategorie(String name, String iconName, List<String> roles)
+	{
+
+	}
 }

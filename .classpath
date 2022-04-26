@@ -49,7 +49,6 @@
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-databind-2.13.2.2.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jakarta.persistence.source_2.2.3.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/java-jwt-3.19.1.jar"/>
-	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-1.4.10.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-common-1.4.0.jar"/>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-jdk7-1.4.10.jar"/>
@@ -81,5 +80,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/eclipselink.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/json-simple-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
