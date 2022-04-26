@@ -1,15 +1,21 @@
-module java_gr14 {
-	exports test;
-	exports ui;
-	exports util;
-	exports gui;
-	exports domein;
+open module java_gr14
+{
+//	exports test;
+//	exports ui;
+//	exports util;
+//	exports gui;
+//	exports domein;
+	// Persistence
+	requires java.persistence;
+	requires org.json;
 
-	requires javafx.base;
-	requires javafx.graphics;
-	requires org.junit.jupiter.api;
+	// FX
 	requires javafx.fxml;
 	requires javafx.controls;
-	
-	opens gui to javafx.graphics, javafx.fxml;
+	requires javafx.base;
+	requires javafx.graphics;
+
+	// Unit tests
+	requires org.junit.jupiter.api;
+	requires org.junit.jupiter.params;
 }

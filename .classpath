@@ -11,180 +11,75 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.base.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/jakarta.persistence_2.2.3.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.controls.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.fxml.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.controls.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.graphics.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.fxml.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.media.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/javafx.graphics.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.swing.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/modulepath/json-20220320.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx.web.jar">
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/annotations-13.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/auth0-1.40.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/failsafe-2.4.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-annotations-2.13.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-core-2.13.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jackson-databind-2.13.2.2.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/jakarta.persistence.source_2.2.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/java-jwt-3.19.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-common-1.4.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-jdk7-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/kotlin-stdlib-jdk8-1.4.10.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/logging-interceptor-4.9.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/mysql-connector-java-8.0.23.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/okhttp-4.9.3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/okio-2.8.0.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/vikto/.m2/repository/org/eclipse/persistence/eclipselink/2.7.10/eclipselink-2.7.10.jar" sourcepath="C:/Users/vikto/.m2/repository/org/eclipse/persistence/eclipselink/2.7.10/eclipselink-2.7.10-sources.jar">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.eclipse.persistence"/>
+			<attribute name="maven.artifactId" value="eclipselink"/>
+			<attribute name="maven.version" value="2.7.10"/>
+			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/JavaFX_SDK15/javafx-sdk-15.0.1/lib/javafx-swt.jar">
+	<classpathentry kind="lib" path="C:/Users/vikto/.m2/repository/org/eclipse/persistence/jakarta.persistence/2.2.3/jakarta.persistence-2.2.3.jar" sourcepath="C:/Users/vikto/.m2/repository/org/eclipse/persistence/jakarta.persistence/2.2.3/jakarta.persistence-2.2.3-sources.jar">
 		<attributes>
-			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.eclipse.persistence"/>
+			<attribute name="maven.artifactId" value="jakarta.persistence"/>
+			<attribute name="maven.version" value="2.2.3"/>
+			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/mysql-connector-java-8.0.27.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/eclipselink.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jakarta.persistence.source_2.2.3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jakarta.persistence_2.2.3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/jstl-1.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/ExternanLibs/jars/standard-1.1.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/javax.persistence.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/auth0-1.41.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/failsafe-2.4.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-annotations-2.13.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-core-2.13.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/jackson-databind-2.13.2.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/java-jwt-3.19.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-1.4.10.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-jdk7-1.4.10.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-jdk8-1.4.10.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/logging-interceptor-4.9.3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/okhttp-4.9.3.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/okio-2.8.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/annotations-13.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/java-dotenv-5.2.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-1.4.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/Gebruikers/Dylan/bureaublad/Toegepaste_Informatica/2021-2022/Sem II/SDP II GR14/jars/kotlin-stdlib-common-1.4.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="D:/Viktor/School/HOGENT/MT2/SEM2/SDPII/project-jars/classpath/eclipselink.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
