@@ -18,7 +18,7 @@ public class Mvo implements CRUD {
 	 * @param datasource
 	 */
 	public Mvo(String name, Datasource datasource) {
-		this.name = name;
+		this.setName(name);
 		
 	}
 
@@ -55,6 +55,14 @@ public class Mvo implements CRUD {
 	public void delete() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

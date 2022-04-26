@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -19,7 +20,7 @@ public class CategoriePaneelController extends GridPane{
 	private DomeinController dc;
 	
 	@FXML
-	private ListView<Mvo> cat_Mvo_List;
+	private ListView<String> cat_Mvo_List;
 	@FXML
 	private ListView<String> cat_Rol_List;
 	
@@ -36,37 +37,55 @@ public class CategoriePaneelController extends GridPane{
 
 	public CategoriePaneelController(DomeinController dc) {
 		this.dc = dc;
-		cat_Mvo_List = new ListView<>();
-		cat_Rol_List = new ListView<>();
-		mvoItemList = FXCollections.observableArrayList(new ArrayList());
-		rolItemList = FXCollections.observableArrayList(new ArrayList());
 		buildGui();
-		
+		initialize();
 	}
 	
 	private void buildGui() {
 		try{
 			
+			cat_Mvo_List = new ListView<>();
+			cat_Rol_List = new ListView<>();
+			mvoItemList = FXCollections.observableArrayList(new ArrayList());
+			rolItemList = FXCollections.observableArrayList(new ArrayList());
 			
-			mvoItemList.add(new Mvo("nieuwe MVO",null));
-			rolItemList.add("Een rol");
-			
-			//fill with non-binded Mvo's
-			cat_Mvo_List.setItems(mvoItemList);
-			
-			
-			//fill with Roles
-			cat_Rol_List.setItems(rolItemList);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
+			
+			
 			
 			} 
 		catch(IOException ex)
 		{
 		throw new RuntimeException(ex);
 		}
+	}
+	
+	private void initialize() {
+		
+		
+
+		
+		cat_Mvo_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		
+		mvoItemList.add(new Mvo("MVO 1",null));
+		mvoItemList.add(new Mvo("MVO 2",null));
+		mvoItemList.add(new Mvo("MVO 3",null));
+		rolItemList.add("rol 1");
+		rolItemList.add("rol 2");
+		
+		//fill with non-binded Mvo's
+		mvoItemList.forEach(mvo -> cat_Mvo_List.getItems().add(mvo.getName()));
+		
+		
+		//fill with Roles
+		cat_Rol_List.setItems(rolItemList);
+		System.out.println(cat_Mvo_List.getItems());
+		
+		
 	}
 	
 	@FXML
