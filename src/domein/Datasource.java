@@ -38,4 +38,12 @@ public class Datasource implements CRUD {
 		
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }
