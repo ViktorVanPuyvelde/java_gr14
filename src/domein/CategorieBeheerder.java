@@ -38,6 +38,4 @@ public class CategorieBeheerder
 	{
 		return em.createNamedQuery("Categorie.alleCategoriën", Categorie.class).getResultList();
 	}
-	
-	public
 }
