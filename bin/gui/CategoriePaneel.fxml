@@ -41,7 +41,7 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
                         </Label>
-                        <TextField fx:id="cat_Name_Field">
+                        <TextField fx:id="cat_Name_field">
                            <HBox.margin>
                               <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                            </HBox.margin>

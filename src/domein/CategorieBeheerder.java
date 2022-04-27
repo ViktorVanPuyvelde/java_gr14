@@ -17,12 +17,12 @@ public class CategorieBeheerder
 		initializePersistentie();
 	}
 
-	public void initializePersistentie()
+	private void initializePersistentie()
 	{
 		openPersistentie();
 	}
 
-	public void openPersistentie()
+	private void openPersistentie()
 	{
 		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		em = emf.createEntityManager();

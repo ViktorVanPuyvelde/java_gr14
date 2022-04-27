@@ -2,7 +2,7 @@ package domein;
 
 import java.util.List;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 
 public class CategorieController
 {
@@ -12,6 +12,11 @@ public class CategorieController
 	{
 		return cb.geefAlleCategorienJPA().stream().map(Categorie::toString).toList();
 	}
+
+//	public List<String> geefSdgsVanCategorie()
+//	{
+//		
+//	}
 
 	public void voegCategorieToe(String name, String iconName, JSONArray roles)
 	{

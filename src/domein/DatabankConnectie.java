@@ -1,3 +1,6 @@
 package domein;
-public class DatabankConnectie {
+
+public class DatabankConnectie
+{
+
 }
