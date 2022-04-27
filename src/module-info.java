@@ -6,7 +6,7 @@ open module java_gr14
 //	exports gui;
 //	exports domein;
 	// Persistence
-
+	requires java.persistence;
 
 	// FX
 	requires javafx.fxml;
@@ -17,5 +17,6 @@ open module java_gr14
 	// Unit tests
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
-	requires javax.persistence;
+	requires json.simple;
+	requires org.json;
 }
