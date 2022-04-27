@@ -12,7 +12,7 @@ public class StartUpGui extends Application
     public void start(Stage stage)
     {
         DomeinController controller = new DomeinController();
-        Scene scene = new Scene(new CategoriePaneelController(controller));
+        Scene scene = new Scene(new DatasourcePaneelController(controller));
        
         stage.setScene(scene);
         stage.show();

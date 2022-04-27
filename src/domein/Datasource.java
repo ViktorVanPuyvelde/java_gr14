@@ -10,8 +10,7 @@ public class Datasource implements CRUD {
 	 * @param name
 	 */
 	public Datasource(String name) {
-		// TODO - implement Datasource.Datasource
-		throw new UnsupportedOperationException();
+		this.name = name;
 	}
 
 	@Override

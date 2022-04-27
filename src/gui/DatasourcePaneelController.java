@@ -5,11 +5,12 @@ import java.util.ArrayList;
 
 import domein.Datasource;
 import domein.DomeinController;
-import domein.Mvo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 
@@ -17,7 +18,16 @@ public class DatasourcePaneelController extends AnchorPane{
 	private DomeinController dc;
 	
 	@FXML
-	private ListView<String> datasourceList;
+	private ListView<String> datasource_List;
+	
+	@FXML
+	private Button create_btn;
+	@FXML
+	private Button view_btn;
+	@FXML
+	private Button edit_btn;
+	@FXML
+	private Button delete_btn;
 	
 	private ObservableList<Datasource> datasourceItemList;
 	
@@ -32,7 +42,7 @@ public class DatasourcePaneelController extends AnchorPane{
 		datasourceItemList.add(new Datasource("Datasource 1"));
 		datasourceItemList.add(new Datasource("Datasource 2"));
 		
-		datasourceItemList.forEach(ds -> datasourceList.getItems().add(ds.getName()));
+		datasourceItemList.forEach(ds -> datasource_List.getItems().add(ds.getName()));
 		
 	}
 
@@ -40,11 +50,11 @@ public class DatasourcePaneelController extends AnchorPane{
 		
 		try {
 			
-			datasourceList = new ListView<>();
+			datasource_List = new ListView<>();
 			
 			datasourceItemList = FXCollections.observableArrayList(new ArrayList());
 			
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("RaadplegenDatasourcePaneel.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("RaadplegenDatasourcesPaneel.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		loader.load();
@@ -53,6 +63,51 @@ public class DatasourcePaneelController extends AnchorPane{
 		{
 		throw new RuntimeException(ex);
 		}
+		
+	}
+	
+	@FXML
+	public void create_OnAction(ActionEvent event) {
+		collectChanges();
+		verify();
+		update();
+	}
+	
+
+
+	@FXML
+	public void view_OnAction(ActionEvent event) {
+		collectChanges();
+		verify();
+		update();
+	}
+	
+	@FXML
+	public void edit_OnAction(ActionEvent event) {
+		collectChanges();
+		verify();
+		update();
+	}
+	
+	@FXML
+	public void delete_OnAction(ActionEvent event) {
+		collectChanges();
+		verify();
+		update();
+	}
+	
+	private void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void verify() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void collectChanges() {
+		// TODO Auto-generated method stub
 		
 	}
 }

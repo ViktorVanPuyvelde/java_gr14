@@ -14,40 +14,45 @@
          <children>
             <VBox prefHeight="400.0" prefWidth="400.0">
                <children>
-                  <Pane prefHeight="73.0" prefWidth="400.0">
+                  <Pane prefHeight="59.0" prefWidth="400.0">
                      <children>
-                        <Label layoutX="186.0" layoutY="28.0" text="Label" />
+                        <Label layoutX="135.0" layoutY="21.0" text="Datasources Raadplegen" />
                      </children>
                   </Pane>
-                  <HBox prefHeight="210.0" prefWidth="400.0">
+                  <Pane prefHeight="70.0" prefWidth="400.0">
+                     <children>
+                        <Button fx:id="create_btn" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_onAction" text="create new datasource" />
+                     </children>
+                  </Pane>
+                  <HBox prefHeight="186.0" prefWidth="400.0">
                      <children>
                         <Pane prefHeight="100.0" prefWidth="114.0">
                            <children>
-                              <Label layoutX="25.0" layoutY="42.0" text="Datasources" />
+                              <Label layoutX="22.0" layoutY="85.0" text="Datasources :" />
                            </children>
                         </Pane>
                         <Pane prefHeight="210.0" prefWidth="295.0">
                            <children>
-                              <ListView fx:id="datasourceList" prefHeight="210.0" prefWidth="290.0" />
+                              <ListView fx:id="datasource_List" prefHeight="186.0" prefWidth="270.0" />
                            </children>
                         </Pane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="84.0" prefWidth="400.0">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="41.0" layoutY="38.0" mnemonicParsing="false" text="create" />
+                              <Button fx:id="view_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#view_onAction" text="view" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="41.0" layoutY="38.0" mnemonicParsing="false" text="edit" />
+                              <Button fx:id="edit_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#edit_onAction" text="edit" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="41.0" layoutY="38.0" mnemonicParsing="false" text="delete" />
+                              <Button fx:id="delete_btn" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onAction="#delete_onAction" text="delete" />
                            </children>
                         </Pane>
                      </children>
