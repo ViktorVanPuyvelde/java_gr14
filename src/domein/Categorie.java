@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 
 import util.JSONArrayConverter;
 

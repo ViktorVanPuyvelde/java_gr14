@@ -2,9 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
-
 import domein.CategorieController;
-
 
 public class ConsoleLogin
 {
@@ -23,15 +21,15 @@ public class ConsoleLogin
 //		System.out.println("Paswoord:");
 //		String paswoord = sc.next();
 
-		try {
-			dc.meldAan(email, paswoord);
-		} catch (APIException e) {
-			e.printStackTrace();
-		} catch (Auth0Exception e) {
-			e.printStackTrace();
-		}
-		
-		dc.meldAf();
+//		try {
+//			dc.meldAan(email, paswoord);
+//		} catch (APIException e) {
+//			e.printStackTrace();
+//		} catch (Auth0Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		dc.meldAf();
 
 //		User u = new User("161684319461fezs1", "test@test.be"/* new JSONArray() */);
 //
@@ -58,7 +56,6 @@ public class ConsoleLogin
 	{
 		cc = new CategorieController();
 		System.out.printf("Categorie: %s%n", cc.geefCategorien());
-
 	}
 
 }
