@@ -6,8 +6,7 @@ open module java_gr14
 //	exports gui;
 //	exports domein;
 	// Persistence
-	requires java.persistence;
-	requires org.json;
+
 
 	// FX
 	requires javafx.fxml;
