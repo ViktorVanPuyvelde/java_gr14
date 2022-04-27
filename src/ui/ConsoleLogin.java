@@ -22,14 +22,14 @@ public class ConsoleLogin
 //		String paswoord = sc.next();
 
 //		try {
-//		dc.meldAan(email, paswoord);
-//	} catch (APIException e) {
-//		e.printStackTrace();
-//	} catch (Auth0Exception e) {
-//		e.printStackTrace();
-//	}
-//	
-//	dc.meldAf();
+//			dc.meldAan(email, paswoord);
+//		} catch (APIException e) {
+//			e.printStackTrace();
+//		} catch (Auth0Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		dc.meldAf();
 
 //		User u = new User("161684319461fezs1", "test@test.be"/* new JSONArray() */);
 //
@@ -49,6 +49,7 @@ public class ConsoleLogin
 //		en.close();
 //
 //		JPAUtil.getEntityManagerFactory().close();
+
 	}
 
 	public void run()

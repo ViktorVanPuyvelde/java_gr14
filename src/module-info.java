@@ -8,7 +8,6 @@ open module java_gr14
 
 	// Persistence
 	requires java.persistence;
-	requires org.json;
 
 	// FX
 	requires javafx.fxml;
@@ -19,4 +18,6 @@ open module java_gr14
 	// Unit tests
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
+	requires json.simple;
+	requires org.json;
 }
