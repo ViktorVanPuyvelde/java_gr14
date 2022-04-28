@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import domein.CategorieController;
 import domein.DomeinController;
-import domein.Mvo;
+import domein.Sdg;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,28 +23,32 @@ public class CategoriePaneelController extends GridPane
 	private CategorieController cc;
 
 	@FXML
-	private ListView<String> cat_Mvo_List;
+	private ListView<String> cat_Sdg_List;
 	@FXML
 	private ListView<String> cat_Rol_List;
 
 	@FXML
 	private TextField cat_Name_field;
+	@FXML
+	private TextField cat_Pictogram_field;
 
 	@FXML
 	private Button cat_save_btn;
 
 	private String name;
 	private String mvo;
-	private String rol;
+	private String[] rol = new String[5];
+	private String pic;
 
-	private ObservableList<Mvo> mvoItemList;
+	private ObservableList<Sdg> mvoItemList;
 	private ObservableList<String> rolItemList;
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategoriePaneelController(DomeinController dc)
+	public CategoriePaneelController(DomeinController dc, CategorieController cc)
 	{
 		this.dc = dc;
+		this.cc = cc;
 		buildGui();
 		initialize();
 	}
@@ -53,8 +57,7 @@ public class CategoriePaneelController extends GridPane
 	{
 		try
 		{
-			cc = new CategorieController();
-			cat_Mvo_List = new ListView<>();
+			cat_Sdg_List = new ListView<>();
 			cat_Rol_List = new ListView<>();
 			mvoItemList = FXCollections.observableArrayList(new ArrayList());
 			rolItemList = FXCollections.observableArrayList(new ArrayList());
@@ -71,17 +74,17 @@ public class CategoriePaneelController extends GridPane
 
 	private void initialize()
 	{
-		cat_Mvo_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-		mvoItemList.add(new Mvo("MVO 1", null));
-		mvoItemList.add(new Mvo("MVO 2", null));
-		mvoItemList.add(new Mvo("MVO 3", null));
+		mvoItemList.add(new Sdg("SDG 1", null));
+		mvoItemList.add(new Sdg("SDG 2", null));
+		mvoItemList.add(new Sdg("SDG 3", null));
 		rolItemList.add("rol 1");
 		rolItemList.add("rol 2");
 
 		// fill with Mvo's
-		mvoItemList.forEach(mvo -> cat_Mvo_List.getItems().add(mvo.getName()));
+		mvoItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
 
 		// fill with Roles
 		cat_Rol_List.setItems(rolItemList);
@@ -96,7 +99,9 @@ public class CategoriePaneelController extends GridPane
 
 	private void update()
 	{
-		cc.voegCategorieToe(name, null /* nog te implementeren */, null);
+		String[] vb = new String[1];
+		vb[0] = "gebruiker";
+		cc.voegCategorieToe(name, pic, vb);
 	}
 
 	private void verify()
@@ -104,10 +109,13 @@ public class CategoriePaneelController extends GridPane
 		if (name == null || name.isEmpty())
 		{
 			fm.toonFoutmelding("geef een naam mee");
+		} else if (pic == null || pic.isEmpty())
+		{
+			fm.toonFoutmelding("geef een pictogram mee");
 		} else if (mvo == null || mvo.isEmpty())
 		{
 			fm.toonFoutmelding("selecteer een MVO");
-		} else if (rol == null || rol.isEmpty())
+		} else if (rol == null)
 		{
 			fm.toonFoutmelding("selecteer een rol");
 		} else
@@ -119,7 +127,8 @@ public class CategoriePaneelController extends GridPane
 	private void collectChanges()
 	{
 		name = this.cat_Name_field.getText();
-		mvo = cat_Mvo_List.getSelectionModel().getSelectedItem();
-		rol = cat_Rol_List.getSelectionModel().getSelectedItem();
+		pic = this.cat_Pictogram_field.getText();
+		mvo = cat_Sdg_List.getSelectionModel().getSelectedItem();
+		rol[0] = cat_Rol_List.getSelectionModel().getSelectedItem();
 	}
 }

@@ -2,47 +2,30 @@ package domein;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public class CategorieBeheerder
 {
-	public final String PERSISTENCE_UNIT_NAME = "GR14";
-	private EntityManager em;
-	private EntityManagerFactory emf;
+	private DatabankConnectie dc;
 
 	public CategorieBeheerder()
 	{
-		initializePersistentie();
-	}
-
-	private void initializePersistentie()
-	{
-		openPersistentie();
-	}
-
-	private void openPersistentie()
-	{
-		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		em = emf.createEntityManager();
+		this.dc = new DatabankConnectie();
+		dc.initializePersistentie();
 	}
 
 	public void closePersistentie()
 	{
-		em.close();
-		emf.close();
+		dc.closePersistentie();
 	}
 
 	public List<Categorie> geefAlleCategorienJPA()
 	{
-		return em.createNamedQuery("Categorie.alleCategoriën", Categorie.class).getResultList();
+		return dc.getEm().createNamedQuery("Categorie.alleCategoriën", Categorie.class).getResultList();
 	}
 
 	public void addCategorie(Categorie c)
 	{
-		em.getTransaction().begin();
-		em.persist(c);
-		em.getTransaction().commit();
+		dc.getEm().getTransaction().begin();
+		dc.getEm().persist(c);
+		dc.getEm().getTransaction().commit();
 	}
 }

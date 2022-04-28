@@ -1,15 +1,12 @@
 open module java_gr14
 {
-	exports test;
-	exports ui;
-	exports util;
-	exports gui;
-	exports domein;
-
 	// Persistence
 	requires java.persistence;
 	requires json.simple;
 	requires org.json;
+	requires java.instrument;
+	requires java.sql;
+	requires gson;
 
 	// FX
 	requires javafx.fxml;

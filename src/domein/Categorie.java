@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.json.simple.JSONArray;
-
-import util.JSONArrayConverter;
+import com.google.gson.Gson;
 
 @Entity
 @Table(name = "category")
@@ -33,8 +30,7 @@ public class Categorie implements CRUD, Serializable
 	@Column(name = "category_name")
 	private String name;
 	private String iconName;
-	@Convert(converter = JSONArrayConverter.class)
-	private JSONArray roles;
+	private String roles;
 	@Transient
 	private List<Sdg> sdgs;
 
@@ -44,7 +40,7 @@ public class Categorie implements CRUD, Serializable
 	 * @param iconName
 	 * @param roles
 	 */
-	public Categorie(String name, String iconName, JSONArray roles)
+	public Categorie(String name, String iconName, String[] roles)
 	{
 		setName(name);
 		setIconName(iconName);
@@ -86,14 +82,16 @@ public class Categorie implements CRUD, Serializable
 		this.iconName = iconName;
 	}
 
-	public JSONArray getRoles()
+	public String getRoles()
 	{
 		return roles;
 	}
 
-	public void setRoles(JSONArray roles)
+	public void setRoles(String[] roles)
 	{
-		this.roles = roles;
+		Gson gson = new Gson();
+		String rolesAsGson = gson.toJson(roles);
+		this.roles = rolesAsGson;
 	}
 
 	public List<Sdg> getSdgs()
@@ -137,23 +135,23 @@ public class Categorie implements CRUD, Serializable
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(iconName, id, name, roles, sdgs);
+		return Objects.hash(iconName, id, name/* , roles, sdgs */);
 	}
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Categorie other = (Categorie) obj;
-		return Objects.equals(iconName, other.iconName) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name) && Objects.equals(roles, other.roles)
-				&& Objects.equals(sdgs, other.sdgs);
-	}
+//	@Override
+//	public boolean equals(Object obj)
+//	{
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Categorie other = (Categorie) obj;
+//		return Objects.equals(iconName, other.iconName) && Objects.equals(id, other.id)
+//				&& Objects.equals(name, other.name) && Objects.equals(roles, other.roles)
+//				&& Objects.equals(sdgs, other.sdgs);
+//	}
 
 	@Override
 	public String toString()
