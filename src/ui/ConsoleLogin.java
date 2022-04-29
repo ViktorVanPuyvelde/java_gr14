@@ -34,26 +34,6 @@ public class ConsoleLogin
 		}
 		
 		dc.meldAf();
-
-//		User u = new User("161684319461fezs1", "test@test.be"/* new JSONArray() */);
-//
-//		List<User> lijst;
-//		EntityManager en = JPAUtil.getEntityManagerFactory().createEntityManager();
-//
-//		en.getTransaction().begin();
-//
-//		TypedQuery<User> q = en.createNamedQuery("User.findAll", User.class);
-//		lijst = q.getResultList();
-//
-//		System.out.println(lijst);
-//		// en.persist(u);
-//
-//		en.getTransaction().commit();
-//
-//		en.close();
-//
-//		JPAUtil.getEntityManagerFactory().close();
-
 	}
 
 //	public void run()
