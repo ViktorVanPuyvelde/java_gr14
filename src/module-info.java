@@ -18,5 +18,7 @@ open module java_gr14
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
 	requires json.simple;
-	requires org.json;
+	requires auth0;
+	requires java.dotenv;
+	//requires org.json;
 }
