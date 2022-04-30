@@ -2,10 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import domein.CategorieController;
 import domein.DomeinController;
 import domein.Sdg;
+import domein.SdgController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ public class CategoriePaneelController extends GridPane
 {
 	private DomeinController dc;
 	private CategorieController cc;
+	private SdgController sc;
 
 	@FXML
 	private ListView<String> cat_Sdg_List;
@@ -40,15 +43,17 @@ public class CategoriePaneelController extends GridPane
 	private String[] rol = new String[5];
 	private String pic;
 
-	private ObservableList<Sdg> mvoItemList;
+	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategoriePaneelController(DomeinController dc, CategorieController cc)
+	public CategoriePaneelController(DomeinController dc)
 	{
 		this.dc = dc;
-		this.cc = cc;
+		this.cc = new CategorieController();
+		this.sc = new SdgController();
+		setSdgItemList();
 		buildGui();
 		initialize();
 	}
@@ -59,7 +64,7 @@ public class CategoriePaneelController extends GridPane
 		{
 			cat_Sdg_List = new ListView<>();
 			cat_Rol_List = new ListView<>();
-			mvoItemList = FXCollections.observableArrayList(new ArrayList());
+			sdgItemList = FXCollections.observableArrayList(new ArrayList());
 			rolItemList = FXCollections.observableArrayList(new ArrayList());
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
@@ -77,14 +82,14 @@ public class CategoriePaneelController extends GridPane
 		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-		mvoItemList.add(new Sdg("SDG 1", null));
-		mvoItemList.add(new Sdg("SDG 2", null));
-		mvoItemList.add(new Sdg("SDG 3", null));
-		rolItemList.add("rol 1");
-		rolItemList.add("rol 2");
+		rolItemList.add("gebruiker");
+		rolItemList.add("directie");
+		rolItemList.add("manager");
+		rolItemList.add("coördinator");
 
-		// fill with Mvo's
-		mvoItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
+		// fill with Sdg's
+		sdgItemList.forEach(Sdg::toString);
+		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
 
 		// fill with Roles
 		cat_Rol_List.setItems(rolItemList);
@@ -130,5 +135,14 @@ public class CategoriePaneelController extends GridPane
 		pic = this.cat_Pictogram_field.getText();
 		mvo = cat_Sdg_List.getSelectionModel().getSelectedItem();
 		rol[0] = cat_Rol_List.getSelectionModel().getSelectedItem();
+	}
+
+	public void setSdgItemList()
+	{
+		List<Sdg> sdgs = this.sc.geefSdgs();
+		for (Sdg s : sdgs)
+		{
+			this.sdgItemList.add(s);
+		}
 	}
 }

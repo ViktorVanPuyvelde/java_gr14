@@ -7,7 +7,6 @@ import repository.CategorieDaoJpa;
 
 public class CategorieController
 {
-	private CategorieBeheerder cb = new CategorieBeheerder();
 	private CategorieDao categorieRepo;
 
 	public CategorieController()
@@ -35,6 +34,6 @@ public class CategorieController
 
 	public void close()
 	{
-		cb.closePersistentie();
+		CategorieDaoJpa.closePersistency();
 	}
 }

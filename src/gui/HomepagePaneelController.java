@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 
-import domein.CategorieController;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 public class HomepagePaneelController extends AnchorPane
 {
 	private DomeinController dc;
-	private CategorieController cc;
 
 	@FXML
 	private Button aanmelden_btn;
@@ -27,7 +25,6 @@ public class HomepagePaneelController extends AnchorPane
 	public HomepagePaneelController(DomeinController dc)
 	{
 		this.dc = dc;
-		this.cc = new CategorieController();
 		buildGui();
 	}
 
@@ -60,10 +57,11 @@ public class HomepagePaneelController extends AnchorPane
 	@FXML
 	public void categorieAanmaken_onAction(ActionEvent event)
 	{
-		CategoriePaneelController ns = new CategoriePaneelController(dc, cc);
+		CategoriePaneelController ns = new CategoriePaneelController(dc);
 		Scene scene = new Scene(ns);
 		Stage stage = (Stage) this.getScene().getWindow();
 		stage.setScene(scene);
+//		stage.setMaximized(true);
 		stage.show();
 	}
 
