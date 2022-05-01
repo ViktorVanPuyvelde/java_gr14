@@ -71,11 +71,9 @@ public class SideBarController extends BorderPane{
 	}
 	@FXML
 	private void page2(MouseEvent event) {
-		Parent root = null;
-		root = new CategoriePaneelController();
-		System.out.println("----");
+		CategoriePaneelController root = new CategoriePaneelController();
 		bp.setCenter(root);
-		System.out.println("$$$$$$");
+
 		
 	}
 	

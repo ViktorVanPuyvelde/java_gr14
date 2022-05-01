@@ -45,6 +45,13 @@ public class CategoriePaneelController extends GridPane{
 	
 	private void buildGui() {
 		
+	
+		 
+		cat_Mvo_List = new ListView<>();
+		cat_Rol_List = new ListView<>();
+		mvoItemList = FXCollections.observableArrayList(new ArrayList());
+		rolItemList = FXCollections.observableArrayList(new ArrayList());
+		
 		  FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
 		  loader.setController(this); 
 		  loader.setRoot(this); 
@@ -54,11 +61,6 @@ public class CategoriePaneelController extends GridPane{
 		  catch (IOException e) { 
 		  e.printStackTrace(); 
 		  }
-		 
-		cat_Mvo_List = new ListView<>();
-		cat_Rol_List = new ListView<>();
-		mvoItemList = FXCollections.observableArrayList(new ArrayList());
-		rolItemList = FXCollections.observableArrayList(new ArrayList());
 	}
 	
 	private void initialize() {
