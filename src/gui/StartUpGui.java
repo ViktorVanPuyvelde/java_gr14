@@ -13,7 +13,6 @@ public class StartUpGui extends Application
     {
         DomeinController controller = new DomeinController();
         Scene scene = new Scene(new HomepagePaneelController(controller));
-       
         stage.setScene(scene);
         stage.show();
 }

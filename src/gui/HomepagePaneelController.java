@@ -65,7 +65,7 @@ public class HomepagePaneelController extends AnchorPane{
 	}
 	@FXML
 	public void categorieAanmaken_onAction(ActionEvent event) {
-		CategoriePaneelController ns = new CategoriePaneelController(dc);
+		CategoriePaneelController ns = new CategoriePaneelController();
 		Scene scene = new Scene (ns);
 		Stage stage = (Stage) this.getScene().getWindow();
 		stage.setScene(scene);

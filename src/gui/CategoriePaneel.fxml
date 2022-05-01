@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="400.0" prefWidth="400.0" type="GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="605.0">
          <children>
-            <VBox>
+            <VBox prefHeight="392.0" prefWidth="606.0">
                <children>
                   <HBox prefHeight="60.0" prefWidth="423.0">
                      <children>

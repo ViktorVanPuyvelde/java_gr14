@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class CategoriePaneelController extends GridPane{
-	private DomeinController dc;
+	//private DomeinController dc;
 	
 	@FXML
 	private ListView<String> cat_Mvo_List;
@@ -32,35 +32,33 @@ public class CategoriePaneelController extends GridPane{
 	
 	private ObservableList<Mvo> mvoItemList;
 	private ObservableList<String> rolItemList;
+	//private DomeinController dc;
+	
 
 
 
-	public CategoriePaneelController(DomeinController dc) {
-		this.dc = dc;
+	public CategoriePaneelController() {
+		
 		buildGui();
 		initialize();
 	}
 	
 	private void buildGui() {
-		try{
-			
-			cat_Mvo_List = new ListView<>();
-			cat_Rol_List = new ListView<>();
-			mvoItemList = FXCollections.observableArrayList(new ArrayList());
-			rolItemList = FXCollections.observableArrayList(new ArrayList());
-			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
-			loader.setController(this);
-			loader.setRoot(this);
-			loader.load();
-			
-			
-			
-			} 
-		catch(IOException ex)
-		{
-		throw new RuntimeException(ex);
-		}
+		
+		  FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
+		  loader.setController(this); 
+		  loader.setRoot(this); 
+		  try { 
+			  loader.load(); 
+			  }
+		  catch (IOException e) { 
+		  e.printStackTrace(); 
+		  }
+		 
+		cat_Mvo_List = new ListView<>();
+		cat_Rol_List = new ListView<>();
+		mvoItemList = FXCollections.observableArrayList(new ArrayList());
+		rolItemList = FXCollections.observableArrayList(new ArrayList());
 	}
 	
 	private void initialize() {
@@ -84,6 +82,7 @@ public class CategoriePaneelController extends GridPane{
 		//fill with Roles
 		cat_Rol_List.setItems(rolItemList);
 		System.out.println(cat_Mvo_List.getItems());
+		
 		
 		
 	}
