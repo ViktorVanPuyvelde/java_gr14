@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domein.CategorieController;
 import domein.DomeinController;
@@ -17,12 +18,16 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class CategoriePaneelController extends GridPane
 {
@@ -115,22 +120,23 @@ public class CategoriePaneelController extends GridPane
 	{
 		List<String> vb = rol.stream().toList();
 		cc.voegCategorieToe(name, pic, vb);
+		toonBevestiging("Categorie is met succes aangemaakt");
 	}
 
 	private void verify()
 	{
 		if (name == null || name.isEmpty())
 		{
-			fm.toonFoutmelding("geef een naam mee");
+			fm.toonFoutmelding("Geef een naam mee.");
 		} else if (pic == null || pic.isEmpty())
 		{
-			fm.toonFoutmelding("geef een pictogram mee");
+			fm.toonFoutmelding("Geef een pictogram mee.");
 		} else if (sdg == null || sdg.isEmpty())
 		{
-			fm.toonFoutmelding("selecteer een MVO");
-		} else if (rol == null)
+			fm.toonFoutmelding("Selecteer minstens 1 SDG.");
+		} else if (rol == null || rol.isEmpty())
 		{
-			fm.toonFoutmelding("selecteer een rol");
+			fm.toonFoutmelding("Selecteer minstens 1 rol.");
 		} else
 		{
 			update();
@@ -167,14 +173,40 @@ public class CategoriePaneelController extends GridPane
 					Desktop.getDesktop().browse(new URI(linkIcons.getText()));
 				} catch (IOException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (URISyntaxException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+
+	private void toonBevestiging(String melding)
+	{
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Bevestigen");
+		alert.setContentText(melding);
+		alert.setHeaderText("Bevestiging");
+		Optional<ButtonType> result = alert.showAndWait();
+
+		if (result.get() == ButtonType.OK)
+		{
+			Stage stage = (Stage) getScene().getWindow();
+			stage.close();
+			Actie(stage);
+		}
+	}
+
+	private void Actie(Stage stage)
+	{
+		// terug naar hoofdscherm
+		HomepagePaneelController controller = new HomepagePaneelController(dc);
+		Scene scene = new Scene(controller);
+		stage.setScene(scene);
+		stage.setTitle("Fluvius");
+		stage.setMaximized(true);
+		stage.show();
+	}
+
 }

@@ -68,7 +68,7 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="423.0">
+                  <HBox alignment="CENTER" prefHeight="115.0" prefWidth="837.0">
                      <children>
                         <Label prefWidth="110.0" text="SDG(s) :">
                            <HBox.margin>
@@ -78,14 +78,15 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
                         </Label>
-                        <ListView fx:id="cat_Sdg_List" prefHeight="200.0" prefWidth="200.0">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                        </ListView>
+                        <VBox prefHeight="100.0" prefWidth="279.0">
+                           <children>
+                              <ListView fx:id="cat_Sdg_List" prefHeight="74.0" prefWidth="282.0" />
+                              <Label fx:id="tipSdg" prefHeight="17.0" prefWidth="282.0" text="Hou CTRL ingedrukt om meerde SDG's te selecteren" />
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="83.0" prefWidth="423.0">
+                  <HBox alignment="CENTER" prefHeight="143.0" prefWidth="837.0">
                      <children>
                         <Label prefWidth="110.0" text="Rol(len) :">
                            <HBox.margin>
@@ -95,16 +96,17 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </padding>
                         </Label>
-                        <ListView fx:id="cat_Rol_List" prefHeight="200.0" prefWidth="200.0">
-                           <HBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </HBox.margin>
-                        </ListView>
+                        <VBox prefHeight="111.0" prefWidth="346.0">
+                           <children>
+                              <ListView fx:id="cat_Rol_List" prefHeight="92.0" prefWidth="344.0" />
+                              <Label prefHeight="17.0" prefWidth="363.0" text="Hou CTRL ingedrukt om meerdere rollen te selecteren" />
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                   <Pane prefHeight="35.0" prefWidth="423.0">
                      <children>
-                        <Button fx:id="cat_Save_Btn" layoutX="356.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnCatSaveOnAction" text="Categorie aanmaken" />
+                        <Button fx:id="cat_Save_Btn" layoutX="370.0" layoutY="-2.0" mnemonicParsing="false" onAction="#btnCatSaveOnAction" text="Categorie aanmaken" />
                      </children>
                   </Pane>
                </children>

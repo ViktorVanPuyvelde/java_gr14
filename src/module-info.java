@@ -7,7 +7,6 @@ open module java_gr14
 	requires java.instrument;
 	requires java.sql;
 	requires gson;
-	requires java.desktop;
 
 	// FX
 	requires javafx.fxml;
@@ -18,4 +17,7 @@ open module java_gr14
 	// Unit tests
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
+
+	// Other
+	requires java.desktop;
 }
