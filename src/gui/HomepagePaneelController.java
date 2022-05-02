@@ -74,7 +74,11 @@ public class HomepagePaneelController extends AnchorPane{
 
 	@FXML
 	public void datasourcesRaadplegen_onAction(ActionEvent event) {
-		
+		DatasourcePaneelController ns = new DatasourcePaneelController(dc);
+		Scene scene = new Scene (ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 
 

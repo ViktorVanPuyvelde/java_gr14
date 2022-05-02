@@ -10,9 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class DatasourcePaneelController extends AnchorPane{
 	private DomeinController dc;
@@ -68,9 +70,14 @@ public class DatasourcePaneelController extends AnchorPane{
 	
 	@FXML
 	public void create_OnAction(ActionEvent event) {
-		collectChanges();
-		verify();
-		update();
+		//collectChanges();
+		//verify();
+		//update();
+		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController(dc);
+		Scene scene = new Scene (ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 
