@@ -7,6 +7,9 @@ open module java_gr14
 //	exports domein;
 	// Persistence
 	
+	requires java.persistence;
+    requires java.instrument;
+    requires java.sql;
 
 	// FX
 	requires javafx.fxml;
@@ -18,4 +21,8 @@ open module java_gr14
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
 	
+	requires json.simple;
+	requires auth0;
+	requires java.dotenv;
+	//requires org.json;
 }

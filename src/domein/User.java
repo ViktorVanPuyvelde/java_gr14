@@ -4,16 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+	@NamedQuery(name = "User.findRole", query = "SELECT u FROM User u WHERE u.user_id = :id")
 })
 @Table(name= "user")
 public class User implements Serializable {
@@ -21,25 +20,20 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String user_id;
 	
 	@Column
 	private String role;
-	
-//	@Column
-//	private JSONArray orderCat;
-	
+		
+	@Transient
 	private String email;
 	
-	public User(String email, String role/*, JSONArray cat*/) {
+	protected User()
+	{}
+	
+	public User(String email, String id) {
 		this.email = email;
-		this.role = role;
-		//this.orderCat = cat;
-	}
-
-	public User(String email) {
-		this.email = email;
+		this.user_id = id;
 	}
 
 	public String getUser_id() {
@@ -49,4 +43,13 @@ public class User implements Serializable {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public final void setRole(String role) {
+		this.role = role;
+	}
+
 }
