@@ -1,2 +1,7 @@
-/module-info.class
+/META-INF/
+/domein/
 /gui/
+/repository/
+/test/
+/ui/
+/util/
