@@ -28,7 +28,7 @@ public class CategorieController
 	public void voegCategorieToe(String name, String iconName, String[] roles)
 	{
 		CategorieDaoJpa.startTransaction();
-		categorieRepo.insert(new Categorie(name, iconName, roles));
+		categorieRepo.insert(new Categorie(name, iconName, roles, true));
 		CategorieDaoJpa.commitTransaction();
 	}
 

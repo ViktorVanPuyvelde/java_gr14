@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,8 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.google.gson.Gson;
 
@@ -31,8 +32,9 @@ public class Categorie implements CRUD, Serializable
 	private String name;
 	private String iconName;
 	private String roles;
-	@Transient
+	@OneToMany
 	private List<Sdg> sdgs;
+	private boolean isCategory;
 
 	/**
 	 * 
@@ -40,11 +42,13 @@ public class Categorie implements CRUD, Serializable
 	 * @param iconName
 	 * @param roles
 	 */
-	public Categorie(String name, String iconName, String[] roles)
+	public Categorie(String name, String iconName, String[] roles, boolean isCategory)
 	{
 		setName(name);
 		setIconName(iconName);
 		setRoles(roles);
+		setCategory(isCategory);
+		setSdgs(new ArrayList<>());
 	}
 
 	protected Categorie()
@@ -102,6 +106,26 @@ public class Categorie implements CRUD, Serializable
 	public void setSdgs(List<Sdg> sdgs)
 	{
 		this.sdgs = sdgs;
+	}
+
+	public boolean isCategory()
+	{
+		return isCategory;
+	}
+
+	public void setCategory(boolean isCategory)
+	{
+		this.isCategory = isCategory;
+	}
+
+	public static long getSerialversionuid()
+	{
+		return serialVersionUID;
+	}
+
+	public void setRoles(String roles)
+	{
+		this.roles = roles;
 	}
 
 	@Override

@@ -3,6 +3,7 @@
   <persistence-unit name="GR14">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domein.Categorie</class>
+    <class>domein.Sdg</class>
     <class>util.JSONArrayConverter</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sdpii?serverTimezone=UTC"/>

@@ -35,6 +35,11 @@ public class Sdg implements Serializable
 		setImage(image);
 	}
 
+	protected Sdg()
+	{
+
+	}
+
 	public String getId()
 	{
 		return id;

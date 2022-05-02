@@ -53,7 +53,6 @@ public class CategoriePaneelController extends GridPane
 		this.dc = dc;
 		this.cc = new CategorieController();
 		this.sc = new SdgController();
-		setSdgItemList();
 		buildGui();
 		initialize();
 	}
@@ -87,8 +86,9 @@ public class CategoriePaneelController extends GridPane
 		rolItemList.add("manager");
 		rolItemList.add("coördinator");
 
+		setSdgItemList();
+
 		// fill with Sdg's
-		sdgItemList.forEach(Sdg::toString);
 		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
 
 		// fill with Roles
@@ -140,6 +140,7 @@ public class CategoriePaneelController extends GridPane
 	public void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgs();
+		this.sdgItemList = FXCollections.observableArrayList(new ArrayList());
 		for (Sdg s : sdgs)
 		{
 			this.sdgItemList.add(s);
