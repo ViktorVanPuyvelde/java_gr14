@@ -6,8 +6,10 @@ import java.io.IOException;
 import domein.DomeinController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -22,10 +24,13 @@ public class SideBarController extends BorderPane{
 	private BorderPane bp;
 	@FXML
 	private VBox sideBar;
+	@FXML
+	private Button log_Out_Btn;
 	
 	private DomeinController dc;
+	private FXMLLoader loader;
 	
-	FXMLLoader loader;
+
 
 	public SideBarController(DomeinController dc) {
 		this.dc = dc;
@@ -74,7 +79,11 @@ public class SideBarController extends BorderPane{
 	
 	@FXML
 	private void logout(MouseEvent event) {
-		
+		AanmeldPaneelController ns = new AanmeldPaneelController(dc);
+		Scene scene = new Scene (ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	
