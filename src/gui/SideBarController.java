@@ -39,7 +39,7 @@ public class SideBarController extends BorderPane{
 	}
 
 	private void buildGui() {
-		loader = new FXMLLoader(getClass().getResource("HomePagePaneel2.fxml"));
+		loader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		try {
@@ -57,23 +57,23 @@ public class SideBarController extends BorderPane{
 	private void home(MouseEvent event) {
 		bp.setCenter(apScene);
 	}
+	
 	@FXML
-	private void page1(MouseEvent event) {
-		Parent root = null;
-		try {
-			root = FXMLLoader.load(getClass().getResource("page1.fxml"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		bp.setCenter(root);
+	private void mvo(MouseEvent event) {
 		
 	}
 	@FXML
-	private void page2(MouseEvent event) {
+	private void categorie(MouseEvent event) {
 		CategoriePaneelController root = new CategoriePaneelController();
 		bp.setCenter(root);
-
+	}
+	@FXML
+	private void datasource(MouseEvent event) {
+		
+	}
+	
+	@FXML
+	private void logout(MouseEvent event) {
 		
 	}
 	
