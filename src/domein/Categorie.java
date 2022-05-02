@@ -42,7 +42,7 @@ public class Categorie implements CRUD, Serializable
 	 * @param iconName
 	 * @param roles
 	 */
-	public Categorie(String name, String iconName, String[] roles, boolean isCategory)
+	public Categorie(String name, String iconName, List<String> roles, boolean isCategory)
 	{
 		setName(name);
 		setIconName(iconName);
@@ -91,7 +91,7 @@ public class Categorie implements CRUD, Serializable
 		return roles;
 	}
 
-	public void setRoles(String[] roles)
+	public void setRoles(List<String> roles)
 	{
 		Gson gson = new Gson();
 		String rolesAsGson = gson.toJson(roles);

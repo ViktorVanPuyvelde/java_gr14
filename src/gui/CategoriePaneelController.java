@@ -1,6 +1,9 @@
 package gui;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +14,11 @@ import domein.SdgController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -38,9 +43,12 @@ public class CategoriePaneelController extends GridPane
 	@FXML
 	private Button cat_save_btn;
 
+	@FXML
+	private Hyperlink linkIcons;
+
 	private String name;
-	private String mvo;
-	private String[] rol = new String[5];
+	private ObservableList<String> sdg;
+	private ObservableList<String> rol;
 	private String pic;
 
 	private ObservableList<Sdg> sdgItemList;
@@ -54,6 +62,7 @@ public class CategoriePaneelController extends GridPane
 		this.cc = new CategorieController();
 		this.sc = new SdgController();
 		buildGui();
+		setSdgItemList();
 		initialize();
 	}
 
@@ -65,6 +74,7 @@ public class CategoriePaneelController extends GridPane
 			cat_Rol_List = new ListView<>();
 			sdgItemList = FXCollections.observableArrayList(new ArrayList());
 			rolItemList = FXCollections.observableArrayList(new ArrayList());
+			linkIcons = new Hyperlink();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
 			loader.setController(this);
@@ -78,6 +88,7 @@ public class CategoriePaneelController extends GridPane
 
 	private void initialize()
 	{
+		instellenHyperLink();
 		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -85,8 +96,6 @@ public class CategoriePaneelController extends GridPane
 		rolItemList.add("directie");
 		rolItemList.add("manager");
 		rolItemList.add("coördinator");
-
-		setSdgItemList();
 
 		// fill with Sdg's
 		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
@@ -104,8 +113,7 @@ public class CategoriePaneelController extends GridPane
 
 	private void update()
 	{
-		String[] vb = new String[1];
-		vb[0] = "gebruiker";
+		List<String> vb = rol.stream().toList();
 		cc.voegCategorieToe(name, pic, vb);
 	}
 
@@ -117,7 +125,7 @@ public class CategoriePaneelController extends GridPane
 		} else if (pic == null || pic.isEmpty())
 		{
 			fm.toonFoutmelding("geef een pictogram mee");
-		} else if (mvo == null || mvo.isEmpty())
+		} else if (sdg == null || sdg.isEmpty())
 		{
 			fm.toonFoutmelding("selecteer een MVO");
 		} else if (rol == null)
@@ -133,17 +141,40 @@ public class CategoriePaneelController extends GridPane
 	{
 		name = this.cat_Name_field.getText();
 		pic = this.cat_Pictogram_field.getText();
-		mvo = cat_Sdg_List.getSelectionModel().getSelectedItem();
-		rol[0] = cat_Rol_List.getSelectionModel().getSelectedItem();
+		sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
+		rol = cat_Rol_List.getSelectionModel().getSelectedItems();
 	}
 
 	public void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgs();
-		this.sdgItemList = FXCollections.observableArrayList(new ArrayList());
 		for (Sdg s : sdgs)
 		{
 			this.sdgItemList.add(s);
 		}
+	}
+
+	private void instellenHyperLink()
+	{
+		linkIcons.setOnAction(new EventHandler<ActionEvent>()
+		{
+
+			@Override
+			public void handle(ActionEvent arg0)
+			{
+				try
+				{
+					Desktop.getDesktop().browse(new URI(linkIcons.getText()));
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (URISyntaxException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

@@ -7,6 +7,7 @@ open module java_gr14
 	requires java.instrument;
 	requires java.sql;
 	requires gson;
+	requires java.desktop;
 
 	// FX
 	requires javafx.fxml;
