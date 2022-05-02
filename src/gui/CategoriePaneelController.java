@@ -58,14 +58,13 @@ public class CategoriePaneelController extends GridPane
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
-	//private DomeinController dc;
-	
+	// private DomeinController dc;
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategoriePaneelController(DomeinController dc)
+	public CategoriePaneelController()
 	{
-		this.dc = dc;
+		this.dc = new DomeinController();
 		this.cc = new CategorieController();
 		this.sc = new SdgController();
 		buildGui();
@@ -194,9 +193,10 @@ public class CategoriePaneelController extends GridPane
 
 		if (result.get() == ButtonType.OK)
 		{
-			Stage stage = (Stage) getScene().getWindow();
-			stage.close();
-			Actie(stage);
+//			TODO: bespreken met DYlan hoe we dit gaan doen
+//			Stage stage = (Stage) getScene().getWindow();
+//			stage.close();
+//			Actie(stage);
 		}
 	}
 
