@@ -1,2 +1,4 @@
-/domein/
-/gui/
+.env
+.classpath
+.project
+/module-info.class
