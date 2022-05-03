@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="337.0" prefWidth="310.0" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="337.0" prefWidth="310.0" type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="337.0" prefWidth="310.0">
          <children>
@@ -57,7 +57,7 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Button layoutX="52.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="categorieRaadplegen_btn" layoutX="12.0" layoutY="20.0" mnemonicParsing="false" onAction="#categorieRaadplegen_onAction" text="CategorieRaadplegen" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">

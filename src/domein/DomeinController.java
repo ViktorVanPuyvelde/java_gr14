@@ -13,6 +13,11 @@ public class DomeinController {
 
 //	private CoördinatorApplicatie appManager;
 	private User coordinator;
+	private CategorieController catController;
+	
+	public DomeinController(){
+		this.catController = new CategorieController();
+	}
 	
 	/*
 	 * public void meldAan(String email, String paswoord) throws APIException,
@@ -47,5 +52,9 @@ public class DomeinController {
 	 * System.out.println("Afgemeld"); }
 	 */
 	
+	
+	public Categorie raadpleegCategorie(Categorie c) {
+		return catController.raadpleegCategorie(c);
+	}
 	
 }

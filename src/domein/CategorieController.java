@@ -8,10 +8,13 @@ import repository.CategorieDaoJpa;
 public class CategorieController
 {
 	private CategorieDao categorieRepo;
-
+	private List<Categorie> allCat;
+	
 	public CategorieController()
 	{
 		setCategorieRepo(new CategorieDaoJpa());
+		allCat = geefCategorien();
+		allCat.stream().forEach(c -> System.out.println(c.toString()));
 	}
 
 	public void setCategorieRepo(CategorieDao categorieRepo)
@@ -31,9 +34,14 @@ public class CategorieController
 		categorieRepo.insert(new Categorie(name, iconName, roles, true));
 		CategorieDaoJpa.commitTransaction();
 	}
-
+	
 	public void close()
 	{
 		CategorieDaoJpa.closePersistency();
+	}
+
+	public Categorie raadpleegCategorie(Categorie c) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

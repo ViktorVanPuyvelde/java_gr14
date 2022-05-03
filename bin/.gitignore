@@ -1,4 +1,4 @@
-.env
-.classpath
-.project
-/module-info.class
+/gui/
+/domein/
+/ui/
+/repository/
