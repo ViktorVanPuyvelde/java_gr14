@@ -2,17 +2,38 @@ package domein;
 
 import java.util.List;
 
+import repository.CategorieDao;
+import repository.CategorieDaoJpa;
+
 public class CategorieController
 {
-	private CategorieBeheerder cb = new CategorieBeheerder();
+	private CategorieDao categorieRepo;
 
-	public List<String> geefCategorien()
+	public CategorieController()
 	{
-		return cb.geefAlleCategorienJPA().stream().map(Categorie::toString).toList();
+		setCategorieRepo(new CategorieDaoJpa());
+	}
+
+	public void setCategorieRepo(CategorieDao categorieRepo)
+	{
+		this.categorieRepo = categorieRepo;
+	}
+
+	public List<Categorie> geefCategorien()
+	{
+		return categorieRepo.findAll();
+
+	}
+
+	public void voegCategorieToe(String name, String iconName, List<String> roles)
+	{
+		CategorieDaoJpa.startTransaction();
+		categorieRepo.insert(new Categorie(name, iconName, roles, true));
+		CategorieDaoJpa.commitTransaction();
 	}
 
 	public void close()
 	{
-		cb.closePersistentie();
+		CategorieDaoJpa.closePersistency();
 	}
 }

@@ -1,12 +1,12 @@
 open module java_gr14
 {
-//	exports test;
-//	exports ui;
-//	exports util;
-//	exports gui;
-//	exports domein;
 	// Persistence
 	requires java.persistence;
+	requires json.simple;
+	requires org.json;
+	requires java.instrument;
+	requires java.sql;
+	requires gson;
 
 	// FX
 	requires javafx.fxml;
@@ -17,6 +17,9 @@ open module java_gr14
 	// Unit tests
 	requires org.junit.jupiter.api;
 	requires org.junit.jupiter.params;
-	requires json.simple;
-	requires org.json;
+
+	// Other
+	requires java.desktop;
+	requires auth0;
+	requires java.dotenv;
 }
