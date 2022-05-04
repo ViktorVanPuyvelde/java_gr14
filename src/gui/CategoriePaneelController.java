@@ -101,7 +101,7 @@ public class CategoriePaneelController extends GridPane
 		rolItemList.add("gebruiker");
 		rolItemList.add("directie");
 		rolItemList.add("manager");
-		rolItemList.add("co�rdinator");
+		rolItemList.add("co\u00f6rdinator");
 
 		// fill with Sdg's
 		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));

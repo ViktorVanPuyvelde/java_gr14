@@ -11,7 +11,7 @@ public class StartUpGui extends Application
 	public void start(Stage stage)
 	{
 		DomeinController controller = new DomeinController();
-		Scene scene = new Scene(new SideBarController(controller));
+		Scene scene = new Scene(new AanmeldPaneelController(controller));
 		stage.setScene(scene);
 		stage.show();
 		stage.setScene(scene);
