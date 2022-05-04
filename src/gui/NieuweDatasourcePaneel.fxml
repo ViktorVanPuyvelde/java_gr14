@@ -49,7 +49,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
             <Label text="Selecteer MVO(s): " />
-            <ChoiceBox prefWidth="150.0" />
+            <ChoiceBox fx:id="cbMvos" prefWidth="150.0" />
          </children>
          <padding>
             <Insets left="10.0" />
