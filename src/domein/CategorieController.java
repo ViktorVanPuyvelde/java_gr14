@@ -13,8 +13,8 @@ public class CategorieController
 	public CategorieController()
 	{
 		setCategorieRepo(new CategorieDaoJpa());
+		//populateDB();
 		allCat = geefCategorien();
-		allCat.stream().forEach(c -> System.out.println(c.toString()));
 	}
 
 	public void setCategorieRepo(CategorieDao categorieRepo)
@@ -41,7 +41,16 @@ public class CategorieController
 	}
 
 	public Categorie raadpleegCategorie(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Sdg> sdgs = categorieRepo.geefSdgVoorCategorie(c.getName());
+		c.setSdgs(sdgs);
+		return c;
 	}
+	
+//	private void populateDB() {
+//		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
+//		categorieRepo.insert(new Categorie("Planet", "icon2", new String[] {"manager", "stakeholder", "coördinator"}, true));
+//		categorieRepo.insert(new Categorie("People", "icon3", new String[] {"manager", "stakeholder", "coördinator"}, true));
+//		categorieRepo.insert(new Categorie("Datasources", "icon4", new String[] {"manager", "coördinator"}, false));
+//		categorieRepo.insert(new Categorie("Account", "icon5", new String[] {"manager", "stakeholder", "coördinator"}, false));
+//	}
 }
