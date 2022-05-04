@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane minHeight="300.0" minWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="gui.NieuweDatasourcePaneelController">
+<fx:root minHeight="300.0" minWidth="300.0" type="GridPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -41,7 +40,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
             <Label text="Upload csv bestand: " />
-            <Button mnemonicParsing="false" text="Upload" />
+            <Button fx:id="upload_btn" mnemonicParsing="false" onAction="#upload_OnAction" text="Upload" />
          </children>
          <padding>
             <Insets left="10.0" />
@@ -56,6 +55,6 @@
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <Button fx:id="toevoegen_btn" mnemonicParsing="false" text="Toevoegen" GridPane.rowIndex="4" />
+      <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_OnAction" text="Toevoegen" GridPane.rowIndex="4" />
    </children>
-</GridPane>
+</fx:root>

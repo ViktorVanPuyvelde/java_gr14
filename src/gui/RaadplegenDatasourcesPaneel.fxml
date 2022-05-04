@@ -21,7 +21,7 @@
                   </Pane>
                   <Pane prefHeight="70.0" prefWidth="400.0">
                      <children>
-                        <Button fx:id="create_btn" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_onAction" text="create new datasource" />
+                        <Button fx:id="create_btn" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_OnAction" text="create new datasource" />
                      </children>
                   </Pane>
                   <HBox prefHeight="186.0" prefWidth="400.0">
@@ -42,17 +42,17 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="view_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#view_onAction" text="view" />
+                              <Button fx:id="view_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" text="view" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="edit_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#edit_onAction" text="edit" />
+                              <Button fx:id="edit_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" text="edit" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="delete_btn" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onAction="#delete_onAction" text="delete" />
+                              <Button fx:id="delete_btn" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" text="delete" />
                            </children>
                         </Pane>
                      </children>

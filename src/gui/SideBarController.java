@@ -74,7 +74,8 @@ public class SideBarController extends BorderPane{
 	}
 	@FXML
 	private void datasource(MouseEvent event) {
-		
+		DatasourcePaneelController root = new DatasourcePaneelController(dc);
+		bp.setCenter(root);
 	}
 	
 	@FXML

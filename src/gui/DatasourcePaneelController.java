@@ -2,8 +2,10 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import domein.Datasource;
+import domein.DatasourceController;
 import domein.DomeinController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 
 public class DatasourcePaneelController extends AnchorPane{
 	private DomeinController dc;
+	private DatasourceController datasourceCon;
 	
 	@FXML
 	private ListView<String> datasource_List;
@@ -36,14 +39,13 @@ public class DatasourcePaneelController extends AnchorPane{
 	
 	public DatasourcePaneelController(DomeinController dc) {
 		this.dc = dc;
+		this.datasourceCon = new DatasourceController();
 		buildGui();
+		setDatasourceList();
 		initialize();
 	}
 
 	private void initialize() {
-		datasourceItemList.add(new Datasource("Datasource 1"));
-		datasourceItemList.add(new Datasource("Datasource 2"));
-		
 		datasourceItemList.forEach(ds -> datasource_List.getItems().add(ds.getName()));
 		
 	}
@@ -68,40 +70,57 @@ public class DatasourcePaneelController extends AnchorPane{
 		
 	}
 	
+	private void setDatasourceList() {
+		List<Datasource> datasources = datasourceCon.geefDatasources();
+		for (Datasource d : datasources) {
+			this.datasourceItemList.add(d);
+		}
+	}
+	
 	@FXML
 	public void create_OnAction(ActionEvent event) {
 		//collectChanges();
 		//verify();
 		//update();
 		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController(dc);
-		Scene scene = new Scene (ns);
-		Stage stage = (Stage) this.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
+//		Scene scene = new Scene (ns);
+//		Stage stage = (Stage) this.getScene().getWindow();
+//		stage.setScene(scene);
+//		stage.show();
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
+			loader.setController(ns);
+			loader.setRoot(this);
+			loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
-
-	@FXML
-	public void view_OnAction(ActionEvent event) {
-		collectChanges();
-		verify();
-		update();
-	}
-	
-	@FXML
-	public void edit_OnAction(ActionEvent event) {
-		collectChanges();
-		verify();
-		update();
-	}
-	
-	@FXML
-	public void delete_OnAction(ActionEvent event) {
-		collectChanges();
-		verify();
-		update();
-	}
+//
+//	@FXML
+//	public void view_OnAction(ActionEvent event) {
+//		collectChanges();
+//		verify();
+//		update();
+//	}
+//	
+//	@FXML
+//	public void edit_OnAction(ActionEvent event) {
+//		collectChanges();
+//		verify();
+//		update();
+//	}
+//	
+//	@FXML
+//	public void delete_OnAction(ActionEvent event) {
+//		collectChanges();
+//		verify();
+//		update();
+//	}
 	
 	private void update() {
 		// TODO Auto-generated method stub

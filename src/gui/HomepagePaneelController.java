@@ -74,5 +74,3 @@ public class HomepagePaneelController extends AnchorPane
 	}
 
 	}
-
-}
