@@ -9,7 +9,7 @@ public class MvoController
 {
 	private MvoDao mvoDao;
 
-	protected MvoController()
+	public MvoController()
 	{
 		setMvoDao(new MvoDaoJpa());
 	}
@@ -22,6 +22,14 @@ public class MvoController
 	public List<Mvo> geefMvos()
 	{
 		return mvoDao.findAll();
+	}
+
+	public void voegMvoToe(String name, String sdg, String info, int goalValue, String datasourceId)
+	{
+		MvoDaoJpa.startTransaction();
+//		"" --> superMvoId
+		mvoDao.insert(new Mvo(name, sdg, "", info, goalValue, datasourceId));
+		MvoDaoJpa.commitTransaction();
 	}
 
 	public void close()

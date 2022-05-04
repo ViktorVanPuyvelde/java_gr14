@@ -15,7 +15,7 @@ public class StartUpGui extends Application
 		stage.setScene(scene);
 		stage.show();
 		stage.setScene(scene);
-//		stage.setMaximized(true);
+		stage.setMaximized(true);
 		stage.show();
 	}
 

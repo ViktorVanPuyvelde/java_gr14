@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox fx:id="sideBar" prefHeight="300.0" prefWidth="158.0" spacing="2.0" style="-fx-background-color: #37465D; -fx-border-color: #B2D234;" BorderPane.alignment="CENTER">
          <children>
@@ -24,6 +24,11 @@
                   <Insets top="20.0" />
                </VBox.margin></Button>
             <Button fx:id="mvo_Btn" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="Mvo's" textFill="#b2d234">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnAanmakenMvo" mnemonicParsing="false" onMouseClicked="#aanmakenMvo" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="Mvo aanmaken" textFill="#b2d234">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
