@@ -65,7 +65,7 @@ public class SideBarController extends BorderPane{
 
 
 	private void buildGui() {
-		loader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
+		loader = new FXMLLoader(getClass().getResource("SideBarPaneel.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 		try {
@@ -81,7 +81,14 @@ public class SideBarController extends BorderPane{
 	
 	@FXML
 	private void home(MouseEvent event) {
-		bp.setCenter(apScene);
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
+		
+        bp.getChildren().remove(bp.getCenter());
+        try {
+            bp.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		makeBtnActive(home_Btn);
 	}
 	
