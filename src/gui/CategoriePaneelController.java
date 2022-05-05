@@ -62,9 +62,9 @@ public class CategoriePaneelController extends GridPane
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategoriePaneelController()
+	public CategoriePaneelController(DomeinController dc)
 	{
-		this.dc = new DomeinController();
+		this.dc = dc;
 		this.cc = new CategorieController();
 		this.sc = new SdgController();
 		buildGui();
@@ -203,7 +203,7 @@ public class CategoriePaneelController extends GridPane
 	private void Actie(Stage stage)
 	{
 		// terug naar hoofdscherm
-		HomepagePaneelController controller = new HomepagePaneelController(dc);
+		SideBarController controller = new SideBarController(dc);
 		Scene scene = new Scene(controller);
 		stage.setScene(scene);
 		stage.setTitle("Fluvius");

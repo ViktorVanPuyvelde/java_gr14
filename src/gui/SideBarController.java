@@ -30,6 +30,14 @@ public class SideBarController extends BorderPane{
 	private VBox sideBar;
 	@FXML
 	private Button log_Out_Btn;
+	@FXML
+	private Button home_Btn;
+	@FXML
+	private Button mvo_Btn;
+	@FXML
+	private Button categorie_Btn;
+	@FXML
+	private Button datasource_Btn;
 	
 	private DomeinController dc;
 	private FXMLLoader loader;
@@ -65,21 +73,25 @@ public class SideBarController extends BorderPane{
 	@FXML
 	private void home(MouseEvent event) {
 		bp.setCenter(apScene);
+		makeBtnActive(home_Btn);
 	}
 	
 	@FXML
 	private void mvo(MouseEvent event) {
-		
+		makeBtnActive(mvo_Btn);
 	}
 	@FXML
 	private void categorie(MouseEvent event) {
-		CategoriePaneelController root = new CategoriePaneelController();
+		CategoriePaneelController root = new CategoriePaneelController(dc);
 		bp.setCenter(root);
+		makeBtnActive(categorie_Btn);
 	}
+
 	@FXML
 	private void datasource(MouseEvent event) {
 		DatasourcePaneelController root = new DatasourcePaneelController(dc);
 		bp.setCenter(root);
+		makeBtnActive(datasource_Btn);
 	}
 	
 	@FXML
@@ -100,6 +112,14 @@ public class SideBarController extends BorderPane{
 		}
 	}
 	
+	private void makeBtnActive(Button btn) {
+		home_Btn.setStyle("-fx-background-color: #37465D;");
+		mvo_Btn.setStyle("-fx-background-color: #37465D;");
+		categorie_Btn.setStyle("-fx-background-color: #37465D;");
+		datasource_Btn.setStyle("-fx-background-color: #37465D;");
+		btn.setStyle("-fx-background-color: #465a77;");
+		
+	}
 	
 	
 	
