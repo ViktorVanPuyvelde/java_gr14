@@ -2,6 +2,8 @@ package gui;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import domein.DomeinController;
@@ -42,7 +44,9 @@ public class SideBarController extends BorderPane{
 	private DomeinController dc;
 	private FXMLLoader loader;
 	
-
+	final String IDLE_BUTTON_STYLE = "-fx-background-color: #37465D;";
+	final String ACTIVCATION_BUTTON_STYLE = "-fx-background-color: #465a77;";
+	private List<Button> sidebarBtns;
 
 	public SideBarController(DomeinController dc) {
 		this.dc = dc;
@@ -51,9 +55,14 @@ public class SideBarController extends BorderPane{
 	}
 
 	private void initialize() {
-		// TODO Auto-generated method stub
+		sidebarBtns = new ArrayList<>();
+		sidebarBtns.add(home_Btn);
+		sidebarBtns.add(mvo_Btn);
+		sidebarBtns.add(categorie_Btn);
+		sidebarBtns.add(datasource_Btn);
 		
 	}
+
 
 	private void buildGui() {
 		loader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
@@ -113,11 +122,8 @@ public class SideBarController extends BorderPane{
 	}
 	
 	private void makeBtnActive(Button btn) {
-		home_Btn.setStyle("-fx-background-color: #37465D;");
-		mvo_Btn.setStyle("-fx-background-color: #37465D;");
-		categorie_Btn.setStyle("-fx-background-color: #37465D;");
-		datasource_Btn.setStyle("-fx-background-color: #37465D;");
-		btn.setStyle("-fx-background-color: #465a77;");
+		sidebarBtns.stream().forEach(b -> b.setStyle(IDLE_BUTTON_STYLE));
+		btn.setStyle(ACTIVCATION_BUTTON_STYLE);
 		
 	}
 	
