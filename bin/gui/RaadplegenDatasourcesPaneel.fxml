@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -21,7 +21,7 @@
                   </Pane>
                   <Pane prefHeight="70.0" prefWidth="400.0">
                      <children>
-                        <Button fx:id="create_btn" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_onAction" text="create new datasource" />
+                        <Button fx:id="create_btn" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_OnAction" text="Nieuwe datasource aanmaken" />
                      </children>
                   </Pane>
                   <HBox prefHeight="186.0" prefWidth="400.0">
@@ -42,17 +42,17 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="view_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#view_onAction" text="view" />
+                              <Button fx:id="view_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" text="bekijken" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="edit_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#edit_onAction" text="edit" />
+                              <Button fx:id="edit_btn" layoutX="31.0" layoutY="30.0" mnemonicParsing="false" text="aanpassen" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="delete_btn" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onAction="#delete_onAction" text="delete" />
+                              <Button fx:id="delete_btn" layoutX="28.0" layoutY="30.0" mnemonicParsing="false" text="verwijderen" />
                            </children>
                         </Pane>
                      </children>
