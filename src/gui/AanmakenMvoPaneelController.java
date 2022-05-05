@@ -1,12 +1,20 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import domein.MvoController;
+import domein.Sdg;
 import domein.SdgController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -19,20 +27,26 @@ public class AanmakenMvoPaneelController extends GridPane
 	@FXML
 	private TextField txtMvoName;
 	@FXML
-	private TextField txtSdg;
+	private ListView<String> lvSdg;
 	@FXML
 	private TextField txtType;
 	@FXML
 	private TextField txtDoel;
 	@FXML
 	private TextField txtData;
+	@FXML
+	private GridPane gpAanmakenMvo;
+	@FXML
+	private Node rowConstraint0;
 
 	// lokale attributen
 	private String name;
-	private String sdg;
-	private String type;
+	private Sdg sdg;
+	private ObservableList<String> type;
 	private int doel;
 	private String datasource;
+
+	private ObservableList<Sdg> sdgItemList;
 
 	private Foutmelding fm;
 
@@ -42,6 +56,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		this.sc = new SdgController();
 		fm = new Foutmelding();
 		buildGui();
+		setSdgItemList();
 		initialize();
 	}
 
@@ -49,6 +64,8 @@ public class AanmakenMvoPaneelController extends GridPane
 	{
 		try
 		{
+			type = FXCollections.observableArrayList(new ArrayList());
+			sdgItemList = FXCollections.observableArrayList(new ArrayList());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
@@ -61,7 +78,9 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private void initialize()
 	{
+		lvSdg.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
+		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
 	}
 
 	@FXML
@@ -74,8 +93,8 @@ public class AanmakenMvoPaneelController extends GridPane
 	private void collectChanges()
 	{
 		this.name = txtMvoName.getText();
-		this.sdg = txtSdg.getText();
-		this.type = txtType.getText();
+		this.sdg = this.sdgItemList.get(0);
+		this.type.add(txtType.getText());
 		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
 		{
 			fm.toonFoutmelding("Er moet een doel meegegeven worden aan de nieuwe MVO.");
@@ -83,6 +102,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		{
 			this.doel = Integer.parseInt(txtDoel.getText());
 		}
+		this.datasource = txtData.getText();
 	}
 
 	private void verify()
@@ -90,12 +110,15 @@ public class AanmakenMvoPaneelController extends GridPane
 		if (name == null || name.isEmpty())
 		{
 			fm.toonFoutmelding("Naam mag niet leeg zijn.");
-		} else if (sdg == null || sdg.isEmpty())
+		} else if (sdg == null)
 		{
 			fm.toonFoutmelding("Er moet een SDG toegewezen zijn aan de nieuwe MVO.");
 		} else if (type == null || type.isEmpty())
 		{
 			fm.toonFoutmelding("Type mag niet leeg zijn");
+		} else if (datasource == null || datasource.isEmpty())
+		{
+			fm.toonFoutmelding("Er moet een datasource meegegeven worden ");
 		} else
 		{
 			update();
@@ -105,6 +128,15 @@ public class AanmakenMvoPaneelController extends GridPane
 	private void update()
 	{
 		this.mc.voegMvoToe(name, sdg, type, doel, datasource);
+	}
+
+	public void setSdgItemList()
+	{
+		List<Sdg> sdgs = this.sc.geefSdgs();
+		for (Sdg s : sdgs)
+		{
+			this.sdgItemList.add(s);
+		}
 	}
 
 }

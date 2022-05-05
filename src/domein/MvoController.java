@@ -24,7 +24,7 @@ public class MvoController
 		return mvoDao.findAll();
 	}
 
-	public void voegMvoToe(String name, String sdg, String info, int goalValue, String datasourceId)
+	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, String datasourceId)
 	{
 		MvoDaoJpa.startTransaction();
 //		"" --> superMvoId

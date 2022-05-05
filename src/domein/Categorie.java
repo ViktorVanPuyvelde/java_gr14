@@ -27,7 +27,7 @@ public class Categorie implements CRUD, Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private String id;
+	private int id;
 	@Column(name = "category_name")
 	private String name;
 	private String iconName;
@@ -56,12 +56,12 @@ public class Categorie implements CRUD, Serializable
 
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

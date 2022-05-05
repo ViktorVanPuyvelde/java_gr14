@@ -8,21 +8,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.google.gson.Gson;
 
 @Entity
 @Table(name = "mvo")
 public class Mvo implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mvo_id")
-	private String id;
+	private int id;
 	@Column(name = "mvo_name")
 	private String name;
-	@Column(name = "sdg_id")
-	private String sdg;
 	@Column(name = "super_mvo_id")
 	private String superMvoId;
 	@Column(name = "info")
@@ -31,17 +34,20 @@ public class Mvo implements Serializable
 	private int goalValue;
 	@Column(name = "datasource_id")
 	private String datasourceId;
+	@ManyToOne
+	@JoinColumn(name = "sdg_id", nullable = false)
+	private Sdg sdg;
 	@Transient
 	private List<String> mvo_data;
 
-	protected Mvo(String name, String sdg, String superMvoId, String info, int goalValue, String datasourceId)
+	protected Mvo(String name, Sdg sdg, String superMvoId, List<String> info, int goalValue, String datasourceId)
 	{
 		setName(name);
-		setSdg(sdg);
 		setSuperMvoId(superMvoId);
 		setInfo(info);
 		setGoalValue(goalValue);
 		setDatasourceId(datasourceId);
+		setSdg(sdg);
 	}
 
 	protected Mvo()
@@ -59,16 +65,6 @@ public class Mvo implements Serializable
 		this.name = name;
 	}
 
-	public String getSdg()
-	{
-		return sdg;
-	}
-
-	public void setSdg(String sdg)
-	{
-		this.sdg = sdg;
-	}
-
 	public String getSuperMvoId()
 	{
 		return superMvoId;
@@ -84,9 +80,11 @@ public class Mvo implements Serializable
 		return info;
 	}
 
-	public void setInfo(String info)
+	public void setInfo(List<String> info)
 	{
-		this.info = info;
+		Gson gson = new Gson();
+		String infoasGSon = gson.toJson(info);
+		this.info = infoasGSon;
 	}
 
 	public int getGoalValue()
@@ -107,6 +105,16 @@ public class Mvo implements Serializable
 	public void setDatasourceId(String datasourceId)
 	{
 		this.datasourceId = datasourceId;
+	}
+
+	public Sdg getSdg()
+	{
+		return sdg;
+	}
+
+	public void setSdg(Sdg sdg)
+	{
+		this.sdg = sdg;
 	}
 
 	public List<String> getMvo_data()
