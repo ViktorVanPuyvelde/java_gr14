@@ -1,7 +1,10 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import domein.Categorie;
 import domein.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import repository.CategorieDaoJpa;
+import repository.GenericDaoJpa;
 
 public class HomepagePaneelController extends AnchorPane
 {
@@ -42,6 +47,23 @@ public class HomepagePaneelController extends AnchorPane
 		{
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	private void populateDB() {
+			CategorieDaoJpa cj = new CategorieDaoJpa();
+			CategorieDaoJpa.startTransaction();
+			
+			List<String> rollen = new ArrayList<>();
+			
+			rollen.add("gebruiker");
+			
+			Categorie c = new Categorie("Profit", "Aap", rollen, true);
+			Categorie c1 = new Categorie("Planet", "Aap", rollen, true);
+			Categorie c2 = new Categorie("People", "Aap", rollen, true);
+			
+			CategorieDaoJpa.commitTransaction();
+			
+			
 	}
 
 	@FXML

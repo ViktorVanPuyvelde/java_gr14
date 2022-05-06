@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="CENTER" prefHeight="521.0" prefWidth="839.0" type="GridPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="522.0" prefWidth="840.0">
+         <children>
+            <HBox prefHeight="64.0" prefWidth="838.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="85.0" prefWidth="838.0" text="Mvo-doelstellingen">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox layoutY="64.0" prefHeight="50.0" prefWidth="838.0">
+               <children>
+                  <ListView fx:id="MvoCatListView" orientation="HORIZONTAL" prefHeight="50.0" prefWidth="843.0" />
+               </children>
+            </HBox>
+            <HBox layoutY="114.0" prefHeight="50.0" prefWidth="839.0">
+               <children>
+                  <ListView fx:id="MvoListView" orientation="HORIZONTAL" prefHeight="50.0" prefWidth="840.0" />
+               </children>
+            </HBox>
+            <AnchorPane layoutX="102.0" layoutY="193.0" prefHeight="260.0" prefWidth="634.0" style="-fx-background-color: #37465D;">
+               <children>
+                  <HBox prefHeight="40.0" prefWidth="634.0">
+                     <children>
+                        <Label fx:id="mvoNaam" alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="635.0" style="-fx-border-color: #ffffff;" text="MVO" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="7.0" layoutY="40.0" prefHeight="137.0" prefWidth="302.0">
+                     <children>
+                        <Label fx:id="infoMvo" alignment="TOP_LEFT" prefHeight="196.0" prefWidth="302.0" style="-fx-padding: 10px;" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="7.0" layoutY="192.0" prefHeight="99.0" prefWidth="286.0">
+                     <children>
+                        <ImageView fx:id="sdgImage" fitHeight="86.0" fitWidth="151.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="309.0" layoutY="40.0" prefHeight="50.0" prefWidth="324.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label alignment="CENTER_RIGHT" prefHeight="93.0" prefWidth="317.0" text="Goal value:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="58.0" prefWidth="228.0">
+                           <children>
+                              <Label fx:id="goalValue" prefHeight="61.0" prefWidth="226.0" style="-fx-padding: 5px;" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

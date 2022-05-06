@@ -1,67 +1,74 @@
 package domein;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Mvo implements CRUD
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "mvo")
+@NamedQueries(
+{ @NamedQuery(name = "Mvo.geefMvosVoorCategorie", query = "SELECT m FROM Categorie c INNER JOIN c.sdgs s INNER JOIN s.mvos m WHERE c.name = :catNaam"),
+	@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"),
+	})
+public class Mvo implements Serializable
 {
+	
+	public Sdg getS() {
+		return s;
+	}
 
-	private String id;
-	private Date date;
-	private List<String> data;
-	private int quarter;
-	private List<String> mvo_data;
+	public void setS(Sdg s) {
+		this.s = s;
+	}
+
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "mvo_id")
+	private int id;
+	@Column(name = "mvo_name")
 	private String name;
+	@Column(name = "super_mvo_id")
+	private String superMvoId;
+	@Column(name = "info")
+	private String info;
+	@Column(name = "goal_val")
+	private int goalValue;
+	@Column(name = "datasource_id")
+	private String datasourceId;
+	
+	@ManyToOne
+	private Sdg s;
+	
+	@Transient
+	private List<String> mvo_data;
 
-	/**
-	 * 
-	 * @param name
-	 * @param datasource
-	 */
-	public Mvo(String name, Datasource datasource)
+	protected Mvo(String name, String superMvoId, String info, int goalValue, String datasourceId)
 	{
-		this.setName(name);
+		setName(name);
+		setSuperMvoId(superMvoId);
+		setInfo(info);
+		setGoalValue(goalValue);
+		setDatasourceId(datasourceId);
 	}
 
-	/**
-	 * 
-	 * @param name
-	 * @param datasource
-	 * @param drempelwaarde
-	 */
-	public Mvo(String name, Datasource datasource, int drempelwaarde)
+	protected Mvo()
 	{
-		// TODO - implement Mvo.Mvo
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void read()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void create()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete()
-	{
-		// TODO Auto-generated method stub
-
+		super();
 	}
 
 	public String getName()
@@ -74,25 +81,54 @@ public class Mvo implements CRUD
 		this.name = name;
 	}
 
-	@Override
-	public int hashCode()
+	public String getSuperMvoId()
 	{
-		return Objects.hash(data, date, id, mvo_data, name, quarter);
+		return superMvoId;
 	}
 
-	@Override
-	public boolean equals(Object obj)
+	public void setSuperMvoId(String superMvoId)
 	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Mvo other = (Mvo) obj;
-		return Objects.equals(data, other.data) && Objects.equals(date, other.date) && Objects.equals(id, other.id)
-				&& Objects.equals(mvo_data, other.mvo_data) && Objects.equals(name, other.name)
-				&& quarter == other.quarter;
+		this.superMvoId = superMvoId;
+	}
+
+	public String getInfo()
+	{
+		return info;
+	}
+
+	public void setInfo(String info)
+	{
+		this.info = info;
+	}
+
+	public int getGoalValue()
+	{
+		return goalValue;
+	}
+
+	public void setGoalValue(int goalValue)
+	{
+		this.goalValue = goalValue;
+	}
+
+	public String getDatasourceId()
+	{
+		return datasourceId;
+	}
+
+	public void setDatasourceId(String datasourceId)
+	{
+		this.datasourceId = datasourceId;
+	}
+
+	public List<String> getMvo_data()
+	{
+		return mvo_data;
+	}
+
+	public void setMvo_data(List<String> mvo_data)
+	{
+		this.mvo_data = mvo_data;
 	}
 
 }

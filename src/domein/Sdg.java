@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,31 +9,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "sdg")
+@NamedQueries(
+{	@NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.s s WHERE s.id = :mvoSdgId")
+	})
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sdg_id")
-	private String id;
+	private int id;
 	@Column(name = "sdg_name")
 	private String name;
 	@Column(name = "sdg_image")
 	private String image;
+	
+	@OneToMany (mappedBy="s")
+	private List<Mvo> mvos;
+	
+	@ManyToOne
+	private Categorie categorie;
 
 	/**
 	 * 
 	 * @param name
 	 * @param image
 	 */
-	public Sdg(String name, String image)
+	public Sdg(String name, String image, List<Mvo> mvos, Categorie categorie)
 	{
 		setName(name);
 		setImage(image);
+		setMvos(mvos);
+		setCategorie(categorie);
 	}
 
 	protected Sdg()
@@ -40,12 +56,28 @@ public class Sdg implements Serializable
 
 	}
 
-	public String getId()
+	public List<Mvo> getMvos() {
+		return mvos;
+	}
+
+	public void setMvos(List<Mvo> mvos) {
+		this.mvos = mvos;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public int getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

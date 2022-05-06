@@ -20,19 +20,22 @@ import com.google.gson.Gson;
 @Entity
 @Table(name = "category")
 @NamedQueries(
-{ @NamedQuery(name = "Categorie.alleCategoriën", query = "select c from Categorie c") })
+{ @NamedQuery(name = "Categorie.alleCategoriën", query = "select c from Categorie c"),
+	@NamedQuery(name = "Categorie.alleEchteCategoriën", query = "select c from Categorie c where c.isCategory = 1")})
 public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private String id;
+	private int id;
+	
 	@Column(name = "category_name")
 	private String name;
 	private String iconName;
 	private String roles;
-	@OneToMany
+	@OneToMany(mappedBy = "categorie")
 	private List<Sdg> sdgs;
 	private boolean isCategory;
 
@@ -56,12 +59,12 @@ public class Categorie implements CRUD, Serializable
 
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

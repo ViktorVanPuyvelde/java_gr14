@@ -23,6 +23,10 @@ public class SdgController
 	{
 		return sdgRepo.findAll();
 	}
+	
+	public Sdg geefSdgVoorMvo(int sdgId) {
+		return sdgRepo.geefSdgVoorMvo(sdgId);
+	}
 
 	public void close()
 	{

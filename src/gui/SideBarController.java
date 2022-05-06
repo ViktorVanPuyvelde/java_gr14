@@ -65,7 +65,8 @@ public class SideBarController extends BorderPane{
 	
 	@FXML
 	private void mvo(MouseEvent event) {
-		
+		MvoPaneelController root = new MvoPaneelController();
+		bp.setCenter(root);
 	}
 	@FXML
 	private void categorie(MouseEvent event) {
