@@ -12,6 +12,7 @@ public class SdgController
 	public SdgController()
 	{
 		setSdgRepo(new SdgDaoJpa());
+		//populateDB();
 	}
 
 	public void setSdgRepo(SdgDao sdgRepo)
@@ -33,4 +34,12 @@ public class SdgController
 	{
 		SdgDaoJpa.closePersistency();
 	}
+	
+//	private void populateDB() {
+//		sdgRepo.insert(new Sdg("Geen Armoede", "img1"	));
+//		sdgRepo.insert(new Sdg("Geen Honger", "img2"));
+//		sdgRepo.insert(new Sdg("Goede Gezondheid", "img3"));
+//		sdgRepo.insert(new Sdg("Kwaliteits Onderwijs", "img4"));
+//		sdgRepo.insert(new Sdg("Gender Gelijkheid", "img5"));
+//	}
 }

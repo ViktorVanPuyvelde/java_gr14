@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="400.0">
+         <children>
+            <VBox prefHeight="400.0" prefWidth="400.0">
+               <children>
+                  <Pane prefHeight="59.0" prefWidth="400.0">
+                     <children>
+                        <Label layoutX="135.0" layoutY="21.0" text="Datasources Raadplegen" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="70.0" prefWidth="400.0">
+                     <children>
+                        <Button fx:id="create_btn" layoutX="133.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_onAction" text="create new datasource" />
+                     </children>
+                  </Pane>
+                  <HBox prefHeight="186.0" prefWidth="400.0">
+                     <children>
+                        <Pane prefHeight="100.0" prefWidth="114.0">
+                           <children>
+                              <Label layoutX="22.0" layoutY="85.0" text="Datasources :" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="210.0" prefWidth="295.0">
+                           <children>
+                              <ListView fx:id="datasource_List" prefHeight="186.0" prefWidth="270.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="84.0" prefWidth="400.0">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="view_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#view_onAction" text="view" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="edit_btn" layoutX="48.0" layoutY="30.0" mnemonicParsing="false" onAction="#edit_onAction" text="edit" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="delete_btn" layoutX="42.0" layoutY="30.0" mnemonicParsing="false" onAction="#delete_onAction" text="delete" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</fx:root>

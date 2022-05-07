@@ -21,6 +21,8 @@ public class HomepagePaneelController extends AnchorPane
 	private Button categorieAanmeken_btn;
 	@FXML
 	private Button datasourcesRaadplegen_btn;
+	@FXML
+	private Button categorieRaadplegen_btn;
 
 	public HomepagePaneelController(DomeinController dc)
 	{
@@ -65,9 +67,22 @@ public class HomepagePaneelController extends AnchorPane
 	}
 
 	@FXML
-	public void datasourcesRaadplegen_onAction(ActionEvent event)
-	{
+	public void datasourcesRaadplegen_onAction(ActionEvent event) {
+		DatasourcePaneelController ns = new DatasourcePaneelController(dc);
+		Scene scene = new Scene (ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
 
+	@FXML
+	public void categorieRaadplegen_onAction(ActionEvent event)
+	{
+		CategorieRaadpleegPaneelController ns = new CategorieRaadpleegPaneelController(dc);
+		Scene scene = new Scene(ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 
 }

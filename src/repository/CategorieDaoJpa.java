@@ -1,8 +1,11 @@
 package repository;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import domein.Categorie;
+import domein.Sdg;
 
 public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements CategorieDao
 {
@@ -13,10 +16,15 @@ public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements Categor
 	}
 
 	@Override
-	public Categorie geefAlleCategorieen() throws EntityNotFoundException
+	public List<Categorie> geefAlleCategorieen() throws EntityNotFoundException
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return super.findAll();
+	}
+
+	@Override
+	public List<Sdg> geefSdgVoorCategorie(String naamCat) throws EntityNotFoundException {
+		List <Sdg> sdgs = em.createNamedQuery("Categorie.sdgVoorCat", Sdg.class).setParameter("catNaam", naamCat).getResultList();
+		return sdgs;
 	}
 
 }
