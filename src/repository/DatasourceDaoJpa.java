@@ -1,18 +1,18 @@
 package repository;
 
-import java.util.List;
-
 import domein.Datasource;
 
-public class DatasourceDaoJpa extends GenericDaoJpa<Datasource> implements DatasourceDao {
+public class DatasourceDaoJpa extends GenericDaoJpa<Datasource> implements DatasourceDao
+{
 
-	public DatasourceDaoJpa() {
+	public DatasourceDaoJpa()
+	{
 		super(Datasource.class);
 	}
-	
-	@Override
-	public List<Datasource> findAll() {
-		return em.createNamedQuery("Datasource.alleDatasources").getResultList();
-	}
+
+//	@Override
+//	public List<Datasource> findAll() {
+//		return em.createNamedQuery("Datasource.alleDatasources").getResultList();
+//	}
 
 }

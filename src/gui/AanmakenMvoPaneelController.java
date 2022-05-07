@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domein.Datasource;
+import domein.DatasourceController;
 import domein.MvoController;
 import domein.Sdg;
 import domein.SdgController;
@@ -23,6 +24,7 @@ public class AanmakenMvoPaneelController extends GridPane
 {
 	private MvoController mc;
 	private SdgController sc;
+	private DatasourceController dc;
 
 	// FXML attributen
 	@FXML
@@ -39,6 +41,8 @@ public class AanmakenMvoPaneelController extends GridPane
 	private GridPane gpAanmakenMvo;
 	@FXML
 	private Node rowConstraint0;
+	@FXML
+	private ListView<String> lvDatasource;
 
 	// lokale attributen
 	private String name;
@@ -46,6 +50,7 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ObservableList<String> type;
 	private int doel;
 	private Datasource datasource;
+	private Boolean foutMeldingDoel = false;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<Datasource> datasourceItemList;
@@ -56,9 +61,11 @@ public class AanmakenMvoPaneelController extends GridPane
 	{
 		this.mc = new MvoController();
 		this.sc = new SdgController();
+		this.dc = new DatasourceController();
 		fm = new Foutmelding();
 		buildGui();
 		setSdgItemList();
+		setDatasourceItemList();
 		initialize();
 	}
 
@@ -82,8 +89,10 @@ public class AanmakenMvoPaneelController extends GridPane
 	private void initialize()
 	{
 		lvSdg.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		lvDatasource.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
+		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
 	}
 
 	@FXML
@@ -100,12 +109,12 @@ public class AanmakenMvoPaneelController extends GridPane
 		this.type.add(txtType.getText());
 		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
 		{
-			fm.toonFoutmelding("Er moet een doel meegegeven worden aan de nieuwe MVO.");
+			foutMeldingDoel = true;
 		} else
 		{
 			this.doel = Integer.parseInt(txtDoel.getText());
 		}
-//		this.datasource = txtData.getText();
+		this.datasource = this.datasourceItemList.get(0);
 	}
 
 	private void verify()
@@ -122,6 +131,10 @@ public class AanmakenMvoPaneelController extends GridPane
 		} else if (datasource == null)
 		{
 			fm.toonFoutmelding("Er moet een datasource meegegeven worden ");
+		} else if (foutMeldingDoel)
+		{
+			fm.toonFoutmelding("Er moet een doel meegegeven worden");
+			foutMeldingDoel = false;
 		} else
 		{
 			update();
@@ -133,12 +146,21 @@ public class AanmakenMvoPaneelController extends GridPane
 		this.mc.voegMvoToe(name, sdg, type, doel, datasource);
 	}
 
-	public void setSdgItemList()
+	private void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgs();
 		for (Sdg s : sdgs)
 		{
 			this.sdgItemList.add(s);
+		}
+	}
+
+	private void setDatasourceItemList()
+	{
+		List<Datasource> datasources = this.dc.geefDatasources();
+		for (Datasource d : datasources)
+		{
+			this.datasourceItemList.add(d);
 		}
 	}
 
