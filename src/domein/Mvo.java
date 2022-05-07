@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -32,21 +33,22 @@ public class Mvo implements Serializable
 	private String info;
 	@Column(name = "goal_val")
 	private int goalValue;
-	@Column(name = "datasource_id")
-	private String datasourceId;
+	@OneToOne
+	@JoinColumn(name = "datasource_id", nullable = true)
+	private Datasource datasource;
 	@ManyToOne
 	@JoinColumn(name = "sdg_id", nullable = false)
 	private Sdg sdg;
 	@Transient
 	private List<String> mvo_data;
 
-	protected Mvo(String name, Sdg sdg, String superMvoId, List<String> info, int goalValue, String datasourceId)
+	protected Mvo(String name, Sdg sdg, String superMvoId, List<String> info, int goalValue, Datasource datasource)
 	{
 		setName(name);
 		setSuperMvoId(superMvoId);
 		setInfo(info);
 		setGoalValue(goalValue);
-		setDatasourceId(datasourceId);
+		setDatasource(datasource);
 		setSdg(sdg);
 	}
 
@@ -97,14 +99,14 @@ public class Mvo implements Serializable
 		this.goalValue = goalValue;
 	}
 
-	public String getDatasourceId()
+	public Datasource getDatasource()
 	{
-		return datasourceId;
+		return datasource;
 	}
 
-	public void setDatasourceId(String datasourceId)
+	public void setDatasource(Datasource datasource)
 	{
-		this.datasourceId = datasourceId;
+		this.datasource = datasource;
 	}
 
 	public Sdg getSdg()

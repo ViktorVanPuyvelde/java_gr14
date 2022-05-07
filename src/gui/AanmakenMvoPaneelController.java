@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domein.Datasource;
 import domein.MvoController;
 import domein.Sdg;
 import domein.SdgController;
@@ -44,9 +45,10 @@ public class AanmakenMvoPaneelController extends GridPane
 	private Sdg sdg;
 	private ObservableList<String> type;
 	private int doel;
-	private String datasource;
+	private Datasource datasource;
 
 	private ObservableList<Sdg> sdgItemList;
+	private ObservableList<Datasource> datasourceItemList;
 
 	private Foutmelding fm;
 
@@ -66,6 +68,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		{
 			type = FXCollections.observableArrayList(new ArrayList());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList());
+			datasourceItemList = FXCollections.observableArrayList(new ArrayList());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
@@ -102,7 +105,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		{
 			this.doel = Integer.parseInt(txtDoel.getText());
 		}
-		this.datasource = txtData.getText();
+//		this.datasource = txtData.getText();
 	}
 
 	private void verify()
@@ -116,7 +119,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		} else if (type == null || type.isEmpty())
 		{
 			fm.toonFoutmelding("Type mag niet leeg zijn");
-		} else if (datasource == null || datasource.isEmpty())
+		} else if (datasource == null)
 		{
 			fm.toonFoutmelding("Er moet een datasource meegegeven worden ");
 		} else

@@ -24,11 +24,11 @@ public class MvoController
 		return mvoDao.findAll();
 	}
 
-	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, String datasourceId)
+	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource)
 	{
 		MvoDaoJpa.startTransaction();
 //		"" --> superMvoId
-		mvoDao.insert(new Mvo(name, sdg, "", info, goalValue, datasourceId));
+		mvoDao.insert(new Mvo(name, sdg, "", info, goalValue, datasource));
 		MvoDaoJpa.commitTransaction();
 	}
 
