@@ -24,11 +24,9 @@ public class Mvo implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mvo_id")
-	private int id;
+	private String id;
 	@Column(name = "mvo_name")
 	private String name;
-	@Column(name = "super_mvo_id")
-	private String superMvoId;
 	@Column(name = "info")
 	private String info;
 	@Column(name = "goal_val")
@@ -41,15 +39,18 @@ public class Mvo implements Serializable
 	private Sdg sdg;
 	@Transient
 	private List<String> mvo_data;
+	@ManyToOne(targetEntity = Mvo.class)
+	@JoinColumn(name = "super_mvo_id")
+	private Mvo superMvo;
 
-	protected Mvo(String name, Sdg sdg, String superMvoId, List<String> info, int goalValue, Datasource datasource)
+	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
 		setName(name);
-		setSuperMvoId(superMvoId);
 		setInfo(info);
 		setGoalValue(goalValue);
 		setDatasource(datasource);
 		setSdg(sdg);
+		setSuperMvo(superMvo);
 	}
 
 	protected Mvo()
@@ -65,16 +66,6 @@ public class Mvo implements Serializable
 	public void setName(String name)
 	{
 		this.name = name;
-	}
-
-	public String getSuperMvoId()
-	{
-		return superMvoId;
-	}
-
-	public void setSuperMvoId(String superMvoId)
-	{
-		this.superMvoId = superMvoId;
 	}
 
 	public String getInfo()
@@ -128,4 +119,15 @@ public class Mvo implements Serializable
 	{
 		this.mvo_data = mvo_data;
 	}
+
+	public Mvo getSuperMvo()
+	{
+		return superMvo;
+	}
+
+	public void setSuperMvo(Mvo superMvo)
+	{
+		this.superMvo = superMvo;
+	}
+
 }
