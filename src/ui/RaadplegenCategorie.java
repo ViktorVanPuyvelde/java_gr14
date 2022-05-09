@@ -1,19 +1,19 @@
 package ui;
 
-import domein.Categorie;
-import domein.DomeinController;
+import java.util.List;
+
+import domein.CategorieController;
+import domein.Sdg;
 
 public class RaadplegenCategorie {
 
 	public static void main(String[] args) {
-		DomeinController dc = new DomeinController();
+		CategorieController controller = new CategorieController();
+		List<Sdg> sdgs = controller.geefSdgsVoorCategorie(controller.geefCategorien().get(1));
 		
-		Categorie c = dc.raadpleegCategorie(dc.geefAlleCategories().get(1));
+		System.out.println(String.format("%s", sdgs.isEmpty()));
 		
-		System.out.println(c.toString());
-		
-		System.out.println(c.getSdgs());
-
+		sdgs.forEach(s -> System.out.println(s.toString()));
 	}
 
 }

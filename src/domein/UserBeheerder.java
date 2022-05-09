@@ -10,6 +10,7 @@ import com.auth0.json.auth.UserInfo;
 import com.auth0.net.AuthRequest;
 import com.auth0.net.Request;
 
+import exceptions.IngelogdVerkeerdeRol;
 import io.github.cdimascio.dotenv.Dotenv;
 import util.JPAUtil;
 
@@ -50,12 +51,12 @@ public class UserBeheerder
 
 		// enkel coordinator kan inloggen
 		openPersistentie();
-
 		User u = em.createNamedQuery("User.findRole", User.class).setParameter("id", id).getSingleResult();
 
 		if (!u.getRole().equals("coördinator"))
 		{
 			meldAf();
+			throw new IngelogdVerkeerdeRol();
 		} else
 		{
 			coordinator.setRole(u.getRole());

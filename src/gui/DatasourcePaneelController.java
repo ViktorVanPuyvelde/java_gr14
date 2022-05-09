@@ -6,7 +6,7 @@ import java.util.List;
 
 import domein.Datasource;
 import domein.DatasourceController;
-import domein.DomeinController;
+import domein.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class DatasourcePaneelController extends AnchorPane{
-	private DomeinController dc;
 	private DatasourceController datasourceCon;
 	
 	@FXML
@@ -37,8 +36,7 @@ public class DatasourcePaneelController extends AnchorPane{
 	private ObservableList<Datasource> datasourceItemList;
 	
 	
-	public DatasourcePaneelController(DomeinController dc) {
-		this.dc = dc;
+	public DatasourcePaneelController() {
 		this.datasourceCon = new DatasourceController();
 		buildGui();
 		setDatasourceList();
@@ -56,7 +54,7 @@ public class DatasourcePaneelController extends AnchorPane{
 			
 			datasource_List = new ListView<>();
 			
-			datasourceItemList = FXCollections.observableArrayList(new ArrayList());
+			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
 			
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("RaadplegenDatasourcesPaneel.fxml"));
 		loader.setController(this);
@@ -82,7 +80,7 @@ public class DatasourcePaneelController extends AnchorPane{
 		//collectChanges();
 		//verify();
 		//update();
-		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController(dc);
+		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController();
 //		Scene scene = new Scene (ns);
 //		Stage stage = (Stage) this.getScene().getWindow();
 //		stage.setScene(scene);

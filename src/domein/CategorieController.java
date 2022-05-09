@@ -8,13 +8,11 @@ import repository.CategorieDaoJpa;
 public class CategorieController
 {
 	private CategorieDao categorieRepo;
-	private List<Categorie> allCat;
 	
 	public CategorieController()
 	{
 		setCategorieRepo(new CategorieDaoJpa());
 		//populateDB();
-		allCat = geefCategorien();
 	}
 
 	public void setCategorieRepo(CategorieDao categorieRepo)
@@ -40,10 +38,10 @@ public class CategorieController
 		CategorieDaoJpa.closePersistency();
 	}
 
-	public Categorie raadpleegCategorie(Categorie c) {
+	public List<Sdg> geefSdgsVoorCategorie(Categorie c) {
 		List<Sdg> sdgs = categorieRepo.geefSdgVoorCategorie(c.getName());
 		c.setSdgs(sdgs);
-		return c;
+		return sdgs;
 	}
 	
 //	private void populateDB() {

@@ -1,12 +1,9 @@
 package gui;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import domein.DomeinController;
 import domein.Mvo;
 import domein.MvoController;
 import javafx.collections.FXCollections;
@@ -16,15 +13,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class NieuweDatasourcePaneelController extends GridPane {
 
-	private DomeinController dc;
 	private MvoController mc;
 	
 	@FXML
@@ -41,8 +35,7 @@ public class NieuweDatasourcePaneelController extends GridPane {
     
     private ObservableList<Mvo> mvoList;
     
-    public NieuweDatasourcePaneelController(DomeinController dc) {
-		this.dc = dc;
+    public NieuweDatasourcePaneelController() {
 		this.mc = new MvoController();
 		buildGui();
 		setMvoList();

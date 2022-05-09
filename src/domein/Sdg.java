@@ -20,7 +20,7 @@ public class Sdg implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sdg_id")
-	private String id;
+	private int id;
 	@Column(name = "sdg_name")
 	private String name;
 	@Column(name = "sdg_image")
@@ -42,12 +42,12 @@ public class Sdg implements Serializable
 
 	}
 
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
 
-	public void setId(String id)
+	public void setId(int id)
 	{
 		this.id = id;
 	}

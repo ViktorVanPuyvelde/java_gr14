@@ -10,7 +10,7 @@ import java.util.List;
 
 import domein.Categorie;
 import domein.CategorieController;
-import domein.DomeinController;
+import domein.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -51,7 +51,7 @@ public class CategoriePaneelController extends AnchorPane{
 			
 			categorie_List = new ListView<>();
 			
-			catItemList = FXCollections.observableArrayList(new ArrayList());
+			catItemList = FXCollections.observableArrayList(new ArrayList<>());
 			
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
 		loader.setController(this);
@@ -79,7 +79,7 @@ public class CategoriePaneelController extends AnchorPane{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController(new DomeinController());
+		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController();
 		AnchorPane.setRightAnchor(catAanmakenPaneel, 25.0);
 		this.getChildren().add(catAanmakenPaneel);
 		rechterSchermAanwezig = true;

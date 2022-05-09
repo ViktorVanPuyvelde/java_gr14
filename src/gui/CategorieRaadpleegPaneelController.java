@@ -1,15 +1,18 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import domein.Categorie;
 import domein.CategorieController;
+import domein.Sdg;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class CategorieRaadpleegPaneelController extends VBox {
 
@@ -34,6 +37,8 @@ public class CategorieRaadpleegPaneelController extends VBox {
 	
 	private void buildGui()
 	{
+		sdg_list = new ListView<>();
+		
 		try
 		{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategorieRaadpleegPaneel.fxml"));
@@ -47,10 +52,11 @@ public class CategorieRaadpleegPaneelController extends VBox {
 	}
 	
 	private void initialize() {
-		id_lbl.setText(categorie.getId());
+		id_lbl.setText(String.format("%d", categorie.getId()));
 		naam_lbl.setText(categorie.getName());
 		icon_lbl.setText(categorie.getIconName());
 
+		List<Sdg> sdgs = FXCollections.observableArrayList(new ArrayList<>(controller.geefSdgsVoorCategorie(categorie)));
+		sdgs.forEach(s -> sdg_list.getItems().add(s.toString()));
 	}
-
 }

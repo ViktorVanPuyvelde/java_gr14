@@ -6,7 +6,8 @@ import java.io.IOException;
 import com.auth0.exception.APIException;
 import com.auth0.exception.Auth0Exception;
 
-import domein.DomeinController;
+import domein.UserController;
+import exceptions.IngelogdVerkeerdeRol;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 
 public class AanmeldPaneelController extends AnchorPane{
 	
-	private DomeinController dc;
+	private UserController userController;
 	
 	@FXML
 	private TextField gebruikersnaam;
@@ -34,8 +35,8 @@ public class AanmeldPaneelController extends AnchorPane{
 	private Button inlogButton;
 	
 
-	public AanmeldPaneelController(DomeinController controller) {
-		this.dc=controller;
+	public AanmeldPaneelController() {
+		this.userController = new UserController();
 		buildGui();
 		initialize();
 	}
@@ -64,12 +65,14 @@ public class AanmeldPaneelController extends AnchorPane{
 	@FXML
 	public void inloggen(ActionEvent event) throws APIException, Auth0Exception {
 		try {
-			dc.meldAan(gebruikersnaam.getText(), wachtwoord.getText());
-			SideBarController ns = new SideBarController(dc);
+			userController.meldAan(gebruikersnaam.getText(), wachtwoord.getText());
+			SideBarController ns = new SideBarController(userController);
 			Scene scene = new Scene (ns);
 			Stage stage = (Stage) this.getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();
+		}catch(IngelogdVerkeerdeRol e) {
+			wrongLogIn.setText(e.getMessage());
 		}catch(Auth0Exception a) {
 			wrongLogIn.setText("Foute gebruikersnaam en/of wachtwoord");
 		}

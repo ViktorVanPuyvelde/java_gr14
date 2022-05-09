@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import domein.CategorieController;
-import domein.DomeinController;
+import domein.UserController;
 import domein.Sdg;
 import domein.SdgController;
 import javafx.collections.FXCollections;
@@ -31,7 +31,6 @@ import javafx.stage.Stage;
 
 public class CategorieAanmakenPaneelController extends GridPane
 {
-	private DomeinController dc;
 	private CategorieController cc;
 	private SdgController sc;
 
@@ -58,13 +57,11 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
-	// private DomeinController dc;
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategorieAanmakenPaneelController(DomeinController dc)
+	public CategorieAanmakenPaneelController()
 	{
-		this.dc = dc;
 		this.cc = new CategorieController();
 		this.sc = new SdgController();
 		buildGui();
@@ -78,8 +75,8 @@ public class CategorieAanmakenPaneelController extends GridPane
 		{
 			cat_Sdg_List = new ListView<>();
 			cat_Rol_List = new ListView<>();
-			sdgItemList = FXCollections.observableArrayList(new ArrayList());
-			rolItemList = FXCollections.observableArrayList(new ArrayList());
+			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
+			rolItemList = FXCollections.observableArrayList(new ArrayList<>());
 			linkIcons = new Hyperlink();
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategorieAanmakenPaneel.fxml"));
@@ -200,15 +197,15 @@ public class CategorieAanmakenPaneelController extends GridPane
 		}
 	}
 
-	private void Actie(Stage stage)
-	{
-		// terug naar hoofdscherm
-		SideBarController controller = new SideBarController(dc);
-		Scene scene = new Scene(controller);
-		stage.setScene(scene);
-		stage.setTitle("Fluvius");
-		stage.setMaximized(true);
-		stage.show();
-	}
+//	private void Actie(Stage stage)
+//	{
+//		// terug naar hoofdscherm
+//		SideBarController controller = new SideBarController();
+//		Scene scene = new Scene(controller);
+//		stage.setScene(scene);
+//		stage.setTitle("Fluvius");
+//		stage.setMaximized(true);
+//		stage.show();
+//	}
 
 }
