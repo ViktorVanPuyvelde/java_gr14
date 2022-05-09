@@ -42,7 +42,7 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="viewCategorie_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" text="Raadplegen" />
+                              <Button fx:id="viewCategorie_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" onAction="#raadplegenCategorie_OnAction" text="Raadplegen" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">

@@ -1,33 +1,33 @@
 package gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import domein.Categorie;
-import domein.DomeinController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import domein.CategorieController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class CategorieRaadpleegPaneelController extends GridPane {
+public class CategorieRaadpleegPaneelController extends VBox {
+
+	private Categorie categorie;
+	private CategorieController controller;
+	
 	@FXML
-	private RowConstraints firstRowGrid;
-
-	private DomeinController dc;
-	private ObservableList<Categorie> cats; 
-	private int rij;
-
-	public CategorieRaadpleegPaneelController(DomeinController dc) {
-		this.dc = dc;
-		this.rij = 2;
+	private Label id_lbl;
+	@FXML
+	private Label naam_lbl;
+	@FXML
+	private Label icon_lbl;
+	@FXML
+	private ListView<String> sdg_list;
+	
+	public CategorieRaadpleegPaneelController(Categorie c, CategorieController controller) {
+		this.controller = controller;
+		this.categorie = c;
 		buildGui();
 		initialize();
 	}
@@ -44,37 +44,13 @@ public class CategorieRaadpleegPaneelController extends GridPane {
 		{
 			throw new RuntimeException(ex);
 		}
-		this.setVgap(25);
-		this.setAlignment(Pos.CENTER);
-		this.setPadding(new Insets(10,10,10,10));
-		firstRowGrid.setMaxHeight(15);
-		firstRowGrid.setMinHeight(15);
 	}
 	
 	private void initialize() {
-		cats = FXCollections.observableArrayList(new ArrayList(dc.geefAlleCategories()));
+		id_lbl.setText(categorie.getId());
+		naam_lbl.setText(categorie.getName());
+		icon_lbl.setText(categorie.getIconName());
 
-		cats.stream().forEach(c -> {
-			
-			Label id = new Label(c.getId());
-			Label naam = new Label(c.getName());
-			Label icon = new Label(c.getIconName());			
-			id.setFont(Font.font(14));
-			naam.setFont(Font.font(14));
-			icon.setFont(Font.font(14));
-			
-			GridPane.setConstraints(id, 0, rij);
-			GridPane.setConstraints(naam, 1, rij);
-			GridPane.setConstraints(icon, 2, rij);
-
-			Button btn = new Button("Raadplegen");
-			GridPane.setConstraints(btn, 3, rij);			
-			
-			this.getChildren().addAll(id, naam, icon, btn);
-			rij= rij + 1;
-		});
-		
-		
 	}
 
 }
