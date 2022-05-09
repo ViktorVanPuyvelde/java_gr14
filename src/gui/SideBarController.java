@@ -98,7 +98,7 @@ public class SideBarController extends BorderPane{
 	}
 	@FXML
 	private void categorie(MouseEvent event) {
-		CategoriePaneelController root = new CategoriePaneelController(dc);
+		CategoriePaneelController root = new CategoriePaneelController();
 		bp.setCenter(root);
 		makeBtnActive(categorie_Btn);
 	}
