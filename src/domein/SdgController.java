@@ -25,6 +25,11 @@ public class SdgController
 		return sdgRepo.findAll();
 	}
 
+	public Sdg geefSdg(String id)
+	{
+		return sdgRepo.get(id);
+	}
+
 	public void close()
 	{
 		SdgDaoJpa.closePersistency();

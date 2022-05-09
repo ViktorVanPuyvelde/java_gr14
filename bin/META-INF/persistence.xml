@@ -6,6 +6,7 @@
     <class>util.JPAUtil</class>    
     <class>domein.Categorie</class>
     <class>domein.Sdg</class>
+    <class>domein.Mvo</class>
     <class>domein.Datasource</class>
     <class>util.JSONArrayConverter</class>
     <properties>

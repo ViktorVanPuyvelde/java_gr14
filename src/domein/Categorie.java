@@ -32,7 +32,7 @@ public class Categorie implements CRUD, Serializable
 	private String name;
 	private String iconName;
 	private String roles;
-	
+
 	@OneToMany
 	private List<Sdg> sdgs;
 	private boolean isCategory;

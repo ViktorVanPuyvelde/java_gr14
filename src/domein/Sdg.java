@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -25,6 +26,8 @@ public class Sdg implements Serializable
 	private String name;
 	@Column(name = "sdg_image")
 	private String image;
+	@OneToMany
+	private List<Mvo> mvos;
 
 	/**
 	 * 

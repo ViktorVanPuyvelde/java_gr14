@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +8,6 @@ import java.util.Optional;
 import domein.DomeinController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,7 +19,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SideBarController extends BorderPane{
+public class SideBarController extends BorderPane
+{
 
 	@FXML
 	private AnchorPane apScene;
@@ -68,17 +66,17 @@ public class SideBarController extends BorderPane{
 		loader = new FXMLLoader(getClass().getResource("SideBarPaneel.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		try {
+		try
+		{
 			loader.load();
-		} catch (IOException e) {
-			
+		} catch (IOException e)
+		{
+
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
+
 	@FXML
 	private void home(MouseEvent event) {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
@@ -91,11 +89,12 @@ public class SideBarController extends BorderPane{
         }
 		makeBtnActive(home_Btn);
 	}
-	
+
 	@FXML
 	private void mvo(MouseEvent event) {
 		makeBtnActive(mvo_Btn);
 	}
+
 	@FXML
 	private void categorie(MouseEvent event) {
 		CategoriePaneelController root = new CategoriePaneelController(dc);
@@ -109,7 +108,7 @@ public class SideBarController extends BorderPane{
 		bp.setCenter(root);
 		makeBtnActive(datasource_Btn);
 	}
-	
+
 	@FXML
 	private void logout(MouseEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);

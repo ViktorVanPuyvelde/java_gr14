@@ -7,10 +7,10 @@ import repository.DatasourceDaoJpa;
 
 public class DatasourceController
 {
-	private DatasourceBeheerder cb = new DatasourceBeheerder();
 	private DatasourceDao datasourceRepo;
-	
-	public DatasourceController() {
+
+	public DatasourceController()
+	{
 		setDatasourceRepo(new DatasourceDaoJpa());
 	}
 
@@ -21,10 +21,11 @@ public class DatasourceController
 
 	public void close()
 	{
-		cb.closePersistentie();
+		DatasourceDaoJpa.closePersistency();
 	}
-	
-	private void setDatasourceRepo(DatasourceDao repo) {
+
+	private void setDatasourceRepo(DatasourceDao repo)
+	{
 		this.datasourceRepo = repo;
 	}
 }
