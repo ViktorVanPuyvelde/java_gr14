@@ -89,7 +89,7 @@ public class DatasourcePaneelController extends AnchorPane{
 //		stage.show();
 		
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcePaneel.fxml"));
 			loader.setController(ns);
 			loader.setRoot(this);
 			loader.load();
