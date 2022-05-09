@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 import domein.CategorieController;
-import domein.UserController;
 import domein.Sdg;
 import domein.SdgController;
 import javafx.collections.FXCollections;

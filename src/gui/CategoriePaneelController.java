@@ -3,6 +3,7 @@ package gui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.List;
 
 import domein.Categorie;
 import domein.CategorieController;
-import domein.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +29,8 @@ public class CategoriePaneelController extends AnchorPane{
 	private Button editCategorie_btn;
 	@FXML
 	private Button deleteCategorie_btn;
+	@FXML
+	private Label catSelecteren_lbl;	
 	
 	private CategorieController catController;
 	private ObservableList<Categorie> catItemList;
@@ -76,6 +78,7 @@ public class CategoriePaneelController extends AnchorPane{
 	// Event Listener on Button[#createCategorie_btn].onAction
 	@FXML
 	public void createCategorie_OnAction(ActionEvent event) {
+		catSelecteren_lbl.setText("");
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
@@ -88,16 +91,20 @@ public class CategoriePaneelController extends AnchorPane{
 	// Event Listener on Button[#raadpleegCategorie_btn].onAction
 	@FXML
 	public void raadplegenCategorie_OnAction(ActionEvent event) {
+		catSelecteren_lbl.setText("");
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
 		String naam = categorie_List.getSelectionModel().getSelectedItem();
-		Categorie c = catItemList.stream().filter(cat -> cat.getName().equals(naam)).findAny().get();
-
-		CategorieRaadpleegPaneelController root = new CategorieRaadpleegPaneelController(c, catController);
-		AnchorPane.setRightAnchor(root, 25.0);
-		this.getChildren().add(root);
-		rechterSchermAanwezig = true;
+		Categorie c = catItemList.stream().filter(cat -> cat.getName().equals(naam)).findAny().orElse(null);
+		if (c != null) {
+			CategorieRaadpleegPaneelController root = new CategorieRaadpleegPaneelController(c, catController);
+			AnchorPane.setRightAnchor(root, 25.0);
+			this.getChildren().add(root);
+			rechterSchermAanwezig = true;			
+		}else {
+			catSelecteren_lbl.setText("Gelieve eerst een categorie te selecteren!");
+		}
 	}
 	
 	// Event Listener on Button[#editCategorie_btn].onAction

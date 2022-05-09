@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -16,7 +17,10 @@
                <children>
                   <Pane prefHeight="59.0" prefWidth="400.0">
                      <children>
-                        <Label layoutX="135.0" layoutY="21.0" text="Categoriën" />
+                        <Label layoutX="135.0" layoutY="21.0" text="Categoriën" underline="true">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font></Label>
                      </children>
                   </Pane>
                   <Pane prefHeight="70.0" prefWidth="400.0">
@@ -24,20 +28,25 @@
                         <Button fx:id="createCategorie_btn" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCategorie_OnAction" text="Nieuwe categorie aanmaken" />
                      </children>
                   </Pane>
-                  <HBox prefHeight="186.0" prefWidth="400.0">
+                  <VBox alignment="CENTER" spacing="20.0">
                      <children>
-                        <Pane prefHeight="100.0" prefWidth="114.0">
+                        <HBox prefHeight="186.0" prefWidth="400.0">
                            <children>
-                              <Label layoutX="22.0" layoutY="85.0" text="Categoriën :" />
+                              <Pane prefHeight="100.0" prefWidth="114.0">
+                                 <children>
+                                    <Label layoutX="22.0" layoutY="85.0" text="Categoriën :" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="210.0" prefWidth="295.0">
+                                 <children>
+                                    <ListView fx:id="categorie_List" prefHeight="186.0" prefWidth="270.0" />
+                                 </children>
+                              </Pane>
                            </children>
-                        </Pane>
-                        <Pane prefHeight="210.0" prefWidth="295.0">
-                           <children>
-                              <ListView fx:id="categorie_List" prefHeight="186.0" prefWidth="270.0" />
-                           </children>
-                        </Pane>
+                        </HBox>
+                        <Label fx:id="catSelecteren_lbl" alignment="CENTER" textFill="RED" />
                      </children>
-                  </HBox>
+                  </VBox>
                   <HBox prefHeight="84.0" prefWidth="400.0">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
