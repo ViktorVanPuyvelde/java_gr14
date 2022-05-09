@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -83,21 +84,22 @@ public class DatasourcePaneelController extends AnchorPane{
 		//verify();
 		//update();
 		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController(dc);
-//		Scene scene = new Scene (ns);
-//		Stage stage = (Stage) this.getScene().getWindow();
-//		stage.setScene(scene);
-//		stage.show();
+		Scene scene = new Scene (ns);
+		Stage stage = (Stage) this.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 		
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
-			loader.setController(ns);
-			loader.setRoot(this);
-			loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
+//			loader.setController(ns);
+//			loader.setRoot(this);
+//			loader.load();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
+	
 	
 
 //

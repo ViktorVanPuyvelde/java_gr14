@@ -2,6 +2,7 @@ package gui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class NieuweDatasourcePaneelController extends GridPane {
 
@@ -34,10 +39,16 @@ public class NieuweDatasourcePaneelController extends GridPane {
 	private Button upload_btn;
 	
 	@FXML
-	private ChoiceBox<String> cbMvos;
+    private Label fileLbl;
+	
+	@FXML
+	private ListView<String> mvosList;
 	
     @FXML
     private Button toevoegen_btn;
+    
+    @FXML
+    private Label toevoegenLbl;
     
     private ObservableList<Mvo> mvoList;
     
@@ -52,7 +63,8 @@ public class NieuweDatasourcePaneelController extends GridPane {
     private void buildGui() {
 		try{
 						
-			cbMvos = new ChoiceBox<>();
+			mvosList = new ListView<>();
+	    	mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			
 			mvoList = FXCollections.observableArrayList(new ArrayList<Mvo>());
 			
@@ -71,22 +83,35 @@ public class NieuweDatasourcePaneelController extends GridPane {
 	}
     
     private void setMvoList() {
-    	List<Mvo> mvos = null; // nog aanpassen naar mc.geefMvos();
-//    	for (Mvo m : mvos) {
-//    		mvoList.add(m);
-//    	}
+    	List<Mvo> mvos = mc.geefMvos();
+    	for (Mvo m : mvos) {
+    		mvoList.add(m);
+    	}
     	
+    	mvoList.forEach(m -> mvosList.getItems().add(m.getName()));    		
     }
     
     @FXML
     public void upload_OnAction(ActionEvent actionEvent) {
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Open Csv File");
-    	//fileChooser.showOpenDialog(null);
+    	fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Csv Files", "*.csv"));
+    	
+    	Stage newWindow = new Stage();
+    	newWindow.setTitle("Kies een csv bestand");
+    	File selectedFile = fileChooser.showOpenDialog(newWindow);
+    	
+    	if (selectedFile != null) {
+    		fileLbl.setText(String.format("%s geselecteerd", selectedFile.getName()));
+    		fileLbl.setTextFill(Color.GREEN);
+    		fileLbl.setStyle("-fx-font-weight: bold");
+    	}
     }
     
     @FXML
     public void toevoegen_OnAction(ActionEvent actionEvent) {
-    	
+    	toevoegenLbl.setText("Datasource toegevoegd!");
+    	toevoegenLbl.setTextFill(Color.GREEN);
+    	toevoegenLbl.setStyle("-fx-font-weight: bold");
     }
 }

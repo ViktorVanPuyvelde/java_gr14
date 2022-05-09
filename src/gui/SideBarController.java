@@ -8,6 +8,7 @@ import java.util.Optional;
 import domein.DomeinController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -92,6 +93,8 @@ public class SideBarController extends BorderPane
 
 	@FXML
 	private void mvo(MouseEvent event) {
+		AanmakenMvoPaneelController root = new AanmakenMvoPaneelController();
+		bp.setCenter(root);
 		makeBtnActive(mvo_Btn);
 	}
 
@@ -132,7 +135,6 @@ public class SideBarController extends BorderPane
 		btn.setStyle(ACTIVCATION_BUTTON_STYLE);
 		
 	}
-	
 	
 	
 }

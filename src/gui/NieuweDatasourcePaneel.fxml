@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root minHeight="300.0" minWidth="300.0" type="GridPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="300.0" prefHeight="301.0" prefWidth="416.0" type="GridPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -20,41 +20,68 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <columnConstraints>
-      <ColumnConstraints halignment="CENTER" />
+      <ColumnConstraints halignment="CENTER" maxWidth="314.4" minWidth="300.0" prefWidth="314.4" />
+      <ColumnConstraints halignment="CENTER" minWidth="300.0" />
    </columnConstraints>
    <children>
-      <Label alignment="CENTER" prefHeight="18.0" prefWidth="314.0" text="Nieuwe datasource aanmaken" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="314.0" text="Nieuwe datasource aanmaken" textFill="#b2d234" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox prefHeight="116.0" prefWidth="314.0" GridPane.rowIndex="1">
+      <HBox alignment="CENTER_RIGHT" prefHeight="116.0" prefWidth="314.0" GridPane.rowIndex="1">
          <children>
             <Label text="Naam: " />
-            <TextField fx:id="naam_textfield" />
          </children>
          <padding>
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
             <Label text="Upload csv bestand: " />
-            <Button fx:id="upload_btn" mnemonicParsing="false" onAction="#upload_OnAction" text="Upload" />
          </children>
          <padding>
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
             <Label text="Selecteer MVO(s): " />
-            <ChoiceBox fx:id="cbMvos" prefWidth="150.0" />
          </children>
          <padding>
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_OnAction" text="Toevoegen" GridPane.rowIndex="4" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+         <children>
+            <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_OnAction" text="Toevoegen" />
+            <Label fx:id="toevoegenLbl">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <Button fx:id="upload_btn" mnemonicParsing="false" onAction="#upload_OnAction" text="Upload" />
+            <Label fx:id="fileLbl" text="Geen file geselecteerd">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <TextField fx:id="naam_textfield" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <ListView fx:id="mvosList" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </HBox>
    </children>
 </fx:root>
