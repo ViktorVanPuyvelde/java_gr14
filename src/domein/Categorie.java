@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +24,6 @@ public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private String id;
 	@Column(name = "category_name")
@@ -45,6 +43,7 @@ public class Categorie implements CRUD, Serializable
 	 */
 	public Categorie(String name, String iconName, List<String> roles, boolean isCategory)
 	{
+		setId(UUID.randomUUID().toString());
 		setName(name);
 		setIconName(iconName);
 		setRoles(roles);

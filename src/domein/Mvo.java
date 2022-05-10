@@ -2,11 +2,10 @@ package domein;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,7 +21,6 @@ public class Mvo implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mvo_id")
 	private String id;
 	@Column(name = "mvo_name")
@@ -45,7 +43,7 @@ public class Mvo implements Serializable
 
 	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
-
+		setId(UUID.randomUUID().toString());
 		setName(name);
 		setInfo(info);
 		setGoalValue(goalValue);
@@ -57,6 +55,16 @@ public class Mvo implements Serializable
 	protected Mvo()
 	{
 		super();
+	}
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 
 	public String getName()

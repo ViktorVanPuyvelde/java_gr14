@@ -1,5 +1,7 @@
 package domein;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +12,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="datasource")
+@Table(name = "datasource")
 @NamedQueries(
 { @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d") })
-public class Datasource implements CRUD {
+public class Datasource
+{
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -22,50 +25,41 @@ public class Datasource implements CRUD {
 	private String id;
 	@Column(name = "datasource_name")
 	private String name;
-	
+
 	private Boolean flag;
 
 	/**
 	 * 
 	 * @param name
 	 */
-	public Datasource(String name) {
+	public Datasource(String name)
+	{
+		setId(UUID.randomUUID().toString());
 		this.name = name;
 	}
-	
-	protected Datasource() {
-		
+
+	protected Datasource()
+	{
+
 	}
 
-	@Override
-	public void read() {
-		// TODO Auto-generated method stub
-		
+	public String getId()
+	{
+		return id;
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
