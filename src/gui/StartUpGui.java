@@ -3,6 +3,8 @@ package gui;
 import domein.DomeinController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class StartUpGui extends Application
@@ -12,6 +14,7 @@ public class StartUpGui extends Application
 	{
 		DomeinController controller = new DomeinController();
 		Scene scene = new Scene(new AanmeldPaneelController(controller));
+		scene.setFill(Color.WHITE);
 		stage.setScene(scene);
 		stage.show();
 		stage.setScene(scene);
