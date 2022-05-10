@@ -23,6 +23,7 @@ public class StartUpGui extends Application
 		stage.show();
 		stage.setScene(scene);
 		stage.setTitle("Fluvius MVO-beheer");
+		
 		stage.setMaximized(true);
 		stage.show();
 	}
