@@ -29,10 +29,7 @@ public class Datasource implements Serializable, CRUD {
 	
 	private Boolean flag;
 
-	/**
-	 * 
-	 * @param name
-	 */
+
 	public Datasource(String name)
 	{
 		setId(UUID.randomUUID().toString());
@@ -53,8 +50,6 @@ public class Datasource implements Serializable, CRUD {
 	{
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;

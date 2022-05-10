@@ -47,7 +47,7 @@ public class AanmeldPaneelController extends AnchorPane{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AanmeldPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
-			loader.load();			
+			loader.load();	
 			} 
 		catch(IOException ex)
 		{

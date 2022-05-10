@@ -27,6 +27,12 @@ public class MvoController
 		return MvoRepo.geefMvoMetNaam(naam);
 	}
 	
+
+	public void setMvoDao(MvoDao MvoRepo)
+	{
+		this.MvoRepo = MvoRepo;
+	}
+
 	public List<Mvo> geefMvos()
 	{
 		return MvoRepo.findAll();
@@ -43,5 +49,4 @@ public class MvoController
 	{
 		MvoDaoJpa.closePersistency();
 	}
-
 }

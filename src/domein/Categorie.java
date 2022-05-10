@@ -19,9 +19,9 @@ import com.google.gson.Gson;
 @Entity
 @Table(name = "category")
 @NamedQueries(
-{ @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam") }),
-{ @NamedQuery(name = "Categorie.alleCategoriën", query = "select c from Categorie c"),
-	@NamedQuery(name = "Categorie.alleEchteCategoriën", query = "select c from Categorie c where c.isCategory = 1")})
+{ @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam"), 
+ @NamedQuery(name = "Categorie.alleCategorieï¿½n", query = "select c from Categorie c"),
+	@NamedQuery(name = "Categorie.alleEchteCategorieï¿½n", query = "select c from Categorie c where c.isCategory = 1")})
 public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;

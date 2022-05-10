@@ -17,7 +17,6 @@ public class StartUpGui extends Application
 		Scene scene = new Scene(new AanmeldPaneelController(controller));
 		scene.setFill(Color.WHITE);
 		stage.setScene(scene);
-		//"../../resources/icons/logo.pgn"
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/logo.png")));
 		stage.show();
 		stage.setScene(scene);

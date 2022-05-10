@@ -15,7 +15,19 @@ public class CategorieController
 	{
 		setCategorieRepo(new CategorieDaoJpa());
 		//populateDB();
-		allCat = geefCategorien();
+		allCat = categorieRepo.geefAlleCategorieen();
+	}
+	
+	public List<Categorie> geefCategorien()
+	{
+		return categorieRepo.findAll();
+
+	}
+	
+	public List<Sdg> geefSdgsVoorCategorie(Categorie c) {
+		List<Sdg> sdgs = categorieRepo.geefSdgVoorCategorie(c.getName());
+		c.setSdgs(sdgs);
+		return sdgs;
 	}
 
 	public void setCategorieRepo(CategorieDao categorieRepo)
