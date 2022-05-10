@@ -57,7 +57,7 @@ public class MvoPaneelController extends AnchorPane{
 			verwijderRechterScherm();			
 		}
 		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
-		AnchorPane.setRightAnchor(aanmakenMVOPaneel,25.0);
+		AnchorPane.setRightAnchor(aanmakenMVOPaneel,100.0);
 		this.getChildren().add(aanmakenMVOPaneel);
 		rechterSchermAanwezig = true;
     }
@@ -78,7 +78,7 @@ public class MvoPaneelController extends AnchorPane{
 			verwijderRechterScherm();			
 		}
 		MvoRaadplegenPaneelController raadplegenMvoPaneel = new MvoRaadplegenPaneelController(selectedMvo);
-		AnchorPane.setRightAnchor(raadplegenMvoPaneel,25.0);
+		AnchorPane.setRightAnchor(raadplegenMvoPaneel,100.0);
 		this.getChildren().add(raadplegenMvoPaneel);
 		rechterSchermAanwezig = true;
     }
