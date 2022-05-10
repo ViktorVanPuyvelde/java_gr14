@@ -13,11 +13,10 @@ public class StartUpGui extends Application
 	@Override
 	public void start(Stage stage)
 	{
-		DomeinController controller = new DomeinController();//
+		DomeinController controller = new DomeinController();
 		Scene scene = new Scene(new AanmeldPaneelController(controller));
 		scene.setFill(Color.WHITE);
 		stage.setScene(scene);
-		//"../../resources/icons/logo.pgn"
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/logo.png")));
 		stage.show();
 		stage.setScene(scene);
