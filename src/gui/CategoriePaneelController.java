@@ -1,180 +1,126 @@
 package gui;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-
-import domein.CategorieController;
-import domein.DomeinController;
-import domein.Sdg;
-import domein.SdgController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import domein.Categorie;
+import domein.CategorieController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 
-public class CategoriePaneelController extends GridPane
-{
-	private DomeinController dc;
-	private CategorieController cc;
-	private SdgController sc;
-
+public class CategoriePaneelController extends AnchorPane{
 	@FXML
-	private ListView<String> cat_Sdg_List;
+	private Button createCategorie_btn;
 	@FXML
-	private ListView<String> cat_Rol_List;
-
+	private ListView<String> categorie_List;
 	@FXML
-	private TextField cat_Name_field;
+	private Button viewCategorie_btn;
 	@FXML
-	private TextField cat_Pictogram_field;
-
+	private Button editCategorie_btn;
 	@FXML
-	private Button cat_save_btn;
-
+	private Button deleteCategorie_btn;
 	@FXML
-	private Hyperlink linkIcons;
-
-	private String name;
-	private ObservableList<String> sdg;
-	private ObservableList<String> rol;
-	private String pic;
-
-	private ObservableList<Sdg> sdgItemList;
-	private ObservableList<String> rolItemList;
-	// private DomeinController dc;
-
-	private Melding melding = new Melding();
-
-	public CategoriePaneelController(DomeinController dc)
-	{
-		this.dc = dc;
-		this.cc = new CategorieController();
-		this.sc = new SdgController();
+	private Label catSelecteren_lbl;	
+	
+	private CategorieController catController;
+	private ObservableList<Categorie> catItemList;
+	private boolean rechterSchermAanwezig = false;
+	
+	public CategoriePaneelController() {
+		this.catController = new CategorieController();
 		buildGui();
-		setSdgItemList();
+		setCategorieList();
 		initialize();
 	}
+	
+	private void initialize() {
+		catItemList.forEach(c -> categorie_List.getItems().add(c.getName()));
+	}
 
-	private void buildGui()
-	{
-		try
+	private void buildGui() {
+		
+		try {
+			
+			categorie_List = new ListView<>();
+			
+			catItemList = FXCollections.observableArrayList(new ArrayList<>());
+			
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
+		loader.setController(this);
+		loader.setRoot(this);
+		loader.load();
+		} 
+		catch(IOException ex)
 		{
-			cat_Sdg_List = new ListView<>();
-			cat_Rol_List = new ListView<>();
-			sdgItemList = FXCollections.observableArrayList(new ArrayList());
-			rolItemList = FXCollections.observableArrayList(new ArrayList());
-			linkIcons = new Hyperlink();
-
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
-			loader.setController(this);
-			loader.setRoot(this);
-			loader.load();
-		} catch (IOException ex)
-		{
-			throw new RuntimeException(ex);
+		throw new RuntimeException(ex);
+		}
+		
+	}
+	
+	private void setCategorieList() {
+		List<Categorie> cats = catController.geefCategorien();
+		for (Categorie c : cats) {
+			this.catItemList.add(c);
 		}
 	}
+	
 
-	private void initialize()
-	{
-		instellenHyperLink();
-		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-		rolItemList.add("gebruiker");
-		rolItemList.add("directie");
-		rolItemList.add("manager");
-		rolItemList.add("co\u00f6rdinator");
-
-		// fill with Sdg's
-		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
-
-		// fill with Roles
-		cat_Rol_List.setItems(rolItemList);
-	}
-
+	// Event Listener on Button[#createCategorie_btn].onAction
 	@FXML
-	public void btnCatSaveOnAction(ActionEvent event)
-	{
-		collectChanges();
-		verify();
+	public void createCategorie_OnAction(ActionEvent event) {
+		catSelecteren_lbl.setText("");
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController();
+		AnchorPane.setRightAnchor(catAanmakenPaneel, 25.0);
+		this.getChildren().add(catAanmakenPaneel);
+		rechterSchermAanwezig = true;
 	}
 
-	private void update()
-	{
-		List<String> vb = rol.stream().toList();
-		cc.voegCategorieToe(name, pic, vb);
-		melding.toonBevestiging("Categorie is met succes aangemaakt");
-	}
-
-	private void verify()
-	{
-		if (name == null || name.isEmpty())
-		{
-			melding.toonFoutmelding("Geef een naam mee.");
-		} else if (pic == null || pic.isEmpty())
-		{
-			melding.toonFoutmelding("Geef een pictogram mee.");
-		} else if (sdg == null || sdg.isEmpty())
-		{
-			melding.toonFoutmelding("Selecteer minstens 1 SDG.");
-		} else if (rol == null || rol.isEmpty())
-		{
-			melding.toonFoutmelding("Selecteer minstens 1 rol.");
-		} else
-		{
-			update();
+	// Event Listener on Button[#raadpleegCategorie_btn].onAction
+	@FXML
+	public void raadplegenCategorie_OnAction(ActionEvent event) {
+		catSelecteren_lbl.setText("");
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		String naam = categorie_List.getSelectionModel().getSelectedItem();
+		Categorie c = catItemList.stream().filter(cat -> cat.getName().equals(naam)).findAny().orElse(null);
+		if (c != null) {
+			CategorieRaadpleegPaneelController root = new CategorieRaadpleegPaneelController(c, catController);
+			AnchorPane.setRightAnchor(root, 25.0);
+			this.getChildren().add(root);
+			rechterSchermAanwezig = true;			
+		}else {
+			catSelecteren_lbl.setText("Gelieve eerst een categorie te selecteren!");
 		}
 	}
-
-	private void collectChanges()
-	{
-		name = this.cat_Name_field.getText();
-		pic = this.cat_Pictogram_field.getText();
-		sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
-		rol = cat_Rol_List.getSelectionModel().getSelectedItems();
+	
+	// Event Listener on Button[#editCategorie_btn].onAction
+	@FXML
+	public void editCategorie_OnAction(ActionEvent event) {
+		// TODO Autogenerated
 	}
 
-	public void setSdgItemList()
-	{
-		List<Sdg> sdgs = this.sc.geefSdgs();
-		for (Sdg s : sdgs)
-		{
-			this.sdgItemList.add(s);
-		}
+	// Event Listener on Button[#deleteCategorie_btn].onAction
+	@FXML
+	public void deleteCategorie_OnAction(ActionEvent event) {
+		// TODO Autogenerated
 	}
-
-	private void instellenHyperLink()
-	{
-		linkIcons.setOnAction(new EventHandler<ActionEvent>()
-		{
-
-			@Override
-			public void handle(ActionEvent arg0)
-			{
-				try
-				{
-					Desktop.getDesktop().browse(new URI(linkIcons.getText()));
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				} catch (URISyntaxException e)
-				{
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	private void verwijderRechterScherm() {
+		this.getChildren().remove(this.getChildren().size()-1);
+		rechterSchermAanwezig = false;
 	}
 }

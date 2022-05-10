@@ -8,10 +8,6 @@
      <class>domein.Datasource</class>
     <class>domein.Sdg</class>
     <class>domein.Mvo</class>
-<<<<<<< HEAD
-    <class>domein.Datasource</class>
-=======
->>>>>>> raadplegen_mvo
     <class>util.JSONArrayConverter</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sdpii?serverTimezone=UTC"/>

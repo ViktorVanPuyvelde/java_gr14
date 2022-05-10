@@ -19,15 +19,8 @@ public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements Categor
 	@Override
 	public List<Categorie> geefAlleCategorieen() throws EntityNotFoundException
 	{
-		return super.findAll();
-	}
-
-	@Override
-	public List<Sdg> geefSdgVoorCategorie(String naamCat) throws EntityNotFoundException {
-		List <Sdg> sdgs = em.createNamedQuery("Categorie.sdgVoorCat", Sdg.class).setParameter("catNaam", naamCat).getResultList();
-		return sdgs;
         try {
-            return em.createNamedQuery("Categorie.alleCategoriï¿½n", Categorie.class)
+            return em.createNamedQuery("Categorie.alleCategorieën", Categorie.class)
                 .getResultList();
         } catch (NoResultException ex) {
             throw new EntityNotFoundException();
@@ -35,9 +28,15 @@ public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements Categor
 	}
 
 	@Override
+	public List<Sdg> geefSdgVoorCategorie(String naamCat) throws EntityNotFoundException {
+		List <Sdg> sdgs = em.createNamedQuery("Categorie.sdgVoorCat", Sdg.class).setParameter("catNaam", naamCat).getResultList();
+		return sdgs;
+	}
+
+	@Override
 	public List<Categorie> geefAlleEchteCategorieen() throws EntityNotFoundException {
         try {
-            return em.createNamedQuery("Categorie.alleEchteCategoriï¿½n", Categorie.class)
+            return em.createNamedQuery("Categorie.alleEchteCategorieën", Categorie.class)
                 .getResultList();
         } catch (NoResultException ex) {
             throw new EntityNotFoundException();
