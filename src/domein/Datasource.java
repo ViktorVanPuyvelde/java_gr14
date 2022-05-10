@@ -54,15 +54,7 @@ public class Datasource implements Serializable, CRUD {
 		this.id = id;
 	}
 
-	public String getName()
-	{
-		return name;
-	}
 
-	public void setName(String name)
-	{
-		this.name = name;
-	}
 
 	public String getName() {
 		return name;
@@ -70,6 +62,30 @@ public class Datasource implements Serializable, CRUD {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void read() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
