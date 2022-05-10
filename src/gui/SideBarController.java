@@ -128,7 +128,7 @@ public class SideBarController extends BorderPane
 	 */
 	
 	private void toDatasource() {
-		DatasourcePaneelController root = new DatasourcePaneelController();
+		DatasourcePaneelController root = new DatasourcePaneelController(dc);
 		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(datasource_Btn);
