@@ -20,19 +20,29 @@ import com.google.gson.Gson;
 @Table(name = "category")
 @NamedQueries(
 { @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam") })
+{ @NamedQuery(name = "Categorie.alleCategori�n", query = "select c from Categorie c"),
+	@NamedQuery(name = "Categorie.alleEchteCategori�n", query = "select c from Categorie c where c.isCategory = 1")})
 public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(name = "category_id")
 	private String id;
+	
 	@Column(name = "category_name")
 	private String name;
+	
+	@Column(name="iconName")
 	private String iconName;
+	
+	@Column(name="roles")
 	private String roles;
-
-	@OneToMany
+	
+	@OneToMany(mappedBy = "categorie")
 	private List<Sdg> sdgs;
+	
+	@Column(name="isCategory")
 	private boolean isCategory;
 
 	/**

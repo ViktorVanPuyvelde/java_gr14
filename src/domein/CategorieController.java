@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import repository.CategorieDao;
 import repository.CategorieDaoJpa;
@@ -22,9 +23,11 @@ public class CategorieController
 		this.categorieRepo = categorieRepo;
 	}
 
-	public List<Categorie> geefCategorien()
+	public List<String> geefAlleEchteCategorienNaam()
 	{
-		return categorieRepo.findAll();
+		List<Categorie> catList = categorieRepo.geefAlleEchteCategorieen();
+		
+		return catList.stream().map(Categorie::getName).collect(Collectors.toList());
 
 	}
 

@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.UUID;
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +13,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "datasource")
+@Table(name="datasource")
 @NamedQueries(
 { @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d") })
-public class Datasource
-{
+public class Datasource implements Serializable, CRUD {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,6 +26,7 @@ public class Datasource
 	@Column(name = "datasource_name")
 	private String name;
 
+	
 	private Boolean flag;
 
 	/**
@@ -60,6 +61,14 @@ public class Datasource
 
 	public void setName(String name)
 	{
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 

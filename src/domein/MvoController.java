@@ -7,7 +7,42 @@ import repository.MvoDaoJpa;
 
 public class MvoController
 {
-	private MvoDao mvoDao;
+	
+	private MvoDao MvoRepo;
+	
+	public MvoController() {
+		setMvoRepo(new MvoDaoJpa());
+	}
+
+
+	public void setMvoRepo(MvoDao mvoRepo) {
+		MvoRepo = mvoRepo;
+	}
+	
+	public List<Mvo> geefMvosVanCategorie(String categorie){
+		return MvoRepo.geefAlleMvosVoorCategorie(categorie);
+	}
+	
+	public Mvo geefMvoMetNaam(String naam) {
+		return MvoRepo.geefMvoMetNaam(naam);
+	}
+	
+	public List<Mvo> geefMvos()
+	{
+		return MvoRepo.findAll();
+	}
+	
+	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
+	{
+		MvoDaoJpa.startTransaction();
+		//MvoRepo.insert(new Mvo(name, sdg, info, goalValue, datasource, superMvo));
+		MvoDaoJpa.commitTransaction();
+	}
+	
+	public void close()
+	{
+		MvoDaoJpa.closePersistency();
+	}
 
 	public MvoController()
 	{

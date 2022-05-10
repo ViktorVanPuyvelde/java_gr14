@@ -5,9 +5,9 @@
     <class>domein.User</class>
     <class>util.JPAUtil</class>    
     <class>domein.Categorie</class>
+     <class>domein.Datasource</class>
     <class>domein.Sdg</class>
     <class>domein.Mvo</class>
-    <class>domein.Datasource</class>
     <class>util.JSONArrayConverter</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sdpii?serverTimezone=UTC"/>

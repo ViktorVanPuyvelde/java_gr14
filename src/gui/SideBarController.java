@@ -102,7 +102,7 @@ public class SideBarController extends BorderPane
 
 	@FXML
 	private void mvo(MouseEvent event) {
-		AanmakenMvoPaneelController root = new AanmakenMvoPaneelController();
+		MvoPaneelController root = new MvoPaneelController();
 		bp.setCenter(root);
 		makeBtnActive(mvo_Btn);
 	}

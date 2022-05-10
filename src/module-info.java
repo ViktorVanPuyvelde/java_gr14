@@ -15,8 +15,8 @@ open module java_gr14
 	requires javafx.graphics;
 
 	// Unit tests
-	// requires org.junit.jupiter.api;
-	// requires org.junit.jupiter.params;
+	//requires org.junit.jupiter.api;
+	//requires org.junit.jupiter.params;
 
 	// Other
 	requires java.desktop;
