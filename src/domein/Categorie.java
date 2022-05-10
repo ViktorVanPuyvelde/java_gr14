@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -19,15 +20,12 @@ import com.google.gson.Gson;
 
 @Entity
 @Table(name = "category")
-@NamedQueries(
-{ @NamedQuery(name = "Categorie.sdgVoorCat", query = "SELECT s FROM Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam") })
 public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private int id;
+	private String id;
 	@Column(name = "category_name")
 	private String name;
 	private String iconName;
@@ -35,7 +33,6 @@ public class Categorie implements CRUD, Serializable
 	
 	@OneToMany
 	private List<Sdg> sdgs;	
-	
 	private boolean isCategory;
 
 	/**
@@ -58,12 +55,12 @@ public class Categorie implements CRUD, Serializable
 
 	}
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

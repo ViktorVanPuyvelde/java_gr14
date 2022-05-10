@@ -23,7 +23,7 @@ public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements Categor
 
 	@Override
 	public List<Sdg> geefSdgVoorCategorie(String catNaam) throws EntityNotFoundException {
-		List <Sdg> sdgs = em.createNamedQuery("Categorie.sdgVoorCat", Sdg.class).setParameter("catNaam", catNaam).getResultList();
+		List <Sdg> sdgs = em.createNamedQuery("Sdg.sdgVoorCat", Sdg.class).setParameter("catNaam", catNaam).getResultList();
 		return sdgs;
 	}
 

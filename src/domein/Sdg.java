@@ -8,24 +8,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "sdg")
+@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam")
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sdg_id")
-	private int id;
+	private String id;
 	@Column(name = "sdg_name")
 	private String name;
 	@Column(name = "sdg_image")
 	private String image;
 
+	
+	@ManyToOne
+	@JoinColumn(name= "category_id", nullable= false)
+	private Categorie categorie;
 	/**
 	 * 
 	 * @param name
@@ -42,12 +48,12 @@ public class Sdg implements Serializable
 
 	}
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}
