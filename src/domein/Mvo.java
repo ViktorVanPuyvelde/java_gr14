@@ -45,6 +45,7 @@ public class Mvo implements Serializable
 
 	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
+
 		setName(name);
 		setInfo(info);
 		setGoalValue(goalValue);
