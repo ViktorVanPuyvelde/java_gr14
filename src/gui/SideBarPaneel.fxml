@@ -7,11 +7,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="300.0" minWidth="600.0" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="700.0" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox fx:id="sideBar" prefHeight="300.0" prefWidth="158.0" spacing="2.0" style="-fx-background-color: #37465D;" BorderPane.alignment="CENTER">
          <children>
@@ -22,12 +25,12 @@
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin></Button>
-            <Button fx:id="mvo_Btn" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="MVO's" textFill="#b2d234">
+            <Button fx:id="mvo_Btn" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="Mvo's" textFill="#b2d234">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="categorie_Btn" mnemonicParsing="false" onMouseClicked="#categorie" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="Categorieën" textFill="#b2d234">
+            <Button fx:id="categorie_Btn" mnemonicParsing="false" onMouseClicked="#categorie" prefHeight="46.0" prefWidth="174.0" style="-fx-background-color: #37465D;" text="Categoriën" textFill="#b2d234">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -55,12 +58,12 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <ImageView fitHeight="42.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../img/1200px-Fluvius_logo.svg.png" />
                </image>
                <GridPane.margin>
-                  <Insets left="20.0" />
+                  <Insets left="10.0" />
                </GridPane.margin>
             </ImageView>
          </children>
@@ -72,4 +75,116 @@
          </padding>
       </GridPane>
    </top>
+   <center>
+      <GridPane fx:id="CenterGrid" alignment="TOP_CENTER" minHeight="400.0" minWidth="600.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="127.79999389648438" minHeight="10.0" prefHeight="19.799997711181646" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="247.00000228881837" minHeight="10.0" prefHeight="247.00000228881837" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Text fontSmoothingType="LCD" layoutX="273.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welkom !">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <children>
+            <Text layoutX="103.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hier kan u de gewenste onderwerpen aanmaken, verwijderen of bewerken" />
+         </children>
+      </Pane>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="20.0" right="20.0" />
+         </GridPane.margin>
+         <children>
+            <Button id="mvoHP" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="247.0" prefWidth="200.0">
+               <graphic>
+                  <VBox prefHeight="247.0" prefWidth="190.0">
+                     <children>
+                        <Pane prefHeight="62.0" prefWidth="180.0">
+                           <children>
+                              <Text layoutX="61.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MVO">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="119.0" fitWidth="116.0" layoutX="17.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/Zwart%20Universeel%20recycling%20symbool%20(U+267B).png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+            <Button id="categorieHP" mnemonicParsing="false" onMouseClicked="#categorie" prefHeight="247.0" prefWidth="200.0">
+               <graphic>
+                  <VBox prefHeight="247.0" prefWidth="190.0">
+                     <children>
+                        <Pane prefHeight="62.0" prefWidth="180.0">
+                           <children>
+                              <Text layoutX="44.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Categoriën">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                              <Pane prefHeight="178.0" prefWidth="150.0">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/tags_categories_icon_145927.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+            <Button id="datasourceHP" mnemonicParsing="false" onMouseClicked="#datasource" prefHeight="247.0" prefWidth="200.0">
+               <graphic>
+                  <VBox prefHeight="247.0" prefWidth="190.0">
+                     <children>
+                        <Pane prefHeight="62.0" prefWidth="180.0">
+                           <children>
+                              <Text layoutX="41.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Datasources">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="117.0" fitWidth="129.0" layoutX="11.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/datasource.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+      </GridPane>
+   </center>
 </fx:root>

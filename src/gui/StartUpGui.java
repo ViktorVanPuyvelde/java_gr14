@@ -1,5 +1,8 @@
 package gui;
 
+import java.io.File;
+import java.net.MalformedURLException;
+
 import domein.DomeinController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -15,12 +18,12 @@ public class StartUpGui extends Application
 	{
 		DomeinController controller = new DomeinController();
 		Scene scene = new Scene(new AanmeldPaneelController(controller));
-		scene.setFill(Color.WHITE);
 		stage.setScene(scene);
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/logo.png")));
 		stage.show();
 		stage.setScene(scene);
 		stage.setTitle("Fluvius MVO-beheer");
+		
 		stage.setMaximized(true);
 		stage.show();
 	}
@@ -29,4 +32,6 @@ public class StartUpGui extends Application
 	{
 		Application.launch(StartUpGui.class, args);
 	}
+	
+
 }

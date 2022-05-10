@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,6 +26,8 @@ public class SideBarController extends BorderPane
 
 	@FXML
 	private AnchorPane apScene;
+	@FXML
+	private GridPane CenterGrid;
 	@FXML
 	private BorderPane bp;
 	@FXML
@@ -60,13 +63,6 @@ public class SideBarController extends BorderPane
 		sidebarBtns.add(categorie_Btn);
 		sidebarBtns.add(datasource_Btn);
 		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
-        bp.getChildren().remove(bp.getCenter());
-        try {
-            bp.setCenter(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 		makeBtnActive(home_Btn);
 		
 	}
@@ -89,34 +85,51 @@ public class SideBarController extends BorderPane
 
 	@FXML
 	private void home(MouseEvent event) {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomePagePaneel.fxml"));
-		
-        bp.getChildren().remove(bp.getCenter());
-        try {
-            bp.setCenter(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+		toHome();
+	}
+	
+	private void toHome() {
+		bp.getChildren().remove(bp.getCenter());
+		bp.setCenter(CenterGrid);
 		makeBtnActive(home_Btn);
 	}
 
 	@FXML
 	private void mvo(MouseEvent event) {
-		MvoPaneelController root = new MvoPaneelController();
+		toMvo();
+	}
+	
+
+	private void toMvo() {
+		AanmakenMvoPaneelController root = new AanmakenMvoPaneelController();
+		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(mvo_Btn);
 	}
-
+	
 	@FXML
 	private void categorie(MouseEvent event) {
+		toCategorie();
+	}
+	
+	private void toCategorie() {
 		CategoriePaneelController root = new CategoriePaneelController();
+		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(categorie_Btn);
 	}
 
 	@FXML
 	private void datasource(MouseEvent event) {
-		DatasourcePaneelController root = new DatasourcePaneelController(dc);
+		toDatasource();
+	}
+	
+	/*
+	 */
+	
+	private void toDatasource() {
+		DatasourcePaneelController root = new DatasourcePaneelController();
+		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(datasource_Btn);
 	}
@@ -143,6 +156,10 @@ public class SideBarController extends BorderPane
 		sidebarBtns.stream().forEach(b -> b.setStyle(IDLE_BUTTON_STYLE));
 		btn.setStyle(ACTIVCATION_BUTTON_STYLE);
 		
+	}
+	
+	public BorderPane getBp() {
+		return this.bp;
 	}
 	
 	
