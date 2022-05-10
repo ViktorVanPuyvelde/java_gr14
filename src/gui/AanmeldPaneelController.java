@@ -67,6 +67,7 @@ public class AanmeldPaneelController extends AnchorPane{
 			dc.meldAan(gebruikersnaam.getText(), wachtwoord.getText());
 			SideBarController ns = new SideBarController(dc);
 			Scene scene = new Scene (ns);
+			//ns.getStylesheets().add(getClass().getResource("../stylesheets/HomePage.css"));
 			Stage stage = (Stage) this.getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();
