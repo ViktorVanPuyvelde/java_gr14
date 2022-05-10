@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sdg")
 @NamedQueries(
-{	@NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.s s WHERE s.id = :mvoSdgId")
+{	@NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId")
 	})
 public class Sdg implements Serializable
 {
@@ -26,16 +27,21 @@ public class Sdg implements Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sdg_id")
-	private int id;
+	private String id;
 	@Column(name = "sdg_name")
 	private String name;
 	@Column(name = "sdg_image")
 	private String image;
 	
-	@OneToMany (mappedBy="s")
+	@OneToMany (mappedBy="sdg")
 	private List<Mvo> mvos;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Sdg.class)
+	@JoinColumn(name = "super_sdg_id")
+	private Sdg super_sdg;
+	
+	@ManyToOne(targetEntity = Categorie.class)
+	@JoinColumn(name = "category_id")
 	private Categorie categorie;
 
 	/**
@@ -72,12 +78,12 @@ public class Sdg implements Serializable
 		this.categorie = categorie;
 	}
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

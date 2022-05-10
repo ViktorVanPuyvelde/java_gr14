@@ -29,14 +29,21 @@ public class Categorie implements CRUD, Serializable
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
-	private int id;
+	private String id;
 	
 	@Column(name = "category_name")
 	private String name;
+	
+	@Column(name="iconName")
 	private String iconName;
+	
+	@Column(name="roles")
 	private String roles;
+	
 	@OneToMany(mappedBy = "categorie")
 	private List<Sdg> sdgs;
+	
+	@Column(name="isCategory")
 	private boolean isCategory;
 
 	/**
@@ -59,12 +66,12 @@ public class Categorie implements CRUD, Serializable
 
 	}
 
-	public int getId()
+	public String getId()
 	{
 		return id;
 	}
 
-	public void setId(int id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

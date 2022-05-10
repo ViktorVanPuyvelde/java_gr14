@@ -17,16 +17,19 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
-public class MvoPaneelController extends GridPane{
+public class MvoPaneelController extends AnchorPane{
 	
 	@FXML
 	private ListView<String> MvoCatListView;
@@ -34,6 +37,58 @@ public class MvoPaneelController extends GridPane{
     @FXML
     private ListView<String> MvoListView;
     
+    @FXML
+    private Button createMVO_btn;
+
+    @FXML
+    private Button deleteMVO_btn;
+
+    @FXML
+    private Button editMVO_btn;
+
+    @FXML
+    private Button viewMVO_btn;
+    
+    private boolean rechterSchermAanwezig = false;
+
+    @FXML
+    void createMVO_OnAction(ActionEvent event) {
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
+		AnchorPane.setRightAnchor(aanmakenMVOPaneel,25.0);
+		this.getChildren().add(aanmakenMVOPaneel);
+		rechterSchermAanwezig = true;
+    }
+
+    @FXML
+    void deleteMVO_OnAction(ActionEvent event) {
+    	
+    }
+
+    @FXML
+    void editMVO_OnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void raadplegenMVO_OnAction(ActionEvent event) {
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		MvoRaadplegenPaneelController raadplegenMvoPaneel = new MvoRaadplegenPaneelController(selectedMvo);
+		AnchorPane.setRightAnchor(raadplegenMvoPaneel,25.0);
+		this.getChildren().add(raadplegenMvoPaneel);
+		rechterSchermAanwezig = true;
+    }
+    
+	private void verwijderRechterScherm() {
+		this.getChildren().remove(this.getChildren().size()-1);
+		rechterSchermAanwezig = false;
+	}
+    
+    /*
     @FXML
     private Label mvoNaam;
     
@@ -44,13 +99,13 @@ public class MvoPaneelController extends GridPane{
     private Label infoMvo;
 	
     @FXML
-    private ImageView sdgImage;
+    private ImageView sdgImage;*/
     
 	private CategorieController cc;
 	private MvoController mc;
 	private SdgController sc;
 	private String selectedCat;
-	private String selectedMvo;
+	private Mvo selectedMvo;
 	private List<Mvo> mvosVanCategorie;
 	
 	public MvoPaneelController()
@@ -78,6 +133,7 @@ public class MvoPaneelController extends GridPane{
 	}
 	
 	private void initialize() {
+		
 		
 		MvoCatListView.getItems().addAll(cc.geefAlleEchteCategorienNaam());
 		
@@ -112,25 +168,25 @@ public class MvoPaneelController extends GridPane{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				
-				selectedMvo = MvoListView.getSelectionModel().getSelectedItem();
+				String Mvo = MvoListView.getSelectionModel().getSelectedItem();
 				
-				System.out.println(selectedMvo);
+				System.out.println(Mvo);
 				
-				Mvo mvo = mc.geefMvoMetNaam(selectedMvo);
+				selectedMvo = mc.geefMvoMetNaam(Mvo);
 				
-				Sdg sdg = sc.geefSdgVoorMvo(mvo.getS().getId());
+				//Sdg sdg = sc.geefSdgVoorMvo(selectedMvo.getSdg().getId());
 				
-				System.out.println(sdg.getImage());
+				//System.out.println(sdg.getImage());
 				
-				mvoNaam.setText(mvo.getName());
+				//mvoNaam.setText(mvo.getName());
 				
-				goalValue.setText(mvo.getGoalValue()+ "");
+				//goalValue.setText(mvo.getGoalValue()+ "");
 				
-				infoMvo.setText(mvo.getInfo());
+				//infoMvo.setText(mvo.getInfo());
 				
-				Image i = new Image("/images/"+sdg.getImage()+".png");
+				//Image i = new Image("/images/"+sdg.getImage()+".png");
 				
-				sdgImage.setImage(i);
+				//sdgImage.setImage(i);
 				
 				
 				

@@ -24,8 +24,8 @@ public class SdgController
 		return sdgRepo.findAll();
 	}
 	
-	public Sdg geefSdgVoorMvo(int sdgId) {
-		return sdgRepo.geefSdgVoorMvo(sdgId);
+	public Sdg geefSdgVoorMvo(String id,String mvoId) {
+		return sdgRepo.geefSdgVoorMvo(id,mvoId);
 	}
 
 	public void close()

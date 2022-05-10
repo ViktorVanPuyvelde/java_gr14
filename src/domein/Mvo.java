@@ -1,21 +1,22 @@
 package domein;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.google.gson.Gson;
 
 @Entity
 @Table(name = "mvo")
@@ -25,51 +26,47 @@ import javax.persistence.Transient;
 	})
 public class Mvo implements Serializable
 {
-	
-	public Sdg getS() {
-		return s;
-	}
-
-	public void setS(Sdg s) {
-		this.s = s;
-	}
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mvo_id")
-	private int id;
+	private String id;
 	@Column(name = "mvo_name")
 	private String name;
-	@Column(name = "super_mvo_id")
-	private String superMvoId;
 	@Column(name = "info")
 	private String info;
 	@Column(name = "goal_val")
 	private int goalValue;
-	@Column(name = "datasource_id")
-	private String datasourceId;
-	
+	@OneToOne
+	@JoinColumn(name = "datasource_id", nullable = true)
+	private Datasource datasource;
 	@ManyToOne
-	private Sdg s;
-	
+	@JoinColumn(name = "sdg_id", nullable = false)
+	private Sdg sdg;
 	@Transient
 	private List<String> mvo_data;
+	@ManyToOne(targetEntity = Mvo.class)
+	@JoinColumn(name = "super_mvo_id")
+	private Mvo superMvo;
 
-	protected Mvo(String name, String superMvoId, String info, int goalValue, String datasourceId)
+	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
+
 		setName(name);
-		setSuperMvoId(superMvoId);
 		setInfo(info);
 		setGoalValue(goalValue);
-		setDatasourceId(datasourceId);
+		setDatasource(datasource);
+		setSdg(sdg);
+		setSuperMvo(superMvo);
 	}
 
 	protected Mvo()
 	{
 		super();
 	}
+
 
 	public String getName()
 	{
@@ -81,14 +78,36 @@ public class Mvo implements Serializable
 		this.name = name;
 	}
 
-	public String getSuperMvoId()
-	{
-		return superMvoId;
+	public String getId() {
+		return id;
 	}
 
-	public void setSuperMvoId(String superMvoId)
-	{
-		this.superMvoId = superMvoId;
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Datasource getDatasource() {
+		return datasource;
+	}
+
+	public void setDatasource(Datasource datasource) {
+		this.datasource = datasource;
+	}
+
+	public Sdg getSdg() {
+		return sdg;
+	}
+
+	public void setSdg(Sdg sdg) {
+		this.sdg = sdg;
+	}
+
+	public Mvo getSuperMvo() {
+		return superMvo;
+	}
+
+	public void setSuperMvo(Mvo superMvo) {
+		this.superMvo = superMvo;
 	}
 
 	public String getInfo()
@@ -96,9 +115,11 @@ public class Mvo implements Serializable
 		return info;
 	}
 
-	public void setInfo(String info)
+	public void setInfo(List<String> info)
 	{
-		this.info = info;
+		Gson gson = new Gson();
+		String infoasGSon = gson.toJson(info);
+		this.info = infoasGSon;
 	}
 
 	public int getGoalValue()
@@ -111,15 +132,6 @@ public class Mvo implements Serializable
 		this.goalValue = goalValue;
 	}
 
-	public String getDatasourceId()
-	{
-		return datasourceId;
-	}
-
-	public void setDatasourceId(String datasourceId)
-	{
-		this.datasourceId = datasourceId;
-	}
 
 	public List<String> getMvo_data()
 	{

@@ -13,10 +13,12 @@ public class SdgDaoJpa extends GenericDaoJpa<Sdg> implements SdgDao
 	}
 	
 	@Override
-	public Sdg geefSdgVoorMvo(int sdgId) throws EntityNotFoundException {
+	public Sdg geefSdgVoorMvo(String sdgId,String mvoId) throws EntityNotFoundException {
         try {
+        	System.out.println(sdgId);
             return em.createNamedQuery("Mvo.geefSdgVoorMvo", Sdg.class)
             		.setParameter("mvoSdgId", sdgId)
+            		.setParameter("mvoId", mvoId)
             		.getSingleResult();
         } catch (NoResultException ex) {
             throw new EntityNotFoundException();
