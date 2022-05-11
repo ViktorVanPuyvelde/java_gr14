@@ -40,8 +40,9 @@ public class MvoController
 
 	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
+		Mvo mvo = new Mvo(name, sdg, info, goalValue, datasource, superMvo);
 		MvoDaoJpa.startTransaction();
-		MvoRepo.insert(new Mvo(name, sdg, info, goalValue, datasource, superMvo));
+		MvoRepo.insert(mvo);
 		MvoDaoJpa.commitTransaction();
 	}
 
