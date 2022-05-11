@@ -16,8 +16,9 @@ public class UserBeheerder
 {
 	private User coordinator;
 	private UserDaoJpa repository;
-	
-	public UserBeheerder() {
+
+	public UserBeheerder()
+	{
 		repository = new UserDaoJpa();
 	}
 
@@ -46,7 +47,7 @@ public class UserBeheerder
 
 		// enkel coordinator kan inloggen
 		User u = repository.get(id);
-		if (!u.getRole().equals("coördinator"))
+		if (!u.getRole().equals("co\u00f6rdinator"))
 		{
 			meldAf();
 			throw new IngelogdVerkeerdeRol();
