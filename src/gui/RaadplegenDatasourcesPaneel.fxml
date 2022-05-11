@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="hBox" alignment="TOP_LEFT" fillHeight="false" spacing="100.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hBox" alignment="TOP_LEFT" fillHeight="false" spacing="100.0" type="HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
          <children>
@@ -43,7 +43,6 @@
             </VBox>
             <HBox alignment="CENTER" prefHeight="84.0" prefWidth="400.0" spacing="40.0">
                <children>
-                  <Button fx:id="view_btn" mnemonicParsing="false" onAction="#view_OnAction" styleClass="Button" text="Raadplegen" />
                   <Button fx:id="edit_btn" mnemonicParsing="false" onAction="#edit_OnAction" styleClass="Button" text="Aanpassen" />
                   <Button id="deleteBtn" fx:id="delete_btn" mnemonicParsing="false" onAction="#delete_OnAction" styleClass="Button" text="Verwijderen" />
                </children>
