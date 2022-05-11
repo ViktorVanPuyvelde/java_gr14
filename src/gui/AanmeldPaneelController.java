@@ -1,6 +1,9 @@
 package gui;
 
 import javafx.event.ActionEvent;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import com.auth0.exception.APIException;
@@ -67,10 +70,13 @@ public class AanmeldPaneelController extends AnchorPane{
 		try {
 			dc.meldAan(gebruikersnaam.getText(), wachtwoord.getText());
 			SideBarController ns = new SideBarController(dc);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			Scene scene = new Scene (ns);
 			Stage stage = (Stage) this.getScene().getWindow();
 			scene.getStylesheets().add(getClass().getResource("Styles.css").toExternalForm());
 			stage.setScene(scene);
+			stage.setWidth(screenSize.getWidth());
+			stage.setHeight(screenSize.getHeight());
 			stage.show();
 		}catch(Auth0Exception a) {
 			wrongLogIn.setText("Foute gebruikersnaam en/of wachtwoord");

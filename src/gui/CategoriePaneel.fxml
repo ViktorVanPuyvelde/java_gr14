@@ -25,7 +25,7 @@
                   </Pane>
                   <Pane prefHeight="70.0" prefWidth="400.0">
                      <children>
-                        <Button fx:id="createCategorie_btn" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCategorie_OnAction" text="Nieuwe categorie aanmaken" />
+                        <Button id="createBtn" fx:id="createCategorie_btn" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" onAction="#createCategorie_OnAction" styleClass="Button" text="Nieuwe categorie aanmaken" />
                      </children>
                   </Pane>
                   <VBox alignment="CENTER" spacing="20.0">
@@ -51,17 +51,17 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="viewCategorie_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" onAction="#raadplegenCategorie_OnAction" text="Raadplegen" />
+                              <Button fx:id="viewCategorie_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" onAction="#raadplegenCategorie_OnAction" styleClass="Button" text="Raadplegen" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="editCategorie_btn" layoutX="31.0" layoutY="30.0" mnemonicParsing="false" onAction="#editCategorie_OnAction" text="Aanpassen" />
+                              <Button fx:id="editCategorie_btn" layoutX="31.0" layoutY="30.0" mnemonicParsing="false" onAction="#editCategorie_OnAction" styleClass="Button" text="Aanpassen" />
                            </children>
                         </Pane>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="deleteCategorie_btn" layoutX="28.0" layoutY="30.0" mnemonicParsing="false" onAction="#deleteCategorie_OnAction" text="Verwijderen" />
+                              <Button id="deleteBtn" fx:id="deleteCategorie_btn" layoutX="28.0" layoutY="30.0" mnemonicParsing="false" onAction="#deleteCategorie_OnAction" styleClass="Button" text="Verwijderen" />
                            </children>
                         </Pane>
                      </children>
