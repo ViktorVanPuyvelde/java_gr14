@@ -23,5 +23,5 @@ open module java_gr14
 	requires auth0;
 	requires java.dotenv;
 	requires org.junit.jupiter.api;
-	//requires org.junit.jupiter.api;
+
 }

@@ -27,3 +27,80 @@
 #deleteBtn {
   -fx-background-color: #d63e23;
 }
+
+/* ---- START List View ---- */
+.list-view {
+  -fx-background-insets: 0;
+  -fx-padding: 0px;
+  -fx-font-weight: bold;
+  -fx-background-color: #a3c031;
+  -fx-background-radius: 10px;
+  -fx-border-color: #41587a;
+  -fx-border-width: 3px;
+  -fx-border-radius: 10px;
+}
+
+.list-view .list-cell:hover {
+  -fx-background-radius: 10px;
+  -fx-background-color: #37465d;
+}
+
+.list-view .list-cell:selected {
+  -fx-margin: 0px;
+  -fx-background-radius: 10px;
+  -fx-background-color: #37465d;
+  -fx-text-fill: #adc15b;
+}
+
+.list-view .list-cell {
+  -fx-background-color: #a3c031;
+  -fx-background-radius: 10px;
+  -fx-text-fill: white;
+}
+
+.list-view .label {
+  -fx-text-fill: white;
+}
+
+.list-view .list-cell:empty {
+  -fx-background-color: transparent;
+}
+.list-view .list-cell:empty:hover {
+  -fx-background-color: transparent;
+}
+
+.list-view:focus {
+  -fx-outline: none !important;
+  -fx-border-color: #68befb !important;
+  -fx-border-width: 10px !important;
+  -fx-border-radius: 20px;
+}
+
+.list-view .scroll-bar:vertical {
+  -fx-background-color: #37465d;
+}
+
+.list-view .increment-button,
+.list-view .decrement-button {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+
+.list-view > .increment-button > .increment-arrow,
+.list-view > .decrement-button > .decrement-arrow {
+  -fx-background-color: white;
+}
+
+.list-view .scroll-bar:vertical .thumb {
+  -fx-background-color: #6075c8;
+  -fx-background-insets: 5, 5, 5;
+  -fx-background-radius: 5;
+}
+
+.list-view .scroll-bar:horizontal {
+  -fx-scale-x: 0;
+}
+.virtual-flow > .corner {
+  -fx-background-color: #37465d;
+}
+/* ---- END List View ---- */
