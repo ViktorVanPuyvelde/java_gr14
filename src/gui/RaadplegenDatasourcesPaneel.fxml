@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hBox" alignment="TOP_LEFT" fillHeight="false" spacing="100.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="400.0" prefWidth="400.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
          <children>
-            <VBox prefHeight="400.0" prefWidth="400.0">
+            <Label text="Datasources" textFill="#b2d234">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Button id="createBtn" fx:id="create_btn" mnemonicParsing="false" onAction="#create_OnAction" styleClass="Button" text="Nieuwe datasource aanmaken" />
+            <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Pane prefHeight="59.0" prefWidth="400.0">
-                     <children>
-                        <Label layoutX="135.0" layoutY="21.0" text="Datasources Raadplegen" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="70.0" prefWidth="400.0">
-                     <children>
-                        <Button fx:id="create_btn" layoutX="112.0" layoutY="14.0" mnemonicParsing="false" onAction="#create_OnAction" text="Nieuwe datasource aanmaken" />
-                     </children>
-                  </Pane>
                   <HBox prefHeight="186.0" prefWidth="400.0">
                      <children>
                         <Pane prefHeight="100.0" prefWidth="114.0">
@@ -38,28 +35,26 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="84.0" prefWidth="400.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="view_btn" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" text="bekijken" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="edit_btn" layoutX="31.0" layoutY="30.0" mnemonicParsing="false" text="aanpassen" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="delete_btn" layoutX="28.0" layoutY="30.0" mnemonicParsing="false" text="verwijderen" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </HBox>
+                  <Label fx:id="datasource_Selecteren_lbl" alignment="CENTER" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="35.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="400.0" spacing="40.0">
+               <children>
+                  <Button fx:id="view_btn" mnemonicParsing="false" onAction="#view_OnAction" styleClass="Button" text="Raadplegen" />
+                  <Button fx:id="edit_btn" mnemonicParsing="false" onAction="#edit_OnAction" styleClass="Button" text="Aanpassen" />
+                  <Button id="deleteBtn" fx:id="delete_btn" mnemonicParsing="false" onAction="#delete_OnAction" styleClass="Button" text="Verwijderen" />
+               </children>
+               <VBox.margin>
+                  <Insets top="-40.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-      </Pane>
+      </VBox>
    </children>
+   <padding>
+      <Insets left="80.0" top="60.0" />
+   </padding>
 </fx:root>

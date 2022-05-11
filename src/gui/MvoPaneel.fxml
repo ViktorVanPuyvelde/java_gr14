@@ -12,9 +12,9 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
          <children>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" textFill="#b2d234" underline="true">
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" textFill="#b2d234">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
             <Button id="createBtn" fx:id="createMVO_btn" mnemonicParsing="false" onAction="#createMVO_OnAction" prefHeight="25.0" prefWidth="170.0" styleClass="Button" text="Nieuwe MVO aanmaken" />

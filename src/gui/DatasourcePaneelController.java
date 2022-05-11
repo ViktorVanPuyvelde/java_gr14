@@ -11,13 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
-public class DatasourcePaneelController extends AnchorPane{
+public class DatasourcePaneelController extends HBox{
 	private DatasourceController datasourceCon;
 	
 	@FXML
@@ -101,7 +100,6 @@ public class DatasourcePaneelController extends AnchorPane{
             verwijderRechterScherm();            
         }
         NieuweDatasourcePaneelController nieuweDatasourcePaneel = new NieuweDatasourcePaneelController();
-        AnchorPane.setRightAnchor(nieuweDatasourcePaneel,100.0);
         this.getChildren().add(nieuweDatasourcePaneel);
         rechterSchermAanwezig = true;
 	}
@@ -113,27 +111,27 @@ public class DatasourcePaneelController extends AnchorPane{
 	
 	
 
-//
-//	@FXML
-//	public void view_OnAction(ActionEvent event) {
+
+	@FXML
+	public void view_OnAction(ActionEvent event) {
 //		collectChanges();
 //		verify();
 //		update();
-//	}
-//	
-//	@FXML
-//	public void edit_OnAction(ActionEvent event) {
+	}
+	
+	@FXML
+	public void edit_OnAction(ActionEvent event) {
 //		collectChanges();
 //		verify();
 //		update();
-//	}
-//	
-//	@FXML
-//	public void delete_OnAction(ActionEvent event) {
+	}
+	
+	@FXML
+	public void delete_OnAction(ActionEvent event) {
 //		collectChanges();
 //		verify();
 //		update();
-//	}
+	}
 	
 	private void update() {
 		// TODO Auto-generated method stub
