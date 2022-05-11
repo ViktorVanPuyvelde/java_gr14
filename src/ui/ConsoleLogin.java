@@ -6,7 +6,7 @@ import com.auth0.exception.APIException;
 import com.auth0.exception.Auth0Exception;
 
 import domein.CategorieController;
-import domein.DomeinController;
+import domein.UserController;
 
 public class ConsoleLogin
 {
@@ -14,7 +14,7 @@ public class ConsoleLogin
 
 	public static void main(String[] args)
 	{
-		DomeinController dc = new DomeinController();
+		UserController dc = new UserController();
 
 		Scanner sc = new Scanner(System.in);
 //		new ConsoleLogin().run();

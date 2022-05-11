@@ -1,7 +1,5 @@
 package domein;
 
-import javax.persistence.EntityManager;
-
 import com.auth0.client.auth.AuthAPI;
 import com.auth0.exception.APIException;
 import com.auth0.exception.Auth0Exception;
@@ -10,24 +8,22 @@ import com.auth0.json.auth.UserInfo;
 import com.auth0.net.AuthRequest;
 import com.auth0.net.Request;
 
+import exceptions.IngelogdVerkeerdeRol;
 import io.github.cdimascio.dotenv.Dotenv;
-import util.JPAUtil;
+import repository.UserDaoJpa;
 
 public class UserBeheerder
 {
-
-	private EntityManager em;
 	private User coordinator;
-
-	public void openPersistentie()
-	{
-		em = JPAUtil.getEntityManagerFactory().createEntityManager();
+	private UserDaoJpa repository;
+	
+	public UserBeheerder() {
+		repository = new UserDaoJpa();
 	}
 
 	public void closePersistentie()
 	{
-		em.close();
-		JPAUtil.getEntityManagerFactory().close();
+		UserDaoJpa.closePersistency();
 	}
 
 	public void meldAan(String email, String paswoord) throws APIException, Auth0Exception
@@ -49,19 +45,15 @@ public class UserBeheerder
 		coordinator = new User(info.getValues().get("email").toString(), id);
 
 		// enkel coordinator kan inloggen
-		openPersistentie();
-
-		User u = em.createNamedQuery("User.findRole", User.class).setParameter("id", id).getSingleResult();
-
+		User u = repository.get(id);
 		if (!u.getRole().equals("coördinator"))
 		{
 			meldAf();
+			throw new IngelogdVerkeerdeRol();
 		} else
 		{
 			coordinator.setRole(u.getRole());
 		}
-
-		closePersistentie();
 	}
 
 	public void meldAf()

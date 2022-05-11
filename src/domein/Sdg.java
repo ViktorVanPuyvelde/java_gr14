@@ -19,7 +19,8 @@ import javax.persistence.Table;
 @Table(name = "sdg")
 @NamedQueries(
 {	@NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId")
-	})
+	@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam")
+})
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +42,10 @@ public class Sdg implements Serializable
 	@ManyToOne(targetEntity = Categorie.class)
 	@JoinColumn(name = "category_id")
 	private Categorie categorie;
-
+	
+	// @ManyToOne
+	// @JoinColumn(name= "category_id", nullable= false)
+	// private Categorie categorie;
 	/**
 	 * 
 	 * @param name

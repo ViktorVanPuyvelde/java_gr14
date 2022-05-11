@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import domein.DomeinController;
 import domein.Mvo;
 import domein.MvoController;
 import javafx.collections.FXCollections;
@@ -26,7 +25,6 @@ import javafx.stage.Stage;
 public class NieuweDatasourcePaneelController extends GridPane
 {
 
-	private DomeinController dc;
 	private MvoController mc;
 
 	@FXML
@@ -49,9 +47,14 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private ObservableList<Mvo> mvoList;
 
-	public NieuweDatasourcePaneelController(DomeinController dc)
-	{
-		this.dc = dc;
+	private ChoiceBox<String> cbMvos;
+	
+    @FXML
+    private Button toevoegen_btn;
+    
+    private ObservableList<Mvo> mvoList;
+    
+    public NieuweDatasourcePaneelController() {
 		this.mc = new MvoController();
 		buildGui();
 		setMvoList();

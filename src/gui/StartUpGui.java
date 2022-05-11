@@ -16,8 +16,7 @@ public class StartUpGui extends Application
 	@Override
 	public void start(Stage stage)
 	{
-		DomeinController controller = new DomeinController();
-		Scene scene = new Scene(new AanmeldPaneelController(controller));
+		Scene scene = new Scene(new AanmeldPaneelController());
 		stage.setScene(scene);
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/logo.png")));
 		stage.show();

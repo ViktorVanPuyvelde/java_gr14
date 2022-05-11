@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import domein.DomeinController;
+import domein.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -42,16 +42,16 @@ public class SideBarController extends BorderPane
 	private Button categorie_Btn;
 	@FXML
 	private Button datasource_Btn;
-	
-	private DomeinController dc;
+
+	private UserController userController;
 	private FXMLLoader loader;
 	
 	final String IDLE_BUTTON_STYLE = "-fx-background-color: #37465D;";
 	final String ACTIVCATION_BUTTON_STYLE = "-fx-background-color: #465a77;";
 	private List<Button> sidebarBtns;
 
-	public SideBarController(DomeinController dc) {
-		this.dc = dc;
+	public SideBarController(UserController controller) {
+		this.userController = controller;
 		buildGui();
 		initialize();
 	}
@@ -128,7 +128,7 @@ public class SideBarController extends BorderPane
 	 */
 	
 	private void toDatasource() {
-		DatasourcePaneelController root = new DatasourcePaneelController(dc);
+		DatasourcePaneelController root = new DatasourcePaneelController();
 		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(datasource_Btn);
@@ -142,8 +142,8 @@ public class SideBarController extends BorderPane
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
-			dc.meldAf();
-			Scene scene = new Scene (new AanmeldPaneelController(dc));
+			userController.meldAf();
+			Scene scene = new Scene (new AanmeldPaneelController());
 			Stage stage = (Stage) this.getScene().getWindow();
 			stage.setScene(scene);
 			stage.show();

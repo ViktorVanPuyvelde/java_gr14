@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -190,6 +191,6 @@ public class Categorie implements CRUD, Serializable
 	@Override
 	public String toString()
 	{
-		return String.format("id: %s, naam: %s, iconName: %s%n", getId(), getName(), getIconName());
+		return String.format("id: %d, naam: %s, iconName: %s%n", getId(), getName(), getIconName());
 	}
 }
