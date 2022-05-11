@@ -17,7 +17,7 @@
                <children>
                   <Pane prefHeight="59.0" prefWidth="400.0">
                      <children>
-                        <Label alignment="CENTER" layoutY="21.0" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" underline="true">
+                        <Label alignment="CENTER" layoutY="21.0" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" textFill="#b2d234" underline="true">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
@@ -34,7 +34,7 @@
                            <children>
                               <Pane prefHeight="100.0" prefWidth="114.0">
                                  <children>
-                                    <Label layoutX="42.0" layoutY="14.0" text="Filter op categorie:">
+                                    <Label layoutX="42.0" layoutY="14.0" text="Filter op categorie:" textFill="#37465d">
                                        <font>
                                           <Font size="13.0" />
                                        </font></Label>

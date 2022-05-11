@@ -37,7 +37,6 @@ public class Mvo implements Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "mvo_id")
 	private String id;
 	@Column(name = "mvo_name")
@@ -60,7 +59,9 @@ public class Mvo implements Serializable
 
 	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
-		setId(UUID.randomUUID().toString());
+		String randomId = UUID.randomUUID().toString();
+		System.out.println(randomId);
+		setId(randomId);
 		setName(name);
 		setInfo(info);
 		setGoalValue(goalValue);
