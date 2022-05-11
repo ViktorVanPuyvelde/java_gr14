@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="400.0" prefWidth="400.0">
          <children>
@@ -17,7 +17,7 @@
                <children>
                   <Pane prefHeight="59.0" prefWidth="400.0">
                      <children>
-                        <Label layoutX="135.0" layoutY="21.0" text="Categoriën" underline="true">
+                        <Label layoutX="135.0" layoutY="21.0" text="Categorieën" underline="true">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font></Label>
@@ -34,7 +34,7 @@
                            <children>
                               <Pane prefHeight="100.0" prefWidth="114.0">
                                  <children>
-                                    <Label layoutX="22.0" layoutY="85.0" text="Categoriën :" />
+                                    <Label layoutX="22.0" layoutY="85.0" text="Categorieën:" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="210.0" prefWidth="295.0">
