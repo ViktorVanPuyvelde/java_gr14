@@ -9,9 +9,9 @@
 
 <fx:root alignment="TOP_CENTER" spacing="30.0" type="VBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Raadplegen Categorie" underline="true">
+      <Label text="Raadplegen Categorie" textFill="#b2d234">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Label>
       <HBox spacing="20.0">
@@ -19,10 +19,13 @@
             <Insets />
          </VBox.margin>
          <children>
-            <Label text="Id:">
+            <Label prefWidth="55.0" text="Id:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Label>
             <Label fx:id="id_lbl" alignment="TOP_LEFT">
                <font>
@@ -33,10 +36,13 @@
       </HBox>
       <HBox spacing="20.0">
          <children>
-            <Label text="Naam:">
+            <Label prefWidth="55.0" text="Naam:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Label>
             <Label fx:id="naam_lbl" alignment="TOP_LEFT">
                <font>
@@ -47,10 +53,13 @@
       </HBox>
       <HBox spacing="20.0">
          <children>
-            <Label text="Icon:">
+            <Label prefWidth="55.0" text="Icon:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Label>
             <Label fx:id="icon_lbl" alignment="TOP_LEFT">
                <font>
@@ -61,16 +70,19 @@
       </HBox>
       <HBox fx:id="sdg_hbox" spacing="20.0">
          <children>
-            <Label text="Sdg's:">
+            <Label prefWidth="55.0" text="SDG's:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Label>
-            <ListView fx:id="sdg_list" disable="true" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="sdg_list" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </HBox>
    </children>
    <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      <Insets left="70.0" top="10.0" />
    </padding>
 </fx:root>

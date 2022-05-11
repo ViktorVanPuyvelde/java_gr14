@@ -2,6 +2,7 @@ package gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -17,8 +18,9 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
-public class CategoriePaneelController extends AnchorPane{
+public class CategoriePaneelController extends HBox{
 	@FXML
 	private Button createCategorie_btn;
 	@FXML
@@ -30,7 +32,9 @@ public class CategoriePaneelController extends AnchorPane{
 	@FXML
 	private Button deleteCategorie_btn;
 	@FXML
-	private Label catSelecteren_lbl;	
+	private Label catSelecteren_lbl;
+	@FXML
+	private HBox hBox;
 	
 	private CategorieController catController;
 	private ObservableList<Categorie> catItemList;
@@ -83,7 +87,6 @@ public class CategoriePaneelController extends AnchorPane{
 			verwijderRechterScherm();			
 		}
 		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController();
-		AnchorPane.setRightAnchor(catAanmakenPaneel, 25.0);
 		this.getChildren().add(catAanmakenPaneel);
 		rechterSchermAanwezig = true;
 	}
@@ -99,7 +102,6 @@ public class CategoriePaneelController extends AnchorPane{
 		Categorie c = catItemList.stream().filter(cat -> cat.getName().equals(naam)).findAny().orElse(null);
 		if (c != null) {
 			CategorieRaadpleegPaneelController root = new CategorieRaadpleegPaneelController(c, catController);
-			AnchorPane.setRightAnchor(root, 25.0);
 			this.getChildren().add(root);
 			rechterSchermAanwezig = true;			
 		}else {
