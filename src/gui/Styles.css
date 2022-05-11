@@ -1,0 +1,29 @@
+.Button {
+  -fx-background-color: #b0b0b0;
+  -fx-background-radius: 30;
+  -fx-background-insets: 0;
+  -fx-text-fill: white;
+}
+.HPbutton {
+  -fx-border-radius: 20px;
+  -fx-background-radius: 20px;
+}
+
+#datasourceHP {
+  -fx-background-color: #4cb6ce;
+}
+
+#categorieHP {
+  -fx-background-color: #fedd2d;
+}
+
+#mvoHP {
+  -fx-background-color: #f59c00;
+}
+
+#createBtn {
+  -fx-background-color: #2a9716;
+}
+#deleteBtn {
+  -fx-background-color: #d63e23;
+}

@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="700.0" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="bp" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="700.0" stylesheets="@Styles.css" type="BorderPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <VBox fx:id="sideBar" prefHeight="300.0" prefWidth="158.0" spacing="2.0" style="-fx-background-color: #37465D;" BorderPane.alignment="CENTER">
          <children>
@@ -104,7 +104,7 @@
             <Insets left="20.0" right="20.0" />
          </GridPane.margin>
          <children>
-            <Button id="mvoHP" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="247.0" prefWidth="200.0">
+            <Button id="mvoHP" mnemonicParsing="false" onMouseClicked="#mvo" prefHeight="247.0" prefWidth="200.0" styleClass="HPbutton">
                <graphic>
                   <VBox prefHeight="247.0" prefWidth="190.0">
                      <children>
@@ -130,7 +130,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button id="categorieHP" mnemonicParsing="false" onMouseClicked="#categorie" prefHeight="247.0" prefWidth="200.0">
+            <Button id="categorieHP" mnemonicParsing="false" onMouseClicked="#categorie" prefHeight="247.0" prefWidth="200.0" styleClass="HPbutton">
                <graphic>
                   <VBox prefHeight="247.0" prefWidth="190.0">
                      <children>
@@ -156,7 +156,7 @@
                   </VBox>
                </graphic>
             </Button>
-            <Button id="datasourceHP" mnemonicParsing="false" onMouseClicked="#datasource" prefHeight="247.0" prefWidth="200.0">
+            <Button id="datasourceHP" mnemonicParsing="false" onMouseClicked="#datasource" prefHeight="247.0" prefWidth="200.0" styleClass="HPbutton">
                <graphic>
                   <VBox prefHeight="247.0" prefWidth="190.0">
                      <children>

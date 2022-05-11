@@ -47,7 +47,8 @@ public class AanmeldPaneelController extends AnchorPane{
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AanmeldPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
-			loader.load();	
+			loader.load();
+			
 			} 
 		catch(IOException ex)
 		{
@@ -67,8 +68,8 @@ public class AanmeldPaneelController extends AnchorPane{
 			dc.meldAan(gebruikersnaam.getText(), wachtwoord.getText());
 			SideBarController ns = new SideBarController(dc);
 			Scene scene = new Scene (ns);
-			//ns.getStylesheets().add(getClass().getResource("../stylesheets/HomePage.css"));
 			Stage stage = (Stage) this.getScene().getWindow();
+			scene.getStylesheets().add(getClass().getResource("Styles.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 		}catch(Auth0Exception a) {
