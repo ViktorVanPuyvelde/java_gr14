@@ -40,14 +40,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private ListView<String> mvosList;
 
 	@FXML
-	private Button toevoegen_btn;
-
-	@FXML
 	private Label toevoegenLbl;
-
-	private ObservableList<Mvo> mvoList;
-
-	private ChoiceBox<String> cbMvos;
 	
     @FXML
     private Button toevoegen_btn;

@@ -1,14 +1,8 @@
 package gui;
 
-import java.io.File;
-import java.net.MalformedURLException;
-
-import domein.DomeinController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class StartUpGui extends Application

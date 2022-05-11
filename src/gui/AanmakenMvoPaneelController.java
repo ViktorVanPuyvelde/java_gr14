@@ -79,10 +79,10 @@ public class AanmakenMvoPaneelController extends GridPane
 	{
 		try
 		{
-			type = FXCollections.observableArrayList(new ArrayList());
-			sdgItemList = FXCollections.observableArrayList(new ArrayList());
-			datasourceItemList = FXCollections.observableArrayList(new ArrayList());
-			superMvoItemList = FXCollections.observableArrayList(new ArrayList());
+			type = FXCollections.observableArrayList(new ArrayList<>());
+			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
+			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
+			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
