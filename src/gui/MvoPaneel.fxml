@@ -1,69 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="597.0" prefWidth="588.0" stylesheets="@Styles.css" type="AnchorPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fillHeight="false" spacing="100.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="597.0" prefWidth="588.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
          <children>
-            <VBox prefHeight="400.0" prefWidth="400.0">
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" textFill="#b2d234" underline="true">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button id="createBtn" fx:id="createMVO_btn" mnemonicParsing="false" onAction="#createMVO_OnAction" prefHeight="25.0" prefWidth="170.0" styleClass="Button" text="Nieuwe MVO aanmaken" />
+            <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <Pane prefHeight="59.0" prefWidth="400.0">
+                  <HBox alignment="CENTER" prefHeight="186.0" prefWidth="400.0">
                      <children>
-                        <Label alignment="CENTER" layoutY="21.0" prefHeight="30.0" prefWidth="588.0" text="MVO doelstellingen" textFill="#b2d234" underline="true">
+                        <Label prefWidth="130.0" text="Filter op categorie:" textAlignment="CENTER" textFill="#37465d">
                            <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font></Label>
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="61.0" prefWidth="485.0">
-                     <children>
-                        <Button id="createBtn" fx:id="createMVO_btn" layoutX="209.0" layoutY="15.0" mnemonicParsing="false" onAction="#createMVO_OnAction" prefHeight="25.0" prefWidth="170.0" styleClass="Button" text="Nieuwe MVO aanmaken" />
-                     </children>
-                  </Pane>
-                  <VBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <HBox prefHeight="186.0" prefWidth="400.0">
-                           <children>
-                              <Pane prefHeight="100.0" prefWidth="114.0">
-                                 <children>
-                                    <Label layoutX="42.0" layoutY="14.0" text="Filter op categorie:" textFill="#37465d">
-                                       <font>
-                                          <Font size="13.0" />
-                                       </font></Label>
-                                    <ListView fx:id="MvoCatListView" layoutX="56.0" layoutY="40.0" prefHeight="101.0" prefWidth="79.0" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="210.0" prefWidth="295.0">
-                                 <children>
-                                    <ListView fx:id="MvoListView" layoutX="70.0" layoutY="-3.0" prefHeight="245.0" prefWidth="323.0" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </HBox>
-                        <Label fx:id="catSelecteren_lbl" alignment="CENTER" textFill="RED" />
-                     </children>
-                  </VBox>
-                  <HBox prefHeight="84.0" prefWidth="400.0">
-                     <children>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="MvoCatListView" prefHeight="174.0" prefWidth="89.0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </ListView>
+                        <ListView fx:id="MvoListView" prefHeight="174.0" prefWidth="209.0" />
                      </children>
                   </HBox>
+                  <Label fx:id="mvo_Selecteren_lbl" alignment="CENTER" textFill="RED">
+                     <VBox.margin>
+                        <Insets left="30.0" top="-15.0" />
+                     </VBox.margin></Label>
                </children>
             </VBox>
-            <Button id="deleteBtn" fx:id="deleteMVO_btn" layoutX="471.0" layoutY="414.0" mnemonicParsing="false" onAction="#deleteMVO_OnAction" styleClass="Button" text="Verwijderen" />
-            <Button fx:id="editMVO_btn" layoutX="335.0" layoutY="418.0" mnemonicParsing="false" onAction="#editMVO_OnAction" styleClass="Button" text="Aanpassen" />
-            <Button fx:id="viewMVO_btn" layoutX="185.0" layoutY="417.0" mnemonicParsing="false" onAction="#raadplegenMVO_OnAction" styleClass="Button" text="Raadplegen" />
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="400.0" spacing="40.0">
+               <children>
+                  <Button fx:id="viewMVO_btn" mnemonicParsing="false" onAction="#raadplegenMVO_OnAction" styleClass="Button" text="Raadplegen" />
+                  <Button fx:id="editMVO_btn" mnemonicParsing="false" onAction="#editMVO_OnAction" styleClass="Button" text="Aanpassen" />
+                  <Button id="deleteBtn" fx:id="deleteMVO_btn" mnemonicParsing="false" onAction="#deleteMVO_OnAction" styleClass="Button" text="Verwijderen" />
+               </children>
+               <VBox.margin>
+                  <Insets top="-40.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-      </Pane>
+      </VBox>
    </children>
+   <padding>
+      <Insets left="80.0" top="60.0" />
+   </padding>
 </fx:root>

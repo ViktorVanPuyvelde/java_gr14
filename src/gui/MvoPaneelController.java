@@ -14,10 +14,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 
-public class MvoPaneelController extends AnchorPane{
+public class MvoPaneelController extends HBox{
 	
 	@FXML
 	private ListView<String> MvoCatListView;
@@ -37,15 +39,18 @@ public class MvoPaneelController extends AnchorPane{
     @FXML
     private Button viewMVO_btn;
     
+    @FXML
+    private Label mvo_Selecteren_lbl;
+    
     private boolean rechterSchermAanwezig = false;
 
     @FXML
     void createMVO_OnAction(ActionEvent event) {
+    	mvo_Selecteren_lbl.setText("");
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
 		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
-		AnchorPane.setRightAnchor(aanmakenMVOPaneel,100.0);
 		this.getChildren().add(aanmakenMVOPaneel);
 		rechterSchermAanwezig = true;
     }
@@ -62,13 +67,17 @@ public class MvoPaneelController extends AnchorPane{
 
     @FXML
     void raadplegenMVO_OnAction(ActionEvent event) {
+    	mvo_Selecteren_lbl.setText("");
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		MvoRaadplegenPaneelController raadplegenMvoPaneel = new MvoRaadplegenPaneelController(selectedMvo);
-		AnchorPane.setRightAnchor(raadplegenMvoPaneel,100.0);
-		this.getChildren().add(raadplegenMvoPaneel);
-		rechterSchermAanwezig = true;
+		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
+			MvoRaadplegenPaneelController raadplegenMvoPaneel = new MvoRaadplegenPaneelController(selectedMvo);
+			this.getChildren().add(raadplegenMvoPaneel);
+			rechterSchermAanwezig = true;			
+		}else {
+			mvo_Selecteren_lbl.setText("Gelieve eerst een MVO te selecteren!");
+		}
     }
     
 	private void verwijderRechterScherm() {
