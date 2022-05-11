@@ -59,9 +59,7 @@ public class Mvo implements Serializable
 
 	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
-		String randomId = UUID.randomUUID().toString();
-		System.out.println(randomId);
-		setId(randomId);
+		setId(UUID.randomUUID().toString());
 		setName(name);
 		setInfo(info);
 		setGoalValue(goalValue);

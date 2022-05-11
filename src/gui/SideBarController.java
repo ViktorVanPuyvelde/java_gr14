@@ -101,7 +101,7 @@ public class SideBarController extends BorderPane
 	
 
 	private void toMvo() {
-		AanmakenMvoPaneelController root = new AanmakenMvoPaneelController();
+		MvoPaneelController root = new MvoPaneelController();
 		bp.getChildren().remove(bp.getCenter());
 		bp.setCenter(root);
 		makeBtnActive(mvo_Btn);
