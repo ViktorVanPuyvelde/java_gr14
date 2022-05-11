@@ -34,6 +34,8 @@ public class DatasourcePaneelController extends AnchorPane{
 	
 	private ObservableList<Datasource> datasourceItemList;
 	
+    private boolean rechterSchermAanwezig = false;
+	
 	
 	public DatasourcePaneelController() {
 		this.datasourceCon = new DatasourceController();
@@ -79,11 +81,11 @@ public class DatasourcePaneelController extends AnchorPane{
 		//collectChanges();
 		//verify();
 		//update();
-		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController();
-		Scene scene = new Scene (ns);
-		Stage stage = (Stage) this.getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
+//		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController();
+//		Scene scene = new Scene (ns);
+//		Stage stage = (Stage) this.getScene().getWindow();
+//		stage.setScene(scene);
+//		stage.show();
 		
 //		try {
 //			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
@@ -94,7 +96,20 @@ public class DatasourcePaneelController extends AnchorPane{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		
+		if (rechterSchermAanwezig) {
+            verwijderRechterScherm();            
+        }
+        NieuweDatasourcePaneelController nieuweDatasourcePaneel = new NieuweDatasourcePaneelController();
+        AnchorPane.setRightAnchor(nieuweDatasourcePaneel,100.0);
+        this.getChildren().add(nieuweDatasourcePaneel);
+        rechterSchermAanwezig = true;
 	}
+	
+	private void verwijderRechterScherm() {
+        this.getChildren().remove(this.getChildren().size()-1);
+        rechterSchermAanwezig = false;
+    }
 	
 	
 
