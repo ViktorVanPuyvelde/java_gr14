@@ -10,6 +10,7 @@ import domein.Mvo;
 import domein.MvoController;
 import domein.Sdg;
 import domein.SdgController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -129,31 +130,38 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private void verify()
 	{
-		if (name == null || name.isEmpty())
-		{
-			melding.toonFoutmelding("Naam mag niet leeg zijn.");
-		} else if (sdg == null)
-		{
-			melding.toonFoutmelding("Er moet een SDG toegewezen zijn aan de nieuwe MVO.");
-		} else if (type == null || type.isEmpty())
-		{
-			melding.toonFoutmelding("Type mag niet leeg zijn");
-		} else if (datasource == null)
-		{
-			melding.toonFoutmelding("Er moet een datasource meegegeven worden ");
-		} else if (foutMeldingDoel)
-		{
-			melding.toonFoutmelding("Er moet een doel meegegeven worden");
-			foutMeldingDoel = false;
-		} else
-		{
-			update();
-		}
+//		if (name == null || name.isEmpty())
+//		{
+//			melding.toonFoutmelding("Naam mag niet leeg zijn.");
+//		} else if (sdg == null)
+//		{
+//			melding.toonFoutmelding("Er moet een SDG toegewezen zijn aan de nieuwe MVO.");
+//		} else if (type == null || type.isEmpty())
+//		{
+//			melding.toonFoutmelding("Type mag niet leeg zijn");
+//		} else if (datasource == null)
+//		{
+//			melding.toonFoutmelding("Er moet een datasource meegegeven worden ");
+//		} else if (foutMeldingDoel)
+//		{
+//			melding.toonFoutmelding("Er moet een doel meegegeven worden");
+//			foutMeldingDoel = false;
+//		} else
+//		{
+		update();
+//		}
 	}
 
 	private void update()
 	{
-		this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
+		try
+		{
+			this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
+		} catch (InformationRequiredException e)
+		{
+			System.out.println(e.getMessage());
+			e.getInformationRequired().forEach(System.out::println);
+		}
 		melding.toonBevestiging("De MVO is aangemaakt.");
 	}
 
