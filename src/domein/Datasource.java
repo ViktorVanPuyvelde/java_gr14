@@ -1,7 +1,7 @@
 package domein;
 
-import java.util.UUID;
 import java.io.Serializable;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,10 +13,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="datasource")
+@Table(name = "datasource")
 @NamedQueries(
-{ @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d") })
-public class Datasource implements Serializable, CRUD {
+{ @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d"),
+		@NamedQuery(name = "Datasource.geefDatasourceDoorNaam", query = "select d from Datasource d where d.datasource_name = :naam") })
+public class Datasource implements Serializable, CRUD
+{
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -26,9 +28,7 @@ public class Datasource implements Serializable, CRUD {
 	@Column(name = "datasource_name")
 	private String name;
 
-	
 	private Boolean flag;
-
 
 	public Datasource(String name)
 	{
@@ -51,36 +51,48 @@ public class Datasource implements Serializable, CRUD {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
 	@Override
-	public void create() {
+	public void create()
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void read() {
+	public void read()
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void update() {
+	public void update()
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void delete() {
+	public void delete()
+	{
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s", name);
 	}
 
 }

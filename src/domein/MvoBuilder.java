@@ -32,6 +32,9 @@ public class MvoBuilder
 		{
 			requiredElements.add(RequiredElement.InfoRequired);
 		}
+
+		System.out.println(this.requiredElements.size());
+
 //		if (this.mvo.getGoalValue())
 //		{
 //			requiredElements.add(RequiredElementMvo.GoalValueRequired);

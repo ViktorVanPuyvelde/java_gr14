@@ -9,14 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -29,13 +21,12 @@ import com.google.gson.Gson;
 @Table(name = "mvo")
 @NamedQueries(
 { @NamedQuery(name = "Mvo.geefMvosVoorCategorie", query = "SELECT m FROM Categorie c INNER JOIN c.sdgs s INNER JOIN s.mvos m WHERE c.name = :catNaam"),
-	@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"),
-	})
+		@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"), })
 public class Mvo implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "mvo_id")
 	private String id;
@@ -83,35 +74,43 @@ public class Mvo implements Serializable
 		this.name = name;
 	}
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
-	public Datasource getDatasource() {
+	public Datasource getDatasource()
+	{
 		return datasource;
 	}
 
-	public void setDatasource(Datasource datasource) {
+	public void setDatasource(Datasource datasource)
+	{
 		this.datasource = datasource;
 	}
 
-	public Sdg getSdg() {
+	public Sdg getSdg()
+	{
 		return sdg;
 	}
 
-	public void setSdg(Sdg sdg) {
+	public void setSdg(Sdg sdg)
+	{
 		this.sdg = sdg;
 	}
 
-	public Mvo getSuperMvo() {
+	public Mvo getSuperMvo()
+	{
 		return superMvo;
 	}
 
-	public void setSuperMvo(Mvo superMvo) {
+	public void setSuperMvo(Mvo superMvo)
+	{
 		this.superMvo = superMvo;
 	}
 
@@ -137,7 +136,6 @@ public class Mvo implements Serializable
 		this.goalValue = goalValue;
 	}
 
-
 	public List<String> getMvo_data()
 	{
 		return mvo_data;
@@ -148,4 +146,9 @@ public class Mvo implements Serializable
 		this.mvo_data = mvo_data;
 	}
 
+	@Override
+	public String toString()
+	{
+		return String.format("%s", name);
+	}
 }
