@@ -115,7 +115,7 @@ public class AanmakenMvoPaneelController extends GridPane
 	private void collectChanges()
 	{
 		this.name = txtMvoName.getText();
-		this.sdg = this.sdgItemList.get(0);
+		this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
 		this.type.add(txtType.getText());
 		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
 		{
@@ -124,38 +124,25 @@ public class AanmakenMvoPaneelController extends GridPane
 		{
 			this.doel = Integer.parseInt(txtDoel.getText());
 		}
-		this.datasource = this.datasourceItemList.get(0);
+		this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
 		this.superMvo = this.superMvoItemList.get(0);
 	}
 
 	private void verify()
 	{
-//		if (name == null || name.isEmpty())
-//		{
-//			melding.toonFoutmelding("Naam mag niet leeg zijn.");
-//		} else if (sdg == null)
-//		{
-//			melding.toonFoutmelding("Er moet een SDG toegewezen zijn aan de nieuwe MVO.");
-//		} else if (type == null || type.isEmpty())
-//		{
-//			melding.toonFoutmelding("Type mag niet leeg zijn");
-//		} else if (datasource == null)
-//		{
-//			melding.toonFoutmelding("Er moet een datasource meegegeven worden ");
-//		} else if (foutMeldingDoel)
-//		{
-//			melding.toonFoutmelding("Er moet een doel meegegeven worden");
-//			foutMeldingDoel = false;
-//		} else
-//		{
 		update();
-//		}
 	}
 
 	private void update()
 	{
 		try
 		{
+			System.out.println(name);
+			System.out.println(sdg.toString());
+			System.out.println(type.isEmpty());
+			System.out.println(doel);
+			System.out.println(datasource.toString());
+			System.out.println(superMvo.toString());
 			this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
 		} catch (InformationRequiredException e)
 		{

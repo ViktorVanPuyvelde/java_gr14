@@ -19,6 +19,11 @@ public class DatasourceController
 		return datasourceRepo.findAll();
 	}
 
+	public Datasource geefDatasourceDoorNaam(String naam)
+	{
+		return datasourceRepo.geefDatasourceDoorNaam(naam);
+	}
+
 	public void close()
 	{
 		DatasourceDaoJpa.closePersistency();

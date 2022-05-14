@@ -1,5 +1,8 @@
 package repository;
 
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+
 import domein.Datasource;
 
 public class DatasourceDaoJpa extends GenericDaoJpa<Datasource> implements DatasourceDao
@@ -10,9 +13,16 @@ public class DatasourceDaoJpa extends GenericDaoJpa<Datasource> implements Datas
 		super(Datasource.class);
 	}
 
-//	@Override
-//	public List<Datasource> findAll() {
-//		return em.createNamedQuery("Datasource.alleDatasources").getResultList();
-//	}
-
+	@Override
+	public Datasource geefDatasourceDoorNaam(String naam)
+	{
+		try
+		{
+			return em.createNamedQuery("Datasource.geefDatasourceDoorNaam", Datasource.class).setParameter("naam", naam)
+					.getSingleResult();
+		} catch (NoResultException e)
+		{
+			throw new EntityNotFoundException();
+		}
+	}
 }
