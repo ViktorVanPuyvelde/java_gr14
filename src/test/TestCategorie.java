@@ -1,13 +1,19 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import domein.Categorie;
@@ -38,12 +44,25 @@ class TestCategorie {
 		Assertions.assertFalse(cats.isEmpty());
 		Assertions.assertEquals(new Categorie("Planet", "FaGlobeAmericas", new ArrayList<>(), true), cats.get(1));
 	}
+	
+	private static Stream<Arguments> echteCategorieen(){
+		return Stream.of(
+				Arguments.of(new Categorie[]{new Categorie("nieuw", "icon", new ArrayList<>(), true), new Categorie("nieuwCat", "icon2", new ArrayList<>(), true)}, 2),
+				Arguments.of(new Categorie[]{new Categorie("nieuw1", "icon", new ArrayList<>(), true)}, 1),
+				Arguments.of(new Categorie[]{}, 0)
+			);
+	}
+	
+	@ParameterizedTest
+	@MethodSource("echteCategorieen")
+	public void testRaadpleegEchteCategorieen(Categorie[] array, int expectedEchteCat) {
+		Mockito.when(categorieRepo.geefAlleEchteCategorieen()).thenReturn(Arrays.asList(array));
 
-//	@Test
-//	public void testRaadpleegEchteCategorieen() {
-//		List<String> namen = controller.geefAlleEchteCategorienNaam();
-//		System.out.println(namen.toString());
-//	}
+		List<String> echteCat = controller.geefAlleEchteCategorienNaam();		
+		Assertions.assertEquals(expectedEchteCat, echteCat.size());
+		
+		Mockito.verify(categorieRepo).geefAlleEchteCategorieen();
+	}
 	
 //	@Test
 //	public void testUpdateCategory() {
