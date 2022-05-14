@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,17 +10,17 @@ import repository.CategorieDaoJpa;
 public class CategorieController
 {
 	private CategorieDao categorieRepo;
+	private List<Categorie> cats;
 	
 	public CategorieController()
 	{
 		setCategorieRepo(new CategorieDaoJpa());
+		cats = categorieRepo.findAll();
 		//populateDB();
 	}
 	
-	public List<Categorie> geefCategorien()
-	{
-		return categorieRepo.findAll();
-
+	public List<Categorie> geefCategorien() {
+		return Collections.unmodifiableList(cats);
 	}
 	
 	public void setCategorieRepo(CategorieDao categorieRepo)
@@ -37,9 +38,11 @@ public class CategorieController
 
 	public void voegCategorieToe(String name, String iconName, List<String> roles)
 	{
+		Categorie c =new Categorie(name, iconName, roles, true);
 		CategorieDaoJpa.startTransaction();
-		categorieRepo.insert(new Categorie(name, iconName, roles, true));
+		categorieRepo.insert(c);
 		CategorieDaoJpa.commitTransaction();
+		cats.add(c);
 	}
 	
 	public void close()
