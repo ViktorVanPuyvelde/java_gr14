@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
@@ -17,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -47,6 +50,8 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ListView<String> lvDatasource;
 	@FXML
 	private ListView<String> lvSuperMvo;
+	@FXML
+	private Label lblErrorNietAangemaakt;
 
 	// lokale attributen
 	private String name;
@@ -114,18 +119,24 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private void collectChanges()
 	{
-		this.name = txtMvoName.getText();
-		this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
-		this.type.add(txtType.getText());
-		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
+		try
 		{
-			foutMeldingDoel = true;
-		} else
+			this.name = txtMvoName.getText();
+			this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
+			this.type.add(txtType.getText());
+			if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
+			{
+				foutMeldingDoel = true;
+			} else
+			{
+				this.doel = Integer.parseInt(txtDoel.getText());
+			}
+			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
+			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
+		} catch (EntityNotFoundException e)
 		{
-			this.doel = Integer.parseInt(txtDoel.getText());
+			System.out.println("error");
 		}
-		this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
-		this.superMvo = this.superMvoItemList.get(0);
 	}
 
 	private void verify()
@@ -137,19 +148,13 @@ public class AanmakenMvoPaneelController extends GridPane
 	{
 		try
 		{
-			System.out.println(name);
-			System.out.println(sdg.toString());
-			System.out.println(type.isEmpty());
-			System.out.println(doel);
-			System.out.println(datasource.toString());
-			System.out.println(superMvo.toString());
 			this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
+			melding.toonBevestiging("De MVO is aangemaakt.");
 		} catch (InformationRequiredException e)
 		{
-			System.out.println(e.getMessage());
+			lblErrorNietAangemaakt.setText(e.getMessage());
 			e.getInformationRequired().forEach(System.out::println);
 		}
-		melding.toonBevestiging("De MVO is aangemaakt.");
 	}
 
 	private void setSdgItemList()

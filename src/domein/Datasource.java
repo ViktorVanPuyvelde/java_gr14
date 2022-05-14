@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "datasource")
 @NamedQueries(
 { @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d"),
-		@NamedQuery(name = "Datasource.geefDatasourceDoorNaam", query = "select d from Datasource d where d.datasource_name = :naam") })
+		@NamedQuery(name = "Datasource.geefDatasourceDoorNaam", query = "select d from Datasource d where d.name = :naam") })
 public class Datasource implements Serializable, CRUD
 {
 

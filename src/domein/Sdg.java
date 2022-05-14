@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @NamedQueries(
 { @NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId"),
 		@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam"),
-		@NamedQuery(name = "Sdg.geefSdgDoorNaam", query = "SELECT s FROM Sdg s WHERE s.sdg_name : :naam") })
+		@NamedQuery(name = "Sdg.geefSdgDoorNaam", query = "SELECT s FROM Sdg s WHERE s.name = :naam") })
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
