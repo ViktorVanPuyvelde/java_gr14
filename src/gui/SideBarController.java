@@ -14,11 +14,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class SideBarController extends BorderPane
@@ -42,7 +48,11 @@ public class SideBarController extends BorderPane
 	private Button categorie_Btn;
 	@FXML
 	private Button datasource_Btn;
-
+	@FXML	
+	private Label userInfo_lbl;
+	@FXML	
+	private Circle circle;
+	
 	private UserController userController;
 	private FXMLLoader loader;
 	
@@ -62,9 +72,10 @@ public class SideBarController extends BorderPane
 		sidebarBtns.add(mvo_Btn);
 		sidebarBtns.add(categorie_Btn);
 		sidebarBtns.add(datasource_Btn);
-		
+		Image im = new Image(getClass().getResourceAsStream("/icons/avatar_logo.jpg"));
+		circle.setFill(new ImagePattern(im));
+		userInfo_lbl.setText(userController.getUserInfo());
 		makeBtnActive(home_Btn);
-		
 	}
 
 

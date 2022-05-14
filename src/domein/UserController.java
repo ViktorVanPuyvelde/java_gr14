@@ -19,4 +19,7 @@ public class UserController {
 		ub.meldAf();
 	}
 
+	public String getUserInfo() {
+		return ub.getUserInfo();
+	}
 }

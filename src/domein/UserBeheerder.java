@@ -43,7 +43,7 @@ public class UserBeheerder
 		Request<UserInfo> request2 = auth.userInfo(holder.getAccessToken());
 		UserInfo info = request2.execute();
 		String id = info.getValues().get("sub").toString().substring(6);
-		coordinator = new User(info.getValues().get("email").toString(), id);
+		coordinator = new User(info.getValues().get("email").toString(), id, info.getValues().get("nickname").toString());
 
 		// enkel coordinator kan inloggen
 		User u = repository.get(id);
@@ -65,5 +65,9 @@ public class UserBeheerder
 //
 //		auth.logoutUrl("http://localhost:3000/", true);
 		coordinator = null;
+	}
+
+	public String getUserInfo() {
+		return coordinator.getName();
 	}
 }

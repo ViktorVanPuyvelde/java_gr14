@@ -27,13 +27,16 @@ public class User implements Serializable {
 		
 	@Transient
 	private String email;
+	@Transient
+	private String name;
 	
 	protected User()
 	{}
 	
-	public User(String email, String id) {
+	public User(String email, String id, String name) {
 		this.email = email;
 		this.user_id = id;
+		this.name = name;
 	}
 
 	public String getUser_id() {
@@ -50,6 +53,10 @@ public class User implements Serializable {
 
 	public final void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

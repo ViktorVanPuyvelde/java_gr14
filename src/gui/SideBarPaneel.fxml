@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -46,19 +48,21 @@
    <top>
       <GridPane prefHeight="30.0" prefWidth="600.0" style="-fx-background-color: #b2d234;" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="493.59996337890624" />
-          <ColumnConstraints halignment="CENTER" maxWidth="495.20001220703125" minWidth="10.0" prefWidth="107.20003662109372" />
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="511.20000610351565" />
+          <ColumnConstraints halignment="CENTER" maxWidth="495.20001220703125" minWidth="10.0" prefWidth="138.39999389648438" />
+            <ColumnConstraints halignment="CENTER" maxWidth="495.20001220703125" minWidth="10.0" prefWidth="107.20003662109372" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" />
+          <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" />
         </rowConstraints>
          <children>
-            <Button fx:id="log_Out_Btn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMousePressed="#logout" style="-fx-background-color: #b2d234; -fx-border-color: #37465D; -fx-border-radius: 5;" text="Uitloggen" textFill="#37465d" GridPane.columnIndex="1">
+            <Button fx:id="log_Out_Btn" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMousePressed="#logout" style="-fx-background-color: #b2d234; -fx-border-color: #37465D; -fx-border-radius: 5;" text="Uitloggen" textFill="#37465d" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
                   <Image url="@../../img/1200px-Fluvius_logo.svg.png" />
                </image>
@@ -66,6 +70,12 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </ImageView>
+            <HBox alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Circle fx:id="circle" fill="#b2d134" radius="15.0" stroke="#37465d" strokeType="INSIDE" />
+                  <Label fx:id="userInfo_lbl" text="niels.vanhove" textFill="#37465d" />
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets />
