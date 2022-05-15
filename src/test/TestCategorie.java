@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import domein.Categorie;
 import domein.CategorieController;
+import domein.Sdg;
 import repository.CategorieDao;
 
 @ExtendWith(MockitoExtension.class)
@@ -63,7 +64,27 @@ class TestCategorie {
 		
 		Mockito.verify(categorieRepo).geefAlleEchteCategorieen();
 	}
+
+	private static Stream<Arguments> sdgsVoorCategorie(){
+		return Stream.of(
+				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null), new Sdg("sdg2", "img2", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true)),
+				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true)),
+				Arguments.of(new Sdg[]{}, new Categorie("nieuw1", "icon", new ArrayList<>(), true))
+			);
+	}
 	
+	@ParameterizedTest
+	@MethodSource("sdgsVoorCategorie")
+	public void testRaadpleegSdgCategorie(Sdg[] array, Categorie c) {
+		Mockito.when(categorieRepo.geefSdgVoorCategorie(c.getName())).thenReturn(Arrays.asList(array));
+
+		List<Sdg> sdgs = controller.geefSdgsVoorCategorie(c);
+		Assertions.assertEquals(c.getSdgs().size(), sdgs.size());
+		Assertions.assertArrayEquals(array, sdgs.toArray(new Sdg[sdgs.size()]));
+		
+		Mockito.verify(categorieRepo).geefSdgVoorCategorie(c.getName());
+	}
+
 //	@Test
 //	public void testUpdateCategory() {
 //		fail("Not yet implemented");

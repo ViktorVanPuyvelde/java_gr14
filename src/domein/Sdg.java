@@ -112,14 +112,12 @@ public class Sdg implements Serializable
 	}
 
 	@Override
-	public int hashCode()
-	{
-		return Objects.hash(id, image, name);
+	public int hashCode() {
+		return Objects.hash(image, name);
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -127,7 +125,7 @@ public class Sdg implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		Sdg other = (Sdg) obj;
-		return Objects.equals(id, other.id) && Objects.equals(image, other.image) && Objects.equals(name, other.name);
+		return Objects.equals(image, other.image) && Objects.equals(name, other.name);
 	}
 
 	@Override

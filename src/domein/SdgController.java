@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.Collections;
 import java.util.List;
 
 import repository.SdgDao;
@@ -8,11 +9,12 @@ import repository.SdgDaoJpa;
 public class SdgController
 {
 	private SdgDao sdgRepo;
-
+	private List<Sdg> sdgs;
+	
 	public SdgController()
 	{
 		setSdgRepo(new SdgDaoJpa());
-		//populateDB();
+		sdgs = sdgRepo.findAll();
 	}
 
 	public void setSdgRepo(SdgDao sdgRepo)
@@ -22,7 +24,7 @@ public class SdgController
 
 	public List<Sdg> geefSdgs()
 	{
-		return sdgRepo.findAll();
+		return Collections.unmodifiableList(sdgs);
 	}
 	
 	public Sdg geefSdgVoorMvo(String id,String mvoId) {
