@@ -14,8 +14,7 @@ public class MvoController
 	public MvoController() {
 		setMvoRepo(new MvoDaoJpa());
 	}
-
-
+	
 	public void setMvoRepo(MvoDao mvoRepo) {
 		MvoRepo = mvoRepo;
 	}
@@ -28,7 +27,6 @@ public class MvoController
 		return MvoRepo.geefMvoMetNaam(naam);
 	}
 	
-
 	public void setMvoDao(MvoDao MvoRepo)
 	{
 		this.MvoRepo = MvoRepo;
@@ -54,6 +52,5 @@ public class MvoController
 
 	public void voegMvoToe(String name, Sdg sdg, ObservableList<String> type, int doel, Datasource datasource,
 			Mvo superMvo, Aggregatie methode) {
-		
 	}
 }

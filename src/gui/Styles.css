@@ -9,6 +9,18 @@
   -fx-background-radius: 20px;
 }
 
+.text-field {
+  -fx-border-color: grey;
+  -fx-border-width: 0 0 1 0;
+  -fx-background-color: transparent;
+}
+
+.text-field:focused {
+  -fx-border-color: #37465d;
+  -fx-border-width: 0 0 1 0;
+  -fx-background-color: transparent;
+}
+
 #datasourceHP {
   -fx-background-color: #4cb6ce;
 }

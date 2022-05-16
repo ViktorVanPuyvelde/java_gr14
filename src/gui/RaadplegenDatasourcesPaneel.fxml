@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="hBox" alignment="TOP_LEFT" fillHeight="false" spacing="100.0" type="HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="hBox" alignment="TOP_LEFT" fillHeight="false" spacing="100.0" stylesheets="@Styles.css" type="HBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="400.0" spacing="20.0">
          <children>
