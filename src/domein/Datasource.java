@@ -5,8 +5,6 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,23 +15,23 @@ import javax.persistence.Table;
 @NamedQueries(
 { @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d"),
 		@NamedQuery(name = "Datasource.geefDatasourceDoorNaam", query = "select d from Datasource d where d.name = :naam") })
-public class Datasource implements Serializable, CRUD
+public class Datasource implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "datasource_id")
 	private String id;
 	@Column(name = "datasource_name")
 	private String name;
-
+	@Column(name = "flag")
 	private Boolean flag;
 
-	public Datasource(String name)
+	public Datasource(String name, boolean flag)
 	{
 		setId(UUID.randomUUID().toString());
-		this.name = name;
+		setName(name);
+		setFlag(flag);
 	}
 
 	protected Datasource()
@@ -61,32 +59,14 @@ public class Datasource implements Serializable, CRUD
 		this.name = name;
 	}
 
-	@Override
-	public void create()
+	public Boolean getFlag()
 	{
-		// TODO Auto-generated method stub
-
+		return flag;
 	}
 
-	@Override
-	public void read()
+	public void setFlag(Boolean flag)
 	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void delete()
-	{
-		// TODO Auto-generated method stub
-
+		this.flag = flag;
 	}
 
 	@Override
