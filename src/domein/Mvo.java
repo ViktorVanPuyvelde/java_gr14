@@ -2,6 +2,7 @@ package domein;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -141,4 +142,20 @@ public class Mvo implements Serializable
 		this.mvo_data = mvo_data;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Mvo other = (Mvo) obj;
+		return Objects.equals(name, other.name);
+	}
 }

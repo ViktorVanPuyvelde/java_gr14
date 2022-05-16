@@ -1,31 +1,42 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Assertions;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import domein.Mvo;
+import domein.MvoController;
+import repository.MvoDao;
+
+@ExtendWith(MockitoExtension.class)
 class TestMvo {
-
-
-	//CRUD
-
+	
+	@Mock
+	private MvoDao mvoRepo;
+	
+	@InjectMocks
+	private MvoController controller;
+	
 	@Test
-	void testCreateMvo() {
-		fail("Not yet implemented");
+	public void testCreateMvo() {
+		Mvo mvo = new Mvo("mvo", null, null, 0, null, null);
+
+		Assertions.assertFalse(controller.geefMvos().contains(mvo));
+		controller.voegMvoToe("mvo", null, null, 0, null, null);
+		Assertions.assertTrue(controller.geefMvos().contains(mvo));		
 	}
 	
 	@Test
-	void testUpdateMvo() {
-		fail("Not yet implemented");
+	public void testRaadpleegMvo() {
+		List<Mvo> mvos = controller.geefMvos();
+		Assertions.assertFalse(mvos.isEmpty());
+		Assertions.assertEquals(new Mvo("Waterverbruik", null, null, 0, null, null), mvos.get(0));
 	}
-
-	@Test
-	void testDeleteMvo() {
-		fail("Not yet implemented");
-	}
-
-	
 
 }
