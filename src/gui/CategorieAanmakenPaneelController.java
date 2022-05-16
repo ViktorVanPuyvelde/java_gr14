@@ -11,6 +11,7 @@ import java.util.Optional;
 import domein.CategorieController;
 import domein.Sdg;
 import domein.SdgController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -35,22 +37,22 @@ public class CategorieAanmakenPaneelController extends GridPane
 	private ListView<String> cat_Sdg_List;
 	@FXML
 	private ListView<String> cat_Rol_List;
-
 	@FXML
 	private TextField cat_Name_field;
 	@FXML
 	private TextField cat_Pictogram_field;
-
 	@FXML
 	private Button cat_save_btn;
-
 	@FXML
 	private Hyperlink linkIcons;
+	@FXML
+	private Label lblErrorLabel;
 
 	private String name;
 	private ObservableList<String> sdg;
 	private ObservableList<String> rol;
 	private String pic;
+	private List<Sdg> sdgs;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
@@ -114,36 +116,36 @@ public class CategorieAanmakenPaneelController extends GridPane
 	private void update()
 	{
 		List<String> vb = rol.stream().toList();
-		cc.voegCategorieToe(name, pic, vb);
-		toonBevestiging("Categorie is met succes aangemaakt");
+		setSdgs(sdg);
+
+		try
+		{
+			cc.voegCategorieToe(name, pic, vb, sdgs);
+			toonBevestiging("Categorie is met succes aangemaakt");
+		} catch (InformationRequiredException e)
+		{
+			lblErrorLabel.setText(e.getMessage());
+			e.getInformationRequired().forEach(System.out::println);
+		}
 	}
 
 	private void verify()
 	{
-		if (name == null || name.isEmpty())
-		{
-			fm.toonFoutmelding("Geef een naam mee.");
-		} else if (pic == null || pic.isEmpty())
-		{
-			fm.toonFoutmelding("Geef een pictogram mee.");
-		} else if (sdg == null || sdg.isEmpty())
-		{
-			fm.toonFoutmelding("Selecteer minstens 1 SDG.");
-		} else if (rol == null || rol.isEmpty())
-		{
-			fm.toonFoutmelding("Selecteer minstens 1 rol.");
-		} else
-		{
-			update();
-		}
+		update();
 	}
 
 	private void collectChanges()
 	{
-		name = this.cat_Name_field.getText();
-		pic = this.cat_Pictogram_field.getText();
-		sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
-		rol = cat_Rol_List.getSelectionModel().getSelectedItems();
+		try
+		{
+			name = this.cat_Name_field.getText();
+			pic = this.cat_Pictogram_field.getText();
+			sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
+			rol = cat_Rol_List.getSelectionModel().getSelectedItems();
+		} catch (Exception e)
+		{
+			System.out.println("error categorie");
+		}
 	}
 
 	public void setSdgItemList()
@@ -192,6 +194,17 @@ public class CategorieAanmakenPaneelController extends GridPane
 //			stage.close();
 //			Actie(stage);
 		}
+	}
+
+	private void setSdgs(ObservableList<String> sdg)
+	{
+		List<Sdg> sdgDummy = new ArrayList<>();
+		for (String s : sdg)
+		{
+			sdgDummy.add(this.sc.geefSdgDoorNaam(s));
+		}
+
+		this.sdgs = sdgDummy;
 	}
 
 //	private void Actie(Stage stage)

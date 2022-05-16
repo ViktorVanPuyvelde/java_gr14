@@ -2,5 +2,5 @@ package domein;
 
 public enum RequiredElement
 {
-	NameRequired, DatasourceRequired, SdgRequired, InfoRequired, GoalValueRequired
+	NameRequired, DatasourceRequired, SdgRequired, InfoRequired, GoalValueRequired, RolesRequired, IconNameRequired
 }

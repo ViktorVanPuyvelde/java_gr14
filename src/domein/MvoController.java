@@ -55,7 +55,7 @@ public class MvoController
 		MvoDaoJpa.closePersistency();
 	}
 
-	public Mvo createMvo(MvoBuilder mb, String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource,
+	private Mvo createMvo(MvoBuilder mb, String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource,
 			Mvo superMvo) throws InformationRequiredException
 	{
 		if (mb == null)
