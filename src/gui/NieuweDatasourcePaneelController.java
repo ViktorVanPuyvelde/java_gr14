@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domein.Aggregatie;
 import domein.Mvo;
 import domein.MvoController;
 import javafx.collections.FXCollections;
@@ -60,7 +61,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 		{
 
 			mvosList = new ListView<>();
-			mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			//mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
 			mvoList = FXCollections.observableArrayList(new ArrayList<Mvo>());
 
@@ -108,8 +109,56 @@ public class NieuweDatasourcePaneelController extends GridPane
 	@FXML
 	public void toevoegen_OnAction(ActionEvent actionEvent)
 	{
+		collectChanges();
+		verify();
+		update();
+	}
+
+	private void update() {
+		
+	
+	}
+
+	private void verify() {
+		
+		
 		toevoegenLbl.setText("Datasource toegevoegd!");
 		toevoegenLbl.setTextFill(Color.GREEN);
 		toevoegenLbl.setStyle("-fx-font-weight: bold");
+		
+	}
+
+	private void collectChanges() {
+		
+		Aggregatie methode = mvoList.get(0).getMethode();
+		verwerkDatasource(methode);
+		
+	}
+
+	private void verwerkDatasource(Aggregatie methode) {
+		// data in dictionary op quarter
+		
+		switch(methode) {
+		  case SOM:
+			 verwerkDataAlsSom();
+		    break;
+		  case GEMIDDELDE:
+			  verwerkDataAlsGem();
+		    break;
+		  default:
+			  
+		    
+		}
+		
+	}
+
+	private void verwerkDataAlsGem() {
+		
+		
+	}
+
+	private void verwerkDataAlsSom() {
+		
+		
 	}
 }

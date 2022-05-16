@@ -2,6 +2,7 @@ package domein;
 
 import java.util.List;
 
+import javafx.collections.ObservableList;
 import repository.MvoDao;
 import repository.MvoDaoJpa;
 
@@ -48,5 +49,11 @@ public class MvoController
 	public void close()
 	{
 		MvoDaoJpa.closePersistency();
+	}
+
+
+	public void voegMvoToe(String name, Sdg sdg, ObservableList<String> type, int doel, Datasource datasource,
+			Mvo superMvo, Aggregatie methode) {
+		
 	}
 }

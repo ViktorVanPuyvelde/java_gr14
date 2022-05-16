@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domein.Aggregatie;
 import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -46,6 +48,8 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ListView<String> lvDatasource;
 	@FXML
 	private ListView<String> lvSuperMvo;
+	@FXML
+	private ChoiceBox<Aggregatie> aggregatieBox;
 
 	// lokale attributen
 	private String name;
@@ -55,6 +59,7 @@ public class AanmakenMvoPaneelController extends GridPane
 	private Datasource datasource;
 	private Boolean foutMeldingDoel = false;
 	private Mvo superMvo;
+	private Aggregatie methode;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<Datasource> datasourceItemList;
@@ -102,6 +107,8 @@ public class AanmakenMvoPaneelController extends GridPane
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
 		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
+		
+		aggregatieBox.getItems().setAll(Aggregatie.values());
 	}
 
 	@FXML
@@ -125,6 +132,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		}
 		this.datasource = this.datasourceItemList.get(0);
 		this.superMvo = this.superMvoItemList.get(0);
+		this.methode = this.aggregatieBox.getValue();
 	}
 
 	private void verify()
@@ -153,7 +161,7 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private void update()
 	{
-		this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
+		this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo, methode);
 		melding.toonBevestiging("De MVO is aangemaakt.");
 	}
 
