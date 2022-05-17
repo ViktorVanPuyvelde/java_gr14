@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domein.Datasource;
+import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
 import javafx.collections.FXCollections;
@@ -41,14 +43,19 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	@FXML
 	private Label toevoegenLbl;
-	
+	@FXML
+	private Label titel_lbl;
     @FXML
     private Button toevoegen_btn;
     
     private ObservableList<Mvo> mvoList;
+    private DatasourceController controller;
+    private Datasource datasource;
     
-    public NieuweDatasourcePaneelController() {
+    public NieuweDatasourcePaneelController(Datasource d, DatasourceController controller) {
 		this.mc = new MvoController();
+		this.controller = controller;
+		this.datasource = d;
 		buildGui();
 		setMvoList();
 
@@ -58,7 +65,6 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 		try
 		{
-
 			mvosList = new ListView<>();
 			mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -68,7 +74,11 @@ public class NieuweDatasourcePaneelController extends GridPane
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
-
+			if (datasource != null) {
+				toevoegen_btn.setText("Wijzigen");
+				titel_lbl.setText("Datasource wijzigen");
+				naam_textfield.setText(datasource.getName());
+			}
 		} catch (IOException ex)
 		{
 			throw new RuntimeException(ex);
@@ -106,9 +116,16 @@ public class NieuweDatasourcePaneelController extends GridPane
 	}
 
 	@FXML
-	public void toevoegen_OnAction(ActionEvent actionEvent)
+	public void toevoegen_wijzigen_OnAction(ActionEvent actionEvent)
 	{
-		toevoegenLbl.setText("Datasource toegevoegd!");
+		if (datasource == null) {
+			controller.voegDatasourceToe(naam_textfield.getText(), false);
+			toevoegenLbl.setText("Datasource toegevoegd!");
+		}else {
+			controller.updateDatasource(datasource, naam_textfield.getText(), false);
+			toevoegenLbl.setText("Datasource gewijzigd!");			
+		}
+		
 		toevoegenLbl.setTextFill(Color.GREEN);
 		toevoegenLbl.setStyle("-fx-font-weight: bold");
 	}
