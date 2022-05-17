@@ -54,6 +54,7 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ListView<String> lvSuperMvo;
 	@FXML
 	private Label lblErrorNietAangemaakt;
+	@FXML
 	private ChoiceBox<Aggregatie> aggregatieBox;
 
 	// lokale attributen
@@ -69,6 +70,7 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<Datasource> datasourceItemList;
 	private ObservableList<Mvo> superMvoItemList;
+	private ObservableList<Aggregatie> boxOptions;
 
 	private Melding melding;
 
@@ -93,6 +95,7 @@ public class AanmakenMvoPaneelController extends GridPane
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
 			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
+			boxOptions = FXCollections.observableArrayList(Aggregatie.values());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
@@ -113,7 +116,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 		
-		aggregatieBox.getItems().setAll(Aggregatie.values());
+		aggregatieBox.getItems().setAll(boxOptions);
 	}
 
 	@FXML
@@ -139,6 +142,7 @@ public class AanmakenMvoPaneelController extends GridPane
 			}
 			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
+			
 		} catch (EntityNotFoundException e)
 		{
 			System.out.println("error");
