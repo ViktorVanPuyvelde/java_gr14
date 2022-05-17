@@ -54,10 +54,8 @@ public class WijzigenCategorieController extends GridPane
 	@FXML
 	private Label lblErrorLabel;
 
-	private String name;
 	private ObservableList<String> sdg;
 	private ObservableList<String> rol;
-	private String pic;
 	private List<Sdg> sdgs;
 
 	private ObservableList<Sdg> sdgItemList;
