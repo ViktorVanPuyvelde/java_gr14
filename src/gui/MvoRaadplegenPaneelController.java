@@ -2,6 +2,8 @@ package gui;
 
 import java.io.IOException;
 
+import domein.Datasource;
+import domein.DatasourceController;
 import domein.Mvo;
 import domein.Sdg;
 import domein.SdgController;
@@ -18,9 +20,12 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 	
 	private SdgController sc;
 	
+	private DatasourceController dc;
+	
 	public MvoRaadplegenPaneelController(Mvo mvo) {
 		this.selectedMvo=mvo;
 		this.sc=new SdgController();
+		this.dc=new DatasourceController();
 		buildGui();
 		initialize();
 	}
@@ -33,6 +38,19 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 
     @FXML
     private ImageView sdgImage;
+    
+    @FXML
+    private Label sdg_id;
+
+    @FXML
+    private Label sdg_naam;
+    
+    @FXML
+    private Label datasource_id;
+
+    @FXML
+    private Label datasource_name;
+
     
 	private void buildGui()
 	{
@@ -51,16 +69,20 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 	
 	private void initialize() {
 		
-		System.out.println(selectedMvo.getId());
-		System.out.println(selectedMvo.getSdg().getId());
-		
 		goalValue.setText(selectedMvo.getGoalValue()+"");
 		
 		mvoNaam.setText(selectedMvo.getName());
 		
 		Sdg sdg = sc.geefSdgVoorMvo(selectedMvo.getSdg().getId(),selectedMvo.getId());
 		
-		System.out.println(sdg.getImage());
+		sdg_id.setText(sdg.getId());
+		
+		sdg_naam.setText(sdg.getName());
+		
+		Datasource datasource = dc.geefDatasourceMetId(selectedMvo.getDatasource().getId());
+		
+		datasource_id.setText(selectedMvo.getDatasource().getId());
+		datasource_name.setText(datasource.getName());
 		
 		Image i = new Image("/images/"+sdg.getImage());
 		

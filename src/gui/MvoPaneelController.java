@@ -58,7 +58,7 @@ public class MvoPaneelController extends HBox{
 	private CategorieController cc;
 	private MvoController mc;
 	private SdgController sc;
-	private String selectedCat;
+	private String selectedCategory;
 	private Mvo selectedMvo;
 	private List<Mvo> mvosVanCategorie;
 	private Melding melding;
@@ -150,19 +150,14 @@ public class MvoPaneelController extends HBox{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				
-				selectedCat = MvoCatListView.getSelectionModel().getSelectedItem();
+				selectedCategory = MvoCatListView.getSelectionModel().getSelectedItem();
 				
-				System.out.println(selectedCat);
-				
-				//Currentcat gebruiken om MVO namen op te halen voor bepaalde categorie en deze in de andere ListView te krijgen
-				if(selectedCat != "*") {
-					mvosVanCategorie = mc.geefMvosVanCategorie(selectedCat);
+				System.out.println(selectedCategory);
+
+				if(selectedCategory != "*") {
+					mvosVanCategorie = mc.geefMvosVanCategorie(selectedCategory);
 				}else {
 					mvosVanCategorie = mc.geefMvos();
-				}
-				
-				for(int i=0;i<mvosVanCategorie.size();i++) {
-					System.out.println(mvosVanCategorie.get(i).getName());
 				}
 				
 				MvoListView.getItems().clear();
@@ -181,15 +176,10 @@ public class MvoPaneelController extends HBox{
 				
 				String Mvo = MvoListView.getSelectionModel().getSelectedItem();
 				
-				System.out.println(Mvo);
-				
 				if(Mvo != null) {
 					selectedMvo = mc.geefMvoMetNaam(Mvo);
 				}	
-				
-				System.out.println(selectedMvo.getId());
-				
-				
+								
 			}
 			
 		});

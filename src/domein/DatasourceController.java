@@ -28,4 +28,8 @@ public class DatasourceController
 	{
 		this.datasourceRepo = repo;
 	}
+	
+	public Datasource geefDatasourceMetId(String id) {
+		return datasourceRepo.geefDatasourceMetId(id);
+	}
 }

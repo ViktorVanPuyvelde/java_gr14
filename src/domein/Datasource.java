@@ -15,7 +15,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="datasource")
 @NamedQueries(
-{ @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d") })
+{ @NamedQuery(name = "Datasource.alleDatasources", query = "select d from Datasource d"),
+	@NamedQuery(name = "Datasource.geefDatasourceMetId", query = "SELECT d from Datasource d where d.id = :datasource_id")})
 public class Datasource implements Serializable, CRUD {
 
 	private static final long serialVersionUID = 1L;
