@@ -48,7 +48,10 @@
       </AnchorPane>
       <HBox layoutY="492.0" prefHeight="83.0" prefWidth="468.0">
          <children>
-            <ImageView fx:id="sdgImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="sdgImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" />
+               </HBox.margin></ImageView>
          </children>
       </HBox>
    </children>

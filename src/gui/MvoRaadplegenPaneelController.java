@@ -51,6 +51,9 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 	
 	private void initialize() {
 		
+		System.out.println(selectedMvo.getId());
+		System.out.println(selectedMvo.getSdg().getId());
+		
 		goalValue.setText(selectedMvo.getGoalValue()+"");
 		
 		mvoNaam.setText(selectedMvo.getName());
@@ -59,7 +62,7 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 		
 		System.out.println(sdg.getImage());
 		
-		Image i = new Image("/images/"+sdg.getImage()+".png");
+		Image i = new Image("/images/"+sdg.getImage());
 		
 		sdgImage.setImage(i);
 		

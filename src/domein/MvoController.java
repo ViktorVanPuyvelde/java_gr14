@@ -45,6 +45,19 @@ public class MvoController
 		MvoDaoJpa.commitTransaction();
 	}
 	
+	public void verwijderMvoMetId(String id) {
+    	MvoDaoJpa.startTransaction();
+		MvoRepo.verwijderMvoMetId(id);
+        MvoDaoJpa.commitTransaction();
+	}
+	
+	public void updateMvoMetId(String id,String naam,Mvo superMvoId,Sdg sdgId,int doel,Datasource datasourceId,String type) {
+    	MvoDaoJpa.startTransaction();
+		MvoRepo.updateMvoMetId(id, naam, superMvoId, sdgId, doel, datasourceId, type);
+        MvoDaoJpa.commitTransaction();
+	}
+	
+	
 	public void close()
 	{
 		MvoDaoJpa.closePersistency();
