@@ -130,8 +130,6 @@ public class WijzigenCategorieController extends GridPane
 		Gson gson = new Gson();
 		List<String> rollen = gson.fromJson(this.c.getRoles(), List.class);
 		selectDefault(rollen, cat_Rol_List);
-//		selectDefaultSdgs();
-//		selectDefaultRoles();
 	}
 
 	private ListView<String> selectDefault(List<String> list, ListView<String> listView)
