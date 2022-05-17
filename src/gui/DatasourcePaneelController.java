@@ -77,25 +77,6 @@ public class DatasourcePaneelController extends HBox{
 	
 	@FXML
 	public void create_OnAction(ActionEvent event) {
-		//collectChanges();
-		//verify();
-		//update();
-//		NieuweDatasourcePaneelController ns = new NieuweDatasourcePaneelController();
-//		Scene scene = new Scene (ns);
-//		Stage stage = (Stage) this.getScene().getWindow();
-//		stage.setScene(scene);
-//		stage.show();
-		
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcesPaneel.fxml"));
-//			loader.setController(ns);
-//			loader.setRoot(this);
-//			loader.load();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		if (rechterSchermAanwezig) {
             verwijderRechterScherm();            
         }

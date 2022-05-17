@@ -47,6 +47,9 @@ public class Mvo implements Serializable
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "super_mvo_id")
 	private Mvo superMvo;
+	@Transient
+	private Aggregatie methode;
+	
 
 	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
@@ -57,6 +60,19 @@ public class Mvo implements Serializable
 		setDatasource(datasource);
 		setSdg(sdg);
 		setSuperMvo(superMvo);
+		
+	}
+	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo, Aggregatie methode)
+	{
+		setId(UUID.randomUUID().toString());
+		setName(name);
+		setInfo(info);
+		setGoalValue(goalValue);
+		setDatasource(datasource);
+		setSdg(sdg);
+		setSuperMvo(superMvo);
+		this.methode = methode;
+		
 	}
 
 	protected Mvo()
@@ -150,5 +166,11 @@ public class Mvo implements Serializable
 	public String toString()
 	{
 		return String.format("%s", name);
+	}
+	public Aggregatie getMethode() {
+		return methode;
+	}
+	public void setMethode(Aggregatie methode) {
+		this.methode = methode;
 	}
 }

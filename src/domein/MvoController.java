@@ -3,6 +3,7 @@ package domein;
 import java.util.List;
 
 import exceptions.InformationRequiredException;
+import javafx.collections.ObservableList;
 import repository.MvoDao;
 import repository.MvoDaoJpa;
 
@@ -30,7 +31,6 @@ public class MvoController
 	{
 		return MvoRepo.geefMvoMetNaam(naam);
 	}
-
 	public void setMvoDao(MvoDao MvoRepo)
 	{
 		this.MvoRepo = MvoRepo;
