@@ -114,18 +114,4 @@ public class DatasourcePaneelController extends HBox{
 //		update();
 	}
 	
-	private void update() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void verify() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void collectChanges() {
-		// TODO Auto-generated method stub
-		
-	}
 }
