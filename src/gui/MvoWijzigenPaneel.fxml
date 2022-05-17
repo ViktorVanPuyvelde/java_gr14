@@ -36,10 +36,10 @@
       <TextField fx:id="txtMvoName" prefHeight="25.0" prefWidth="375.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="txtType" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <TextField fx:id="txtDoel" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" onAction="#btnMaakMvo" prefHeight="25.0" prefWidth="164.0" text="MVO wijzigen" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#btnMaakMvo" prefHeight="25.0" prefWidth="164.0" text="MVO doelstelling wijzigen" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
       <ListView fx:id="lvSdg" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <ListView fx:id="lvDatasource" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label alignment="CENTER" prefHeight="74.0" prefWidth="500.0" text="MVO wijzigen" textAlignment="CENTER" textFill="#b2d234" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label alignment="CENTER" prefHeight="74.0" prefWidth="500.0" text="MVO doelstelling wijzigen" textAlignment="CENTER" textFill="#b2d234" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
