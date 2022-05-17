@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
 import java.io.File;  
 import java.io.FileInputStream;  
 import java.util.Iterator;  
-import org.apache.poi.ss.usermodel.Cell;  
-import org.apache.poi.ss.usermodel.Row;  
-import org.apache.poi.xssf.usermodel.XSSFSheet;  
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;  
+
 
 import domein.Aggregatie;
 import domein.Mvo;
@@ -105,7 +108,8 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Excel File");
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel file", "xls", "xlsx"));
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(extFilter);
 
 		Stage newWindow = new Stage();
 		newWindow.setTitle("Kies een Excel bestand");
@@ -146,45 +150,47 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void collectChanges() {
 		
-		Aggregatie methode = mvoList.get(0).getMethode();
-		verwerkDatasource(methode);
+		//Aggregatie methode = mvoList.get(0).getMethode();
+		//verwerkDatasource(methode);
 		dataOpnemen();
 		
 	}
 
 	private void dataOpnemen() {
-		try {  
-		 
-			FileInputStream fis = new FileInputStream(selectedFile);   //obtaining bytes from the file  
-			//creating Workbook instance that refers to .xlsx file  
-			XSSFWorkbook wb = new XSSFWorkbook(fis);   
-			XSSFSheet sheet = wb.getSheetAt(0);     //creating a Sheet object to retrieve object  
-			Iterator<Row> itr = sheet.iterator();    //iterating over excel file  
-			while (itr.hasNext())                 
-			{  
-			Row row = itr.next();  
-			Iterator<Cell> cellIterator = row.cellIterator();   //iterating over each column  
-			while (cellIterator.hasNext())   
-			{  
-			Cell cell = cellIterator.next();  
-			switch (cell.getCellType())               
-			{  
-			case Cell.CELL_TYPE_STRING:    //field that represents string cell type  
-			System.out.print(cell.getStringCellValue() + "\t\t\t");  
-			break;  
-			case Cell.CELL_TYPE_NUMERIC:    //field that represents number cell type  
-			System.out.print(cell.getNumericCellValue() + "\t\t\t");  
-			break;  
-			default:  
-			}  
-			}  
-			System.out.println("");  
-			}  
-			}   catch (FileNotFoundException e) {
+		try {
+        
+ 
+            XSSFWorkbook workbook = new XSSFWorkbook(selectedFile);
+ 
+            XSSFSheet sheet = workbook.getSheetAt(0);
+ 
+            //Iterate through each rows one by one
+            Iterator<Row> rowIterator = sheet.iterator();
+            rowIterator.next();
+            while (rowIterator.hasNext()) 
+            {
+                Row row = rowIterator.next();
+                //For each row, iterate through all the columns
+                Iterator<Cell> cellIterator = row.cellIterator();
+                 
+                while (cellIterator.hasNext()) 
+                {
+                    Cell cell = cellIterator.next();
+                    System.out.println(cell);
+                   
+                }
+                System.out.println("");
+            }
+           
+            workbook.close();
+        }  catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			
 			e.printStackTrace();
 		}
 		   

@@ -21,9 +21,9 @@ open module java_gr14
 	requires java.desktop;
 	requires auth0;
 	requires java.dotenv;
-	requires poi;
-	requires poi.ooxml;
-
+	requires org.apache.poi.ooxml;
+	requires org.apache.poi.poi;
+	requires org.apache.poi.ooxml.schemas;
 	
 
 }
