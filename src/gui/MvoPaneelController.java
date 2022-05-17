@@ -61,6 +61,7 @@ public class MvoPaneelController extends HBox{
 	private String selectedCat;
 	private Mvo selectedMvo;
 	private List<Mvo> mvosVanCategorie;
+	private Melding melding;
 	
 	/*
 	 * 
@@ -81,7 +82,8 @@ public class MvoPaneelController extends HBox{
     @FXML
     void deleteMVO_OnAction(ActionEvent event) {
     	System.out.println("Verwijder: "+selectedMvo.getName()+" // " + selectedMvo.getId());
-    	mc.verwijderMvoMetId(selectedMvo.getId());
+    	mc.delete(selectedMvo);
+    	melding.toonBevestiging("MVO doelstelling succesvol verwijderd");
     }
 
     @FXML
@@ -117,6 +119,7 @@ public class MvoPaneelController extends HBox{
 		cc = new CategorieController();
 		mc = new MvoController();
 		sc = new SdgController();
+		melding = new Melding();
 		buildGui();
 		initialize();
 	}
@@ -141,8 +144,6 @@ public class MvoPaneelController extends HBox{
 		MvoCatListView.getItems().add("*");
 		MvoCatListView.getItems().addAll(cc.geefAlleEchteCategorienNaam());
 		
-		MvoCatListView.getSelectionModel().select("*");
-		
 		MvoCatListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			
 
@@ -154,10 +155,14 @@ public class MvoPaneelController extends HBox{
 				System.out.println(selectedCat);
 				
 				//Currentcat gebruiken om MVO namen op te halen voor bepaalde categorie en deze in de andere ListView te krijgen
-				mvosVanCategorie = mc.geefMvosVanCategorie(selectedCat);
+				if(selectedCat != "*") {
+					mvosVanCategorie = mc.geefMvosVanCategorie(selectedCat);
+				}else {
+					mvosVanCategorie = mc.geefMvos();
+				}
 				
 				for(int i=0;i<mvosVanCategorie.size();i++) {
-					System.out.println(mvosVanCategorie.get(i));
+					System.out.println(mvosVanCategorie.get(i).getName());
 				}
 				
 				MvoListView.getItems().clear();
@@ -178,7 +183,9 @@ public class MvoPaneelController extends HBox{
 				
 				System.out.println(Mvo);
 				
-				selectedMvo = mc.geefMvoMetNaam(Mvo);	
+				if(Mvo != null) {
+					selectedMvo = mc.geefMvoMetNaam(Mvo);
+				}	
 				
 				System.out.println(selectedMvo.getId());
 				

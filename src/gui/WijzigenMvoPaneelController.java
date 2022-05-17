@@ -73,7 +73,7 @@ public class WijzigenMvoPaneelController extends GridPane{
 	// lokale attributen
 	private String name;
 	private Sdg sdg;
-	private String type;
+	private List<String> type;
 	private int doel;
 	private Datasource datasource;
 	private Boolean foutMeldingDoel = false;
@@ -108,7 +108,7 @@ public class WijzigenMvoPaneelController extends GridPane{
 	{
 		try
 		{
-			//type = FXCollections.observableArrayList(new ArrayList<>());
+			type = FXCollections.observableArrayList(new ArrayList<>());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
 			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
@@ -140,18 +140,10 @@ public class WijzigenMvoPaneelController extends GridPane{
 		
 		lvDatasource.getSelectionModel().select(selectedMvo.getDatasource().getName());
 		
-		for(int i=0;i<sdgItemList.size();i++) {
-			if(lvSdg.getItems().get(i)==selectedMvo.getSdg().getName()) {
-				lvSdg.getSelectionModel().select(i);
-			}
-		}
+		lvSdg.getSelectionModel().select(selectedMvo.getSdg().getName());
 		
 		if(selectedMvo.getSuperMvo() != null) {
-			for(int i=0;i<superMvoItemList.size();i++) {
-				if(lvSuperMvo.getItems().get(i)==selectedMvo.getSuperMvo().getName()) {
-					lvSuperMvo.getSelectionModel().select(i);
-				}
-			}
+			lvSuperMvo.getSelectionModel().select(selectedMvo.getSuperMvo().getName());
 		}
 		
 	}
@@ -164,8 +156,7 @@ public class WijzigenMvoPaneelController extends GridPane{
 		int indexSdg = sdgNamen.indexOf(lvSdg.getSelectionModel().getSelectedItem());
 		this.sdg = this.sdgItemList.get(indexSdg);
 		
-		//this.type.add(txtType.getText());
-		this.type = txtType.getText();
+		this.type.add(txtType.getText());
 		
 		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
 		{
@@ -219,10 +210,13 @@ public class WijzigenMvoPaneelController extends GridPane{
 
 	private void update()
 	{
-		//System.out.println(superMvo.getName() + "// "+ superMvo.getId());
-		System.out.println(sdg.getName()+ "// "+ sdg.getId());
-		System.out.println(datasource.getName()+ "// "+ datasource.getId());
-		this.mc.updateMvoMetId(selectedMvo.getId(), name, superMvo, sdg, doel, datasource, type);;
+		selectedMvo.setName(name);
+		selectedMvo.setSuperMvo(superMvo);
+		selectedMvo.setSdg(sdg);
+		selectedMvo.setGoalValue(doel);
+		selectedMvo.setDatasource(datasource);
+		selectedMvo.setInfo(type);
+		mc.update(selectedMvo);
 		melding.toonBevestiging("De MVO is bijgewerkt.");
 	}
 	

@@ -43,20 +43,19 @@ public class MvoController
 		MvoDaoJpa.startTransaction();
 		MvoRepo.insert(new Mvo(name, sdg, info, goalValue, datasource, superMvo));
 		MvoDaoJpa.commitTransaction();
-	}
+	}	
 	
-	public void verwijderMvoMetId(String id) {
+	public void update(Mvo mvo) {
     	MvoDaoJpa.startTransaction();
-		MvoRepo.verwijderMvoMetId(id);
+		MvoRepo.update(mvo);
         MvoDaoJpa.commitTransaction();
 	}
 	
-	public void updateMvoMetId(String id,String naam,Mvo superMvoId,Sdg sdgId,int doel,Datasource datasourceId,String type) {
+	public void delete(Mvo mvo) {
     	MvoDaoJpa.startTransaction();
-		MvoRepo.updateMvoMetId(id, naam, superMvoId, sdgId, doel, datasourceId, type);
+		MvoRepo.delete(mvo);
         MvoDaoJpa.commitTransaction();
 	}
-	
 	
 	public void close()
 	{
