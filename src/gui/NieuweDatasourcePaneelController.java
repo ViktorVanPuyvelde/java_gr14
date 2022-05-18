@@ -67,7 +67,7 @@ public class NieuweDatasourcePaneelController extends GridPane
     private ObservableList<Mvo> mvoList;
     
     private File selectedFile;
-    HashMap<Double, List<List<Object>>> allData = new HashMap<>();
+    HashMap<Double, List<List<Object>>> allDataFromFile = new HashMap<>();
     
     
     public NieuweDatasourcePaneelController() {
@@ -185,23 +185,25 @@ public class NieuweDatasourcePaneelController extends GridPane
                 Double dataCel = cellIterator.next().getNumericCellValue();
                 String dateCel = cellIterator.next().getStringCellValue();
                 Double quarterCel = cellIterator.next().getNumericCellValue();
-                data.add(dataCel);data.add(dateCel);data.add(quarterCel);
+                data.add(dataCel);
+                data.add(dateCel);
+                data.add(quarterCel);
                 //------
 
                 //add datalist to hashmap
                 //-------------------------
-                if(allData.get(quarterCel) != null) {
+                if(allDataFromFile.get(quarterCel) != null) {
 
-                	allData.get(quarterCel).add(data);
+                	allDataFromFile.get(quarterCel).add(data);
                 }else {
-                	//first dataList
+                	//first dataList with column names
                 	List<Object> firstDataList = new ArrayList<>(data);
                 	
                 	//new List with first dataList for new key
                 	List<List<Object>> filledStarterList = new ArrayList<>();
                 	filledStarterList.add(firstDataList);
 
-                	allData.put(quarterCel,filledStarterList);
+                	allDataFromFile.put(quarterCel,filledStarterList);
                 }
                //-----------------------------              
             }           
@@ -216,21 +218,17 @@ public class NieuweDatasourcePaneelController extends GridPane
 			
 			e.printStackTrace();
 		}
-		  
-		System.out.println(verwerkDataAlsGem(allData));
-		System.out.println(verwerkDataAlsSom(allData));
 		
 	}
 
 	private void verwerkDatasource(Aggregatie methode) {
-		// data in dictionary op quarter
 		
 		switch(methode) {
 		  case SOM:
-			 verwerkDataAlsSom(allData);
+			 verwerkDataAlsSom(allDataFromFile);
 		    break;
 		  case GEMIDDELDE:
-			  verwerkDataAlsGem(allData);
+			  verwerkDataAlsGem(allDataFromFile);
 		    break;
 		  default:
 			  
@@ -242,26 +240,29 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private  TreeMap<Double, List<Object>> verwerkDataAlsGem(HashMap<Double, List<List<Object>>> dataMap) {
 		//datalijst = [waarde, datum, quarter]
 		
-		
 		//begin Treemap voor uiteindelijke verwerkte data lijsten
 				TreeMap<Double,List<Object>> verwerkteData = new TreeMap<>();
 		
-				// per key (quarter) de data lijsten ophalen
+		// per key (quarter) de data lijsten ophalen
 				dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
-					//elke datalijst waarde opsslaan in nieuwe lijst (in treemap)
+					
+		//elke datalijst waarde opslaan in nieuwe lijst (in treemap)
 					Double key = dataLijstenPerKey.getKey();
 					List<Double> waardeLijst = new ArrayList<>();
 					dataLijstenPerKey.getValue().stream().forEach(datalijst -> {
 						
 						waardeLijst.add((double) datalijst.get(0));
 					});
-				//bereken het gemmidelde van alle waarden per quarter
-				OptionalDouble gem = waardeLijst.stream()
-			            .mapToDouble(a -> a)
-			            .average();
-				//nieuwe entry maken voor treemap met gemmidelde
+					
+		//bereken het gemmidelde van alle waarden per quarter
+				OptionalDouble gem = waardeLijst.stream().mapToDouble(a -> a).average();
+				
+		//nieuwe entry maken voor treemap met gemmidelde
 				List<Object> newDataList = new ArrayList<>();
-				newDataList.add(gem);newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));newDataList.add(key);
+				newDataList.add(gem);
+				newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));
+				newDataList.add(key);
+				
 				verwerkteData.put(key,newDataList);
 				});
 				
@@ -277,17 +278,23 @@ public class NieuweDatasourcePaneelController extends GridPane
 		
 		// per key (quarter) de data lijsten ophalen
 		dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
-			//elke datalijst waarde optellen (in treemap)
-			dataLijstenPerKey.getValue().stream().forEach(datalijst -> {
+			
+		//elke datalijst waarde optellen bij vorig totaal (in treemap)
+			dataLijstenPerKey.getValue().stream().forEach(datalijst -> 
+			{
 				Double key = dataLijstenPerKey.getKey();
 				List<Object> treeValueLijst = verwerkteData.get(key);
+				
 				// er zit al data voor deze quarter in de treemap
 				if(treeValueLijst != null) {
-					//waarde optellen
-					treeValueLijst.set(0,(double)treeValueLijst.get(0) + (double) datalijst.get(0));
+					
+					//waarde optellen bij treemap waarde
+					treeValueLijst.set(0,(double)treeValueLijst.get(0) + (double) datalijst.get(0));								
 					verwerkteData.put(key, treeValueLijst);
-				}else {
-				// er zit nog geen data voor deze quarter in de treemap
+				}
+				// er zit nog geen data voor deze quarter in de treemap -> nieuwe entr
+				else {
+					
 					verwerkteData.put(key, datalijst);
 				}
 			});
