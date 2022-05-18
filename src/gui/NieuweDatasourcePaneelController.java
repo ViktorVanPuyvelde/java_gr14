@@ -1,9 +1,27 @@
 package gui;
 
-import java.io.File;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.TreeMap;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+
+import java.io.File;  
+import java.io.FileInputStream;  
+import java.util.Iterator;  
+
 
 import domein.Aggregatie;
 import domein.Datasource;
@@ -53,7 +71,12 @@ public class NieuweDatasourcePaneelController extends GridPane
     private DatasourceController controller;
     private Datasource datasource;
     
-    public NieuweDatasourcePaneelController(Datasource d, DatasourceController controller) {
+    private File selectedFile;
+    HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
+    TreeMap<Double, List<Object>> verwerkteData;
+    
+    
+    public NieuweDatasourcePaneelController(Datasource d , DatasourceController controller) {
 		this.mc = new MvoController();
 		this.controller = controller;
 		this.datasource = d;
@@ -95,23 +118,29 @@ public class NieuweDatasourcePaneelController extends GridPane
 		}
 
 		mvoList.forEach(m -> mvosList.getItems().add(m.getName()));
+		
 	}
 
 	@FXML
 	public void upload_OnAction(ActionEvent actionEvent)
 	{
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Csv File");
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Csv Files", "*.csv"));
+		fileChooser.setTitle("Open Excel File");
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Excel files (*.xlsx)", "*.xlsx");
+        fileChooser.getExtensionFilters().add(extFilter);
 
 		Stage newWindow = new Stage();
-		newWindow.setTitle("Kies een csv bestand");
-		File selectedFile = fileChooser.showOpenDialog(newWindow);
+		newWindow.setTitle("Kies een Excel bestand");
+		selectedFile = fileChooser.showOpenDialog(newWindow);
 
 		if (selectedFile != null)
 		{
 			fileLbl.setText(String.format("%s geselecteerd", selectedFile.getName()));
 			fileLbl.setTextFill(Color.GREEN);
+			fileLbl.setStyle("-fx-font-weight: bold");
+		}else {
+			fileLbl.setText(String.format("geselecteerd bestand is fout"));
+			fileLbl.setTextFill(Color.RED);
 			fileLbl.setStyle("-fx-font-weight: bold");
 		}
 	}
@@ -126,11 +155,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void update() {
 		
-	
+		verwerkteData.forEach((key,val) -> System.out.println(val));
 	}
 
 	private void verify() {
-		
 		
 		toevoegenLbl.setText("Datasource toegevoegd!");
 		if (datasource == null) {
@@ -147,36 +175,152 @@ public class NieuweDatasourcePaneelController extends GridPane
 	}
 
 	private void collectChanges() {
+		dataOpnemen();
+		//Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		Aggregatie methode = Aggregatie.GEMIDDELDE;
+		String naam = naam_textfield.getText();
+		verwerkteData = verwerkDatasource(methode);
 		
-		Aggregatie methode = mvoList.get(0).getMethode();
-		verwerkDatasource(methode);
 		
 	}
 
-	private void verwerkDatasource(Aggregatie methode) {
-		// data in dictionary op quarter
-		
-		switch(methode) {
-		  case SOM:
-			 verwerkDataAlsSom();
-		    break;
-		  case GEMIDDELDE:
-			  verwerkDataAlsGem();
-		    break;
-		  default:
-			  
-		    
+	private void dataOpnemen() {
+		try {
+			
+ 
+            XSSFWorkbook workbook = new XSSFWorkbook(selectedFile);
+ 
+            XSSFSheet sheet = workbook.getSheetAt(0);
+ 
+            Iterator<Row> rowIterator = sheet.iterator();
+            rowIterator.next();
+            //loop each row
+            while (rowIterator.hasNext()) 
+            {
+            	List<Object> data = new ArrayList<>();
+  
+                Row row = rowIterator.next();
+                Iterator<Cell> cellIterator = row.cellIterator();
+                
+                //fill datalist from excel cells
+                //-----
+                Double dataCel = cellIterator.next().getNumericCellValue();
+                String dateCel = cellIterator.next().getStringCellValue();
+                Double quarterCel = cellIterator.next().getNumericCellValue();
+                data.add(dataCel);
+                data.add(dateCel);
+                data.add(quarterCel);
+                //------
+
+                //add datalist to hashmap
+                //-------------------------
+                if(allDataFromFileMap.get(quarterCel) != null) {
+
+                	allDataFromFileMap.get(quarterCel).add(data);
+                }else {
+                	//first dataList with column names
+                	List<Object> firstDataList = new ArrayList<>(data);
+                	
+                	//new List with first dataList for new key
+                	List<List<Object>> filledStarterList = new ArrayList<>();
+                	filledStarterList.add(firstDataList);
+
+                	allDataFromFileMap.put(quarterCel,filledStarterList);
+                }
+               //-----------------------------              
+            }           
+            workbook.close();
+        }  catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} catch (InvalidFormatException e) {
+			
+			e.printStackTrace();
 		}
 		
 	}
 
-	private void verwerkDataAlsGem() {
+	private  TreeMap<Double, List<Object>> verwerkDatasource(Aggregatie methode) {
 		
+		switch(methode) {
+		  case SOM:
+			 return verwerkDataAlsSom(allDataFromFileMap);
+		  
+		  case GEMIDDELDE:
+			  return verwerkDataAlsGem(allDataFromFileMap);
+		   	    
+		}
+		return null;
 		
 	}
 
-	private void verwerkDataAlsSom() {
+	private  TreeMap<Double, List<Object>> verwerkDataAlsGem(HashMap<Double, List<List<Object>>> dataMap) {
+		//datalijst = [waarde, datum, quarter]
 		
+		//begin Treemap voor uiteindelijke verwerkte data lijsten
+				TreeMap<Double,List<Object>> verwerkteDataTree = new TreeMap<>();
 		
+		// per key (quarter) de data lijsten ophalen
+				dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
+					
+		//elke datalijst waarde opslaan in nieuwe lijst (in treemap)
+					Double key = dataLijstenPerKey.getKey();
+					List<Double> waardeLijst = new ArrayList<>();
+					dataLijstenPerKey.getValue().stream().forEach(datalijst -> {
+						
+						waardeLijst.add((double) datalijst.get(0));
+					});
+					
+		//bereken het gemmidelde van alle waarden per quarter
+				OptionalDouble gem = waardeLijst.stream().mapToDouble(a -> a).average();
+				
+		//nieuwe entry maken voor treemap met gemmidelde
+				List<Object> newDataList = new ArrayList<>();
+				newDataList.add(gem);
+				newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));
+				newDataList.add(key);
+				
+				verwerkteDataTree.put(key,newDataList);
+				});
+				
+				
+		return verwerkteDataTree;
+	}
+
+	private TreeMap<Double, List<Object>> verwerkDataAlsSom(HashMap<Double, List<List<Object>>> dataMap) {
+		//datalijst = [waarde, datum, quarter]
+		
+		//begin Treemap voor uiteindelijke verwerkte data lijsten
+		TreeMap<Double,List<Object>> verwerkteDataTree = new TreeMap<>();
+		
+		// per key (quarter) de data lijsten ophalen
+		dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
+			
+		//elke datalijst waarde optellen bij vorig totaal (in treemap)
+			dataLijstenPerKey.getValue().stream().forEach(datalijst -> 
+			{
+				Double key = dataLijstenPerKey.getKey();
+				List<Object> treeValueLijst = verwerkteData.get(key);
+				
+				// er zit al data voor deze quarter in de treemap
+				if(treeValueLijst != null) {
+					
+					//waarde optellen bij treemap waarde
+					treeValueLijst.set(0,(double)treeValueLijst.get(0) + (double) datalijst.get(0));								
+					verwerkteDataTree.put(key, treeValueLijst);
+				}
+				// er zit nog geen data voor deze quarter in de treemap -> nieuwe entr
+				else {
+					
+					verwerkteDataTree.put(key, datalijst);
+				}
+			});
+			
+		});
+		
+		return verwerkteDataTree;
 	}
 }

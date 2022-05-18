@@ -45,7 +45,7 @@
   -fx-background-insets: 0;
   -fx-padding: 0px;
   -fx-font-weight: bold;
-  -fx-background-color: #a3c031;
+  -fx-background-color: white;
   -fx-background-radius: 10px;
   -fx-border-color: #41587a;
   -fx-border-width: 3px;
@@ -55,23 +55,19 @@
 .list-view .list-cell:hover {
   -fx-background-radius: 10px;
   -fx-background-color: #37465d;
+  -fx-text-fill: white;
 }
 
 .list-view .list-cell:selected {
   -fx-margin: 0px;
   -fx-background-radius: 10px;
   -fx-background-color: #37465d;
-  -fx-text-fill: #adc15b;
+  -fx-text-fill: white;
 }
 
 .list-view .list-cell {
-  -fx-background-color: #a3c031;
+  -fx-background-color: white;
   -fx-background-radius: 10px;
-  -fx-text-fill: white;
-}
-
-.list-view .label {
-  -fx-text-fill: white;
 }
 
 .list-view .list-cell:empty {

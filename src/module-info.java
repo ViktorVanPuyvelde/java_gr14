@@ -16,13 +16,17 @@ open module java_gr14
 
 	// Unit tests
 	requires org.junit.jupiter.api;
-	//requires org.junit.jupiter.params;
+	requires org.junit.jupiter.params;
 
 	// Other
 	requires java.desktop;
 	requires auth0;
 	requires java.dotenv;
-	//requires org.mockito.junit.jupiter;
-	//requires org.mockito;
+	requires org.mockito.junit.jupiter;
+	requires org.mockito;
+	requires org.apache.poi.ooxml;
+	requires org.apache.poi.poi;
+	requires org.apache.poi.ooxml.schemas;
+	
 
 }
