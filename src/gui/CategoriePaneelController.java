@@ -132,7 +132,6 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	public void propertyChange(PropertyChangeEvent evt) {
 		List<Categorie> newValue = (List<Categorie>) evt.getNewValue();
 		catItemList = FXCollections.observableArrayList(newValue);
-		catItemList.forEach(c -> System.out.println(c.getName()));
 		categorie_List.getItems().clear();
 		initialize();
 	}
