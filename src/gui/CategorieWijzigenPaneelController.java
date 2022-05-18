@@ -31,7 +31,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class WijzigenCategorieController extends GridPane
+public class CategorieWijzigenPaneelController extends GridPane
 {
 	private Categorie c;
 	private CategorieController categorieController;
@@ -61,7 +61,7 @@ public class WijzigenCategorieController extends GridPane
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
 
-	public WijzigenCategorieController(Categorie c, CategorieController catController)
+	public CategorieWijzigenPaneelController(Categorie c, CategorieController catController)
 	{
 		this.c = c;
 		this.categorieController = catController;

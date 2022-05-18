@@ -148,7 +148,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 
 		if (c != null)
 		{
-			WijzigenCategorieController controller = new WijzigenCategorieController(c, this.catController);
+			CategorieWijzigenPaneelController controller = new CategorieWijzigenPaneelController(c, this.catController);
 			this.getChildren().add(controller);
 			rechterSchermAanwezig = true;
 		} else
