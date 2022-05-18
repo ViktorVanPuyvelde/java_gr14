@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.OptionalDouble;
+import java.util.TreeMap;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -183,7 +185,7 @@ public class NieuweDatasourcePaneelController extends GridPane
                 Double dataCel = cellIterator.next().getNumericCellValue();
                 String dateCel = cellIterator.next().getStringCellValue();
                 Double quarterCel = cellIterator.next().getNumericCellValue();
-                data.add(dateCel);data.add(dataCel);data.add(quarterCel);
+                data.add(dataCel);data.add(dateCel);data.add(quarterCel);
                 //------
 
                 //add datalist to hashmap
@@ -214,7 +216,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 			
 			e.printStackTrace();
 		}
-		   
+		  
+		System.out.println(verwerkDataAlsGem(allData));
+		System.out.println(verwerkDataAlsSom(allData));
 		
 	}
 
@@ -223,10 +227,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 		
 		switch(methode) {
 		  case SOM:
-			 verwerkDataAlsSom();
+			 verwerkDataAlsSom(allData);
 		    break;
 		  case GEMIDDELDE:
-			  verwerkDataAlsGem();
+			  verwerkDataAlsGem(allData);
 		    break;
 		  default:
 			  
@@ -235,14 +239,61 @@ public class NieuweDatasourcePaneelController extends GridPane
 		
 	}
 
-	private void verwerkDataAlsGem() {
+	private  TreeMap<Double, List<Object>> verwerkDataAlsGem(HashMap<Double, List<List<Object>>> dataMap) {
+		//datalijst = [waarde, datum, quarter]
 		
 		
+		//begin Treemap voor uiteindelijke verwerkte data lijsten
+				TreeMap<Double,List<Object>> verwerkteData = new TreeMap<>();
+		
+				// per key (quarter) de data lijsten ophalen
+				dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
+					//elke datalijst waarde opsslaan in nieuwe lijst (in treemap)
+					Double key = dataLijstenPerKey.getKey();
+					List<Double> waardeLijst = new ArrayList<>();
+					dataLijstenPerKey.getValue().stream().forEach(datalijst -> {
+						
+						waardeLijst.add((double) datalijst.get(0));
+					});
+				//bereken het gemmidelde van alle waarden per quarter
+				OptionalDouble gem = waardeLijst.stream()
+			            .mapToDouble(a -> a)
+			            .average();
+				//nieuwe entry maken voor treemap met gemmidelde
+				List<Object> newDataList = new ArrayList<>();
+				newDataList.add(gem);newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));newDataList.add(key);
+				verwerkteData.put(key,newDataList);
+				});
+				
+				
+		return verwerkteData;
 	}
 
-	private void verwerkDataAlsSom() {
+	private TreeMap<Double, List<Object>> verwerkDataAlsSom(HashMap<Double, List<List<Object>>> dataMap) {
+		//datalijst = [waarde, datum, quarter]
 		
+		//begin Treemap voor uiteindelijke verwerkte data lijsten
+		TreeMap<Double,List<Object>> verwerkteData = new TreeMap<>();
 		
-
+		// per key (quarter) de data lijsten ophalen
+		dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
+			//elke datalijst waarde optellen (in treemap)
+			dataLijstenPerKey.getValue().stream().forEach(datalijst -> {
+				Double key = dataLijstenPerKey.getKey();
+				List<Object> treeValueLijst = verwerkteData.get(key);
+				// er zit al data voor deze quarter in de treemap
+				if(treeValueLijst != null) {
+					//waarde optellen
+					treeValueLijst.set(0,(double)treeValueLijst.get(0) + (double) datalijst.get(0));
+					verwerkteData.put(key, treeValueLijst);
+				}else {
+				// er zit nog geen data voor deze quarter in de treemap
+					verwerkteData.put(key, datalijst);
+				}
+			});
+			
+		});
+		
+		return verwerkteData;
 	}
 }
