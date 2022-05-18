@@ -59,9 +59,9 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategorieAanmakenPaneelController()
+	public CategorieAanmakenPaneelController(CategorieController c)
 	{
-		this.cc = new CategorieController();
+		this.cc = c;
 		this.sc = new SdgController();
 		buildGui();
 		setSdgItemList();

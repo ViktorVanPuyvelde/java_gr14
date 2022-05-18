@@ -1,5 +1,9 @@
 package domein;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,9 +16,11 @@ public class CategorieController
 {
 	private CategorieDao categorieRepo;
 	private List<Categorie> cats;
-	
+    private PropertyChangeSupport subject;
+
 	public CategorieController()
 	{
+		subject = new PropertyChangeSupport(this);
 		setCategorieRepo(new CategorieDaoJpa());
 		cats = categorieRepo.findAll();
 		//populateDB();
@@ -40,11 +46,13 @@ public class CategorieController
 	public void voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
+		List<Categorie> oldCats = new ArrayList<>(cats);
 		Categorie newCategorie = createCategorie(null, name, iconName, roles, sdgs);
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
+        subject.firePropertyChange("cats", oldCats, cats);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
@@ -74,6 +82,17 @@ public class CategorieController
 		c.setSdgs(sdgs);
 		return sdgs;
 	}
+	
+	//nieuwe luisteraar inschrijven
+    public void addPropertyChangeListener(PropertyChangeListener pcl) { 
+        subject.addPropertyChangeListener(pcl);
+        pcl.propertyChange(
+        		new PropertyChangeEvent(pcl, "cats", cats, cats));
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        subject.removePropertyChangeListener(pcl);
+    }
 
 //	private void populateDB() {
 //		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));

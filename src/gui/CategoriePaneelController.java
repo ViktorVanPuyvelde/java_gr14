@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-public class CategoriePaneelController extends HBox{
+public class CategoriePaneelController extends HBox implements PropertyChangeListener{
 	@FXML
 	private Button createCategorie_btn;
 	@FXML
@@ -44,7 +46,8 @@ public class CategoriePaneelController extends HBox{
 		this.catController = new CategorieController();
 		buildGui();
 		setCategorieList();
-		initialize();
+//		initialize();
+		catController.addPropertyChangeListener(this);
 	}
 	
 	private void initialize() {
@@ -54,7 +57,6 @@ public class CategoriePaneelController extends HBox{
 	private void buildGui() {
 		
 		try {
-			
 			categorie_List = new ListView<>();
 			
 			catItemList = FXCollections.observableArrayList(new ArrayList<>());
@@ -86,7 +88,7 @@ public class CategoriePaneelController extends HBox{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController();
+		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController(catController);
 		this.getChildren().add(catAanmakenPaneel);
 		rechterSchermAanwezig = true;
 	}
@@ -124,5 +126,14 @@ public class CategoriePaneelController extends HBox{
 	private void verwijderRechterScherm() {
 		this.getChildren().remove(this.getChildren().size()-1);
 		rechterSchermAanwezig = false;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		List<Categorie> newValue = (List<Categorie>) evt.getNewValue();
+		catItemList = FXCollections.observableArrayList(newValue);
+		catItemList.forEach(c -> System.out.println(c.getName()));
+		categorie_List.getItems().clear();
+		initialize();
 	}
 }
