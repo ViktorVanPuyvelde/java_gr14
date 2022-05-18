@@ -67,7 +67,8 @@ public class NieuweDatasourcePaneelController extends GridPane
     private ObservableList<Mvo> mvoList;
     
     private File selectedFile;
-    HashMap<Double, List<List<Object>>> allDataFromFile = new HashMap<>();
+    HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
+    TreeMap<Double, List<Object>> verwerkteData;
     
     
     public NieuweDatasourcePaneelController() {
@@ -107,6 +108,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 		}
 
 		mvoList.forEach(m -> mvosList.getItems().add(m.getName()));
+		
 	}
 
 	@FXML
@@ -143,7 +145,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void update() {
 		
-	
+		verwerkteData.forEach((key,val) -> System.out.println(val));
 	}
 
 	private void verify() {
@@ -155,10 +157,11 @@ public class NieuweDatasourcePaneelController extends GridPane
 	}
 
 	private void collectChanges() {
-		
-		//Aggregatie methode = mvoList.get(0).getMethode();
-		//verwerkDatasource(methode);
 		dataOpnemen();
+		Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		String naam = naam_textfield.getText();
+		verwerkteData = verwerkDatasource(methode);
+		
 		
 	}
 
@@ -192,9 +195,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 
                 //add datalist to hashmap
                 //-------------------------
-                if(allDataFromFile.get(quarterCel) != null) {
+                if(allDataFromFileMap.get(quarterCel) != null) {
 
-                	allDataFromFile.get(quarterCel).add(data);
+                	allDataFromFileMap.get(quarterCel).add(data);
                 }else {
                 	//first dataList with column names
                 	List<Object> firstDataList = new ArrayList<>(data);
@@ -203,16 +206,16 @@ public class NieuweDatasourcePaneelController extends GridPane
                 	List<List<Object>> filledStarterList = new ArrayList<>();
                 	filledStarterList.add(firstDataList);
 
-                	allDataFromFile.put(quarterCel,filledStarterList);
+                	allDataFromFileMap.put(quarterCel,filledStarterList);
                 }
                //-----------------------------              
             }           
             workbook.close();
         }  catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (InvalidFormatException e) {
 			
@@ -221,19 +224,17 @@ public class NieuweDatasourcePaneelController extends GridPane
 		
 	}
 
-	private void verwerkDatasource(Aggregatie methode) {
+	private  TreeMap<Double, List<Object>> verwerkDatasource(Aggregatie methode) {
 		
 		switch(methode) {
 		  case SOM:
-			 verwerkDataAlsSom(allDataFromFile);
-		    break;
+			 return verwerkDataAlsSom(allDataFromFileMap);
+		  
 		  case GEMIDDELDE:
-			  verwerkDataAlsGem(allDataFromFile);
-		    break;
-		  default:
-			  
-		    
+			  return verwerkDataAlsGem(allDataFromFileMap);
+		   	    
 		}
+		return null;
 		
 	}
 
@@ -241,7 +242,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 		//datalijst = [waarde, datum, quarter]
 		
 		//begin Treemap voor uiteindelijke verwerkte data lijsten
-				TreeMap<Double,List<Object>> verwerkteData = new TreeMap<>();
+				TreeMap<Double,List<Object>> verwerkteDataTree = new TreeMap<>();
 		
 		// per key (quarter) de data lijsten ophalen
 				dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
@@ -263,18 +264,18 @@ public class NieuweDatasourcePaneelController extends GridPane
 				newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));
 				newDataList.add(key);
 				
-				verwerkteData.put(key,newDataList);
+				verwerkteDataTree.put(key,newDataList);
 				});
 				
 				
-		return verwerkteData;
+		return verwerkteDataTree;
 	}
 
 	private TreeMap<Double, List<Object>> verwerkDataAlsSom(HashMap<Double, List<List<Object>>> dataMap) {
 		//datalijst = [waarde, datum, quarter]
 		
 		//begin Treemap voor uiteindelijke verwerkte data lijsten
-		TreeMap<Double,List<Object>> verwerkteData = new TreeMap<>();
+		TreeMap<Double,List<Object>> verwerkteDataTree = new TreeMap<>();
 		
 		// per key (quarter) de data lijsten ophalen
 		dataMap.entrySet().stream().forEach(dataLijstenPerKey -> {
@@ -290,17 +291,17 @@ public class NieuweDatasourcePaneelController extends GridPane
 					
 					//waarde optellen bij treemap waarde
 					treeValueLijst.set(0,(double)treeValueLijst.get(0) + (double) datalijst.get(0));								
-					verwerkteData.put(key, treeValueLijst);
+					verwerkteDataTree.put(key, treeValueLijst);
 				}
 				// er zit nog geen data voor deze quarter in de treemap -> nieuwe entr
 				else {
 					
-					verwerkteData.put(key, datalijst);
+					verwerkteDataTree.put(key, datalijst);
 				}
 			});
 			
 		});
 		
-		return verwerkteData;
+		return verwerkteDataTree;
 	}
 }
