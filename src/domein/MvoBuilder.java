@@ -28,13 +28,13 @@ public class MvoBuilder
 		{
 			requiredElements.add(RequiredElement.SdgRequired);
 		}
-		if (this.mvo.getInfo() == null || this.mvo.getInfo().isEmpty())
+		if (this.mvo.getInfo().equals("null") || this.mvo.getInfo().isEmpty())
 		{
 			requiredElements.add(RequiredElement.InfoRequired);
 		}
-//		if (this.mvo.getGoalValue())
+//		if (this.mvo.getGoalValue() == -1)
 //		{
-//			requiredElements.add(RequiredElementMvo.GoalValueRequired);
+//			requiredElements.add(RequiredElement.GoalValueRequired);
 //		}
 
 		if (!this.requiredElements.isEmpty())
