@@ -24,7 +24,7 @@
       <ColumnConstraints halignment="CENTER" minWidth="300.0" />
    </columnConstraints>
    <children>
-      <Label alignment="CENTER" prefHeight="18.0" prefWidth="314.0" text="Datasource aanmaken" textFill="#b2d234" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+      <Label fx:id="titel_lbl" alignment="CENTER" prefHeight="18.0" prefWidth="314.0" text="Datasource aanmaken" textFill="#b2d234" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

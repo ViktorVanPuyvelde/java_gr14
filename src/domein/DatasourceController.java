@@ -33,4 +33,24 @@ public class DatasourceController
 	{
 		this.datasourceRepo = repo;
 	}
+	
+	public void voegDatasourceToe(String naam, boolean flag) {
+		DatasourceDaoJpa.startTransaction();
+		this.datasourceRepo.insert(new Datasource(naam, flag));
+		DatasourceDaoJpa.commitTransaction();
+	}	
+	
+	public void updateDatasource(Datasource d, String naam, boolean flag) {
+		d.setName(naam);
+		d.setFlag(flag);
+		DatasourceDaoJpa.startTransaction();
+		this.datasourceRepo.update(d);
+		DatasourceDaoJpa.commitTransaction();
+	}
+
+	public void deleteDatasource(Datasource d) {
+		DatasourceDaoJpa.startTransaction();
+		this.datasourceRepo.delete(d);
+		DatasourceDaoJpa.commitTransaction();
+	}	
 }
