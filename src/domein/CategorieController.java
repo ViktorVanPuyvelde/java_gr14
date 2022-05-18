@@ -16,17 +16,18 @@ public class CategorieController
 {
 	private CategorieDao categorieRepo;
 	private List<Categorie> cats;
-    private PropertyChangeSupport subject;
+	private PropertyChangeSupport subject;
 
 	public CategorieController()
 	{
 		subject = new PropertyChangeSupport(this);
 		setCategorieRepo(new CategorieDaoJpa());
 		cats = categorieRepo.findAll();
-		//populateDB();
+		// populateDB();
 	}
-	
-	public List<Categorie> geefCategorien() {
+
+	public List<Categorie> geefCategorien()
+	{
 		return Collections.unmodifiableList(cats);
 	}
 
@@ -52,7 +53,7 @@ public class CategorieController
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
-        subject.firePropertyChange("cats", oldCats, cats);
+		subject.firePropertyChange("cats", oldCats, cats);
 	}
 
 	public void pasCategorieAan(Categorie c) throws InformationRequiredException
@@ -62,6 +63,13 @@ public class CategorieController
 		Categorie updateCategorie = cb.getCategorie();
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.update(updateCategorie);
+		CategorieDaoJpa.commitTransaction();
+	}
+
+	public void verwijderCategorie(Categorie c)
+	{
+		CategorieDaoJpa.startTransaction();
+		categorieRepo.delete(c);
 		CategorieDaoJpa.commitTransaction();
 	}
 
@@ -78,6 +86,7 @@ public class CategorieController
 		cb.buildIconName(iconName);
 		cb.buildSdgs(sdgs);
 		cb.buildRoles(roles);
+		cb.buildCategory(true);
 		return cb.getCategorie();
 	}
 
@@ -92,17 +101,18 @@ public class CategorieController
 		c.setSdgs(sdgs);
 		return sdgs;
 	}
-	
-	//nieuwe luisteraar inschrijven
-    public void addPropertyChangeListener(PropertyChangeListener pcl) { 
-        subject.addPropertyChangeListener(pcl);
-        pcl.propertyChange(
-        		new PropertyChangeEvent(pcl, "cats", cats, cats));
-    }
 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        subject.removePropertyChangeListener(pcl);
-    }
+	// nieuwe luisteraar inschrijven
+	public void addPropertyChangeListener(PropertyChangeListener pcl)
+	{
+		subject.addPropertyChangeListener(pcl);
+		pcl.propertyChange(new PropertyChangeEvent(pcl, "cats", cats, cats));
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener pcl)
+	{
+		subject.removePropertyChangeListener(pcl);
+	}
 
 //	private void populateDB() {
 //		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
