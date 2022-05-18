@@ -25,4 +25,19 @@ public class DatasourceDaoJpa extends GenericDaoJpa<Datasource> implements Datas
 			throw new EntityNotFoundException();
 		}
 	}
+	public Datasource geefDatasourceMetId(String id) throws EntityNotFoundException {
+        try {
+            return em.createNamedQuery("Datasource.geefDatasourceMetId", Datasource.class)
+            		.setParameter("datasource_id", id )
+            		.getSingleResult();
+        } catch (NoResultException ex) {
+            throw new EntityNotFoundException();
+        } 
+	}
+
+//	@Override
+//	public List<Datasource> findAll() {
+//		return em.createNamedQuery("Datasource.alleDatasources").getResultList();
+//	}
+
 }

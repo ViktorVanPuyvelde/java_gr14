@@ -53,4 +53,7 @@ public class DatasourceController
 		this.datasourceRepo.delete(d);
 		DatasourceDaoJpa.commitTransaction();
 	}	
+	public Datasource geefDatasourceMetId(String id) {
+		return datasourceRepo.geefDatasourceMetId(id);
+	}
 }

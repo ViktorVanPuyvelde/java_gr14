@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
-
-import domein.Categorie;
+import javax.persistence.Query;
+import domein.Datasource;
 import domein.Mvo;
 import domein.Sdg;
 
@@ -17,9 +17,8 @@ public class MvoDaoJpa extends GenericDaoJpa<Mvo> implements MvoDao{
 	}
 
 	@Override
-	public Mvo geefAlleMvos() throws EntityNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Mvo> geefAlleMvos() throws EntityNotFoundException {
+		return super.findAll();
 	}
 
 	@Override
@@ -43,6 +42,5 @@ public class MvoDaoJpa extends GenericDaoJpa<Mvo> implements MvoDao{
 	            throw new EntityNotFoundException();
 	        } 
 	}
-
 
 }

@@ -43,6 +43,18 @@ public class MvoController
 		mvoRepo.insert(newMvo);
 		MvoDaoJpa.commitTransaction();
 		mvos.add(newMvo);
+	}	
+	
+	public void update(Mvo mvo) {
+    	MvoDaoJpa.startTransaction();
+		MvoRepo.update(mvo);
+        MvoDaoJpa.commitTransaction();
+	}
+	
+	public void delete(Mvo mvo) {
+    	MvoDaoJpa.startTransaction();
+		MvoRepo.delete(mvo);
+        MvoDaoJpa.commitTransaction();
 	}
 
 	public void close()

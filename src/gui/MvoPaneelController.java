@@ -16,10 +16,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public class MvoPaneelController extends HBox{
+	
+	/*
+	 * 
+	 * FXML variabelen
+	 * 
+	 */
 	
 	@FXML
 	private ListView<String> MvoCatListView;
@@ -43,6 +48,25 @@ public class MvoPaneelController extends HBox{
     private Label mvo_Selecteren_lbl;
     
     private boolean rechterSchermAanwezig = false;
+    
+    
+    /*
+     * 
+     * LOKALE VARIABELEN
+     */
+    
+	private CategorieController cc;
+	private MvoController mc;
+	private SdgController sc;
+	private String selectedCategory;
+	private Mvo selectedMvo;
+	private List<Mvo> mvosVanCategorie;
+	private Melding melding;
+	
+	/*
+	 * 
+	 * FXML onAction functies
+	 */
 
     @FXML
     void createMVO_OnAction(ActionEvent event) {
@@ -57,12 +81,20 @@ public class MvoPaneelController extends HBox{
 
     @FXML
     void deleteMVO_OnAction(ActionEvent event) {
-    	
+    	System.out.println("Verwijder: "+selectedMvo.getName()+" // " + selectedMvo.getId());
+    	mc.delete(selectedMvo);
+    	melding.toonBevestiging("MVO doelstelling succesvol verwijderd");
     }
 
     @FXML
     void editMVO_OnAction(ActionEvent event) {
-
+    	mvo_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
+		this.getChildren().add(wijzigenMVOPaneel);
+		rechterSchermAanwezig = true;
     }
 
     @FXML
@@ -80,36 +112,14 @@ public class MvoPaneelController extends HBox{
 		}
     }
     
-	private void verwijderRechterScherm() {
-		this.getChildren().remove(this.getChildren().size()-1);
-		rechterSchermAanwezig = false;
-	}
     
-    /*
-    @FXML
-    private Label mvoNaam;
-    
-    @FXML
-    private Label goalValue;
-    
-    @FXML
-    private Label infoMvo;
-	
-    @FXML
-    private ImageView sdgImage;*/
-    
-	private CategorieController cc;
-	private MvoController mc;
-	private SdgController sc;
-	private String selectedCat;
-	private Mvo selectedMvo;
-	private List<Mvo> mvosVanCategorie;
 	
 	public MvoPaneelController()
 	{
 		cc = new CategorieController();
 		mc = new MvoController();
 		sc = new SdgController();
+		melding = new Melding();
 		buildGui();
 		initialize();
 	}
@@ -130,8 +140,8 @@ public class MvoPaneelController extends HBox{
 	}
 	
 	private void initialize() {
-		
-		
+				
+		MvoCatListView.getItems().add("*");
 		MvoCatListView.getItems().addAll(cc.geefAlleEchteCategorienNaam());
 		
 		MvoCatListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -140,15 +150,14 @@ public class MvoPaneelController extends HBox{
 			@Override
 			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
 				
-				selectedCat = MvoCatListView.getSelectionModel().getSelectedItem();
+				selectedCategory = MvoCatListView.getSelectionModel().getSelectedItem();
 				
-				System.out.println(selectedCat);
-				
-				//Currentcat gebruiken om MVO namen op te halen voor bepaalde categorie en deze in de andere ListView te krijgen
-				mvosVanCategorie = mc.geefMvosVanCategorie(selectedCat);
-				
-				for(int i=0;i<mvosVanCategorie.size();i++) {
-					System.out.println(mvosVanCategorie.get(i));
+				System.out.println(selectedCategory);
+
+				if(selectedCategory != "*") {
+					mvosVanCategorie = mc.geefMvosVanCategorie(selectedCategory);
+				}else {
+					mvosVanCategorie = mc.geefMvos();
 				}
 				
 				MvoListView.getItems().clear();
@@ -167,32 +176,20 @@ public class MvoPaneelController extends HBox{
 				
 				String Mvo = MvoListView.getSelectionModel().getSelectedItem();
 				
-				System.out.println(Mvo);
-				
-				selectedMvo = mc.geefMvoMetNaam(Mvo);
-				
-				//Sdg sdg = sc.geefSdgVoorMvo(selectedMvo.getSdg().getId());
-				
-				//System.out.println(sdg.getImage());
-				
-				//mvoNaam.setText(mvo.getName());
-				
-				//goalValue.setText(mvo.getGoalValue()+ "");
-				
-				//infoMvo.setText(mvo.getInfo());
-				
-				//Image i = new Image("/images/"+sdg.getImage()+".png");
-				
-				//sdgImage.setImage(i);
-				
-				
-				
-				
-				
+				if(Mvo != null) {
+					selectedMvo = mc.geefMvoMetNaam(Mvo);
+				}	
+								
 			}
 			
 		});
 	
 	}
+	
+	private void verwijderRechterScherm() {
+		this.getChildren().remove(this.getChildren().size()-1);
+		rechterSchermAanwezig = false;
+	}
+   
 
 }
