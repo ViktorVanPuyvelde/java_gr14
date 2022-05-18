@@ -3,12 +3,15 @@ package gui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -62,6 +65,7 @@ public class NieuweDatasourcePaneelController extends GridPane
     private ObservableList<Mvo> mvoList;
     
     private File selectedFile;
+    HashMap<Double, List<List<Object>>> allData = new HashMap<>();
     
     
     public NieuweDatasourcePaneelController() {
@@ -158,30 +162,47 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void dataOpnemen() {
 		try {
-        
+			
  
             XSSFWorkbook workbook = new XSSFWorkbook(selectedFile);
  
             XSSFSheet sheet = workbook.getSheetAt(0);
  
-            //Iterate through each rows one by one
             Iterator<Row> rowIterator = sheet.iterator();
             rowIterator.next();
+            //loop each row
             while (rowIterator.hasNext()) 
             {
+            	List<Object> data = new ArrayList<>();
+  
                 Row row = rowIterator.next();
-                //For each row, iterate through all the columns
                 Iterator<Cell> cellIterator = row.cellIterator();
-                 
-                while (cellIterator.hasNext()) 
-                {
-                    Cell cell = cellIterator.next();
-                    System.out.println(cell);
-                   
+                
+                //fill datalist from excel cells
+                //-----
+                Double dataCel = cellIterator.next().getNumericCellValue();
+                String dateCel = cellIterator.next().getStringCellValue();
+                Double quarterCel = cellIterator.next().getNumericCellValue();
+                data.add(dateCel);data.add(dataCel);data.add(quarterCel);
+                //------
+
+                //add datalist to hashmap
+                //-------------------------
+                if(allData.get(quarterCel) != null) {
+
+                	allData.get(quarterCel).add(data);
+                }else {
+                	//first dataList
+                	List<Object> firstDataList = new ArrayList<>(data);
+                	
+                	//new List with first dataList for new key
+                	List<List<Object>> filledStarterList = new ArrayList<>();
+                	filledStarterList.add(firstDataList);
+
+                	allData.put(quarterCel,filledStarterList);
                 }
-                System.out.println("");
-            }
-           
+               //-----------------------------              
+            }           
             workbook.close();
         }  catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -222,5 +243,6 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private void verwerkDataAlsSom() {
 		
 		
+
 	}
 }
