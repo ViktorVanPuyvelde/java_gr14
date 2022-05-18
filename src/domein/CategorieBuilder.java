@@ -47,6 +47,11 @@ public class CategorieBuilder
 		this.categorie = new Categorie();
 	}
 
+	public void setCategorie(Categorie c)
+	{
+		this.categorie = c;
+	}
+
 	public void buildId()
 	{
 		this.categorie.setId(UUID.randomUUID().toString());

@@ -55,6 +55,16 @@ public class CategorieController
         subject.firePropertyChange("cats", oldCats, cats);
 	}
 
+	public void pasCategorieAan(Categorie c) throws InformationRequiredException
+	{
+		CategorieBuilder cb = new CategorieBuilder();
+		cb.setCategorie(c);
+		Categorie updateCategorie = cb.getCategorie();
+		CategorieDaoJpa.startTransaction();
+		categorieRepo.update(updateCategorie);
+		CategorieDaoJpa.commitTransaction();
+	}
+
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
 			List<Sdg> sdgs) throws InformationRequiredException
 	{
