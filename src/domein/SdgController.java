@@ -26,9 +26,10 @@ public class SdgController
 	{
 		return Collections.unmodifiableList(sdgs);
 	}
-	
-	public Sdg geefSdgVoorMvo(String id,String mvoId) {
-		return sdgRepo.geefSdgVoorMvo(id,mvoId);
+
+	public Sdg geefSdgVoorMvo(String id, String mvoId)
+	{
+		return sdgRepo.geefSdgVoorMvo(id, mvoId);
 	}
 
 	public Sdg geefSdg(String id)
@@ -36,11 +37,16 @@ public class SdgController
 		return sdgRepo.get(id);
 	}
 
+	public Sdg geefSdgDoorNaam(String naam)
+	{
+		return sdgRepo.geefSdgDoorNaam(naam);
+	}
+
 	public void close()
 	{
 		SdgDaoJpa.closePersistency();
 	}
-	
+
 //	private void populateDB() {
 //		sdgRepo.insert(new Sdg("Geen Armoede", "img1"	));
 //		sdgRepo.insert(new Sdg("Geen Honger", "img2"));

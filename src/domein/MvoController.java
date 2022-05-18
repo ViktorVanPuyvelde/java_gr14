@@ -3,6 +3,8 @@ package domein;
 import java.util.Collections;
 import java.util.List;
 
+import exceptions.InformationRequiredException;
+import javafx.collections.ObservableList;
 import repository.MvoDao;
 import repository.MvoDaoJpa;
 
@@ -33,18 +35,37 @@ public class MvoController
 	{
 		return Collections.unmodifiableList(mvos);
 	}
-	
+
 	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
+			throws InformationRequiredException
 	{
-		Mvo m = new Mvo(name, sdg, info, goalValue, datasource, superMvo);
+		Mvo newMvo = createMvo(null, name, sdg, info, goalValue, datasource, superMvo);
 		MvoDaoJpa.startTransaction();
-		mvoRepo.insert(m);
+		MvoRepo.insert(newMvo);
 		MvoDaoJpa.commitTransaction();
-		mvos.add(m);
+		mvos.add(newMvo);
 	}
-	
+
 	public void close()
 	{
 		MvoDaoJpa.closePersistency();
+	}
+
+	private Mvo createMvo(MvoBuilder mb, String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource,
+			Mvo superMvo) throws InformationRequiredException
+	{
+		if (mb == null)
+		{
+			mb = new MvoBuilder();
+		}
+		mb.createNewMvo();
+		mb.buildId();
+		mb.buildName(name);
+		mb.buildSdg(sdg);
+		mb.buildInfo(info);
+		mb.buildGoalValue(goalValue);
+		mb.buildDatasource(datasource);
+		mb.buildSuperMvo(superMvo);
+		return mb.getMvo();
 	}
 }

@@ -4,18 +4,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
+import domein.Aggregatie;
 import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
 import domein.Sdg;
 import domein.SdgController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -46,6 +52,10 @@ public class AanmakenMvoPaneelController extends GridPane
 	private ListView<String> lvDatasource;
 	@FXML
 	private ListView<String> lvSuperMvo;
+	@FXML
+	private Label lblErrorNietAangemaakt;
+	@FXML
+	private ChoiceBox<Aggregatie> aggregatieBox;
 
 	// lokale attributen
 	private String name;
@@ -55,10 +65,12 @@ public class AanmakenMvoPaneelController extends GridPane
 	private Datasource datasource;
 	private Boolean foutMeldingDoel = false;
 	private Mvo superMvo;
+	private Aggregatie methode;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<Datasource> datasourceItemList;
 	private ObservableList<Mvo> superMvoItemList;
+	private ObservableList<Aggregatie> boxOptions;
 
 	private Melding melding;
 
@@ -83,6 +95,7 @@ public class AanmakenMvoPaneelController extends GridPane
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
 			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
+			boxOptions = FXCollections.observableArrayList(Aggregatie.values());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
@@ -102,6 +115,8 @@ public class AanmakenMvoPaneelController extends GridPane
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
 		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
+		
+		aggregatieBox.getItems().setAll(boxOptions);
 	}
 
 	@FXML
@@ -113,48 +128,43 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private void collectChanges()
 	{
-		this.name = txtMvoName.getText();
-		this.sdg = this.sdgItemList.get(0);
-		this.type.add(txtType.getText());
-		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
+		try
 		{
-			foutMeldingDoel = true;
-		} else
+			this.name = txtMvoName.getText();
+			this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
+			this.type.add(txtType.getText());
+			if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
+			{
+				foutMeldingDoel = true;
+			} else
+			{
+				this.doel = Integer.parseInt(txtDoel.getText());
+			}
+			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
+			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
+			
+		} catch (EntityNotFoundException e)
 		{
-			this.doel = Integer.parseInt(txtDoel.getText());
+			System.out.println("error");
 		}
-		this.datasource = this.datasourceItemList.get(0);
-		this.superMvo = this.superMvoItemList.get(0);
 	}
 
 	private void verify()
 	{
-		if (name == null || name.isEmpty())
-		{
-			melding.toonFoutmelding("Naam mag niet leeg zijn.");
-		} else if (sdg == null)
-		{
-			melding.toonFoutmelding("Er moet een SDG toegewezen zijn aan de nieuwe MVO.");
-		} else if (type == null || type.isEmpty())
-		{
-			melding.toonFoutmelding("Type mag niet leeg zijn");
-		} else if (datasource == null)
-		{
-			melding.toonFoutmelding("Er moet een datasource meegegeven worden ");
-		} else if (foutMeldingDoel)
-		{
-			melding.toonFoutmelding("Er moet een doel meegegeven worden");
-			foutMeldingDoel = false;
-		} else
-		{
-			update();
-		}
+		update();
 	}
 
 	private void update()
 	{
-		this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
-		melding.toonBevestiging("De MVO is aangemaakt.");
+		try
+		{
+			this.mc.voegMvoToe(name, sdg, type, doel, datasource, superMvo);
+			melding.toonBevestiging("De MVO is aangemaakt.");
+		} catch (InformationRequiredException e)
+		{
+			lblErrorNietAangemaakt.setText(e.getMessage());
+			e.getInformationRequired().forEach(System.out::println);
+		}
 	}
 
 	private void setSdgItemList()

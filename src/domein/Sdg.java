@@ -18,9 +18,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sdg")
 @NamedQueries(
-{	@NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId"),
-	@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam")
-})
+{ @NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId"),
+		@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam"),
+		@NamedQuery(name = "Sdg.geefSdgDoorNaam", query = "SELECT s FROM Sdg s WHERE s.name = :naam") })
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -31,18 +31,18 @@ public class Sdg implements Serializable
 	private String name;
 	@Column(name = "sdg_image")
 	private String image;
-	
-	@OneToMany (mappedBy="sdg")
+
+	@OneToMany(mappedBy = "sdg")
 	private List<Mvo> mvos;
-	
+
 	@ManyToOne(targetEntity = Sdg.class)
 	@JoinColumn(name = "super_sdg_id")
 	private Sdg super_sdg;
-	
+
 	@ManyToOne(targetEntity = Categorie.class)
 	@JoinColumn(name = "category_id")
 	private Categorie categorie;
-	
+
 	// @ManyToOne
 	// @JoinColumn(name= "category_id", nullable= false)
 	// private Categorie categorie;
@@ -65,19 +65,23 @@ public class Sdg implements Serializable
 
 	}
 
-	public List<Mvo> getMvos() {
+	public List<Mvo> getMvos()
+	{
 		return mvos;
 	}
 
-	public void setMvos(List<Mvo> mvos) {
+	public void setMvos(List<Mvo> mvos)
+	{
 		this.mvos = mvos;
 	}
 
-	public Categorie getCategorie() {
+	public Categorie getCategorie()
+	{
 		return categorie;
 	}
 
-	public void setCategorie(Categorie categorie) {
+	public void setCategorie(Categorie categorie)
+	{
 		this.categorie = categorie;
 	}
 

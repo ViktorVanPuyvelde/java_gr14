@@ -1,7 +1,6 @@
 package domein;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -19,29 +18,30 @@ import com.google.gson.Gson;
 @Entity
 @Table(name = "category")
 @NamedQueries(
-{ @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam"), 
- @NamedQuery(name = "Categorie.alleEchteCategorie�n", query = "select c from Categorie c where c.isCategory = 1")})
-public class Categorie implements  Serializable
+{ @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam"),
+		@NamedQuery(name = "Categorie.alleCategorie�n", query = "select c from Categorie c"),
+		@NamedQuery(name = "Categorie.alleEchteCategorie�n", query = "select c from Categorie c where c.isCategory = 1") })
+public class Categorie implements CRUD, Serializable
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "category_id")
 	private String id;
-	
+
 	@Column(name = "category_name")
 	private String name;
-	
-	@Column(name="iconName")
+
+	@Column(name = "iconName")
 	private String iconName;
-	
-	@Column(name="roles")
+
+	@Column(name = "roles")
 	private String roles;
-	
+
 	@OneToMany(mappedBy = "categorie")
 	private List<Sdg> sdgs;
-	
-	@Column(name="isCategory")
+
+	@Column(name = "isCategory")
 	private boolean isCategory;
 
 	/**
@@ -50,14 +50,14 @@ public class Categorie implements  Serializable
 	 * @param iconName
 	 * @param roles
 	 */
-	public Categorie(String name, String iconName, List<String> roles, boolean isCategory)
+	public Categorie(String name, String iconName, List<String> roles, boolean isCategory, List<Sdg> sdgs)
 	{
 		setId(UUID.randomUUID().toString());
 		setName(name);
 		setIconName(iconName);
 		setRoles(roles);
 		setCategory(isCategory);
-		setSdgs(new ArrayList<>());
+		setSdgs(sdgs);
 	}
 
 	protected Categorie()

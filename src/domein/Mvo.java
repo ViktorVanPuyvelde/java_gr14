@@ -23,13 +23,12 @@ import com.google.gson.Gson;
 @Table(name = "mvo")
 @NamedQueries(
 { @NamedQuery(name = "Mvo.geefMvosVoorCategorie", query = "SELECT m FROM Categorie c INNER JOIN c.sdgs s INNER JOIN s.mvos m WHERE c.name = :catNaam"),
-	@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"),
-	})
+		@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"), })
 public class Mvo implements Serializable
 {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "mvo_id")
 	private String id;
@@ -50,6 +49,9 @@ public class Mvo implements Serializable
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "super_mvo_id")
 	private Mvo superMvo;
+	@Transient
+	private Aggregatie methode;
+	
 
 	public Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
 	{
@@ -60,6 +62,19 @@ public class Mvo implements Serializable
 		setDatasource(datasource);
 		setSdg(sdg);
 		setSuperMvo(superMvo);
+		
+	}
+	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo, Aggregatie methode)
+	{
+		setId(UUID.randomUUID().toString());
+		setName(name);
+		setInfo(info);
+		setGoalValue(goalValue);
+		setDatasource(datasource);
+		setSdg(sdg);
+		setSuperMvo(superMvo);
+		this.methode = methode;
+		
 	}
 
 	protected Mvo()
@@ -77,35 +92,43 @@ public class Mvo implements Serializable
 		this.name = name;
 	}
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id)
+	{
 		this.id = id;
 	}
 
-	public Datasource getDatasource() {
+	public Datasource getDatasource()
+	{
 		return datasource;
 	}
 
-	public void setDatasource(Datasource datasource) {
+	public void setDatasource(Datasource datasource)
+	{
 		this.datasource = datasource;
 	}
 
-	public Sdg getSdg() {
+	public Sdg getSdg()
+	{
 		return sdg;
 	}
 
-	public void setSdg(Sdg sdg) {
+	public void setSdg(Sdg sdg)
+	{
 		this.sdg = sdg;
 	}
 
-	public Mvo getSuperMvo() {
+	public Mvo getSuperMvo()
+	{
 		return superMvo;
 	}
 
-	public void setSuperMvo(Mvo superMvo) {
+	public void setSuperMvo(Mvo superMvo)
+	{
 		this.superMvo = superMvo;
 	}
 
@@ -130,7 +153,6 @@ public class Mvo implements Serializable
 	{
 		this.goalValue = goalValue;
 	}
-
 
 	public List<String> getMvo_data()
 	{
@@ -157,5 +179,14 @@ public class Mvo implements Serializable
 			return false;
 		Mvo other = (Mvo) obj;
 		return Objects.equals(name, other.name);
+	public String toString()
+	{
+		return String.format("%s", name);
+	}
+	public Aggregatie getMethode() {
+		return methode;
+	}
+	public void setMethode(Aggregatie methode) {
+		this.methode = methode;
 	}
 }
