@@ -27,8 +27,6 @@ public class DatasourcePaneelController extends HBox{
 	@FXML
 	private Button create_btn;
 	@FXML
-	private Button view_btn;
-	@FXML
 	private Button edit_btn;
 	@FXML
 	private Button delete_btn;

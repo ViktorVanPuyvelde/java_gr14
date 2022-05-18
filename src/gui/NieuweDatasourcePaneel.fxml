@@ -55,7 +55,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_OnAction" styleClass="Button" text="Toevoegen" />
+            <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_wijzigen_OnAction" styleClass="Button" text="Toevoegen" />
             <Label fx:id="toevoegenLbl">
                <padding>
                   <Insets left="10.0" />
