@@ -1,11 +1,5 @@
 package gui;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -24,7 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
-public class CategoriePaneelController extends HBox implements PropertyChangeListener{
+public class CategoriePaneelController extends HBox implements PropertyChangeListener
+{
 	@FXML
 	private Button createCategorie_btn;
 	@FXML
@@ -58,21 +53,11 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 		catItemList.forEach(c -> categorie_List.getItems().add(c.getName()));
 	}
 
-	private void buildGui() {
-		
-		try {
-			categorie_List = new ListView<>();
-			
-			catItemList = FXCollections.observableArrayList(new ArrayList<>());
-			
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
-		loader.setController(this);
-		loader.setRoot(this);
-		loader.load();
-		} 
-		catch(IOException ex)
-		{
+	private void buildGui()
+	{
 
+		try
+		{
 			categorie_List = new ListView<>();
 
 			catItemList = FXCollections.observableArrayList(new ArrayList<>());
@@ -83,7 +68,22 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 			loader.load();
 		} catch (IOException ex)
 		{
-			throw new RuntimeException(ex);
+
+			categorie_List = new ListView<>();
+
+			catItemList = FXCollections.observableArrayList(new ArrayList<>());
+
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
+			loader.setController(this);
+			loader.setRoot(this);
+			try
+			{
+				loader.load();
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -172,7 +172,8 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
+	public void propertyChange(PropertyChangeEvent evt)
+	{
 		List<Categorie> newValue = (List<Categorie>) evt.getNewValue();
 		catItemList = FXCollections.observableArrayList(newValue);
 		categorie_List.getItems().clear();
