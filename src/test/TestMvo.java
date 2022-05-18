@@ -34,24 +34,25 @@ class TestMvo {
 	
 	@Test
 	public void testCreateMvo() throws InformationRequiredException {
-		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null);
+		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 1, new Datasource("da", false), null);
 
 		Assertions.assertFalse(controller.geefMvos().contains(mvo));
-		controller.voegMvoToe("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null);
+		controller.voegMvoToe("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 1, new Datasource("da", false), null);
 		Assertions.assertTrue(controller.geefMvos().contains(mvo));		
 	}
 
 	private static Stream<Arguments> fouteMvo(){
 		return Stream.of(
-				Arguments.of("", null, null, 0, null, null),
-				Arguments.of("mvo", null, null, 0, null, null),
-				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 0, null, null),
-				Arguments.of("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, null, null),
-				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 0, new Datasource("da", false), null),
-				Arguments.of("mvo", null, new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null),
-				Arguments.of(null, null, null, 0, null, null),
-				Arguments.of(null, new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null),				
-				Arguments.of("", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null)		
+				Arguments.of("", null, null, -1, null, null),
+				Arguments.of("mvo", null, null, 100, null, null),
+				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, null, null),
+				Arguments.of("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, null, null),
+				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, new Datasource("da", false), null),
+				Arguments.of("mvo", null, new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),
+				Arguments.of(null, null, null, -1, null, null),
+				Arguments.of(null, new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),				
+				Arguments.of("", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),		
+				Arguments.of("", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), -1, new Datasource("da", false), null)		
 			);
 	}
 	@ParameterizedTest

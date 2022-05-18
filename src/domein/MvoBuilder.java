@@ -32,10 +32,10 @@ public class MvoBuilder
 		{
 			requiredElements.add(RequiredElement.InfoRequired);
 		}
-//		if (this.mvo.getGoalValue() == -1)
-//		{
-//			requiredElements.add(RequiredElement.GoalValueRequired);
-//		}
+		if (this.mvo.getGoalValue() < 0)
+		{
+			requiredElements.add(RequiredElement.GoalValueRequired);
+		}
 
 		if (!this.requiredElements.isEmpty())
 		{
