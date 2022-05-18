@@ -41,7 +41,7 @@ public class MvoController
 	{
 		Mvo newMvo = createMvo(null, name, sdg, info, goalValue, datasource, superMvo);
 		MvoDaoJpa.startTransaction();
-		MvoRepo.insert(newMvo);
+		mvoRepo.insert(newMvo);
 		MvoDaoJpa.commitTransaction();
 		mvos.add(newMvo);
 	}

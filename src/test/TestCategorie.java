@@ -19,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import domein.Categorie;
 import domein.CategorieController;
 import domein.Sdg;
+import exceptions.InformationRequiredException;
 import repository.CategorieDao;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,25 +32,51 @@ class TestCategorie {
 	private CategorieController controller;
 	
 	@Test
-	public void testCreateCategory() {
-		Categorie categorie = new Categorie("nieuwCat", "icon", new ArrayList<>() , true);
+	public void testCreateCategory() throws InformationRequiredException {
+		Categorie categorie = new Categorie("nieuwCat", "icon", new ArrayList<>() , true, new ArrayList<>());
 
 		Assertions.assertFalse(controller.geefCategorien().contains(categorie));
-		controller.voegCategorieToe("nieuwCat", "icon", new ArrayList<>());
-		Assertions.assertTrue(controller.geefCategorien().contains(categorie));		
+		controller.voegCategorieToe("nieuwCat", "icon", new ArrayList<>(Arrays.asList("Gebruiker")), new ArrayList<>(Arrays.asList(new Sdg("sdg1", null, null, null))));
+		Assertions.assertTrue(controller.geefCategorien().contains(categorie));
 	}
+
+	private static Stream<Arguments> fouteCategorie(){
+		return Stream.of(
+				Arguments.of("", "", new ArrayList<>(), new ArrayList<>()),
+				Arguments.of("nieuwCat", "", new ArrayList<>(), new ArrayList<>()),
+				Arguments.of("nieuwCat", "icon", new ArrayList<>(), new ArrayList<>()),
+				Arguments.of("nieuwCat", "icon", new ArrayList<>(Arrays.asList("Gebruiker")), new ArrayList<>()),
+				Arguments.of("nieuwCat", "icon", new ArrayList<>(), new ArrayList<>(Arrays.asList(new Sdg("sdg", null, null, null)))),
+				Arguments.of("", "icon", new ArrayList<>(Arrays.asList("Gebruiker")), new ArrayList<>(Arrays.asList(new Sdg("sdg", null, null, null)))),
+				Arguments.of(null, null, null, null),
+				Arguments.of("nieuwCat", null, null, null),
+				Arguments.of("nieuwCat", "icon", null, null),
+				Arguments.of("nieuwCat", "icon", null, new ArrayList<>(Arrays.asList(new Sdg("sdg", null, null, null))))
+			);
+	}	
+	
+	@ParameterizedTest
+	@MethodSource("fouteCategorie")
+	public void testCreateCategoryWithException(String naam, String icon, List<String> roles, List<Sdg> sdgs){
+		Categorie categorie = new Categorie("nieuwCat", "icon", new ArrayList<>() , true, new ArrayList<>());
+
+		Assertions.assertFalse(controller.geefCategorien().contains(categorie));
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.voegCategorieToe(naam, icon, roles, sdgs));
+		Assertions.assertFalse(controller.geefCategorien().contains(categorie));
+	}
+
 	
 	@Test
 	public void testRaadpleegCategorieen() {
 		List<Categorie> cats = controller.geefCategorien();
 		Assertions.assertFalse(cats.isEmpty());
-		Assertions.assertEquals(new Categorie("Planet", "FaGlobeAmericas", new ArrayList<>(), true), cats.get(1));
+		Assertions.assertEquals(new Categorie("Planet", "FaGlobeAmericas", new ArrayList<>(), true, new ArrayList<>()), cats.get(1));
 	}
 	
 	private static Stream<Arguments> echteCategorieen(){
 		return Stream.of(
-				Arguments.of(new Categorie[]{new Categorie("nieuw", "icon", new ArrayList<>(), true), new Categorie("nieuwCat", "icon2", new ArrayList<>(), true)}, 2),
-				Arguments.of(new Categorie[]{new Categorie("nieuw1", "icon", new ArrayList<>(), true)}, 1),
+				Arguments.of(new Categorie[]{new Categorie("nieuw", "icon", new ArrayList<>(), true, new ArrayList<>()), new Categorie("nieuwCat", "icon2", new ArrayList<>(), true, new ArrayList<>())}, 2),
+				Arguments.of(new Categorie[]{new Categorie("nieuw1", "icon", new ArrayList<>(), true, new ArrayList<>())}, 1),
 				Arguments.of(new Categorie[]{}, 0)
 			);
 	}
@@ -67,9 +94,9 @@ class TestCategorie {
 
 	private static Stream<Arguments> sdgsVoorCategorie(){
 		return Stream.of(
-				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null), new Sdg("sdg2", "img2", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true)),
-				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true)),
-				Arguments.of(new Sdg[]{}, new Categorie("nieuw1", "icon", new ArrayList<>(), true))
+				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null), new Sdg("sdg2", "img2", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true, new ArrayList<>())),
+				Arguments.of(new Sdg[]{new Sdg("sdg1", "img1", new ArrayList<>(), null)}, new Categorie("nieuw1", "icon", new ArrayList<>(), true, new ArrayList<>())),
+				Arguments.of(new Sdg[]{}, new Categorie("nieuw1", "icon", new ArrayList<>(), true, new ArrayList<>()))
 			);
 	}
 	

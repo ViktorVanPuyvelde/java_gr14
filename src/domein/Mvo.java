@@ -179,6 +179,7 @@ public class Mvo implements Serializable
 			return false;
 		Mvo other = (Mvo) obj;
 		return Objects.equals(name, other.name);
+	}
 	public String toString()
 	{
 		return String.format("%s", name);

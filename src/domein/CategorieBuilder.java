@@ -20,15 +20,15 @@ public class CategorieBuilder
 		{
 			requiredElements.add(RequiredElement.NameRequired);
 		}
-		if (this.categorie.getSdgs().isEmpty() || this.categorie.getSdgs() == null)
+		if (this.categorie.getSdgs() == null || this.categorie.getSdgs().isEmpty())
 		{
 			requiredElements.add(RequiredElement.SdgRequired);
 		}
-		if (this.categorie.getRoles().isEmpty() || this.categorie.getRoles() == null)
+		if (this.categorie.getRoles() == null || this.categorie.getRoles().equals("[]") || this.categorie.getRoles().equals("null"))
 		{
 			this.requiredElements.add(RequiredElement.RolesRequired);
 		}
-		if (this.categorie.getIconName().isEmpty() || this.categorie.getIconName() == null)
+		if (this.categorie.getIconName() == null || this.categorie.getIconName().isEmpty())
 		{
 			this.requiredElements.add(RequiredElement.IconNameRequired);
 		}
