@@ -150,7 +150,7 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 	public void setSdgItemList()
 	{
-		List<Sdg> sdgs = this.sc.geefSdgs();
+		List<Sdg> sdgs = this.sc.geefSdgsZonderCategorie();
 		for (Sdg s : sdgs)
 		{
 			this.sdgItemList.add(s);
