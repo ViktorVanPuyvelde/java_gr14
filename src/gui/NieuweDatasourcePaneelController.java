@@ -158,7 +158,8 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void collectChanges() {
 		dataOpnemen();
-		Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		//Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		Aggregatie methode = Aggregatie.GEMIDDELDE;
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
 		
