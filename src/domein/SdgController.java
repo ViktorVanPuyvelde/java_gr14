@@ -10,7 +10,7 @@ public class SdgController
 {
 	private SdgDao sdgRepo;
 	private List<Sdg> sdgs;
-	
+
 	public SdgController()
 	{
 		setSdgRepo(new SdgDaoJpa());
@@ -37,9 +37,21 @@ public class SdgController
 		return sdgRepo.get(id);
 	}
 
+	public List<Sdg> geefSdgsZonderCategorie()
+	{
+		return sdgRepo.geefSdgsZonderCategorie();
+	}
+
 	public Sdg geefSdgDoorNaam(String naam)
 	{
 		return sdgRepo.geefSdgDoorNaam(naam);
+	}
+
+	public void updateCategorieIdSdg(String sdgId, String categorieId)
+	{
+		SdgDaoJpa.startTransaction();
+		sdgRepo.updateCategorieIdSdg(sdgId, categorieId);
+		SdgDaoJpa.commitTransaction();
 	}
 
 	public void close()

@@ -24,10 +24,11 @@ public class CategorieController
 		subject = new PropertyChangeSupport(this);
 		setCategorieRepo(new CategorieDaoJpa());
 		cats = categorieRepo.findAll();
-		//populateDB();
+		// populateDB();
 	}
-	
-	public List<Categorie> geefCategorien() {
+
+	public List<Categorie> geefCategorien()
+	{
 		return Collections.unmodifiableList(cats);
 	}
 
@@ -44,7 +45,7 @@ public class CategorieController
 
 	}
 
-	public void voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
+	public Categorie voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
 //		List<Categorie> oldCats = new ArrayList<>(cats);
@@ -56,6 +57,7 @@ public class CategorieController
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
         subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
+		return newCategorie;
 	}
 
 	public void pasCategorieAan(Categorie c) throws InformationRequiredException
@@ -73,6 +75,13 @@ public class CategorieController
         subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
 	}
 
+	public void verwijderCategorie(Categorie c)
+	{
+		CategorieDaoJpa.startTransaction();
+		categorieRepo.delete(c);
+		CategorieDaoJpa.commitTransaction();
+	}
+
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
 			List<Sdg> sdgs) throws InformationRequiredException
 	{
@@ -86,6 +95,7 @@ public class CategorieController
 		cb.buildIconName(iconName);
 		cb.buildSdgs(sdgs);
 		cb.buildRoles(roles);
+		cb.buildCategory(true);
 		return cb.getCategorie();
 	}
 
@@ -108,9 +118,10 @@ public class CategorieController
         		new PropertyChangeEvent(pcl, "createOrUpdate", createOrUpdateOrDelete, 0));
     }
 
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        subject.removePropertyChangeListener(pcl);
-    }
+	public void removePropertyChangeListener(PropertyChangeListener pcl)
+	{
+		subject.removePropertyChangeListener(pcl);
+	}
 
 //	private void populateDB() {
 //		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
