@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.gson.Gson;
+
 import domein.Categorie;
 import domein.CategorieController;
 import domein.Sdg;
@@ -29,11 +31,15 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class CategorieAanmakenPaneelController extends GridPane
+public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 {
-	private CategorieController cc;
-	private SdgController sc;
+	private Categorie c;
+	private CategorieController categorieController;
+	private SdgController sdgController;
+	private boolean wijzigen;
 
+	@FXML
+	private Label topLabel;
 	@FXML
 	private ListView<String> cat_Sdg_List;
 	@FXML
@@ -60,10 +66,13 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategorieAanmakenPaneelController(CategorieController c)
+	public CategorieAanmakenEnWijzigenPaneelController(Categorie c, CategorieController catController,
+			boolean wijzigen)
 	{
-		this.cc = c;
-		this.sc = new SdgController();
+		this.c = c;
+		this.categorieController = catController;
+		this.sdgController = new SdgController();
+		this.wijzigen = wijzigen;
 		buildGui();
 		setSdgItemList();
 		initialize();
@@ -83,15 +92,26 @@ public class CategorieAanmakenPaneelController extends GridPane
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
-		} catch (IOException ex)
+		} catch (IOException e)
 		{
-			throw new RuntimeException(ex);
+			e.printStackTrace();
+		}
+	}
+
+	private void setSdgItemList()
+	{
+		List<Sdg> sdgs = this.sdgController.geefSdgs();
+		for (Sdg s : sdgs)
+		{
+			this.sdgItemList.add(s);
 		}
 	}
 
 	private void initialize()
 	{
+//		initializeLabels("Categorie aanmaken", "", "", "Categorie aanmaken");
 		instellenHyperLink();
+
 		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		cat_Rol_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -105,12 +125,58 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 		// fill with Roles
 		cat_Rol_List.setItems(rolItemList);
+
+		if (wijzigen)
+			initializeWijzigen();
+	}
+
+	private void initializeWijzigen()
+	{
+		initializeLabels("Categorie aanpassen", c.getName(), c.getIconName(), "Categorie aanpassen");
+		selectDefault(this.c.getSdgs().stream().map(Sdg::getName).toList(), cat_Sdg_List);
+
+		Gson gson = new Gson();
+		List<String> rollen = gson.fromJson(this.c.getRoles(), List.class);
+		selectDefault(rollen, cat_Rol_List);
+	}
+
+	private void initializeLabels(String topLabel, String name, String pictogram, String button)
+	{
+		this.topLabel.setText(topLabel);
+		this.cat_Name_field.setText(name);
+		this.cat_Pictogram_field.setText(pictogram);
+		this.cat_save_btn.setText(button);
+	}
+
+	private ListView<String> selectDefault(List<String> list, ListView<String> listView)
+	{
+		List<Integer> indexes = new ArrayList<>();
+		for (String item : list)
+		{
+			for (int i = 0; i < listView.getItems().size(); i++)
+			{
+				if (item.equals(listView.getItems().get(i)))
+				{
+					indexes.add(i);
+				}
+			}
+		}
+
+		for (int i : indexes)
+		{
+			listView.getSelectionModel().select(i);
+		}
+
+		return listView;
 	}
 
 	@FXML
 	public void btnCatSaveOnAction(ActionEvent event)
 	{
-		collectChanges();
+		if (wijzigen)
+			collectChangesWijzigen();
+		else
+			collectChanges();
 		verify();
 	}
 
@@ -128,9 +194,30 @@ public class CategorieAanmakenPaneelController extends GridPane
 		}
 	}
 
+	private void collectChangesWijzigen()
+	{
+		try
+		{
+			this.c.setName(this.cat_Name_field.getText());
+			this.c.setIconName(this.cat_Pictogram_field.getText());
+			sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
+			rol = cat_Rol_List.getSelectionModel().getSelectedItems();
+
+			this.c.setRoles(rol.stream().toList());
+			setSdgs(sdg);
+			this.c.setSdgs(sdgs);
+		} catch (Exception e)
+		{
+			System.out.println("error categorie");
+		}
+	}
+
 	private void verify()
 	{
-		update();
+		if (wijzigen)
+			updateWijzigen();
+		else
+			update();
 	}
 
 	private void update()
@@ -141,7 +228,7 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 		try
 		{
-			nieuweCategorie = cc.voegCategorieToe(name, pic, vb, sdgs);
+			nieuweCategorie = this.categorieController.voegCategorieToe(name, pic, vb, sdgs);
 			toonBevestiging("Categorie is met succes aangemaakt");
 		} catch (InformationRequiredException e)
 		{
@@ -156,13 +243,31 @@ public class CategorieAanmakenPaneelController extends GridPane
 
 	private void updateGeselecteerdeSdgs(String categorieId, List<Sdg> updateSdgs)
 	{
-		updateSdgs.forEach(s -> sc.updateCategorieIdSdg(s.getId(), categorieId));
+		updateSdgs.forEach(s -> this.sdgController.updateCategorieIdSdg(s.getId(), categorieId));
 	}
 
-	public void setSdgItemList()
+	private void updateWijzigen()
 	{
-		List<Sdg> sdgs = this.sc.geefSdgsZonderCategorie();
-		sdgs.forEach(s -> this.sdgItemList.add(s));
+		try
+		{
+			categorieController.pasCategorieAan(c);
+			toonBevestiging("Categorie is met succes aangepast");
+		} catch (InformationRequiredException e)
+		{
+			lblErrorLabel.setText(e.getMessage());
+			e.getInformationRequired().forEach(System.out::println);
+		}
+	}
+
+	private void setSdgs(ObservableList<String> sdg)
+	{
+		List<Sdg> sdgDummy = new ArrayList<>();
+		for (String s : sdg)
+		{
+			sdgDummy.add(this.sdgController.geefSdgDoorNaam(s));
+		}
+
+		this.sdgs = sdgDummy;
 	}
 
 	private void instellenHyperLink()
@@ -203,27 +308,5 @@ public class CategorieAanmakenPaneelController extends GridPane
 //			Actie(stage);
 		}
 	}
-
-	private void setSdgs(ObservableList<String> sdg)
-	{
-		List<Sdg> sdgDummy = new ArrayList<>();
-		for (String s : sdg)
-		{
-			sdgDummy.add(this.sc.geefSdgDoorNaam(s));
-		}
-
-		this.sdgs = sdgDummy;
-	}
-
-//	private void Actie(Stage stage)
-//	{
-//		// terug naar hoofdscherm
-//		SideBarController controller = new SideBarController();
-//		Scene scene = new Scene(controller);
-//		stage.setScene(scene);
-//		stage.setTitle("Fluvius");
-//		stage.setMaximized(true);
-//		stage.show();
-//	}
 
 }

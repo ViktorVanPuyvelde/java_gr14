@@ -106,7 +106,8 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 		{
 			verwijderRechterScherm();
 		}
-		CategorieAanmakenPaneelController catAanmakenPaneel = new CategorieAanmakenPaneelController(catController);
+		CategorieAanmakenEnWijzigenPaneelController catAanmakenPaneel = new CategorieAanmakenEnWijzigenPaneelController(
+				null, catController, false);
 		this.getChildren().add(catAanmakenPaneel);
 		rechterSchermAanwezig = true;
 	}
@@ -148,7 +149,8 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 
 		if (c != null)
 		{
-			CategorieWijzigenPaneelController controller = new CategorieWijzigenPaneelController(c, this.catController);
+			CategorieAanmakenEnWijzigenPaneelController controller = new CategorieAanmakenEnWijzigenPaneelController(
+					c, this.catController, true);
 			this.getChildren().add(controller);
 			rechterSchermAanwezig = true;
 		} else
