@@ -4,6 +4,8 @@ package gui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,6 +30,8 @@ import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
+import domein.MvoDataController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,10 +78,14 @@ public class NieuweDatasourcePaneelController extends GridPane
     private File selectedFile;
     HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
     TreeMap<Double, List<Object>> verwerkteData;
+
+	private MvoDataController mdc;
+	Mvo mvo;
     
     
     public NieuweDatasourcePaneelController(Datasource d , DatasourceController controller) {
 		this.mc = new MvoController();
+		this.mdc = new MvoDataController();
 		this.controller = controller;
 		this.datasource = d;
 		buildGui();
@@ -156,6 +164,18 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private void update() {
 		
 		verwerkteData.forEach((key,val) -> System.out.println(val));
+		verwerkteData.forEach((key,val) ->{
+			try {
+				mdc.voegMvoDataToe(new SimpleDateFormat("dd/MM/yyyy").parse((String)val.get(1)), mvo , (int) val.get(0), (int) val.get(2));
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		
 	}
 
 	private void verify() {
@@ -176,7 +196,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void collectChanges() {
 		dataOpnemen();
-		//Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		mvo = mvoList.get(mvosList.getSelectionModel().getSelectedIndex());
 		Aggregatie methode = Aggregatie.GEMIDDELDE;
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);

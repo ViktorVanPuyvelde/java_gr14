@@ -5,10 +5,19 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "mvo_data")
+@NamedQueries(
+{ @NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "")
+})
 public class MvoData implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +44,11 @@ public class MvoData implements Serializable{
 		setWaarde(waarde);
 		setDatum(datum);
 		setQuarter(quarter);
+	}
+
+
+	public MvoData() {
+		super();
 	}
 
 
