@@ -66,8 +66,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 
 	private Foutmelding fm = new Foutmelding();
 
-	public CategorieAanmakenEnWijzigenPaneelController(Categorie c, CategorieController catController,
-			boolean wijzigen)
+	public CategorieAanmakenEnWijzigenPaneelController(Categorie c, CategorieController catController, boolean wijzigen)
 	{
 		this.c = c;
 		this.categorieController = catController;
@@ -162,10 +161,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 			}
 		}
 
-		for (int i : indexes)
-		{
-			listView.getSelectionModel().select(i);
-		}
+		indexes.forEach(i -> listView.getSelectionModel().select(i));
 
 		return listView;
 	}
@@ -262,10 +258,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	private void setSdgs(ObservableList<String> sdg)
 	{
 		List<Sdg> sdgDummy = new ArrayList<>();
-		for (String s : sdg)
-		{
-			sdgDummy.add(this.sdgController.geefSdgDoorNaam(s));
-		}
+		sdg.forEach(s -> sdgDummy.add(this.sdgController.geefSdgDoorNaam(s)));
 
 		this.sdgs = sdgDummy;
 	}
