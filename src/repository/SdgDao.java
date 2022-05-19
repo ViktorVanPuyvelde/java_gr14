@@ -15,4 +15,5 @@ public interface SdgDao extends GenericDao<Sdg>
 
 	public List<Sdg> geefSdgsZonderCategorie() throws EntityNotFoundException;
 
+	public void updateCategorieIdSdg(String sdgId, String categorieId) throws EntityNotFoundException;
 }

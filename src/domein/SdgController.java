@@ -47,6 +47,13 @@ public class SdgController
 		return sdgRepo.geefSdgDoorNaam(naam);
 	}
 
+	public void updateCategorieIdSdg(String sdgId, String categorieId)
+	{
+		SdgDaoJpa.startTransaction();
+		sdgRepo.updateCategorieIdSdg(sdgId, categorieId);
+		SdgDaoJpa.commitTransaction();
+	}
+
 	public void close()
 	{
 		SdgDaoJpa.closePersistency();

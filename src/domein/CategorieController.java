@@ -44,7 +44,7 @@ public class CategorieController
 
 	}
 
-	public void voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
+	public Categorie voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
 		List<Categorie> oldCats = new ArrayList<>(cats);
@@ -54,6 +54,7 @@ public class CategorieController
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
 		subject.firePropertyChange("cats", oldCats, cats);
+		return newCategorie;
 	}
 
 	public void pasCategorieAan(Categorie c) throws InformationRequiredException

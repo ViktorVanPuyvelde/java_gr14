@@ -45,4 +45,11 @@ public class SdgDaoJpa extends GenericDaoJpa<Sdg> implements SdgDao
 	{
 		return em.createNamedQuery("Sdg.geefSdgsZonderCategorie", Sdg.class).getResultList();
 	}
+
+	@Override
+	public void updateCategorieIdSdg(String sdgId, String categorieId) throws EntityNotFoundException
+	{
+		em.createNamedQuery("Sdg.updateCategorieIdSdg", Sdg.class).setParameter(1, categorieId).setParameter(2, sdgId)
+				.executeUpdate();
+	}
 }

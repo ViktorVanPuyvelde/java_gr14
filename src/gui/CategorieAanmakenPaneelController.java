@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import domein.Categorie;
 import domein.CategorieController;
 import domein.Sdg;
 import domein.SdgController;
@@ -113,27 +114,6 @@ public class CategorieAanmakenPaneelController extends GridPane
 		verify();
 	}
 
-	private void update()
-	{
-		List<String> vb = rol.stream().toList();
-		setSdgs(sdg);
-
-		try
-		{
-			cc.voegCategorieToe(name, pic, vb, sdgs);
-			toonBevestiging("Categorie is met succes aangemaakt");
-		} catch (InformationRequiredException e)
-		{
-			lblErrorLabel.setText(e.getMessage());
-			e.getInformationRequired().forEach(System.out::println);
-		}
-	}
-
-	private void verify()
-	{
-		update();
-	}
-
 	private void collectChanges()
 	{
 		try
@@ -148,13 +128,41 @@ public class CategorieAanmakenPaneelController extends GridPane
 		}
 	}
 
+	private void verify()
+	{
+		update();
+	}
+
+	private void update()
+	{
+		List<String> vb = rol.stream().toList();
+		setSdgs(sdg);
+		Categorie nieuweCategorie = null;
+
+		try
+		{
+			nieuweCategorie = cc.voegCategorieToe(name, pic, vb, sdgs);
+			toonBevestiging("Categorie is met succes aangemaakt");
+		} catch (InformationRequiredException e)
+		{
+			lblErrorLabel.setText(e.getMessage());
+			e.getInformationRequired().forEach(System.out::println);
+		}
+		if (nieuweCategorie != null)
+		{
+			updateGeselecteerdeSdgs(nieuweCategorie.getId(), nieuweCategorie.getSdgs());
+		}
+	}
+
+	private void updateGeselecteerdeSdgs(String categorieId, List<Sdg> updateSdgs)
+	{
+		updateSdgs.forEach(s -> sc.updateCategorieIdSdg(s.getId(), categorieId));
+	}
+
 	public void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgsZonderCategorie();
-		for (Sdg s : sdgs)
-		{
-			this.sdgItemList.add(s);
-		}
+		sdgs.forEach(s -> this.sdgItemList.add(s));
 	}
 
 	private void instellenHyperLink()
