@@ -28,6 +28,8 @@ public class CategorieRaadpleegPaneelController extends VBox {
 	@FXML
 	private Label icon_lbl;
 	@FXML
+	private Label rollen_lbl;
+	@FXML
 	private ListView<String> sdg_list;
 	@FXML
 	private HBox sdg_hbox;
@@ -59,6 +61,7 @@ public class CategorieRaadpleegPaneelController extends VBox {
 		id_lbl.setText(categorie.getId());
 		naam_lbl.setText(categorie.getName());
 		icon_lbl.setText(categorie.getIconName());
+		rollen_lbl.setText(categorie.getRoles());
 
 		List<Sdg> sdgs = FXCollections.observableArrayList(new ArrayList<>(controller.geefSdgsVoorCategorie(categorie)));
 		if (!sdgs.isEmpty()) {
