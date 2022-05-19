@@ -23,7 +23,6 @@ public class CategorieController
 		subject = new PropertyChangeSupport(this);
 		setCategorieRepo(new CategorieDaoJpa());
 		cats = categorieRepo.findAll();
-		// populateDB();
 	}
 
 	public List<Categorie> geefCategorien()
@@ -47,7 +46,6 @@ public class CategorieController
 	public Categorie voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
-//		List<Categorie> oldCats = new ArrayList<>(cats);
 		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 1;
 		Categorie newCategorie = createCategorie(null, name, iconName, roles, sdgs);
@@ -55,13 +53,12 @@ public class CategorieController
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
-        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 		return newCategorie;
 	}
 
 	public void pasCategorieAan(Categorie c) throws InformationRequiredException
 	{
-//		List<Categorie> oldCats = new ArrayList<>(cats);
 		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 2;
 		CategorieBuilder cb = new CategorieBuilder();
@@ -71,7 +68,7 @@ public class CategorieController
 		categorieRepo.update(updateCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.set(cats.indexOf(c), updateCategorie);
-        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 	}
 
 	public void verwijderCategorie(Categorie c)
@@ -82,7 +79,7 @@ public class CategorieController
 		categorieRepo.delete(c);
 		CategorieDaoJpa.commitTransaction();
 		cats.remove(c);
-        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
@@ -118,7 +115,7 @@ public class CategorieController
     public void addPropertyChangeListener(PropertyChangeListener pcl) { 
         subject.addPropertyChangeListener(pcl);
         pcl.propertyChange(
-        		new PropertyChangeEvent(pcl, "createOrUpdate", createOrUpdateOrDelete, 0));
+        		new PropertyChangeEvent(pcl, "createOrUpdateOrDelete", createOrUpdateOrDelete, 0));
     }
 
 	public void removePropertyChangeListener(PropertyChangeListener pcl)
@@ -130,11 +127,4 @@ public class CategorieController
 	public Categorie getCategorie(String naam) {
 		return cats.stream().filter(c -> c.getName().equals(naam)).findAny().get();
 	}
-//	private void populateDB() {
-//		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("Planet", "icon2", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("People", "icon3", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("Datasources", "icon4", new String[] {"manager", "coördinator"}, false));
-//		categorieRepo.insert(new Categorie("Account", "icon5", new String[] {"manager", "stakeholder", "coördinator"}, false));
-//	}
 }

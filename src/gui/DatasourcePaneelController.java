@@ -1,5 +1,7 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-public class DatasourcePaneelController extends HBox{
+public class DatasourcePaneelController extends HBox implements PropertyChangeListener{
 	private DatasourceController datasourceCon;
 	
 	@FXML
@@ -32,6 +34,8 @@ public class DatasourcePaneelController extends HBox{
 	private Button delete_btn;
 	@FXML
 	private Label datasource_Selecteren_lbl;
+	@FXML
+	private Label dat_create_update_lbl;
 	
 	private ObservableList<Datasource> datasourceItemList;
 	
@@ -42,7 +46,7 @@ public class DatasourcePaneelController extends HBox{
 		this.datasourceCon = new DatasourceController();
 		buildGui();
 		setDatasourceList();
-		initialize();
+		datasourceCon.addPropertyChangeListener(this);
 	}
 
 	private void initialize() {
@@ -79,6 +83,7 @@ public class DatasourcePaneelController extends HBox{
 	@FXML
 	public void create_OnAction(ActionEvent event) {
 		datasource_Selecteren_lbl.setText("");
+		dat_create_update_lbl.setText("");
 		if (rechterSchermAanwezig) {
             verwijderRechterScherm();            
         }
@@ -90,6 +95,7 @@ public class DatasourcePaneelController extends HBox{
 	@FXML
 	public void edit_OnAction(ActionEvent event) {
 		datasource_Selecteren_lbl.setText("");
+		dat_create_update_lbl.setText("");
 		if (rechterSchermAanwezig) {
             verwijderRechterScherm();            
         }
@@ -105,12 +111,41 @@ public class DatasourcePaneelController extends HBox{
 	}
 		
 	@FXML
-	public void delete_OnAction(ActionEvent event) {		
+	public void delete_OnAction(ActionEvent event) {
+		datasource_Selecteren_lbl.setText("");
+		dat_create_update_lbl.setText("");
+		if (rechterSchermAanwezig) {
+            verwijderRechterScherm();            
+        }
+
 	}
 	
 	private void verwijderRechterScherm() {
         this.getChildren().remove(this.getChildren().size()-1);
         rechterSchermAanwezig = false;
     }
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
+		}
+		int newValue = (int) evt.getNewValue();
+		if (newValue == 1) {
+			dat_create_update_lbl.setText("Datasource is met succes aangemaakt!");
+		}else if(newValue == 2) {
+			dat_create_update_lbl.setText("Datasource is met succes gewijzigd!");
+		}else if(newValue == 3) {
+			dat_create_update_lbl.setText("Datasource is met succes verwijderd!");
+		}else {
+			dat_create_update_lbl.setText("");
+		}
+		
+		datasourceItemList = FXCollections.observableArrayList(datasourceCon.geefDatasources());
+		datasource_List.getItems().clear();
+		initialize();
+
+	}
 
 }

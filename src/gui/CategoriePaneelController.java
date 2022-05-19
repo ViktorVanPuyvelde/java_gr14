@@ -46,7 +46,6 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 		this.catController = new CategorieController();
 		buildGui();
 		setCategorieList();
-//		initialize();
 		catController.addPropertyChangeListener(this);
 	}
 
@@ -204,7 +203,6 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 			verwijderRechterScherm();
 		}
 		int newValue = (int) evt.getNewValue();
-//		List<Categorie> oldValue = (List<Categorie>) evt.getOldValue();
 		if (newValue == 1) {
 			cat_create_update_lbl.setText("Categorie is met succes aangemaakt!");
 		}else if(newValue == 2) {
