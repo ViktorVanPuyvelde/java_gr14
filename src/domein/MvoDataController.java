@@ -15,11 +15,10 @@ public class MvoDataController
 {
 	
 	private MvoDataDao mvoDataRepo;
-	private List<MvoData> mvoDatas;
 	
 	public MvoDataController() {
 		setMvoDataRepo(new MvoDataDaoJpa());
-		this.mvoDatas = mvoDataRepo.findAll();
+		
 	}
 
 	public void setMvoDataRepo(MvoDataDao mvoDataRepo) {
@@ -34,19 +33,16 @@ public class MvoDataController
 		return mvoDataRepo.geefMvoMetNaam(naam);
 	}
 	
-	public List<MvoData> geefMvoDatas()
-	{
-		return Collections.unmodifiableList(mvoDatas);
-	}
 
-	public void voegMvoDataToe(Date date, Mvo mvo, int quarter, int waarde)
+
+	public void voegMvoDataToe(Mvo mvo, int waarde,Date date, int quarter)
 			throws InformationRequiredException
 	{
-		MvoData newMvoData = createMvoData(null, date, mvo, quarter, waarde);
+		MvoData newMvoData = createMvoData(null, mvo,waarde,date, quarter);
 		MvoDaoJpa.startTransaction();
 		mvoDataRepo.insert(newMvoData);
 		MvoDaoJpa.commitTransaction();
-		mvoDatas.add(newMvoData);
+		
 	}	
 	
 	public void update(MvoData mvoData) {
@@ -68,15 +64,16 @@ public class MvoDataController
 		MvoDaoJpa.closePersistency();
 	}
 
-	private MvoData createMvoData(MvoDataBuilder mb, Date date, Mvo mvo, int quarter, int waarde
+	private MvoData createMvoData(MvoDataBuilder mb, Mvo mvo, int waarde,Date date, int quarter
 			) throws InformationRequiredException
 	{
 		if (mb == null)
 		{
 			mb = new MvoDataBuilder();
 		}
-		mb.buildDatum(date);
+		mb.createNewMvoData();
 		mb.buildId();
+		mb.buildDatum(date);
 		mb.buildMvo(mvo);
 		mb.buildQuarter(quarter);
 		mb.buildWaarde(waarde);

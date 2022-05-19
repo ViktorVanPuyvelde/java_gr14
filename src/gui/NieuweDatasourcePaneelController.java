@@ -3,10 +3,10 @@ package gui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -166,11 +166,13 @@ public class NieuweDatasourcePaneelController extends GridPane
 		verwerkteData.forEach((key,val) -> System.out.println(val));
 		verwerkteData.forEach((key,val) ->{
 			try {
-				mdc.voegMvoDataToe(new SimpleDateFormat("dd/MM/yyyy").parse((String)val.get(1)), mvo , (int) val.get(0), (int) val.get(2));
+				mdc.voegMvoDataToe(
+						mvo ,
+						(int) (((OptionalDouble) val.get(0)).getAsDouble()),
+						(Date) val.get(1),
+						(int)( Double.parseDouble( val.get(2).toString()))
+						);
 			} catch (InformationRequiredException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -225,7 +227,7 @@ public class NieuweDatasourcePaneelController extends GridPane
                 //fill datalist from excel cells
                 //-----
                 Double dataCel = cellIterator.next().getNumericCellValue();
-                String dateCel = cellIterator.next().getStringCellValue();
+                Date dateCel = cellIterator.next().getDateCellValue();
                 Double quarterCel = cellIterator.next().getNumericCellValue();
                 data.add(dataCel);
                 data.add(dateCel);

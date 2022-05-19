@@ -13,13 +13,13 @@ public class MvoDataDaoJpa extends GenericDaoJpa<MvoData> implements MvoDataDao{
 
 	public MvoDataDaoJpa() {
 		super(MvoData.class);
-		// TODO Auto-generated constructor stub
+	
 	}
 
-	@Override
-	public List<MvoData> geefAlleMvoDatas() throws EntityNotFoundException {
-		return super.findAll();
-	}
+	/*
+	 * @Override public List<MvoData> geefAlleMvoDatas() throws
+	 * EntityNotFoundException { return super.findAll(); }
+	 */
 
 	@Override
 	public List<MvoData> geefAlleMvoDatasVoorMvo(String mvo_id) throws EntityNotFoundException {

@@ -2,6 +2,8 @@ package domein;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -13,16 +15,23 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.eclipse.persistence.internal.jaxb.json.schema.model.JsonType;
+
+import com.google.gson.Gson;
+
+
+
 @Entity
 @Table(name = "mvo_data")
-@NamedQueries(
-{ @NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "")
+@NamedQueries(		
+{
+	@NamedQuery(name = "MvoData.alleMvoDatas", query = "select md from MvoData md"),
+	@NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "SELECT md FROM MvoData md INNER JOIN  md.mvo_id m WHERE m.mvo_id = :mvo_id"),
 })
 public class MvoData implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	
 	@Id
 	@Column(name = "mvo_data_id")
 	private String id;
@@ -30,7 +39,7 @@ public class MvoData implements Serializable{
 	@JoinColumn(name = "mvo_id")
 	private Mvo mvo_id;
 	@Column(name = "data")
-	private int waarde;
+	private String waarde;
 	@Column(name = "date")
 	private Date datum;
 	@Column(name="quarter")
@@ -47,7 +56,7 @@ public class MvoData implements Serializable{
 	}
 
 
-	public MvoData() {
+	protected MvoData() {
 		super();
 	}
 
@@ -65,11 +74,28 @@ public class MvoData implements Serializable{
 	public void setMvo_id(Mvo mvo_id) {
 		this.mvo_id = mvo_id;
 	}
-	public int getWaarde() {
-		return waarde;
+	public int getWaardeInt() {
+		return Integer. parseInt(waarde.split(":")[1].strip().replaceAll("(\"|})", ""));
 	}
+	
+	public String getWaarde() {
+		return this.waarde;
+	}
+	
+
+	  private class WaardeJson {
+	    String waarde;
+	    protected WaardeJson(String waarde) {
+	    	this.waarde = waarde;
+	    }
+	  }
+	
 	public void setWaarde(int waarde) {
-		this.waarde = waarde;
+			Gson gson = new Gson();
+			String json = gson.toJson(new WaardeJson(Integer.toString(waarde)));
+			System.out.println(json);
+			this.waarde = "'" + json + "'";
+		
 	}
 	public Date getDatum() {
 		return datum;
@@ -84,5 +110,27 @@ public class MvoData implements Serializable{
 		this.quarter = quarter;
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(datum, waarde, quarter);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MvoData other = (MvoData) obj;
+		return Objects.equals(waarde, other.waarde) && Objects.equals(datum, other.datum) && Objects.equals(quarter, other.quarter);
+	}
+
+	@Override
+	public String toString()
+	{
+		return String.format("id: %s, %s, kwartaal: %d%n", getId(), getWaarde(), getQuarter());
+	}
 	
 }

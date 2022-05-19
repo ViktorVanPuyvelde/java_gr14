@@ -29,7 +29,7 @@ public class MvoDataBuilder
 		{
 			requiredElements.add(RequiredElement.QuarterRequired);
 		}
-		if (this.mvoData.getWaarde() < 0)
+		if (this.mvoData.getWaardeInt() < 0)
 		{
 			requiredElements.add(RequiredElement.ValueRequired);
 		}
