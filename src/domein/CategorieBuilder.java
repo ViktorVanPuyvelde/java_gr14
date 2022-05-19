@@ -24,7 +24,8 @@ public class CategorieBuilder
 		{
 			requiredElements.add(RequiredElement.SdgRequired);
 		}
-		if (this.categorie.getRoles() == null || this.categorie.getRoles().equals("[]") || this.categorie.getRoles().equals("null"))
+		if (this.categorie.getRoles() == null || this.categorie.getRoles().equals("[]")
+				|| this.categorie.getRoles().equals("null"))
 		{
 			this.requiredElements.add(RequiredElement.RolesRequired);
 		}

@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,7 +22,11 @@ import javax.persistence.Table;
 @NamedQueries(
 { @NamedQuery(name = "Mvo.geefSdgVoorMvo", query = "SELECT s FROM Mvo m INNER JOIN m.sdg s WHERE s.id LIKE :mvoSdgId AND m.id LIKE :mvoId"),
 		@NamedQuery(name = "Sdg.sdgVoorCat", query = "SELECT s FROM Sdg s INNER JOIN s.categorie c WHERE c.name = :catNaam"),
-		@NamedQuery(name = "Sdg.geefSdgDoorNaam", query = "SELECT s FROM Sdg s WHERE s.name = :naam") })
+		@NamedQuery(name = "Sdg.geefSdgDoorNaam", query = "SELECT s FROM Sdg s WHERE s.name = :naam"),
+		@NamedQuery(name = "Sdg.geefSdgsZonderCategorie", query = "select s from Sdg s where s.categorie is null"), })
+@NamedNativeQueries(
+{ @NamedNativeQuery(name = "Sdg.updateCategorieIdSdg", query = "update Sdg s set s.category_id = ? where s.sdg_id = ?"), })
+
 public class Sdg implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -116,12 +122,14 @@ public class Sdg implements Serializable
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode()
+	{
 		return Objects.hash(image, name);
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj)
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)

@@ -1,5 +1,7 @@
 package repository;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 
@@ -36,5 +38,18 @@ public class SdgDaoJpa extends GenericDaoJpa<Sdg> implements SdgDao
 		{
 			throw new EntityNotFoundException();
 		}
+	}
+
+	@Override
+	public List<Sdg> geefSdgsZonderCategorie() throws EntityNotFoundException
+	{
+		return em.createNamedQuery("Sdg.geefSdgsZonderCategorie", Sdg.class).getResultList();
+	}
+
+	@Override
+	public void updateCategorieIdSdg(String sdgId, String categorieId) throws EntityNotFoundException
+	{
+		em.createNamedQuery("Sdg.updateCategorieIdSdg", Sdg.class).setParameter(1, categorieId).setParameter(2, sdgId)
+				.executeUpdate();
 	}
 }
