@@ -17,7 +17,8 @@ public class CategorieController
 	private CategorieDao categorieRepo;
 	private List<Categorie> cats;
     private PropertyChangeSupport subject;
-
+    private int createOrUpdateOrDelete = 0;
+    
 	public CategorieController()
 	{
 		subject = new PropertyChangeSupport(this);
@@ -46,23 +47,30 @@ public class CategorieController
 	public void voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
-		List<Categorie> oldCats = new ArrayList<>(cats);
+//		List<Categorie> oldCats = new ArrayList<>(cats);
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 1;
 		Categorie newCategorie = createCategorie(null, name, iconName, roles, sdgs);
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
-        subject.firePropertyChange("cats", oldCats, cats);
+        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
 	}
 
 	public void pasCategorieAan(Categorie c) throws InformationRequiredException
 	{
+//		List<Categorie> oldCats = new ArrayList<>(cats);
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 2;
 		CategorieBuilder cb = new CategorieBuilder();
 		cb.setCategorie(c);
 		Categorie updateCategorie = cb.getCategorie();
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.update(updateCategorie);
 		CategorieDaoJpa.commitTransaction();
+		cats.set(cats.indexOf(c), updateCategorie);
+        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
@@ -97,7 +105,7 @@ public class CategorieController
     public void addPropertyChangeListener(PropertyChangeListener pcl) { 
         subject.addPropertyChangeListener(pcl);
         pcl.propertyChange(
-        		new PropertyChangeEvent(pcl, "cats", cats, cats));
+        		new PropertyChangeEvent(pcl, "createOrUpdate", createOrUpdateOrDelete, 0));
     }
 
     public void removePropertyChangeListener(PropertyChangeListener pcl) {

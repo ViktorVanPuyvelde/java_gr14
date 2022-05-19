@@ -121,7 +121,7 @@ public class CategorieAanmakenPaneelController extends GridPane
 		try
 		{
 			cc.voegCategorieToe(name, pic, vb, sdgs);
-			toonBevestiging("Categorie is met succes aangemaakt");
+			//toonBevestiging("Categorie is met succes aangemaakt");
 		} catch (InformationRequiredException e)
 		{
 			lblErrorLabel.setText(e.getMessage());

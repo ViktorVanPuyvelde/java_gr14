@@ -187,7 +187,7 @@ public class CategorieWijzigenPaneelController extends GridPane
 		try
 		{
 			categorieController.pasCategorieAan(c);
-			toonBevestiging("Categorie is met succes aangepast");
+			//toonBevestiging("Categorie is met succes aangepast");
 		} catch (InformationRequiredException e)
 		{
 			lblErrorLabel.setText(e.getMessage());
