@@ -77,9 +77,13 @@ public class CategorieController
 
 	public void verwijderCategorie(Categorie c)
 	{
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 3;
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.delete(c);
 		CategorieDaoJpa.commitTransaction();
+		cats.remove(c);
+        subject.firePropertyChange("createOrUpdate", old, createOrUpdateOrDelete);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
