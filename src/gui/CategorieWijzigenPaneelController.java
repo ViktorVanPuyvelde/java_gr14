@@ -96,7 +96,6 @@ public class CategorieWijzigenPaneelController extends GridPane
 			loader.load();
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -133,11 +132,11 @@ public class CategorieWijzigenPaneelController extends GridPane
 	private ListView<String> selectDefault(List<String> list, ListView<String> listView)
 	{
 		List<Integer> indexes = new ArrayList<>();
-		for (String rol : list)
+		for (String item : list)
 		{
 			for (int i = 0; i < listView.getItems().size(); i++)
 			{
-				if (rol.equals(listView.getItems().get(i)))
+				if (item.equals(listView.getItems().get(i)))
 				{
 					indexes.add(i);
 				}
