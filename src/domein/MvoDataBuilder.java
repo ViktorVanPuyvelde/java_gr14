@@ -69,7 +69,7 @@ public class MvoDataBuilder
 		this.mvoData.setQuarter(quarter);
 	}
 	
-	public void buildWaarde(int waarde)
+	public void buildWaarde(String waarde)
 	{
 		this.mvoData.setWaarde(waarde);
 	}

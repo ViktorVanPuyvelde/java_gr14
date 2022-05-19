@@ -168,7 +168,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 			try {
 				mdc.voegMvoDataToe(
 						mvo ,
-						(int) (((OptionalDouble) val.get(0)).getAsDouble()),
+						String.valueOf(((OptionalDouble) val.get(0)).getAsDouble()),
 						(Date) val.get(1),
 						(int)( Double.parseDouble( val.get(2).toString()))
 						);

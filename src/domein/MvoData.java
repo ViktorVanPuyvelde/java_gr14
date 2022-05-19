@@ -2,7 +2,6 @@ package domein;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -14,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.eclipse.persistence.internal.jaxb.json.schema.model.JsonType;
 
 import com.google.gson.Gson;
 
@@ -50,7 +47,7 @@ public class MvoData implements Serializable{
 	public MvoData( Mvo mvo_id, int waarde, Date datum, int quarter) {
 		setId(UUID.randomUUID().toString());
 		setMvo_id(mvo_id);
-		setWaarde(waarde);
+		setWaarde(Integer.toString(waarde));
 		setDatum(datum);
 		setQuarter(quarter);
 	}
@@ -75,7 +72,9 @@ public class MvoData implements Serializable{
 		this.mvo_id = mvo_id;
 	}
 	public int getWaardeInt() {
-		return Integer. parseInt(waarde.split(":")[1].strip().replaceAll("(\"|})", ""));
+		String stringWaarde = waarde.split(":")[1].strip().replaceAll("(\"|'|})", "");
+		Double doubleWaarde = Double.parseDouble(stringWaarde);
+		return doubleWaarde.intValue();
 	}
 	
 	public String getWaarde() {
@@ -90,9 +89,9 @@ public class MvoData implements Serializable{
 	    }
 	  }
 	
-	public void setWaarde(int waarde) {
+	public void setWaarde(String waarde) {
 			Gson gson = new Gson();
-			String json = gson.toJson(new WaardeJson(Integer.toString(waarde)));
+			String json = gson.toJson(new WaardeJson(waarde));
 			System.out.println(json);
 			this.waarde = "'" + json + "'";
 		

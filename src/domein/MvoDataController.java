@@ -35,26 +35,26 @@ public class MvoDataController
 	
 
 
-	public void voegMvoDataToe(Mvo mvo, int waarde,Date date, int quarter)
+	public void voegMvoDataToe(Mvo mvo, String waarde,Date date, int quarter)
 			throws InformationRequiredException
 	{
 		MvoData newMvoData = createMvoData(null, mvo,waarde,date, quarter);
-		MvoDaoJpa.startTransaction();
+		MvoDataDaoJpa.startTransaction();
 		mvoDataRepo.insert(newMvoData);
-		MvoDaoJpa.commitTransaction();
+		MvoDataDaoJpa.commitTransaction();
 		
 	}	
 	
 	public void update(MvoData mvoData) {
-    	MvoDaoJpa.startTransaction();
+		MvoDataDaoJpa.startTransaction();
 		mvoDataRepo.update(mvoData);
-        MvoDaoJpa.commitTransaction();
+		MvoDataDaoJpa.commitTransaction();
 	}
 	
 	public void delete(MvoData mvoData) {
-    	MvoDaoJpa.startTransaction();
+		MvoDataDaoJpa.startTransaction();
 		mvoDataRepo.delete(mvoData);
-        MvoDaoJpa.commitTransaction();
+		MvoDataDaoJpa.commitTransaction();
 	}
 
 	
@@ -64,7 +64,7 @@ public class MvoDataController
 		MvoDaoJpa.closePersistency();
 	}
 
-	private MvoData createMvoData(MvoDataBuilder mb, Mvo mvo, int waarde,Date date, int quarter
+	private MvoData createMvoData(MvoDataBuilder mb, Mvo mvo, String waarde,Date date, int quarter
 			) throws InformationRequiredException
 	{
 		if (mb == null)
