@@ -14,8 +14,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import domein.Categorie;
 import domein.Datasource;
 import domein.Mvo;
 import domein.MvoController;
@@ -71,5 +73,40 @@ class TestMvo {
 		Assertions.assertFalse(mvos.isEmpty());
 		Assertions.assertEquals(new Mvo("Waterverbruik", null, null, 0, null, null), mvos.get(0));
 	}
+	
+	private static Stream<Arguments> mvos(){
+		return Stream.of(
+				Arguments.of(new Mvo("mvo1", null, null, 0, null, null)),
+				Arguments.of(new Mvo("mvo2", null, null, 0, null, null)),
+				Arguments.of(new Mvo("mvo3", null, null, 0, null, null))
+			);
+	}
+	
+	@ParameterizedTest
+	@MethodSource("mvos")
+	public void testRaadpleegMvo(Mvo m) {
+		Mockito.when(mvoRepo.geefMvoMetNaam(m.getName())).thenReturn(m);
+		Assertions.assertEquals(m, controller.geefMvoMetNaam(m.getName()));
+		Mockito.verify(mvoRepo).geefMvoMetNaam(m.getName());		
+	}
+	
+	@Test
+	public void testUpdateMvo() throws InformationRequiredException {
+		Mvo m = controller.geefMvos().get(0);
+
+		m.setName("updateMvo");
+		controller.update(m);
+		Assertions.assertEquals("updateMvo", controller.geefMvos().get(0).getName());
+		
+		//Terug naar originele waarde zetten
+		m.setName("Waterverbruik");
+		controller.update(m);		
+	}
+	
+//	@ParameterizedTest
+//	@MethodSource("fouteMvo")
+//	public void testUpdateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo){
+//		Assertions.assertThrows(InformationRequiredException.class, () -> controller.update(new Mvo(naam, sdg, info, goal, datasource, superMvo)));
+//	}
 
 }
