@@ -61,8 +61,8 @@ public class AanmeldPaneelController extends AnchorPane{
 	}
 	
 	private void initialize() {
-		gebruikersnaam.setText("arnoud.bury@student.hogent.be");	
-		wachtwoord.setText("Test123@");
+		gebruikersnaam.setText("admin@test.be");	
+		wachtwoord.setText("Azertyuiop.123");
 	}
 	
 	
