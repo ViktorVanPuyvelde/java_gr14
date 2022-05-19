@@ -57,10 +57,10 @@ public class CategorieController
 		return newCategorie;
 	}
 
-	public void pasCategorieAan(Categorie c) throws InformationRequiredException
+	public void pasCategorieAan(Categorie c, boolean isCategorie) throws InformationRequiredException
 	{
 		CategorieBuilder cb = new CategorieBuilder();
-		cb.setCategorie(c);
+		cb.setCategorie(c, isCategorie);
 		Categorie updateCategorie = cb.getCategorie();
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.update(updateCategorie);
