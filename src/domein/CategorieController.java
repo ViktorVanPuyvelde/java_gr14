@@ -3,7 +3,6 @@ package domein;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -127,6 +126,10 @@ public class CategorieController
 		subject.removePropertyChangeListener(pcl);
 	}
 
+	
+	public Categorie getCategorie(String naam) {
+		return cats.stream().filter(c -> c.getName().equals(naam)).findAny().get();
+	}
 //	private void populateDB() {
 //		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
 //		categorieRepo.insert(new Categorie("Planet", "icon2", new String[] {"manager", "stakeholder", "coördinator"}, true));

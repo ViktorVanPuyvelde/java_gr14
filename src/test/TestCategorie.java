@@ -131,10 +131,15 @@ class TestCategorie {
 		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs)));
 	}
 
-//	@Test
-//	public void testDeleteCategory() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	public void testDeleteCategory() throws InformationRequiredException {
+		controller.voegCategorieToe("nieuwCat", "icon", new ArrayList<>(Arrays.asList("gebruiker")), new ArrayList<>(Arrays.asList(new Sdg("sdg1", null, null, null))));
+
+		Categorie c = controller.getCategorie("nieuwCat");
+		Assertions.assertTrue(controller.geefCategorien().contains(c));
+		controller.verwijderCategorie(c);
+		Assertions.assertFalse(controller.geefCategorien().contains(c));		
+	}
 
 	
 }
