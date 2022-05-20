@@ -173,8 +173,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 						(int)( Double.parseDouble( val.get(2).toString()))
 						);
 			} catch (InformationRequiredException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+				toevoegenLbl.setText(String.format("%s", e.getMessage()));
+				toevoegenLbl.setTextFill(Color.RED);
+				toevoegenLbl.setStyle("-fx-font-weight: bold");
 			}
 		});
 		
@@ -254,13 +256,19 @@ public class NieuweDatasourcePaneelController extends GridPane
             workbook.close();
         }  catch (FileNotFoundException e) {
 			
-			e.printStackTrace();
+        	toevoegenLbl.setText(String.format("Bestand niet gevonden"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		} catch (IOException e) {
 			
-			e.printStackTrace();
+			toevoegenLbl.setText(String.format("Error in bestand"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		} catch (InvalidFormatException e) {
 			
-			e.printStackTrace();
+			toevoegenLbl.setText(String.format("Data heeft niet het juiste formaat"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		}
 		
 	}
