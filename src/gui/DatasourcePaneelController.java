@@ -109,13 +109,20 @@ public class DatasourcePaneelController extends HBox{
 		
 	@FXML
 	public void delete_OnAction(ActionEvent event) {	
+		datasource_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig) {
+            verwijderRechterScherm();            
+        }
 		String naam = datasource_List.getSelectionModel().getSelectedItem();
 		Datasource d = datasourceItemList.stream().filter(dat -> dat.getName().equals(naam)).findAny().orElse(null);
-		if(mvoCon.geefCountMVODatasource(d) == 0) {
-			datasourceCon.delete(d);
+		if (d != null) {
+			DatasourceVerwijderenPaneelController root = new DatasourceVerwijderenPaneelController(d);
+			this.getChildren().add(root);
+			rechterSchermAanwezig = true;			
 		}else {
-			datasource_Selecteren_lbl.setText("Verwijderen mislukt: 1 of meerdere MVO doelstellingen gekoppeld");
+			datasource_Selecteren_lbl.setText("Gelieve eerst een datasource te selecteren!");
 		}
+		
 	}
 	
 	
