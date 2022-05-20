@@ -49,8 +49,6 @@ public class AanmakenMvoPaneelController extends GridPane
 	@FXML
 	private Node rowConstraint0;
 	@FXML
-	private ListView<String> lvDatasource;
-	@FXML
 	private ListView<String> lvSuperMvo;
 	@FXML
 	private Label lblErrorNietAangemaakt;
@@ -68,7 +66,6 @@ public class AanmakenMvoPaneelController extends GridPane
 	private Aggregatie methode;
 
 	private ObservableList<Sdg> sdgItemList;
-	private ObservableList<Datasource> datasourceItemList;
 	private ObservableList<Mvo> superMvoItemList;
 	private ObservableList<Aggregatie> boxOptions;
 
@@ -78,11 +75,10 @@ public class AanmakenMvoPaneelController extends GridPane
 	{
 		this.mc = new MvoController();
 		this.sc = new SdgController();
-		this.dc = new DatasourceController();
+
 		melding = new Melding();
 		buildGui();
 		setSdgItemList();
-		setDatasourceItemList();
 		setSuperMvoItemList();
 		initialize();
 	}
@@ -93,7 +89,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		{
 			type = FXCollections.observableArrayList(new ArrayList<>());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
-			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
+
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
 			boxOptions = FXCollections.observableArrayList(Aggregatie.values());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
@@ -109,11 +105,11 @@ public class AanmakenMvoPaneelController extends GridPane
 	private void initialize()
 	{
 		lvSdg.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		lvDatasource.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
 		lvSuperMvo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
-		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
+
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 		
 		aggregatieBox.getItems().setAll(boxOptions);
@@ -140,7 +136,7 @@ public class AanmakenMvoPaneelController extends GridPane
 			{
 				this.doel = Integer.parseInt(txtDoel.getText());
 			}
-			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
+
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
 			
 		} catch (EntityNotFoundException e)
@@ -174,12 +170,6 @@ public class AanmakenMvoPaneelController extends GridPane
 			this.sdgItemList.add(s);
 	}
 
-	private void setDatasourceItemList()
-	{
-		List<Datasource> datasources = this.dc.geefDatasources();
-		for (Datasource d : datasources)
-			this.datasourceItemList.add(d);
-	}
 
 	private void setSuperMvoItemList()
 	{
