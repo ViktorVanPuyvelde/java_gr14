@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 @NamedQueries(		
 {
 	@NamedQuery(name = "MvoData.alleMvoDatas", query = "select md from MvoData md"),
-	@NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "SELECT md FROM MvoData md INNER JOIN  md.mvo_id m WHERE m.mvo_id = :mvo_id"),
+	@NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "SELECT md FROM MvoData md WHERE md.mvo = :mvo_id"),
 })
 public class MvoData implements Serializable{
 
@@ -34,7 +34,7 @@ public class MvoData implements Serializable{
 	private String id;
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "mvo_id")
-	private Mvo mvo_id;
+	private Mvo mvo;
 	@Column(name = "data")
 	private String waarde;
 	@Column(name = "date")
@@ -44,9 +44,9 @@ public class MvoData implements Serializable{
 	
 	
 	
-	public MvoData( Mvo mvo_id, int waarde, Date datum, int quarter) {
+	public MvoData( Mvo mvo, int waarde, Date datum, int quarter) {
 		setId(UUID.randomUUID().toString());
-		setMvo_id(mvo_id);
+		setMvo_id(mvo);
 		setWaarde(Integer.toString(waarde));
 		setDatum(datum);
 		setQuarter(quarter);
@@ -66,10 +66,10 @@ public class MvoData implements Serializable{
 		this.id = id;
 	}
 	public Mvo getMvo_id() {
-		return mvo_id;
+		return mvo;
 	}
-	public void setMvo_id(Mvo mvo_id) {
-		this.mvo_id = mvo_id;
+	public void setMvo_id(Mvo mvo) {
+		this.mvo = mvo;
 	}
 	public int getWaardeInt() {
 		String stringWaarde = waarde.split(":")[1].strip().replaceAll("(\"|'|})", "");
@@ -93,7 +93,7 @@ public class MvoData implements Serializable{
 			Gson gson = new Gson();
 			String json = gson.toJson(new WaardeJson(waarde));
 			System.out.println(json);
-			this.waarde = "'" + json + "'";
+			this.waarde =  json ;
 		
 	}
 	public Date getDatum() {
