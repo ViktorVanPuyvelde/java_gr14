@@ -141,6 +141,7 @@ public class Mvo implements Serializable
 		return info;
 	}
 
+	
 	public void setInfo(List<String> info)
 	{
 		Gson gson = new Gson();
