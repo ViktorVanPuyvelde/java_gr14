@@ -47,13 +47,13 @@ public class MvoController
 	
 	public void update(Mvo mvo) {
     	MvoDaoJpa.startTransaction();
-		MvoRepo.update(mvo);
+		mvoRepo.update(mvo);
         MvoDaoJpa.commitTransaction();
 	}
 	
 	public void delete(Mvo mvo) {
     	MvoDaoJpa.startTransaction();
-		MvoRepo.delete(mvo);
+		mvoRepo.delete(mvo);
         MvoDaoJpa.commitTransaction();
 	}
 

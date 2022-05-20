@@ -63,6 +63,8 @@ public class MvoPaneelController extends HBox{
 	private List<Mvo> mvosVanCategorie;
 	private Melding melding;
 	
+	private GuiController guiController = GuiController.getInstance();
+	
 	/*
 	 * 
 	 * FXML onAction functies
@@ -74,7 +76,8 @@ public class MvoPaneelController extends HBox{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
+		
+		AanmakenMvoPaneelController aanmakenMVOPaneel = guiController.getAanmakenPaneel();
 		this.getChildren().add(aanmakenMVOPaneel);
 		rechterSchermAanwezig = true;
     }
@@ -93,6 +96,7 @@ public class MvoPaneelController extends HBox{
 			verwijderRechterScherm();			
 		}
 		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
+		wijzigenMVOPaneel.setMvo(selectedMvo);
 		this.getChildren().add(wijzigenMVOPaneel);
 		rechterSchermAanwezig = true;
     }

@@ -104,6 +104,10 @@ public class WijzigenMvoPaneelController extends GridPane{
 		initialize();
 	}
 	
+	public void setMvo(Mvo mvo) {
+		this.selectedMvo=mvo;
+	}
+	
 	private void buildGui()
 	{
 		try
