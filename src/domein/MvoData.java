@@ -131,5 +131,11 @@ public class MvoData implements Serializable{
 	{
 		return String.format("id: %s, %s, kwartaal: %d%n", getId(), getWaarde(), getQuarter());
 	}
+
+
+	public void setWaardeInt(int i) {
+		setWaarde(String.valueOf(i));
+		
+	}
 	
 }

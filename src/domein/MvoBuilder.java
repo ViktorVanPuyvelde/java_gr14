@@ -20,10 +20,7 @@ public class MvoBuilder
 		{
 			requiredElements.add(RequiredElement.NameRequired);
 		}
-		if (this.mvo.getDatasource() == null)
-		{
-			requiredElements.add(RequiredElement.DatasourceRequired);
-		}
+		
 		if (this.mvo.getSdg() == null)
 		{
 			requiredElements.add(RequiredElement.SdgRequired);

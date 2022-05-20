@@ -30,6 +30,7 @@ import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
+import domein.MvoData;
 import domein.MvoDataController;
 import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
@@ -204,6 +205,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 		Aggregatie methode = Aggregatie.GEMIDDELDE;
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
+		updateSuperMvo();
 		
 		
 	}
@@ -352,5 +354,35 @@ public class NieuweDatasourcePaneelController extends GridPane
 		});
 		
 		return verwerkteDataTree;
+	}
+	
+	private void updateSuperMvo() {
+		Mvo superMvo = mvo.getSuperMvo();
+		if(superMvo != null) {
+			//treemap voor al bestaande mvoData in superMvo
+			TreeMap<Integer,MvoData> tree = new TreeMap<>();
+			
+			List<MvoData> superMvoDataList = superMvo.getMvo_data();
+			List<MvoData> subMvoDataList = mvo.getMvo_data();
+			
+			// treemap opvullen
+			superMvoDataList.stream().forEach(superMvoData -> tree.put(superMvoData.getQuarter(), superMvoData));
+			subMvoDataList.stream().forEach(subMvoData -> {
+				int quarter = subMvoData.getQuarter();
+				// er is al data voor dit kwartaal -> nieuwe data optellen bij bestaande data
+				if(tree.containsKey(quarter)) {
+					MvoData newSuperMvoData = tree.get(quarter);
+					newSuperMvoData.setMvo_id(superMvo);
+					newSuperMvoData.setDatum(subMvoData.getDatum());
+					newSuperMvoData.setWaardeInt(subMvoData.getWaardeInt() + tree.get(quarter).getWaardeInt());
+					newSuperMvoData.setQuarter(quarter);
+					mdc.update(newSuperMvoData);
+				}else {
+					// er is nog geen data voor dit kwartaal -> nieuwe MvoData
+					new MvoData(superMvo,subMvoData.getWaardeInt(),subMvoData.getDatum(),quarter);
+				}
+			});
+		}
+		
 	}
 }

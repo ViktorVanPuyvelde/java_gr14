@@ -49,7 +49,7 @@ public class Mvo implements Serializable
 	@JoinColumn(name = "sdg_id", nullable = false)
 	private Sdg sdg;
 	@Transient
-	private List<String> mvo_data;
+	private List<MvoData> mvo_data;
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "super_mvo_id")
 	private Mvo superMvo;
@@ -159,12 +159,12 @@ public class Mvo implements Serializable
 		this.goalValue = goalValue;
 	}
 
-	public List<String> getMvo_data()
+	public List<MvoData> getMvo_data()
 	{
 		return mvo_data;
 	}
 
-	public void setMvo_data(List<String> mvo_data)
+	public void setMvo_data(List<MvoData> mvo_data)
 	{
 		this.mvo_data = mvo_data;
 	}
