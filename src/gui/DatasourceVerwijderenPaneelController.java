@@ -73,7 +73,7 @@ public class DatasourceVerwijderenPaneelController extends AnchorPane{
 	private void initialize()
 	{
 		this.lblQuestion
-				.setText(String.format("Weet u zeker dat u de categorie \"%s\" wilt verwijderen?", this.datasource.getName()));
+				.setText(String.format("Weet u zeker dat u de datasource \"%s\" wilt verwijderen?", this.datasource.getName()));
 	}
 
 }

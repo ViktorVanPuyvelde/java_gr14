@@ -81,9 +81,17 @@ public class MvoPaneelController extends HBox{
 
     @FXML
     void deleteMVO_OnAction(ActionEvent event) {
-    	System.out.println("Verwijder: "+selectedMvo.getName()+" // " + selectedMvo.getId());
-    	mc.delete(selectedMvo);
-    	melding.toonBevestiging("MVO doelstelling succesvol verwijderd");
+    	mvo_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig) {
+			verwijderRechterScherm();			
+		}
+		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
+		MvoVerwijderenPaneelController root = new MvoVerwijderenPaneelController(selectedMvo);
+		this.getChildren().add(root);
+		rechterSchermAanwezig = true;
+		}else {
+			mvo_Selecteren_lbl.setText("Gelieve eerst een MVO te selecteren!");
+		}
     }
 
     @FXML
@@ -92,9 +100,13 @@ public class MvoPaneelController extends HBox{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
+		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
 		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
 		this.getChildren().add(wijzigenMVOPaneel);
 		rechterSchermAanwezig = true;
+		}else {
+			mvo_Selecteren_lbl.setText("Gelieve eerst een MVO te selecteren!");
+		}
     }
 
     @FXML

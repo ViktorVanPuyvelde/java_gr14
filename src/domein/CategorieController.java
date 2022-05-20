@@ -114,6 +114,10 @@ public class CategorieController
 	{
 		subject.removePropertyChangeListener(pcl);
 	}
+	
+	public int CatCountMvo(Mvo m) {
+		return categorieRepo.geefCatCountMvo(m);
+	}
 
 //	private void populateDB() {
 //		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));

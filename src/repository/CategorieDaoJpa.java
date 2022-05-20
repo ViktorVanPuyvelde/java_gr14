@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import domein.Categorie;
+import domein.Mvo;
 import domein.Sdg;
 
 public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements CategorieDao
@@ -41,6 +43,16 @@ public class CategorieDaoJpa extends GenericDaoJpa<Categorie> implements Categor
         } catch (NoResultException ex) {
             throw new EntityNotFoundException();
         } 
+	}
+
+	@Override
+	public int geefCatCountMvo(Mvo m) throws EntityNotFoundException {
+        try {
+            Query query = em.createNamedQuery("Categorie.geefaantalCatMvo", Categorie.class);
+            return Integer.parseInt(query.setParameter("mvo_id", m.getId()).getSingleResult().toString());
+         } catch (NoResultException ex) {
+             throw new EntityNotFoundException();
+         }
 	}
 
 }
