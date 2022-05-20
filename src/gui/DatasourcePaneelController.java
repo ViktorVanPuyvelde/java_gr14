@@ -7,6 +7,7 @@ import java.util.List;
 import domein.Categorie;
 import domein.Datasource;
 import domein.DatasourceController;
+import domein.MvoController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.scene.layout.HBox;
 
 public class DatasourcePaneelController extends HBox{
 	private DatasourceController datasourceCon;
+	private MvoController mvoCon;
 	
 	@FXML
 	private ListView<String> datasource_List;
@@ -40,6 +42,7 @@ public class DatasourcePaneelController extends HBox{
 	
 	public DatasourcePaneelController() {
 		this.datasourceCon = new DatasourceController();
+		this.mvoCon = new MvoController();
 		buildGui();
 		setDatasourceList();
 		initialize();
@@ -105,8 +108,16 @@ public class DatasourcePaneelController extends HBox{
 	}
 		
 	@FXML
-	public void delete_OnAction(ActionEvent event) {		
+	public void delete_OnAction(ActionEvent event) {	
+		String naam = datasource_List.getSelectionModel().getSelectedItem();
+		Datasource d = datasourceItemList.stream().filter(dat -> dat.getName().equals(naam)).findAny().orElse(null);
+		if(mvoCon.geefCountMVODatasource(d) == 0) {
+			datasourceCon.delete(d);
+		}else {
+			datasource_Selecteren_lbl.setText("Verwijderen mislukt: 1 of meerdere MVO doelstellingen gekoppeld");
+		}
 	}
+	
 	
 	private void verwijderRechterScherm() {
         this.getChildren().remove(this.getChildren().size()-1);

@@ -47,6 +47,12 @@ public class DatasourceController
 		this.datasourceRepo.update(d);
 		DatasourceDaoJpa.commitTransaction();
 	}
+	
+	public void delete(Datasource d) {
+		DatasourceDaoJpa.startTransaction();
+		this.datasourceRepo.delete(d);
+		DatasourceDaoJpa.commitTransaction();
+	}
 
 	public void deleteDatasource(Datasource d) {
 		DatasourceDaoJpa.startTransaction();

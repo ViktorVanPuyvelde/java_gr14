@@ -30,6 +30,10 @@ public class MvoController
 		return mvoRepo.geefMvoMetNaam(naam);
 	}
 	
+	public int geefCountMVODatasource(Datasource d) {
+		return mvoRepo.geefMvoDatasourceCount(d);
+	}
+	
 	public List<Mvo> geefMvos()
 	{
 		return Collections.unmodifiableList(mvos);
