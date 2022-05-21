@@ -3,8 +3,10 @@ package gui;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +30,8 @@ import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
+import domein.MvoDataController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,10 +78,14 @@ public class NieuweDatasourcePaneelController extends GridPane
     private File selectedFile;
     HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
     TreeMap<Double, List<Object>> verwerkteData;
+
+	private MvoDataController mdc;
+	Mvo mvo;
     
     
     public NieuweDatasourcePaneelController(Datasource d , DatasourceController controller) {
 		this.mc = new MvoController();
+		this.mdc = new MvoDataController();
 		this.controller = controller;
 		this.datasource = d;
 		buildGui();
@@ -156,6 +164,22 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private void update() {
 		
 		verwerkteData.forEach((key,val) -> System.out.println(val));
+		verwerkteData.forEach((key,val) ->{
+			try {
+				mdc.voegMvoDataToe(
+						mvo ,
+						String.valueOf(((OptionalDouble) val.get(0)).getAsDouble()),
+						(Date) val.get(1),
+						(int)( Double.parseDouble( val.get(2).toString()))
+						);
+			} catch (InformationRequiredException e) {
+				
+				toevoegenLbl.setText(String.format("%s", e.getMessage()));
+				toevoegenLbl.setTextFill(Color.RED);
+				toevoegenLbl.setStyle("-fx-font-weight: bold");
+			}
+		});
+		
 	}
 
 	private void verify() {
@@ -176,7 +200,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	private void collectChanges() {
 		dataOpnemen();
-		//Aggregatie methode = mvoList.get(mvosList.getSelectionModel().getSelectedIndex()).getMethode();
+		mvo = mvoList.get(mvosList.getSelectionModel().getSelectedIndex());
 		Aggregatie methode = Aggregatie.GEMIDDELDE;
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
@@ -205,7 +229,7 @@ public class NieuweDatasourcePaneelController extends GridPane
                 //fill datalist from excel cells
                 //-----
                 Double dataCel = cellIterator.next().getNumericCellValue();
-                String dateCel = cellIterator.next().getStringCellValue();
+                Date dateCel = cellIterator.next().getDateCellValue();
                 Double quarterCel = cellIterator.next().getNumericCellValue();
                 data.add(dataCel);
                 data.add(dateCel);
@@ -232,13 +256,19 @@ public class NieuweDatasourcePaneelController extends GridPane
             workbook.close();
         }  catch (FileNotFoundException e) {
 			
-			e.printStackTrace();
+        	toevoegenLbl.setText(String.format("Bestand niet gevonden"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		} catch (IOException e) {
 			
-			e.printStackTrace();
+			toevoegenLbl.setText(String.format("Error in bestand"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		} catch (InvalidFormatException e) {
 			
-			e.printStackTrace();
+			toevoegenLbl.setText(String.format("Data heeft niet het juiste formaat"));
+			toevoegenLbl.setTextFill(Color.RED);
+			toevoegenLbl.setStyle("-fx-font-weight: bold");
 		}
 		
 	}
