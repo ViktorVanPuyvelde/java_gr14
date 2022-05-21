@@ -1,10 +1,8 @@
 package domein;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import exceptions.InformationRequiredException;
@@ -12,12 +10,10 @@ import exceptions.InformationRequiredException;
 public class MvoBuilder
 {
 	protected Mvo mvo;
-	protected Set<RequiredElement> requiredElements;
 	protected Map<String, String> errorMap;
 
 	public Mvo getMvo() throws InformationRequiredException
 	{
-		this.requiredElements = new HashSet<>();
 		this.errorMap = new HashMap<>();
 
 		if (this.mvo.getName() == null || this.mvo.getName().isEmpty())
@@ -54,6 +50,11 @@ public class MvoBuilder
 	public void createNewMvo()
 	{
 		this.mvo = new Mvo();
+	}
+
+	public void setMvo(Mvo mvo)
+	{
+		this.mvo = mvo;
 	}
 
 	public void buildId()
