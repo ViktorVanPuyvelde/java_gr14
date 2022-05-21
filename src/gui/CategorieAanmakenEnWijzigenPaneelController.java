@@ -122,6 +122,10 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 					sdgs = this.sdgController.geefSdgsZonderCategorie();
 				sdgs.forEach(s -> this.sdgItemList.add(s));
 			}
+		} else
+		{
+			sdgs = this.sdgController.geefSdgsZonderCategorie();
+			sdgs.forEach(s -> this.sdgItemList.add(s));
 		}
 
 	}
@@ -148,6 +152,9 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 				cat_Sdg_List.getItems().add("Deze categorie kan geen SDG's bevatten!");
 				cat_Sdg_List.setSelectionModel(new NoSelectionModel<String>());
 			}
+		} else
+		{
+			sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
 		}
 
 		// fill with Roles
