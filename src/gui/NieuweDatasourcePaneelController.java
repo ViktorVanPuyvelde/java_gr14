@@ -3,8 +3,6 @@ package gui;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,22 +59,22 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private Label toevoegenLbl;
 	@FXML
 	private Label titel_lbl;
-    @FXML
-    private Button toevoegen_btn;
-    
-    private ObservableList<Mvo> mvoList;
-    private DatasourceController controller;
-    private Datasource datasource;
-    
-    private File selectedFile;
-    HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
-    TreeMap<Double, List<Object>> verwerkteData;
+	@FXML
+	private Button toevoegen_btn;
+
+	private ObservableList<Mvo> mvoList;
+	private DatasourceController controller;
+	private Datasource datasource;
+
+	private File selectedFile;
+	HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
+	TreeMap<Double, List<Object>> verwerkteData;
 
 	private MvoDataController mdc;
 	Mvo mvo;
-    
-    
-    public NieuweDatasourcePaneelController(Datasource d , DatasourceController controller) {
+
+	public NieuweDatasourcePaneelController(Datasource d, DatasourceController controller)
+	{
 		this.mc = new MvoController();
 		this.mdc = new MvoDataController();
 		this.controller = controller;
@@ -156,25 +154,25 @@ public class NieuweDatasourcePaneelController extends GridPane
 		update();
 	}
 
-	private void update() {
-		
-		verwerkteData.forEach((key,val) -> System.out.println(val));
-		verwerkteData.forEach((key,val) ->{
-			try {
-				mdc.voegMvoDataToe(
-						mvo ,
-						String.valueOf(((OptionalDouble) val.get(0)).getAsDouble()),
-						(Date) val.get(1),
-						(int)( Double.parseDouble( val.get(2).toString()))
-						);
-			} catch (InformationRequiredException e) {
-				
+	private void update()
+	{
+
+		verwerkteData.forEach((key, val) -> System.out.println(val));
+		verwerkteData.forEach((key, val) ->
+		{
+			try
+			{
+				mdc.voegMvoDataToe(mvo, String.valueOf(((OptionalDouble) val.get(0)).getAsDouble()), (Date) val.get(1),
+						(int) (Double.parseDouble(val.get(2).toString())));
+			} catch (InformationRequiredException e)
+			{
+
 				toevoegenLbl.setText(String.format("%s", e.getMessage()));
 				toevoegenLbl.setTextFill(Color.RED);
 				toevoegenLbl.setStyle("-fx-font-weight: bold");
 			}
 		});
-		
+
 	}
 
 	private void verify()
@@ -206,33 +204,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	}
 
-	private void dataOpnemen() {
-		try {
-			
- 
-            XSSFWorkbook workbook = new XSSFWorkbook(selectedFile);
- 
-            XSSFSheet sheet = workbook.getSheetAt(0);
- 
-            Iterator<Row> rowIterator = sheet.iterator();
-            rowIterator.next();
-            //loop each row
-            while (rowIterator.hasNext()) 
-            {
-            	List<Object> data = new ArrayList<>();
-  
-                Row row = rowIterator.next();
-                Iterator<Cell> cellIterator = row.cellIterator();
-                
-                //fill datalist from excel cells
-                //-----
-                Double dataCel = cellIterator.next().getNumericCellValue();
-                Date dateCel = cellIterator.next().getDateCellValue();
-                Double quarterCel = cellIterator.next().getNumericCellValue();
-                data.add(dataCel);
-                data.add(dateCel);
-                data.add(quarterCel);
-                //------
+	private void dataOpnemen()
+	{
+		try
+		{
 
 			XSSFWorkbook workbook = new XSSFWorkbook(selectedFile);
 
@@ -251,7 +226,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 				// fill datalist from excel cells
 				// -----
 				Double dataCel = cellIterator.next().getNumericCellValue();
-				String dateCel = cellIterator.next().getStringCellValue();
+				Date dateCel = cellIterator.next().getDateCellValue();
 				Double quarterCel = cellIterator.next().getNumericCellValue();
 				data.add(dataCel);
 				data.add(dateCel);
@@ -281,23 +256,18 @@ public class NieuweDatasourcePaneelController extends GridPane
 		} catch (FileNotFoundException e)
 		{
 
-                	allDataFromFileMap.put(quarterCel,filledStarterList);
-                }
-               //-----------------------------              
-            }           
-            workbook.close();
-        }  catch (FileNotFoundException e) {
-			
-        	toevoegenLbl.setText(String.format("Bestand niet gevonden"));
+			toevoegenLbl.setText(String.format("Bestand niet gevonden"));
 			toevoegenLbl.setTextFill(Color.RED);
 			toevoegenLbl.setStyle("-fx-font-weight: bold");
-		} catch (IOException e) {
-			
+		} catch (IOException e)
+		{
+
 			toevoegenLbl.setText(String.format("Error in bestand"));
 			toevoegenLbl.setTextFill(Color.RED);
 			toevoegenLbl.setStyle("-fx-font-weight: bold");
-		} catch (InvalidFormatException e) {
-			
+		} catch (InvalidFormatException e)
+		{
+
 			toevoegenLbl.setText(String.format("Data heeft niet het juiste formaat"));
 			toevoegenLbl.setTextFill(Color.RED);
 			toevoegenLbl.setStyle("-fx-font-weight: bold");
