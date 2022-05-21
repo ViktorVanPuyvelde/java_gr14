@@ -83,4 +83,9 @@ public class MvoBuilder
 	{
 		this.mvo.setGoalValue(goalValue);
 	}
+	
+	public void buildMvoData(List<MvoData> mvoData)
+	{
+		this.mvo.setMvo_data(mvoData);
+	}
 }

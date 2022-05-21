@@ -180,6 +180,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 				toevoegenLbl.setStyle("-fx-font-weight: bold");
 			}
 		});
+		updateSuperMvo();
 		
 	}
 
@@ -205,7 +206,6 @@ public class NieuweDatasourcePaneelController extends GridPane
 		Aggregatie methode = Aggregatie.GEMIDDELDE;
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
-		updateSuperMvo();
 		
 		
 	}

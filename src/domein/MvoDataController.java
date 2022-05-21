@@ -25,13 +25,9 @@ public class MvoDataController
 		this.mvoDataRepo = mvoDataRepo;
 	}
 	
-	public List<MvoData> geefMvoDatasVanMvo(String mvo_id){
-		return mvoDataRepo.geefAlleMvoDatasVoorMvo(mvo_id);
-	}
+
 	
-	public Mvo geefMvoMetNaam(String naam) {
-		return mvoDataRepo.geefMvoMetNaam(naam);
-	}
+	
 	
 
 

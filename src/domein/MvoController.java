@@ -77,6 +77,7 @@ public class MvoController
 		mb.buildGoalValue(goalValue);
 		mb.buildDatasource(datasource);
 		mb.buildSuperMvo(superMvo);
+		mb.buildMvoData(mvoRepo.geefAlleMvoDataVoorMvo(mb.getMvo().getId()));
 		return mb.getMvo();
 	}
 }

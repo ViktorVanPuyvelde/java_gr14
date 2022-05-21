@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 @NamedQueries(		
 {
 	@NamedQuery(name = "MvoData.alleMvoDatas", query = "select md from MvoData md"),
-	@NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "SELECT md FROM MvoData md WHERE md.mvo = :mvo_id"),
 })
 public class MvoData implements Serializable{
 

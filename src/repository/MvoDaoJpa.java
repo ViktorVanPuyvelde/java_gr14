@@ -7,6 +7,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import domein.Datasource;
 import domein.Mvo;
+import domein.MvoData;
 import domein.Sdg;
 
 public class MvoDaoJpa extends GenericDaoJpa<Mvo> implements MvoDao{
@@ -41,6 +42,17 @@ public class MvoDaoJpa extends GenericDaoJpa<Mvo> implements MvoDao{
 	        } catch (NoResultException ex) {
 	            throw new EntityNotFoundException();
 	        } 
+	}
+
+	@Override
+	public List<MvoData> geefAlleMvoDataVoorMvo(String id) {
+		try {
+            return em.createNamedQuery("Mvo.geefMvoDatas", MvoData.class)
+            		.setParameter("mvoId", id )
+            		.getResultList();
+        } catch (NoResultException ex) {
+            throw new EntityNotFoundException();
+        } 
 	}
 
 }

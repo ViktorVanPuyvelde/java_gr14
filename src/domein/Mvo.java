@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 	@NamedQuery(name = "Mvo.verwijderMvoMetID", query = "DELETE FROM Mvo m WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.updateMvoMetID", query = "UPDATE Mvo m SET m.name = :mvoName, m.superMvo = :superMvoId, m.sdg = :sdgId, m.goalValue = :doel, m.datasource = :datasourceId, m.info = :type WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.geefAlleMVOS", query = "SELECT m FROM Mvo m"),
+	@NamedQuery(name = "Mvo.geefMvoDatas", query = "SELECT md FROM MvoData md WHERE md.mvo.id = :mvoId")
 	})
 public class Mvo implements Serializable
 {
@@ -53,8 +54,7 @@ public class Mvo implements Serializable
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "super_mvo_id")
 	private Mvo superMvo;
-	@Transient
-	private Aggregatie methode;
+
 	
 
 	public Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
@@ -68,18 +68,7 @@ public class Mvo implements Serializable
 		setSuperMvo(superMvo);
 		
 	}
-	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo, Aggregatie methode)
-	{
-		setId(UUID.randomUUID().toString());
-		setName(name);
-		setInfo(info);
-		setGoalValue(goalValue);
-		setDatasource(datasource);
-		setSdg(sdg);
-		setSuperMvo(superMvo);
-		this.methode = methode;
-		
-	}
+
 
 	protected Mvo()
 	{
@@ -189,10 +178,5 @@ public class Mvo implements Serializable
 	{
 		return String.format("%s", name);
 	}
-	public Aggregatie getMethode() {
-		return methode;
-	}
-	public void setMethode(Aggregatie methode) {
-		this.methode = methode;
-	}
+	
 }
