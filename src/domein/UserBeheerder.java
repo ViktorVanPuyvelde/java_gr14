@@ -26,6 +26,10 @@ public class UserBeheerder
 	{
 		UserDaoJpa.closePersistency();
 	}
+	
+	public User getCoordinator() {
+		return coordinator;
+	}
 
 	public void meldAan(String email, String paswoord) throws APIException, Auth0Exception
 	{
