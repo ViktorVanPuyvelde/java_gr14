@@ -71,7 +71,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	private ObservableList<String> sdg;
 	private ObservableList<String> rol;
 	private String pic;
-	private List<Sdg> sdgs;
+	private List<Sdg> sdgsVoorAanmaken;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
@@ -233,10 +233,9 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 			this.c.setIconName(this.cat_Pictogram_field.getText());
 			sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
 			rol = cat_Rol_List.getSelectionModel().getSelectedItems();
-
 			this.c.setRoles(rol.stream().toList());
 			setSdgs(sdg);
-			this.c.setSdgs(sdgs);
+			this.c.setSdgs(sdgsVoorAanmaken);
 		} catch (Exception e)
 		{
 			System.out.println("error categorie");
@@ -259,7 +258,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 
 		try
 		{
-			nieuweCategorie = this.categorieController.voegCategorieToe(name, pic, vb, sdgs);
+			nieuweCategorie = this.categorieController.voegCategorieToe(name, pic, vb, sdgsVoorAanmaken);
 			toonBevestiging("Categorie is met succes aangemaakt");
 		} catch (InformationRequiredException e)
 		{
@@ -293,7 +292,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	{
 		List<Sdg> sdgDummy = new ArrayList<>();
 		sdg.forEach(s -> sdgDummy.add(this.sdgController.geefSdgDoorNaam(s)));
-		this.sdgs = sdgDummy;
+		this.sdgsVoorAanmaken = sdgDummy;
 	}
 
 	private void instellenHyperLink()
@@ -324,14 +323,16 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 
 	private void overlopenLabels(String key, String value)
 	{
-		if (lblErrorName.getId().equals(key))
-			lblErrorName.setText(value);
-		if (lblErrorPic.getId().equals(key))
-			lblErrorPic.setText(value);
-		if (lblErrorRol.getId().equals(key))
-			lblErrorRol.setText(value);
-		if (lblErrorSdg.getId().equals(key))
-			lblErrorSdg.setText(value);
+		checkLabel(lblErrorName, key, value);
+		checkLabel(lblErrorPic, key, value);
+		checkLabel(lblErrorRol, key, value);
+		checkLabel(lblErrorSdg, key, value);
+	}
+
+	private void checkLabel(Label label, String key, String value)
+	{
+		if (label.getId().equals(key))
+			label.setText(value);
 	}
 
 	private void updateGeselecteerdeSdgs(String categorieId, List<Sdg> updateSdgs)

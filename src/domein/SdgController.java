@@ -54,6 +54,11 @@ public class SdgController
 		SdgDaoJpa.commitTransaction();
 	}
 
+	public String geefCategorieIdVanSdg(String sdgId)
+	{
+		return sdgRepo.geefCategorieIdVanSdg(sdgId);
+	}
+
 	public void close()
 	{
 		SdgDaoJpa.closePersistency();
