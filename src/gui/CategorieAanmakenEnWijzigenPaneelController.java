@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.google.gson.Gson;
@@ -37,6 +38,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	private CategorieController categorieController;
 	private SdgController sdgController;
 	private boolean wijzigen;
+	private boolean isCategorie;
 
 	@FXML
 	private Label topLabel;
@@ -52,19 +54,27 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	private Button cat_save_btn;
 	@FXML
 	private Hyperlink linkIcons;
+
+	// Error velden
 	@FXML
 	private Label lblErrorLabel;
+	@FXML
+	private Label lblErrorName;
+	@FXML
+	private Label lblErrorPic;
+	@FXML
+	private Label lblErrorSdg;
+	@FXML
+	private Label lblErrorRol;
 
 	private String name;
 	private ObservableList<String> sdg;
 	private ObservableList<String> rol;
 	private String pic;
-	private List<Sdg> sdgs;
+	private List<Sdg> sdgsVoorAanmaken;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<String> rolItemList;
-
-	private Foutmelding fm = new Foutmelding();
 
 	public CategorieAanmakenEnWijzigenPaneelController(Categorie c, CategorieController catController, boolean wijzigen)
 	{
@@ -72,6 +82,8 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 		this.categorieController = catController;
 		this.sdgController = new SdgController();
 		this.wijzigen = wijzigen;
+		if (this.c != null)
+			this.isCategorie = this.c.isCategory();
 		buildGui();
 		setSdgItemList();
 		initialize();
@@ -99,16 +111,27 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 
 	private void setSdgItemList()
 	{
-		List<Sdg> sdgs = this.sdgController.geefSdgs();
-		for (Sdg s : sdgs)
+		List<Sdg> sdgs = null;
+		if (this.c != null)
 		{
-			this.sdgItemList.add(s);
+			if (this.isCategorie)
+			{
+				if (wijzigen)
+					sdgs = this.sdgController.geefSdgs();
+				else
+					sdgs = this.sdgController.geefSdgsZonderCategorie();
+				sdgs.forEach(s -> this.sdgItemList.add(s));
+			}
+		} else
+		{
+			sdgs = this.sdgController.geefSdgsZonderCategorie();
+			sdgs.forEach(s -> this.sdgItemList.add(s));
 		}
+
 	}
 
 	private void initialize()
 	{
-//		initializeLabels("Categorie aanmaken", "", "", "Categorie aanmaken");
 		instellenHyperLink();
 
 		cat_Sdg_List.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -119,8 +142,20 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 		rolItemList.add("manager");
 		rolItemList.add("co\u00f6rdinator");
 
-		// fill with Sdg's
-		sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
+		// fill with Sdg's if category
+		if (this.c != null)
+		{
+			if (this.c.isCategory())
+				sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
+			else
+			{
+				cat_Sdg_List.getItems().add("Deze categorie kan geen SDG's bevatten!");
+				cat_Sdg_List.setSelectionModel(new NoSelectionModel<String>());
+			}
+		} else
+		{
+			sdgItemList.forEach(sdg -> cat_Sdg_List.getItems().add(sdg.getName()));
+		}
 
 		// fill with Roles
 		cat_Rol_List.setItems(rolItemList);
@@ -198,10 +233,9 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 			this.c.setIconName(this.cat_Pictogram_field.getText());
 			sdg = cat_Sdg_List.getSelectionModel().getSelectedItems();
 			rol = cat_Rol_List.getSelectionModel().getSelectedItems();
-
 			this.c.setRoles(rol.stream().toList());
 			setSdgs(sdg);
-			this.c.setSdgs(sdgs);
+			this.c.setSdgs(sdgsVoorAanmaken);
 		} catch (Exception e)
 		{
 			System.out.println("error categorie");
@@ -224,12 +258,11 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 
 		try
 		{
-			nieuweCategorie = this.categorieController.voegCategorieToe(name, pic, vb, sdgs);
+			nieuweCategorie = this.categorieController.voegCategorieToe(name, pic, vb, sdgsVoorAanmaken);
 			toonBevestiging("Categorie is met succes aangemaakt");
 		} catch (InformationRequiredException e)
 		{
-			lblErrorLabel.setText(e.getMessage());
-			e.getInformationRequired().forEach(System.out::println);
+			informationRequiredExceptionHandling(e);
 		}
 		if (nieuweCategorie != null)
 		{
@@ -237,37 +270,35 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 		}
 	}
 
-	private void updateGeselecteerdeSdgs(String categorieId, List<Sdg> updateSdgs)
-	{
-		updateSdgs.forEach(s -> this.sdgController.updateCategorieIdSdg(s.getId(), categorieId));
-	}
-
 	private void updateWijzigen()
 	{
 		try
 		{
-			categorieController.pasCategorieAan(c);
+			categorieController.pasCategorieAan(c, isCategorie);
 			toonBevestiging("Categorie is met succes aangepast");
 		} catch (InformationRequiredException e)
 		{
-			lblErrorLabel.setText(e.getMessage());
-			e.getInformationRequired().forEach(System.out::println);
+			informationRequiredExceptionHandling(e);
 		}
+	}
+
+	private void informationRequiredExceptionHandling(InformationRequiredException e)
+	{
+		lblErrorLabel.setText(e.getMessage());
+		errorLabelsOpvullen(e.getErrorMap());
 	}
 
 	private void setSdgs(ObservableList<String> sdg)
 	{
 		List<Sdg> sdgDummy = new ArrayList<>();
 		sdg.forEach(s -> sdgDummy.add(this.sdgController.geefSdgDoorNaam(s)));
-
-		this.sdgs = sdgDummy;
+		this.sdgsVoorAanmaken = sdgDummy;
 	}
 
 	private void instellenHyperLink()
 	{
 		linkIcons.setOnAction(new EventHandler<ActionEvent>()
 		{
-
 			@Override
 			public void handle(ActionEvent arg0)
 			{
@@ -283,6 +314,30 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 				}
 			}
 		});
+	}
+
+	private void errorLabelsOpvullen(Map<String, String> errorMap)
+	{
+		errorMap.entrySet().forEach(entry -> overlopenLabels(entry.getKey(), entry.getValue()));
+	}
+
+	private void overlopenLabels(String key, String value)
+	{
+		checkLabel(lblErrorName, key, value);
+		checkLabel(lblErrorPic, key, value);
+		checkLabel(lblErrorRol, key, value);
+		checkLabel(lblErrorSdg, key, value);
+	}
+
+	private void checkLabel(Label label, String key, String value)
+	{
+		if (label.getId().equals(key))
+			label.setText(value);
+	}
+
+	private void updateGeselecteerdeSdgs(String categorieId, List<Sdg> updateSdgs)
+	{
+		updateSdgs.forEach(s -> this.sdgController.updateCategorieIdSdg(s.getId(), categorieId));
 	}
 
 	private void toonBevestiging(String melding)

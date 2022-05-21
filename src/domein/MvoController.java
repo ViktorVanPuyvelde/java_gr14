@@ -9,27 +9,31 @@ import repository.MvoDaoJpa;
 
 public class MvoController
 {
-	
+
 	private MvoDao mvoRepo;
 	private List<Mvo> mvos;
-	
-	public MvoController() {
+
+	public MvoController()
+	{
 		setMvoRepo(new MvoDaoJpa());
 		this.mvos = mvoRepo.findAll();
 	}
 
-	public void setMvoRepo(MvoDao mvoRepo) {
+	public void setMvoRepo(MvoDao mvoRepo)
+	{
 		this.mvoRepo = mvoRepo;
 	}
-	
-	public List<Mvo> geefMvosVanCategorie(String categorie){
+
+	public List<Mvo> geefMvosVanCategorie(String categorie)
+	{
 		return mvoRepo.geefAlleMvosVoorCategorie(categorie);
 	}
-	
-	public Mvo geefMvoMetNaam(String naam) {
+
+	public Mvo geefMvoMetNaam(String naam)
+	{
 		return mvoRepo.geefMvoMetNaam(naam);
 	}
-	
+
 	public List<Mvo> geefMvos()
 	{
 		return Collections.unmodifiableList(mvos);
@@ -43,18 +47,23 @@ public class MvoController
 		mvoRepo.insert(newMvo);
 		MvoDaoJpa.commitTransaction();
 		mvos.add(newMvo);
-	}	
-	
-	public void update(Mvo mvo) {
-    	MvoDaoJpa.startTransaction();
-		mvoRepo.update(mvo);
-        MvoDaoJpa.commitTransaction();
 	}
-	
-	public void delete(Mvo mvo) {
-    	MvoDaoJpa.startTransaction();
+
+	public void update(Mvo mvo) throws InformationRequiredException
+	{
+		MvoBuilder mvoBuilder = new MvoBuilder();
+		mvoBuilder.setMvo(mvo);
+		Mvo updateMvo = mvoBuilder.getMvo();
+		MvoDaoJpa.startTransaction();
+		mvoRepo.update(updateMvo);
+		MvoDaoJpa.commitTransaction();
+	}
+
+	public void delete(Mvo mvo)
+	{
+		MvoDaoJpa.startTransaction();
 		mvoRepo.delete(mvo);
-        MvoDaoJpa.commitTransaction();
+		MvoDaoJpa.commitTransaction();
 	}
 
 	public void close()

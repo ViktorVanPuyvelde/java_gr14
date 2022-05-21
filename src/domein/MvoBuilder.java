@@ -1,8 +1,8 @@
 package domein;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.UUID;
 
 import exceptions.InformationRequiredException;
@@ -10,38 +10,38 @@ import exceptions.InformationRequiredException;
 public class MvoBuilder
 {
 	protected Mvo mvo;
-	protected Set<RequiredElement> requiredElements;
+	protected Map<String, String> errorMap;
 
 	public Mvo getMvo() throws InformationRequiredException
 	{
-		this.requiredElements = new HashSet<>();
+		this.errorMap = new HashMap<>();
 
 		if (this.mvo.getName() == null || this.mvo.getName().isEmpty())
 		{
-			requiredElements.add(RequiredElement.NameRequired);
+			this.errorMap.put("lblErrorNaam", "Naam is vereist.");
 		}
 		if (this.mvo.getDatasource() == null)
 		{
-			requiredElements.add(RequiredElement.DatasourceRequired);
+			this.errorMap.put("lblErrorDatabron", "Er moet één databron aangeduid zijn.");
 		}
 		if (this.mvo.getSdg() == null)
 		{
-			requiredElements.add(RequiredElement.SdgRequired);
+			this.errorMap.put("lblErrorSdg", "Er moet één SDG aangeduid zijn.");
 		}
 		if (this.mvo.getInfo().equals("null") || this.mvo.getInfo().isEmpty())
 		{
-			requiredElements.add(RequiredElement.InfoRequired);
+			this.errorMap.put("lblErrorEenheid", "Er moet een eenheid meegegeven worden.");
 		}
 		if (this.mvo.getGoalValue() < 0)
 		{
-			requiredElements.add(RequiredElement.GoalValueRequired);
+			this.errorMap.put("lblErrorDoel", "Het doel moet groter dan ");
 		}
 
-		if (!this.requiredElements.isEmpty())
+		if (!this.errorMap.isEmpty())
 		{
 			throw new InformationRequiredException(
 					"De MVO-doelstelling kan niet aangemaakt worden, omdat sommige velden niet ingevuld zijn.",
-					requiredElements);
+					errorMap);
 		}
 
 		return this.mvo;
@@ -50,6 +50,11 @@ public class MvoBuilder
 	public void createNewMvo()
 	{
 		this.mvo = new Mvo();
+	}
+
+	public void setMvo(Mvo mvo)
+	{
+		this.mvo = mvo;
 	}
 
 	public void buildId()

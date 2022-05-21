@@ -18,43 +18,43 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
-public class MvoPaneelController extends HBox{
-	
+public class MvoPaneelController extends HBox
+{
+
 	/*
 	 * 
 	 * FXML variabelen
 	 * 
 	 */
-	
+
 	@FXML
 	private ListView<String> MvoCatListView;
-	
-    @FXML
-    private ListView<String> MvoListView;
-    
-    @FXML
-    private Button createMVO_btn;
 
-    @FXML
-    private Button deleteMVO_btn;
+	@FXML
+	private ListView<String> MvoListView;
 
-    @FXML
-    private Button editMVO_btn;
+	@FXML
+	private Button createMVO_btn;
 
-    @FXML
-    private Button viewMVO_btn;
-    
-    @FXML
-    private Label mvo_Selecteren_lbl;
-    
-    private boolean rechterSchermAanwezig = false;
-    
-    
-    /*
-     * 
-     * LOKALE VARIABELEN
-     */
-    
+	@FXML
+	private Button deleteMVO_btn;
+
+	@FXML
+	private Button editMVO_btn;
+
+	@FXML
+	private Button viewMVO_btn;
+
+	@FXML
+	private Label mvo_Selecteren_lbl;
+
+	private boolean rechterSchermAanwezig = false;
+
+	/*
+	 * 
+	 * LOKALE VARIABELEN
+	 */
+
 	private CategorieController cc;
 	private MvoController mc;
 	private SdgController sc;
@@ -62,58 +62,67 @@ public class MvoPaneelController extends HBox{
 	private Mvo selectedMvo;
 	private List<Mvo> mvosVanCategorie;
 	private Melding melding;
-	
+
 	/*
 	 * 
 	 * FXML onAction functies
 	 */
 
-    @FXML
-    void createMVO_OnAction(ActionEvent event) {
-    	mvo_Selecteren_lbl.setText("");
-		if (rechterSchermAanwezig) {
-			verwijderRechterScherm();			
+	@FXML
+	void createMVO_OnAction(ActionEvent event)
+	{
+		mvo_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
 		}
-		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
+		MvoAanmakenEnWijzigenPaneelContorller aanmakenMVOPaneel = new MvoAanmakenEnWijzigenPaneelContorller(false,
+				null);
 		this.getChildren().add(aanmakenMVOPaneel);
 		rechterSchermAanwezig = true;
-    }
+	}
 
-    @FXML
-    void deleteMVO_OnAction(ActionEvent event) {
-    	System.out.println("Verwijder: "+selectedMvo.getName()+" // " + selectedMvo.getId());
-    	mc.delete(selectedMvo);
-    	melding.toonBevestiging("MVO doelstelling succesvol verwijderd");
-    }
+	@FXML
+	void deleteMVO_OnAction(ActionEvent event)
+	{
+		System.out.println("Verwijder: " + selectedMvo.getName() + " // " + selectedMvo.getId());
+		mc.delete(selectedMvo);
+		melding.toonBevestiging("MVO doelstelling succesvol verwijderd");
+	}
 
-    @FXML
-    void editMVO_OnAction(ActionEvent event) {
-    	mvo_Selecteren_lbl.setText("");
-		if (rechterSchermAanwezig) {
-			verwijderRechterScherm();			
+	@FXML
+	void editMVO_OnAction(ActionEvent event)
+	{
+		mvo_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
 		}
-		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
+		MvoAanmakenEnWijzigenPaneelContorller wijzigenMVOPaneel = new MvoAanmakenEnWijzigenPaneelContorller(true,
+				selectedMvo);
 		this.getChildren().add(wijzigenMVOPaneel);
 		rechterSchermAanwezig = true;
-    }
+	}
 
-    @FXML
-    void raadplegenMVO_OnAction(ActionEvent event) {
-    	mvo_Selecteren_lbl.setText("");
-		if (rechterSchermAanwezig) {
-			verwijderRechterScherm();			
+	@FXML
+	void raadplegenMVO_OnAction(ActionEvent event)
+	{
+		mvo_Selecteren_lbl.setText("");
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
 		}
-		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
+		if (MvoListView.getSelectionModel().getSelectedItem() != null)
+		{
 			MvoRaadplegenPaneelController raadplegenMvoPaneel = new MvoRaadplegenPaneelController(selectedMvo);
 			this.getChildren().add(raadplegenMvoPaneel);
-			rechterSchermAanwezig = true;			
-		}else {
+			rechterSchermAanwezig = true;
+		} else
+		{
 			mvo_Selecteren_lbl.setText("Gelieve eerst een MVO te selecteren!");
 		}
-    }
-    
-    
-	
+	}
+
 	public MvoPaneelController()
 	{
 		cc = new CategorieController();
@@ -123,11 +132,11 @@ public class MvoPaneelController extends HBox{
 		buildGui();
 		initialize();
 	}
-	
+
 	private void buildGui()
 	{
 		try
-		{			
+		{
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoPaneel.fxml"));
 			loader.setController(this);
@@ -138,58 +147,63 @@ public class MvoPaneelController extends HBox{
 			throw new RuntimeException(ex);
 		}
 	}
-	
-	private void initialize() {
-				
+
+	private void initialize()
+	{
+
 		MvoCatListView.getItems().add("*");
 		MvoCatListView.getItems().addAll(cc.geefAlleEchteCategorienNaam());
-		
-		MvoCatListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			
+
+		MvoCatListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+		{
 
 			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2)
+			{
+
 				selectedCategory = MvoCatListView.getSelectionModel().getSelectedItem();
-				
+
 				System.out.println(selectedCategory);
 
-				if(selectedCategory != "*") {
+				if (selectedCategory != "*")
+				{
 					mvosVanCategorie = mc.geefMvosVanCategorie(selectedCategory);
-				}else {
+				} else
+				{
 					mvosVanCategorie = mc.geefMvos();
 				}
-				
+
 				MvoListView.getItems().clear();
-				
+
 				MvoListView.getItems().addAll(mvosVanCategorie.stream().map(Mvo::getName).collect(Collectors.toList()));
 			}
-			
+
 		});
-		
-		
-		MvoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-			
+
+		MvoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>()
+		{
 
 			@Override
-			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
-				
+			public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2)
+			{
+
 				String Mvo = MvoListView.getSelectionModel().getSelectedItem();
-				
-				if(Mvo != null) {
+
+				if (Mvo != null)
+				{
 					selectedMvo = mc.geefMvoMetNaam(Mvo);
-				}	
-								
+				}
+
 			}
-			
+
 		});
-	
+
 	}
-	
-	private void verwijderRechterScherm() {
-		this.getChildren().remove(this.getChildren().size()-1);
+
+	private void verwijderRechterScherm()
+	{
+		this.getChildren().remove(this.getChildren().size() - 1);
 		rechterSchermAanwezig = false;
 	}
-   
 
 }
