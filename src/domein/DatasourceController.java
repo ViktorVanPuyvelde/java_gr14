@@ -92,4 +92,8 @@ public class DatasourceController
 		subject.removePropertyChangeListener(pcl);
 	}
 
+	public Datasource getDatasource(String naam) {
+		return datasources.stream().filter((d) -> d.getName().equals(naam)).findAny().get();
+	}
+
 }

@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -69,6 +70,23 @@ public class Datasource implements Serializable
 	public void setFlag(Boolean flag)
 	{
 		this.flag = flag;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Datasource other = (Datasource) obj;
+		return Objects.equals(name, other.name);
 	}
 
 	@Override
