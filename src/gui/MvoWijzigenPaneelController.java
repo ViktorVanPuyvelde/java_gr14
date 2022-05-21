@@ -22,7 +22,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class WijzigenMvoPaneelController extends GridPane{
+public class MvoWijzigenPaneelController extends GridPane{
 	
     @FXML
     private GridPane gpAanmakenMvo;
@@ -91,7 +91,7 @@ public class WijzigenMvoPaneelController extends GridPane{
     private Mvo selectedMvo;
 
 	
-	public WijzigenMvoPaneelController(Mvo mvo) {
+	public MvoWijzigenPaneelController(Mvo mvo) {
 		this.selectedMvo=mvo;
 		this.mc = new MvoController();
 		this.sc = new SdgController();

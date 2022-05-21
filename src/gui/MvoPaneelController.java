@@ -74,7 +74,7 @@ public class MvoPaneelController extends HBox{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		AanmakenMvoPaneelController aanmakenMVOPaneel = new AanmakenMvoPaneelController();
+		MvoAanmakenPaneelController aanmakenMVOPaneel = new MvoAanmakenPaneelController();
 		this.getChildren().add(aanmakenMVOPaneel);
 		rechterSchermAanwezig = true;
     }
@@ -92,7 +92,7 @@ public class MvoPaneelController extends HBox{
 		if (rechterSchermAanwezig) {
 			verwijderRechterScherm();			
 		}
-		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
+		MvoWijzigenPaneelController wijzigenMVOPaneel = new MvoWijzigenPaneelController(selectedMvo);
 		this.getChildren().add(wijzigenMVOPaneel);
 		rechterSchermAanwezig = true;
     }

@@ -1,7 +1,7 @@
 package domein;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import exceptions.InformationRequiredException;
@@ -9,26 +9,26 @@ import exceptions.InformationRequiredException;
 public class DatasourceBuilder
 {
 	public Datasource datasource;
-	protected Set<RequiredElement> requiredElements;
+	protected Map<String, String> errorMap;
 
 	public Datasource getDatasource() throws InformationRequiredException
 	{
-		this.requiredElements = new HashSet<>();
+		this.errorMap = new HashMap<>();
 
 		if (this.datasource.getName() == null || this.datasource.getName().isEmpty())
 		{
-			requiredElements.add(RequiredElement.NameRequired);
+			this.errorMap.put("lblErrorNaam", "Naam is vereist.");
 		}
-		if (this.datasource.getFlag() == null)
-		{
-			requiredElements.add(RequiredElement.FlagRequired);
-		}
+//		if (this.datasource.getFlag() == null)
+//		{
+//
+//		}
+//		geen idee waarom dit nog is
 
-		if (!this.requiredElements.isEmpty())
+		if (!this.errorMap.isEmpty())
 		{
 			throw new InformationRequiredException(
-					"De datasource kan niet aangemaakt worden, omdat sommige velden niet ingevuld zijn",
-					requiredElements);
+					"De datasource kan niet aangemaakt worden, omdat sommige velden niet ingevuld zijn", errorMap);
 		}
 
 		return this.datasource;

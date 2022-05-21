@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -20,14 +21,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-public class AanmakenMvoPaneelController extends GridPane
+public class MvoAanmakenPaneelController extends GridPane
 {
 	private MvoController mc;
 	private SdgController sc;
@@ -56,6 +57,16 @@ public class AanmakenMvoPaneelController extends GridPane
 	private Label lblErrorNietAangemaakt;
 	@FXML
 	private ChoiceBox<Aggregatie> aggregatieBox;
+	@FXML
+	private Label lblErrorNaam;
+	@FXML
+	private Label lblErrorSdg;
+	@FXML
+	private Label lblErrorDoel;
+	@FXML
+	private Label lblErrorDatabron;
+	@FXML
+	private Label lblErrorEenheid;
 
 	// lokale attributen
 	private String name;
@@ -74,7 +85,7 @@ public class AanmakenMvoPaneelController extends GridPane
 
 	private Melding melding;
 
-	public AanmakenMvoPaneelController()
+	public MvoAanmakenPaneelController()
 	{
 		this.mc = new MvoController();
 		this.sc = new SdgController();
@@ -115,7 +126,7 @@ public class AanmakenMvoPaneelController extends GridPane
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
 		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
-		
+
 		aggregatieBox.getItems().setAll(boxOptions);
 	}
 
@@ -142,7 +153,7 @@ public class AanmakenMvoPaneelController extends GridPane
 			}
 			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
-			
+
 		} catch (EntityNotFoundException e)
 		{
 			System.out.println("error");
@@ -162,9 +173,34 @@ public class AanmakenMvoPaneelController extends GridPane
 			melding.toonBevestiging("De MVO is aangemaakt.");
 		} catch (InformationRequiredException e)
 		{
-			lblErrorNietAangemaakt.setText(e.getMessage());
-			e.getInformationRequired().forEach(System.out::println);
+			informationRequiredExceptionHandling(e);
 		}
+	}
+
+	private void informationRequiredExceptionHandling(InformationRequiredException e)
+	{
+		lblErrorNietAangemaakt.setText(e.getMessage());
+		errorLabelsOpvullen(e.getErrorMap());
+	}
+
+	private void errorLabelsOpvullen(Map<String, String> errorMap)
+	{
+		errorMap.entrySet().forEach(entry -> overlopenLabels(entry.getKey(), entry.getValue()));
+	}
+
+	private void overlopenLabels(String key, String value)
+	{
+		checkLabel(lblErrorNaam, key, value);
+		checkLabel(lblErrorDoel, key, value);
+		checkLabel(lblErrorDatabron, key, value);
+		checkLabel(lblErrorSdg, key, value);
+		checkLabel(lblErrorEenheid, key, value);
+	}
+
+	private void checkLabel(Label label, String key, String value)
+	{
+		if (label.getId().equals(key))
+			label.setText(value);
 	}
 
 	private void setSdgItemList()
