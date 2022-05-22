@@ -17,7 +17,6 @@ public interface MvoDao extends GenericDao<Mvo>{
 	
 	public Mvo geefMvoMetNaam(String naam) throws EntityNotFoundException;
 
-	public List<MvoData> geefAlleMvoDataVoorMvo(String id);
 	
 	public int geefMvoDatasourceCount(Datasource d) throws EntityNotFoundException;
 	

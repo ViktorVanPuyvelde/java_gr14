@@ -51,7 +51,7 @@ public class UserController
 
 		// enkel coordinator kan inloggen
 		User u = repository.get(id);
-		if (!u.getRole().equals("coÃ¶rdinator"))
+		if (!u.getRole().equals("coördinator"))
 		{
 			meldAf();
 			throw new IngelogdVerkeerdeRol();

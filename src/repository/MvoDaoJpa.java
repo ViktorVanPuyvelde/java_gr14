@@ -44,15 +44,11 @@ public class MvoDaoJpa extends GenericDaoJpa<Mvo> implements MvoDao{
 	        } 
 	}
 
+
 	@Override
-	public List<MvoData> geefAlleMvoDataVoorMvo(String id) {
-		try {
-            return em.createNamedQuery("Mvo.geefMvoDatas", MvoData.class)
-            		.setParameter("mvoId", id )
-            		.getResultList();
-        } catch (NoResultException ex) {
-            throw new EntityNotFoundException();
-        } 
+	public int geefMvoDatasourceCount(Datasource d) throws EntityNotFoundException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
