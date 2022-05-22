@@ -35,7 +35,7 @@ class TestSdg {
 	public void testRaadpleegSdgs() {
 		List<Sdg> sdgs = controller.geefSdgs();
 		Assertions.assertFalse(sdgs.isEmpty());
-		Assertions.assertEquals(new Sdg("Geen Armoede", "sdg1", new ArrayList<>(), null), sdgs.get(0));
+		Assertions.assertEquals(new Sdg("Geen Armoede", "sdg_1.png", new ArrayList<>(), null), sdgs.get(0));
 	}
 
 	private static Stream<Arguments> sdgs(){
