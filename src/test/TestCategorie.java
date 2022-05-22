@@ -128,7 +128,7 @@ class TestCategorie {
 	@ParameterizedTest
 	@MethodSource("fouteCategorie")
 	public void testUpdateCategoryWithException(String naam, String icon, List<String> roles, List<Sdg> sdgs){
-		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs), false));
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs), true));
 	}
 
 	@Test

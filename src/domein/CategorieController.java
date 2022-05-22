@@ -60,6 +60,7 @@ public class CategorieController
 	public void pasCategorieAan(Categorie c, boolean isCategorie) throws InformationRequiredException
 	{
 		int old = createOrUpdateOrDelete;
+		int index = cats.indexOf(c);
 		createOrUpdateOrDelete = 2;
 		CategorieBuilder cb = new CategorieBuilder();
 		cb.setCategorie(c, isCategorie);
@@ -67,7 +68,7 @@ public class CategorieController
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.update(updateCategorie);
 		CategorieDaoJpa.commitTransaction();
-		cats.set(cats.indexOf(c), updateCategorie);
+		cats.set(index, updateCategorie);
         subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 	}
 
@@ -89,6 +90,7 @@ public class CategorieController
 		{
 			cb = new CategorieBuilder();
 		}
+		cb.setIsCategorie(true);
 		cb.createNewCategorie();
 		cb.buildId();
 		cb.buildName(name);
