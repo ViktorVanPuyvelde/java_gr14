@@ -116,19 +116,19 @@ class TestCategorie {
 	public void testUpdateCategory() throws InformationRequiredException {
 		Categorie c = controller.geefCategorien().get(1);
 		c.setName("nieuwCat");
-		controller.pasCategorieAan(c);
+		controller.pasCategorieAan(c, false);
 		Assertions.assertEquals("nieuwCat", controller.geefCategorien().get(1).getName());
 		
 		//Terug naar originele waarde zetten
 		c.setName("Planet");
-		controller.pasCategorieAan(c);		
+		controller.pasCategorieAan(c, false);		
 	}
 
 	
 	@ParameterizedTest
 	@MethodSource("fouteCategorie")
 	public void testUpdateCategoryWithException(String naam, String icon, List<String> roles, List<Sdg> sdgs){
-		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs)));
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs), false));
 	}
 
 	@Test
