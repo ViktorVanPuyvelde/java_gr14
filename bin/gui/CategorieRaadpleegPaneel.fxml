@@ -70,7 +70,7 @@
       </HBox>
       <HBox spacing="15.0">
          <children>
-            <Label prefWidth="85.0" text="Rollen:">
+            <Label prefWidth="85.0" text="Rol(len):">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
