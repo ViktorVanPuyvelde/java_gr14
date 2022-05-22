@@ -186,10 +186,20 @@ public class NieuweDatasourcePaneelController extends GridPane
 		
 		toevoegenLbl.setText("Datasource toegevoegd!");
 		if (datasource == null) {
-			controller.voegDatasourceToe(naam_textfield.getText(), false);
+			try {
+				controller.voegDatasourceToe(naam_textfield.getText(), false);
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			toevoegenLbl.setText("Datasource toegevoegd!");
 		}else {
-			controller.updateDatasource(datasource, naam_textfield.getText(), false);
+			try {
+				controller.updateDatasource(datasource, naam_textfield.getText(), false);
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			toevoegenLbl.setText("Datasource gewijzigd!");			
 		}
 		

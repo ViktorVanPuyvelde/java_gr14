@@ -37,22 +37,13 @@ class TestDatasource {
 		controller.voegDatasourceToe("nieuwD", false);
 		Assertions.assertTrue(controller.geefDatasources().contains(datasource));
 	}
-
-	private static Stream<Arguments> fouteDatasource(){
-		return Stream.of(
-				Arguments.of(null, null),
-				Arguments.of("", false),
-				Arguments.of("D", null)
-			);
-	}	
 	
-	@ParameterizedTest
-	@MethodSource("fouteDatasource")
-	public void testCreateCategoryWithException(String naam, boolean b){
-		Datasource d = new Datasource("data", false);
+	@Test
+	public void testCreateCategoryWithException(){
+		Datasource d = new Datasource("", false);
 
 		Assertions.assertFalse(controller.geefDatasources().contains(d));
-		Assertions.assertThrows(InformationRequiredException.class, () -> controller.voegDatasourceToe(naam, b));
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.voegDatasourceToe("", false));
 		Assertions.assertFalse(controller.geefDatasources().contains(d));
 	}
 
@@ -87,10 +78,9 @@ class TestDatasource {
 	}
 
 	
-	@ParameterizedTest
-	@MethodSource("fouteDatasource")
-	public void testUpdateCategoryWithException(String naam, boolean b){
-		Assertions.assertThrows(InformationRequiredException.class, () -> controller.updateDatasource(new Datasource(naam, b), naam, b));
+	@Test
+	public void testUpdateCategoryWithException(){
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.updateDatasource(new Datasource("", false), "", false));
 	}
 
 	@Test
