@@ -106,7 +106,8 @@ public class MvoPaneelController extends HBox
 			verwijderRechterScherm();
 		}
 		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
-		WijzigenMvoPaneelController wijzigenMVOPaneel = new WijzigenMvoPaneelController(selectedMvo);
+			MvoAanmakenEnWijzigenPaneelContorller wijzigenMVOPaneel = new MvoAanmakenEnWijzigenPaneelContorller(false,
+					selectedMvo);
 		this.getChildren().add(wijzigenMVOPaneel);
 		rechterSchermAanwezig = true;
 		}else {
