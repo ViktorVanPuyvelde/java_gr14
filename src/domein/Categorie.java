@@ -20,7 +20,8 @@ import com.google.gson.Gson;
 @NamedQueries(
 { @NamedQuery(name = "Categorie.sdgVoorCat", query = "select s from Categorie c INNER JOIN c.sdgs s WHERE c.name = :catNaam"),
 		@NamedQuery(name = "Categorie.alleCategorie�n", query = "select c from Categorie c"),
-		@NamedQuery(name = "Categorie.alleEchteCategorie�n", query = "select c from Categorie c where c.isCategory = 1") })
+		@NamedQuery(name = "Categorie.alleEchteCategorie�n", query = "select c from Categorie c where c.isCategory = 1"),
+		@NamedQuery(name = "Categorie.geefaantalCatMvo", query = "SELECT COUNT(c) FROM Categorie c INNER JOIN c.sdgs s INNER JOIN s.mvos m WHERE m.id = :mvo_id")})
 public class Categorie implements Serializable
 {
 	private static final long serialVersionUID = 1L;

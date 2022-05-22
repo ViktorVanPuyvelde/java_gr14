@@ -79,6 +79,12 @@ public class DatasourceController
 		datasources.set(index, d);
         subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 	}
+	
+	public void delete(Datasource d) {
+		DatasourceDaoJpa.startTransaction();
+		this.datasourceRepo.delete(d);
+		DatasourceDaoJpa.commitTransaction();
+	}
 
 	public void deleteDatasource(Datasource d) {
 		createOrUpdateOrDelete = 3;

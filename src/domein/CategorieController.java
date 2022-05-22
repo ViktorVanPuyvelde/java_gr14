@@ -122,6 +122,10 @@ public class CategorieController
 	{
 		subject.removePropertyChangeListener(pcl);
 	}
+	
+	public int CatCountMvo(Mvo m) {
+		return categorieRepo.geefCatCountMvo(m);
+	}
 
 	
 	public Categorie getCategorie(String naam) {

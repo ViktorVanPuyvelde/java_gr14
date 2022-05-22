@@ -9,6 +9,7 @@ import java.util.List;
 import domein.Categorie;
 import domein.Datasource;
 import domein.DatasourceController;
+import domein.MvoController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.layout.HBox;
 
 public class DatasourcePaneelController extends HBox implements PropertyChangeListener{
 	private DatasourceController datasourceCon;
+	private MvoController mvoCon;
 	
 	@FXML
 	private ListView<String> datasource_List;
@@ -44,6 +46,7 @@ public class DatasourcePaneelController extends HBox implements PropertyChangeLi
 	
 	public DatasourcePaneelController() {
 		this.datasourceCon = new DatasourceController();
+		this.mvoCon = new MvoController();
 		buildGui();
 		setDatasourceList();
 		datasourceCon.addPropertyChangeListener(this);
@@ -111,14 +114,23 @@ public class DatasourcePaneelController extends HBox implements PropertyChangeLi
 	}
 		
 	@FXML
-	public void delete_OnAction(ActionEvent event) {
+	public void delete_OnAction(ActionEvent event) {	
 		datasource_Selecteren_lbl.setText("");
-		dat_create_update_lbl.setText("");
 		if (rechterSchermAanwezig) {
             verwijderRechterScherm();            
         }
-
+		String naam = datasource_List.getSelectionModel().getSelectedItem();
+		Datasource d = datasourceItemList.stream().filter(dat -> dat.getName().equals(naam)).findAny().orElse(null);
+		if (d != null) {
+			DatasourceVerwijderenPaneelController root = new DatasourceVerwijderenPaneelController(d);
+			this.getChildren().add(root);
+			rechterSchermAanwezig = true;			
+		}else {
+			datasource_Selecteren_lbl.setText("Gelieve eerst een datasource te selecteren!");
+		}
+		
 	}
+	
 	
 	private void verwijderRechterScherm() {
         this.getChildren().remove(this.getChildren().size()-1);

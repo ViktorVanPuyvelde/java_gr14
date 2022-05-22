@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 	@NamedQuery(name = "Mvo.verwijderMvoMetID", query = "DELETE FROM Mvo m WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.updateMvoMetID", query = "UPDATE Mvo m SET m.name = :mvoName, m.superMvo = :superMvoId, m.sdg = :sdgId, m.goalValue = :doel, m.datasource = :datasourceId, m.info = :type WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.geefAlleMVOS", query = "SELECT m FROM Mvo m"),
+	@NamedQuery(name = "Mvo.geefaantalMVOsDatasource", query = "SELECT COUNT(m) FROM Mvo m INNER JOIN m.datasource d where d.id = :datasource_id"),
 	})
 public class Mvo implements Serializable
 {
