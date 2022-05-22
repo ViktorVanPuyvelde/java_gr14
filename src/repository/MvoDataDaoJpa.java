@@ -16,32 +16,15 @@ public class MvoDataDaoJpa extends GenericDaoJpa<MvoData> implements MvoDataDao{
 	
 	}
 
-	/*
-	 * @Override public List<MvoData> geefAlleMvoDatas() throws
-	 * EntityNotFoundException { return super.findAll(); }
-	 */
+	
+	  @Override 
+	  public List<MvoData> geefAlleMvoDatas() throws
+	  EntityNotFoundException { return super.findAll(); }
+	 
 
-	@Override
-	public List<MvoData> geefAlleMvoDatasVoorMvo(String mvo_id) throws EntityNotFoundException {
-        try {
-            return em.createNamedQuery("MvoData.geefMvoDatasVoorMvo", MvoData.class)
-            		.setParameter("mvo_id", mvo_id )
-            		.getResultList();
-        } catch (NoResultException ex) {
-            throw new EntityNotFoundException();
-        } 
-	}
 
-	@Override
-	public Mvo geefMvoMetNaam(String naam) throws EntityNotFoundException {
-	        try {
-	            return em.createNamedQuery("Mvo.geefMvoMetNaam", Mvo.class)
-	            		.setParameter("mvoNaam", naam )
-	            		.getSingleResult();
-	        } catch (NoResultException ex) {
-	            throw new EntityNotFoundException();
-	        } 
-	}
+
+	
 
 	
 

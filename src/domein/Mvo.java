@@ -1,6 +1,7 @@
 package domein;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -27,7 +28,7 @@ import com.google.gson.Gson;
 	@NamedQuery(name = "Mvo.verwijderMvoMetID", query = "DELETE FROM Mvo m WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.updateMvoMetID", query = "UPDATE Mvo m SET m.name = :mvoName, m.superMvo = :superMvoId, m.sdg = :sdgId, m.goalValue = :doel, m.datasource = :datasourceId, m.info = :type WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.geefAlleMVOS", query = "SELECT m FROM Mvo m"),
-	@NamedQuery(name = "Mvo.geefaantalMVOsDatasource", query = "SELECT COUNT(m) FROM Mvo m INNER JOIN m.datasource d where d.id = :datasource_id"),
+	@NamedQuery(name = "Mvo.geefaantalMVOsDatasource", query = "SELECT COUNT(m) FROM Mvo m INNER JOIN m.datasource d where d.id = :datasource_id")
 	})
 public class Mvo implements Serializable
 {
@@ -50,12 +51,11 @@ public class Mvo implements Serializable
 	@JoinColumn(name = "sdg_id", nullable = false)
 	private Sdg sdg;
 	@Transient
-	private List<String> mvo_data;
+	private List<MvoData> mvo_data = new ArrayList<>();
 	@ManyToOne(targetEntity = Mvo.class)
 	@JoinColumn(name = "super_mvo_id")
 	private Mvo superMvo;
-	@Transient
-	private Aggregatie methode;
+
 	
 
 	public Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
@@ -67,20 +67,10 @@ public class Mvo implements Serializable
 		setDatasource(datasource);
 		setSdg(sdg);
 		setSuperMvo(superMvo);
+		this.mvo_data = new ArrayList<>();
 		
 	}
-	protected Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo, Aggregatie methode)
-	{
-		setId(UUID.randomUUID().toString());
-		setName(name);
-		setInfo(info);
-		setGoalValue(goalValue);
-		setDatasource(datasource);
-		setSdg(sdg);
-		setSuperMvo(superMvo);
-		this.methode = methode;
-		
-	}
+
 
 	protected Mvo()
 	{
@@ -160,12 +150,12 @@ public class Mvo implements Serializable
 		this.goalValue = goalValue;
 	}
 
-	public List<String> getMvo_data()
+	public List<MvoData> getMvo_data()
 	{
 		return mvo_data;
 	}
 
-	public void setMvo_data(List<String> mvo_data)
+	public void setMvo_data(List<MvoData> mvo_data)
 	{
 		this.mvo_data = mvo_data;
 	}
@@ -190,10 +180,5 @@ public class Mvo implements Serializable
 	{
 		return String.format("%s", name);
 	}
-	public Aggregatie getMethode() {
-		return methode;
-	}
-	public void setMethode(Aggregatie methode) {
-		this.methode = methode;
-	}
+	
 }

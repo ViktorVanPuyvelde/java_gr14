@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 @NamedQueries(		
 {
 	@NamedQuery(name = "MvoData.alleMvoDatas", query = "select md from MvoData md"),
-	@NamedQuery(name = "MvoData.geefMvoDatasVoorMvo", query = "SELECT md FROM MvoData md WHERE md.mvo = :mvo_id"),
 })
 public class MvoData implements Serializable{
 
@@ -130,6 +129,12 @@ public class MvoData implements Serializable{
 	public String toString()
 	{
 		return String.format("id: %s, %s, kwartaal: %d%n", getId(), getWaarde(), getQuarter());
+	}
+
+
+	public void setWaardeInt(int i) {
+		setWaarde(String.valueOf(i));
+		
 	}
 	
 }

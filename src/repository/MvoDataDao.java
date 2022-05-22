@@ -9,13 +9,8 @@ import domein.MvoData;
 
 
 public interface MvoDataDao extends GenericDao<MvoData>{
-	
-	//public List<MvoData> geefAlleMvoDatas() throws EntityNotFoundException;
-	
-	public List<MvoData> geefAlleMvoDatasVoorMvo(String mvo_id) throws EntityNotFoundException;
 
-	public Mvo geefMvoMetNaam(String naam);
-	
+	List<MvoData> geefAlleMvoDatas() throws EntityNotFoundException;
 	
 	
 

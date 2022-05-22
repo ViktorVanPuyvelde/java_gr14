@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.TreeMap;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -13,6 +14,7 @@ import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
+import domein.MvoData;
 import domein.Sdg;
 import domein.SdgController;
 import exceptions.InformationRequiredException;
@@ -51,13 +53,9 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	@FXML
 	private Node rowConstraint0;
 	@FXML
-	private ListView<String> lvDatasource;
-	@FXML
 	private ListView<String> lvSuperMvo;
 	@FXML
 	private Label lblErrorNietAangemaakt;
-	@FXML
-	private ChoiceBox<Aggregatie> aggregatieBox;
 	@FXML
 	private Label lblErrorNaam;
 	@FXML
@@ -79,13 +77,12 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	private Datasource datasource;
 	private Boolean foutMeldingDoel = false;
 	private Mvo superMvo;
-	private Aggregatie methode;
+
 	private Mvo selectedMvo;
 
 	private ObservableList<Sdg> sdgItemList;
-	private ObservableList<Datasource> datasourceItemList;
 	private ObservableList<Mvo> superMvoItemList;
-	private ObservableList<Aggregatie> boxOptions;
+	
 
 	private Melding melding;
 
@@ -95,13 +92,12 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	{
 		this.mc = new MvoController();
 		this.sc = new SdgController();
-		this.dc = new DatasourceController();
+
 		melding = new Melding();
 		this.wijzigen = wijzigen;
 		this.selectedMvo = selectedMvo2;
 		buildGui();
 		setSdgItemList();
-		setDatasourceItemList();
 		setSuperMvoItemList();
 		initialize();
 	}
@@ -112,7 +108,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		{
 			type = FXCollections.observableArrayList(new ArrayList<>());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
-			datasourceItemList = FXCollections.observableArrayList(new ArrayList<>());
+
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
 			if (wijzigen)
 				boxOptions = FXCollections.observableArrayList(Aggregatie.values());
@@ -129,11 +125,11 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	private void initialize()
 	{
 		lvSdg.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-		lvDatasource.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
 		lvSuperMvo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
-		datasourceItemList.forEach(d -> lvDatasource.getItems().add(d.getName()));
+
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 
 		if (wijzigen)
@@ -183,7 +179,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			{
 				this.doel = Integer.parseInt(txtDoel.getText());
 			}
-			this.datasource = this.dc.geefDatasourceDoorNaam(this.lvDatasource.getSelectionModel().getSelectedItem());
+
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
 
 		} catch (EntityNotFoundException e)
@@ -278,6 +274,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			label.setText(value);
 	}
 
+
 	private void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgs();
@@ -285,12 +282,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			this.sdgItemList.add(s);
 	}
 
-	private void setDatasourceItemList()
-	{
-		List<Datasource> datasources = this.dc.geefDatasources();
-		for (Datasource d : datasources)
-			this.datasourceItemList.add(d);
-	}
 
 	private void setSuperMvoItemList()
 	{
