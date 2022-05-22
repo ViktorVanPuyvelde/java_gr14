@@ -46,20 +46,18 @@ public class CategorieController
 	public Categorie voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
-		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 1;
 		Categorie newCategorie = createCategorie(null, name, iconName, roles, sdgs);
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 		return newCategorie;
 	}
 
 	public void pasCategorieAan(Categorie c, boolean isCategorie) throws InformationRequiredException
 	{
-		int old = createOrUpdateOrDelete;
 		int index = cats.indexOf(c);
 		createOrUpdateOrDelete = 2;
 		CategorieBuilder cb = new CategorieBuilder();
@@ -69,18 +67,17 @@ public class CategorieController
 		categorieRepo.update(updateCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.set(index, updateCategorie);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 	}
 
 	public void verwijderCategorie(Categorie c)
 	{
-		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 3;
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.delete(c);
 		CategorieDaoJpa.commitTransaction();
 		cats.remove(c);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
