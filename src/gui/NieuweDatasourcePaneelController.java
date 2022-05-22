@@ -161,6 +161,8 @@ public class NieuweDatasourcePaneelController extends GridPane
 		verify();
 		update();
 	}
+	
+	  
 
 	private void update() {
 		
@@ -366,12 +368,16 @@ public class NieuweDatasourcePaneelController extends GridPane
 			List<MvoData> subMvoDataList = mvo.getMvo_data();
 			
 			// treemap opvullen
+			if(superMvoDataList != null) {
 			superMvoDataList.stream().forEach(superMvoData -> tree.put(superMvoData.getQuarter(), superMvoData));
+			};
+			
 			subMvoDataList.stream().forEach(subMvoData -> {
 				int quarter = subMvoData.getQuarter();
 				// er is al data voor dit kwartaal -> nieuwe data optellen bij bestaande data
-				if(tree.containsKey(quarter)) {
+				if(tree.containsKey(quarter)) {			
 					MvoData newSuperMvoData = tree.get(quarter);
+					System.out.println(newSuperMvoData.getWaarde());
 					newSuperMvoData.setMvo_id(superMvo);
 					newSuperMvoData.setDatum(subMvoData.getDatum());
 					newSuperMvoData.setWaardeInt(subMvoData.getWaardeInt() + tree.get(quarter).getWaardeInt());
@@ -379,7 +385,12 @@ public class NieuweDatasourcePaneelController extends GridPane
 					mdc.update(newSuperMvoData);
 				}else {
 					// er is nog geen data voor dit kwartaal -> nieuwe MvoData
-					new MvoData(superMvo,subMvoData.getWaardeInt(),subMvoData.getDatum(),quarter);
+					try {
+						mdc.voegMvoDataToe(superMvo,String.valueOf(subMvoData.getWaardeInt()),subMvoData.getDatum(),quarter);
+					} catch (InformationRequiredException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			});
 		}

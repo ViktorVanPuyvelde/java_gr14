@@ -35,6 +35,7 @@ public class MvoDataController
 			throws InformationRequiredException
 	{
 		MvoData newMvoData = createMvoData(null, mvo,waarde,date, quarter);
+		mvo.getMvo_data().add(newMvoData);
 		MvoDataDaoJpa.startTransaction();
 		mvoDataRepo.insert(newMvoData);
 		MvoDataDaoJpa.commitTransaction();
