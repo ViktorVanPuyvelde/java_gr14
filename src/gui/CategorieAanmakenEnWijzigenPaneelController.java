@@ -274,8 +274,8 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 	{
 		try
 		{
-			categorieController.pasCategorieAan(c, isCategorie);
-			toonBevestiging("Categorie is met succes aangepast");
+			categorieController.pasCategorieAan(c);
+			//toonBevestiging("Categorie is met succes aangepast");
 		} catch (InformationRequiredException e)
 		{
 			informationRequiredExceptionHandling(e);

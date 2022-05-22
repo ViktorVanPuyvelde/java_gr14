@@ -33,6 +33,8 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	@FXML
 	private Label catSelecteren_lbl;
 	@FXML
+	private Label cat_create_update_lbl;
+	@FXML
 	private HBox hBox;
 
 	private CategorieController catController;
@@ -44,7 +46,6 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 		this.catController = new CategorieController();
 		buildGui();
 		setCategorieList();
-//		initialize();
 		catController.addPropertyChangeListener(this);
 	}
 
@@ -102,6 +103,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	public void createCategorie_OnAction(ActionEvent event)
 	{
 		catSelecteren_lbl.setText("");
+		cat_create_update_lbl.setText("");
 		if (rechterSchermAanwezig)
 		{
 			verwijderRechterScherm();
@@ -118,6 +120,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	public void raadplegenCategorie_OnAction(ActionEvent event)
 	{
 		catSelecteren_lbl.setText("");
+		cat_create_update_lbl.setText("");
 		if (rechterSchermAanwezig)
 		{
 			verwijderRechterScherm();
@@ -139,6 +142,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	@FXML
 	public void editCategorie_OnAction(ActionEvent event)
 	{
+		cat_create_update_lbl.setText("");
 		catSelecteren_lbl.setText("");
 		if (rechterSchermAanwezig)
 		{
@@ -164,6 +168,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	@FXML
 	public void deleteCategorie_OnAction(ActionEvent event)
 	{
+		cat_create_update_lbl.setText("");
 		catSelecteren_lbl.setText("");
 		if (rechterSchermAanwezig)
 		{
@@ -194,8 +199,23 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 	@Override
 	public void propertyChange(PropertyChangeEvent evt)
 	{
-		List<Categorie> newValue = (List<Categorie>) evt.getNewValue();
-		catItemList = FXCollections.observableArrayList(newValue);
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
+		}
+		int newValue = (int) evt.getNewValue();
+		if (newValue == 1) {
+			cat_create_update_lbl.setText("Categorie is met succes aangemaakt!");
+		}else if(newValue == 2) {
+			cat_create_update_lbl.setText("Categorie is met succes gewijzigd!");
+		}else if(newValue == 3) {
+			cat_create_update_lbl.setText("Categorie is met succes verwijderd!");
+		}else {
+			cat_create_update_lbl.setText("");
+		}
+
+		
+		catItemList = FXCollections.observableArrayList(catController.geefCategorien());
 		categorie_List.getItems().clear();
 		initialize();
 	}

@@ -39,6 +39,10 @@ public class DatasourceBuilder
 		this.datasource = new Datasource();
 	}
 
+	public void setDatasource(Datasource datasource) {
+		this.datasource = datasource;
+	}
+
 	public void buildId()
 	{
 		datasource.setId(UUID.randomUUID().toString());

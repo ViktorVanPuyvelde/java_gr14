@@ -76,4 +76,14 @@ class TestSdg {
 		
 		Mockito.verify(sdgRepo).geefSdgVoorMvo(s.getId(), s.getMvos().get(0).getId());
 	}
+	
+	@ParameterizedTest
+	@MethodSource("sdgs")
+	public void testRaadpleegSdgVoorMvo(Sdg s) {
+		Mockito.when(sdgRepo.geefSdgDoorNaam(s.getName())).thenReturn(s);
+		
+		Assertions.assertEquals(s, controller.geefSdgDoorNaam(s.getName()));
+		
+		Mockito.verify(sdgRepo).geefSdgDoorNaam(s.getName());
+	}
 }

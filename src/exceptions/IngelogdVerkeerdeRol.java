@@ -5,7 +5,7 @@ public class IngelogdVerkeerdeRol extends IllegalArgumentException {
 	private static final long serialVersionUID = 1L;
 
 	public IngelogdVerkeerdeRol(){
-		super("Enkel de coördinator kan inloggen!");
+		super("Enkel de coÃ¶rdinator kan inloggen!");
 	}
 
 	public IngelogdVerkeerdeRol(String s)

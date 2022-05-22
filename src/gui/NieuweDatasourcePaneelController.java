@@ -179,14 +179,22 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 
 		toevoegenLbl.setText("Datasource toegevoegd!");
-		if (datasource == null)
-		{
-			controller.voegDatasourceToe(naam_textfield.getText(), false);
-			toevoegenLbl.setText("Datasource toegevoegd!");
-		} else
-		{
-			controller.updateDatasource(datasource, naam_textfield.getText(), false);
-			toevoegenLbl.setText("Datasource gewijzigd!");
+		if (datasource == null) {
+			try {
+				controller.voegDatasourceToe(naam_textfield.getText(), false);
+				toevoegenLbl.setText("Datasource toegevoegd!");
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				controller.updateDatasource(datasource, naam_textfield.getText(), false);
+				toevoegenLbl.setText("Datasource gewijzigd!");	
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		toevoegenLbl.setTextFill(Color.GREEN);

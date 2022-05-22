@@ -112,15 +112,34 @@ class TestCategorie {
 		Mockito.verify(categorieRepo).geefSdgVoorCategorie(c.getName());
 	}
 
-//	@Test
-//	public void testUpdateCategory() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	public void testDeleteCategory() {
-//		fail("Not yet implemented");
-//	}
+	@Test
+	public void testUpdateCategory() throws InformationRequiredException {
+		Categorie c = controller.geefCategorien().get(1);
+		c.setName("nieuwCat");
+		controller.pasCategorieAan(c);
+		Assertions.assertEquals("nieuwCat", controller.geefCategorien().get(1).getName());
+		
+		//Terug naar originele waarde zetten
+		c.setName("Planet");
+		controller.pasCategorieAan(c);		
+	}
+
+	
+	@ParameterizedTest
+	@MethodSource("fouteCategorie")
+	public void testUpdateCategoryWithException(String naam, String icon, List<String> roles, List<Sdg> sdgs){
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.pasCategorieAan(new Categorie(naam, icon, roles, false, sdgs)));
+	}
+
+	@Test
+	public void testDeleteCategory() throws InformationRequiredException {
+		controller.voegCategorieToe("nieuwCat", "icon", new ArrayList<>(Arrays.asList("gebruiker")), new ArrayList<>(Arrays.asList(new Sdg("sdg1", null, null, null))));
+
+		Categorie c = controller.getCategorie("nieuwCat");
+		Assertions.assertTrue(controller.geefCategorien().contains(c));
+		controller.verwijderCategorie(c);
+		Assertions.assertFalse(controller.geefCategorien().contains(c));		
+	}
 
 	
 }

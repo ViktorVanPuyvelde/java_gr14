@@ -3,7 +3,6 @@ package domein;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +15,14 @@ public class CategorieController
 {
 	private CategorieDao categorieRepo;
 	private List<Categorie> cats;
-	private PropertyChangeSupport subject;
-
+    private PropertyChangeSupport subject;
+    private int createOrUpdateOrDelete = 0;
+    
 	public CategorieController()
 	{
 		subject = new PropertyChangeSupport(this);
 		setCategorieRepo(new CategorieDaoJpa());
 		cats = categorieRepo.findAll();
-		// populateDB();
 	}
 
 	public List<Categorie> geefCategorien()
@@ -47,31 +46,40 @@ public class CategorieController
 	public Categorie voegCategorieToe(String name, String iconName, List<String> roles, List<Sdg> sdgs)
 			throws InformationRequiredException
 	{
-		List<Categorie> oldCats = new ArrayList<>(cats);
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 1;
 		Categorie newCategorie = createCategorie(null, name, iconName, roles, sdgs);
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.insert(newCategorie);
 		CategorieDaoJpa.commitTransaction();
 		cats.add(newCategorie);
-		subject.firePropertyChange("cats", oldCats, cats);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 		return newCategorie;
 	}
 
 	public void pasCategorieAan(Categorie c, boolean isCategorie) throws InformationRequiredException
 	{
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 2;
 		CategorieBuilder cb = new CategorieBuilder();
 		cb.setCategorie(c, isCategorie);
 		Categorie updateCategorie = cb.getCategorie();
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.update(updateCategorie);
 		CategorieDaoJpa.commitTransaction();
+		cats.set(cats.indexOf(c), updateCategorie);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 	}
 
 	public void verwijderCategorie(Categorie c)
 	{
+		int old = createOrUpdateOrDelete;
+		createOrUpdateOrDelete = 3;
 		CategorieDaoJpa.startTransaction();
 		categorieRepo.delete(c);
 		CategorieDaoJpa.commitTransaction();
+		cats.remove(c);
+        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
 	}
 
 	private Categorie createCategorie(CategorieBuilder cb, String name, String iconName, List<String> roles,
@@ -102,24 +110,21 @@ public class CategorieController
 		c.setSdgs(sdgs);
 		return sdgs;
 	}
-
-	// nieuwe luisteraar inschrijven
-	public void addPropertyChangeListener(PropertyChangeListener pcl)
-	{
-		subject.addPropertyChangeListener(pcl);
-		pcl.propertyChange(new PropertyChangeEvent(pcl, "cats", cats, cats));
-	}
+	
+	//nieuwe luisteraar inschrijven
+    public void addPropertyChangeListener(PropertyChangeListener pcl) { 
+        subject.addPropertyChangeListener(pcl);
+        pcl.propertyChange(
+        		new PropertyChangeEvent(pcl, "createOrUpdateOrDelete", createOrUpdateOrDelete, 0));
+    }
 
 	public void removePropertyChangeListener(PropertyChangeListener pcl)
 	{
 		subject.removePropertyChangeListener(pcl);
 	}
 
-//	private void populateDB() {
-//		categorieRepo.insert(new Categorie("Profit", "icon1", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("Planet", "icon2", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("People", "icon3", new String[] {"manager", "stakeholder", "coördinator"}, true));
-//		categorieRepo.insert(new Categorie("Datasources", "icon4", new String[] {"manager", "coördinator"}, false));
-//		categorieRepo.insert(new Categorie("Account", "icon5", new String[] {"manager", "stakeholder", "coördinator"}, false));
-//	}
+	
+	public Categorie getCategorie(String naam) {
+		return cats.stream().filter(c -> c.getName().equals(naam)).findAny().get();
+	}
 }

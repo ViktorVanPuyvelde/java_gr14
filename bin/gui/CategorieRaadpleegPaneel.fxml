@@ -7,19 +7,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_CENTER" spacing="30.0" stylesheets="@Styles.css" type="VBox" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_CENTER" spacing="30.0" stylesheets="@Styles.css" type="VBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Raadplegen Categorie" textFill="#b2d234">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <HBox spacing="20.0">
+      <HBox spacing="15.0">
          <VBox.margin>
             <Insets />
          </VBox.margin>
          <children>
-            <Label prefWidth="55.0" text="Id:">
+            <Label prefWidth="85.0" text="Id:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -34,9 +34,9 @@
             </Label>
          </children>
       </HBox>
-      <HBox spacing="20.0">
+      <HBox spacing="15.0">
          <children>
-            <Label prefWidth="55.0" text="Naam:">
+            <Label prefWidth="85.0" text="Naam:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -51,9 +51,9 @@
             </Label>
          </children>
       </HBox>
-      <HBox spacing="20.0">
+      <HBox spacing="15.0">
          <children>
-            <Label prefWidth="55.0" text="Icon:">
+            <Label prefWidth="85.0" text="Pictogram:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -68,9 +68,26 @@
             </Label>
          </children>
       </HBox>
-      <HBox fx:id="sdg_hbox" spacing="20.0">
+      <HBox spacing="15.0">
          <children>
-            <Label prefWidth="55.0" text="SDG's:">
+            <Label prefWidth="85.0" text="Rollen:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="rollen_lbl" alignment="TOP_LEFT">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox fx:id="sdg_hbox" spacing="15.0">
+         <children>
+            <Label prefWidth="85.0" text="SDG's:">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
