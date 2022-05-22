@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="gpAanmakenMvo" alignment="CENTER" maxHeight="811.0" maxWidth="797.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="811.0" prefWidth="797.0" stylesheets="@Styles.css" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="gpAanmakenMvo" alignment="CENTER" maxHeight="700.0" maxWidth="797.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="797.0" stylesheets="@Styles.css" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="155.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="250.0" />
@@ -19,14 +19,13 @@
       <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="106.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="169.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="162.0" minHeight="10.0" prefHeight="162.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="178.99997558593753" minHeight="4.0" prefHeight="178.99997558593753" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="249.0" minHeight="10.0" prefHeight="60.600024414062545" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="155.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="119.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="162.0" minHeight="10.0" prefHeight="107.20001831054691" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="29.000006103515602" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="200.9999938964844" minHeight="4.0" prefHeight="87.20000610351565" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="249.0" minHeight="10.0" prefHeight="65.79998168945315" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="233.00001831054692" minHeight="10.0" prefHeight="66.39998779296877" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="192.80001220703127" minHeight="10.0" prefHeight="56.19998779296873" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="57.0000061035156" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <Label fx:id="lblMvoName" alignment="CENTER" prefHeight="64.0" prefWidth="240.0" text="Naam*:" GridPane.rowIndex="2" />
@@ -46,9 +45,9 @@
       <Label fx:id="lblSuperMvo" alignment="CENTER" prefHeight="71.0" prefWidth="238.0" text="Super MVO:" GridPane.rowIndex="3" />
       <ListView fx:id="lvSuperMvo" prefHeight="81.0" prefWidth="262.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label alignment="CENTER" prefHeight="37.0" prefWidth="506.0" text="De velden met een * moeten ingevuld zijn." GridPane.columnSpan="2" GridPane.rowIndex="1" />
-      <Label fx:id="lblErrorNietAangemaakt" alignment="CENTER" prefHeight="29.0" prefWidth="662.0" textFill="RED" GridPane.columnSpan="3" GridPane.rowIndex="10" />
       <Label fx:id="lblErrorNaam" prefHeight="58.0" prefWidth="392.0" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Label fx:id="lblErrorSdg" prefHeight="118.0" prefWidth="392.0" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="6" />
       <Label fx:id="lblErrorDoel" prefHeight="107.0" prefWidth="392.0" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label fx:id="lblErrorNietAangemaakt" prefHeight="58.0" prefWidth="392.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="8" />
    </children>
 </fx:root>
