@@ -16,6 +16,7 @@ public class CategorieController
 	private CategorieDao categorieRepo;
 	private List<Categorie> cats;
     private PropertyChangeSupport subject;
+    //0 = niets, 1 = create, 2 = update, 3 = delete
     private int createOrUpdateOrDelete = 0;
     
 	public CategorieController()

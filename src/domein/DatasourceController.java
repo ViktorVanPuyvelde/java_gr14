@@ -45,14 +45,13 @@ public class DatasourceController
 	}
 	
 	public void voegDatasourceToe(String naam, boolean flag) throws InformationRequiredException {
-		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 1;
 		Datasource d = createOrUpdateDatasource(null, naam, flag);
 		DatasourceDaoJpa.startTransaction();
 		this.datasourceRepo.insert(d);
 		DatasourceDaoJpa.commitTransaction();
 		datasources.add(d);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 	}	
 	
 	private Datasource createOrUpdateDatasource(DatasourceBuilder builder, String naam, boolean flag) throws InformationRequiredException {
@@ -69,7 +68,6 @@ public class DatasourceController
 	}
 
 	public void updateDatasource(Datasource d, String naam, boolean flag) throws InformationRequiredException {
-		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 2;
 		int index = datasources.indexOf(d);
 		DatasourceBuilder builder = new DatasourceBuilder();
@@ -79,17 +77,16 @@ public class DatasourceController
 		this.datasourceRepo.update(datasource);
 		DatasourceDaoJpa.commitTransaction();
 		datasources.set(index, d);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 	}
 
 	public void deleteDatasource(Datasource d) {
-		int old = createOrUpdateOrDelete;
 		createOrUpdateOrDelete = 3;
 		DatasourceDaoJpa.startTransaction();
 		this.datasourceRepo.delete(d);
 		DatasourceDaoJpa.commitTransaction();
 		datasources.remove(d);
-        subject.firePropertyChange("createOrUpdateOrDelete", old, createOrUpdateOrDelete);
+        subject.firePropertyChange("createOrUpdateOrDelete", 0, createOrUpdateOrDelete);
 
 	}	
 	public Datasource geefDatasourceMetId(String id) {
