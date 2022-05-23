@@ -105,5 +105,16 @@ class TestMvo {
 	public void testUpdateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo){
 		Assertions.assertThrows(InformationRequiredException.class, () -> controller.update(new Mvo(naam, sdg, info, goal, datasource, superMvo)));
 	}
+	
+	@Test
+	public void testDeleteCategory() throws InformationRequiredException {
+		controller.voegMvoToe("nieuwMvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList(new String[] {"info"})), 50, new Datasource("d", false), null);
+
+		Mvo m = controller.get("nieuwMvo");
+		Assertions.assertTrue(controller.geefMvos().contains(m));
+		controller.delete(m);
+		Assertions.assertFalse(controller.geefMvos().contains(m));		
+	}
+
 
 }

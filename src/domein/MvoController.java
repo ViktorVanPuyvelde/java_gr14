@@ -119,4 +119,8 @@ public class MvoController
 		mb.buildSuperMvo(superMvo);
 		return mb.getMvo();
 	}
+
+	public Mvo get(String naam) {
+		return mvos.stream().filter(m -> m.getName().equals(naam)).findAny().get();
+	}
 }
