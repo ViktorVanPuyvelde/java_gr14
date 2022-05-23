@@ -160,6 +160,8 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 		// fill with Roles
 		cat_Rol_List.setItems(rolItemList);
 
+		System.out.println(wijzigen);
+
 		if (wijzigen)
 			initializeWijzigen();
 	}
@@ -275,7 +277,7 @@ public class CategorieAanmakenEnWijzigenPaneelController extends GridPane
 		try
 		{
 			categorieController.pasCategorieAan(c, isCategorie);
-			//toonBevestiging("Categorie is met succes aangepast");
+			// toonBevestiging("Categorie is met succes aangepast");
 		} catch (InformationRequiredException e)
 		{
 			informationRequiredExceptionHandling(e);

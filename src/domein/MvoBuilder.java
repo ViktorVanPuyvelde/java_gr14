@@ -20,12 +20,11 @@ public class MvoBuilder
 		{
 			this.errorMap.put("lblErrorNaam", "Naam is vereist.");
 		}
-		
 		if (this.mvo.getSdg() == null)
 		{
-			this.errorMap.put("lblErrorSdg", "Er moet ��n SDG aangeduid zijn.");
+			this.errorMap.put("lblErrorSdg", "Er moet \u00E9\u00E9n SDG aangeduid zijn.");
 		}
-		if (this.mvo.getInfo().equals("null") || this.mvo.getInfo().isEmpty())
+		if (this.mvo.getInfo().equals("null") || this.mvo.getInfo().isEmpty() || this.mvo.getInfo().isBlank())
 		{
 			this.errorMap.put("lblErrorEenheid", "Er moet een eenheid meegegeven worden.");
 		}
@@ -88,7 +87,7 @@ public class MvoBuilder
 	{
 		this.mvo.setGoalValue(goalValue);
 	}
-	
+
 	public void buildMvoData(List<MvoData> mvoData)
 	{
 		this.mvo.setMvo_data(mvoData);

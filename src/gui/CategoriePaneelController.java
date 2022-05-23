@@ -109,6 +109,7 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 			verwijderRechterScherm();
 		}
 		categorie_List.getSelectionModel().clearSelection();
+		System.out.println("hier");
 		CategorieAanmakenEnWijzigenPaneelController catAanmakenPaneel = new CategorieAanmakenEnWijzigenPaneelController(
 				null, catController, false);
 		this.getChildren().add(catAanmakenPaneel);
@@ -204,17 +205,20 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 			verwijderRechterScherm();
 		}
 		int newValue = (int) evt.getNewValue();
-		if (newValue == 1) {
+		if (newValue == 1)
+		{
 			cat_create_update_lbl.setText("Categorie is met succes aangemaakt!");
-		}else if(newValue == 2) {
+		} else if (newValue == 2)
+		{
 			cat_create_update_lbl.setText("Categorie is met succes gewijzigd!");
-		}else if(newValue == 3) {
+		} else if (newValue == 3)
+		{
 			cat_create_update_lbl.setText("Categorie is met succes verwijderd!");
-		}else {
+		} else
+		{
 			cat_create_update_lbl.setText("");
 		}
 
-		
 		catItemList = FXCollections.observableArrayList(catController.geefCategorien());
 		categorie_List.getItems().clear();
 		initialize();

@@ -5,16 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.TreeMap;
 
 import javax.persistence.EntityNotFoundException;
 
-import domein.Aggregatie;
-import domein.Datasource;
 import domein.DatasourceController;
 import domein.Mvo;
 import domein.MvoController;
-import domein.MvoData;
 import domein.Sdg;
 import domein.SdgController;
 import exceptions.InformationRequiredException;
@@ -24,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -55,7 +50,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	@FXML
 	private ListView<String> lvSuperMvo;
 	@FXML
-	
 	private Label lblErrorNietAangemaakt;
 	@FXML
 	private Label lblErrorNaam;
@@ -63,8 +57,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	private Label lblErrorSdg;
 	@FXML
 	private Label lblErrorDoel;
-	@FXML
-	private Label lblErrorDatabron;
 	@FXML
 	private Label lblErrorEenheid;
 	@FXML
@@ -75,14 +67,12 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	private Sdg sdg;
 	private ObservableList<String> type;
 	private int doel;
-	private Boolean foutMeldingDoel = false;
 	private Mvo superMvo;
 
 	private Mvo selectedMvo;
 
 	private ObservableList<Sdg> sdgItemList;
 	private ObservableList<Mvo> superMvoItemList;
-	
 
 	private Melding melding;
 
@@ -111,12 +101,10 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			type = FXCollections.observableArrayList(new ArrayList<>());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
-			if (!wijzigen) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
-			}
 		} catch (IOException e)
 		{
 			throw new RuntimeException(e);
@@ -133,17 +121,14 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 
 		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 
-	
-
 		if (wijzigen)
 		{
-			lblTop.setText("MVO aanpassen");
+			this.lblTop.setText("MVO aanpassen");
 			txtMvoName.setText(selectedMvo.getName());
 
 			txtDoel.setText(selectedMvo.getGoalValue() + "");
 
 			txtType.setText(selectedMvo.getInfo());
-
 
 			lvSdg.getSelectionModel().select(selectedMvo.getSdg().getName());
 
@@ -171,16 +156,8 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			this.name = txtMvoName.getText();
 			this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
 			this.type.add(txtType.getText());
-			if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
-			{
-				foutMeldingDoel = true;
-			} else
-			{
-				this.doel = Integer.parseInt(txtDoel.getText());
-			}
-
+			this.doel = Integer.parseInt(txtDoel.getText());
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
-
 		} catch (EntityNotFoundException e)
 		{
 			System.out.println("error");
@@ -194,16 +171,8 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		List<String> sdgNamen = this.sdgItemList.stream().map(Sdg::getName).collect(Collectors.toList());
 		int indexSdg = sdgNamen.indexOf(lvSdg.getSelectionModel().getSelectedItem());
 		this.sdg = this.sdgItemList.get(indexSdg);
-
 		this.type.add(txtType.getText());
-
-		if (txtDoel.getText() == null || txtDoel.getText().isEmpty())
-		{
-			foutMeldingDoel = true;
-		} else
-		{
-			this.doel = Integer.parseInt(txtDoel.getText());
-		}
+		this.doel = Integer.parseInt(txtDoel.getText());
 
 		if (lvSuperMvo.getSelectionModel().getSelectedItem() != null)
 		{
@@ -218,7 +187,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			this.superMvo = null;
 		}
 
-		
 	}
 
 	private void verify()
@@ -256,7 +224,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	{
 		checkLabel(lblErrorNaam, key, value);
 		checkLabel(lblErrorDoel, key, value);
-		checkLabel(lblErrorDatabron, key, value);
 		checkLabel(lblErrorSdg, key, value);
 		checkLabel(lblErrorEenheid, key, value);
 	}
@@ -267,14 +234,12 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			label.setText(value);
 	}
 
-
 	private void setSdgItemList()
 	{
 		List<Sdg> sdgs = this.sc.geefSdgs();
 		for (Sdg s : sdgs)
 			this.sdgItemList.add(s);
 	}
-
 
 	private void setSuperMvoItemList()
 	{
