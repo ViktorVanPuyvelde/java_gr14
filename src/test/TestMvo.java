@@ -46,7 +46,6 @@ class TestMvo {
 				Arguments.of("", null, null, -1, null, null),
 				Arguments.of("mvo", null, null, 100, null, null),
 				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, null, null),
-				Arguments.of("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, null, null),
 				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, new Datasource("da", false), null),
 				Arguments.of("mvo", null, new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),
 				Arguments.of(null, null, null, -1, null, null),
@@ -101,10 +100,10 @@ class TestMvo {
 		controller.update(m);		
 	}
 	
-//	@ParameterizedTest
-//	@MethodSource("fouteMvo")
-//	public void testUpdateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo){
-//		Assertions.assertThrows(InformationRequiredException.class, () -> controller.update(new Mvo(naam, sdg, info, goal, datasource, superMvo)));
-//	}
+	@ParameterizedTest
+	@MethodSource("fouteMvo")
+	public void testUpdateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo){
+		Assertions.assertThrows(InformationRequiredException.class, () -> controller.update(new Mvo(naam, sdg, info, goal, datasource, superMvo)));
+	}
 
 }
