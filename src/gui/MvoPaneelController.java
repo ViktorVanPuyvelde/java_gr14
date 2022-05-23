@@ -1,5 +1,7 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +12,7 @@ import domein.MvoController;
 import domein.SdgController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
-public class MvoPaneelController extends HBox
+public class MvoPaneelController extends HBox implements PropertyChangeListener
 {
 
 	/*
@@ -47,6 +50,9 @@ public class MvoPaneelController extends HBox
 
 	@FXML
 	private Label mvo_Selecteren_lbl;
+	
+	@FXML
+	private Label mvo_create_update_lbl;
 
 	private boolean rechterSchermAanwezig = false;
 
@@ -147,7 +153,8 @@ public class MvoPaneelController extends HBox
 		sc = new SdgController();
 		melding = new Melding();
 		buildGui();
-		initialize();
+		//initialize();
+		mc.addPropertyChangeListener(this);
 	}
 
 	private void buildGui()
@@ -222,5 +229,33 @@ public class MvoPaneelController extends HBox
 		this.getChildren().remove(this.getChildren().size() - 1);
 		rechterSchermAanwezig = false;
 	}
+	
+	@Override
+	public void propertyChange(PropertyChangeEvent evt)
+	{
+		if (rechterSchermAanwezig)
+		{
+			verwijderRechterScherm();
+		}
+		int newValue = (int) evt.getNewValue();
+		if (newValue == 1)
+		{
+			mvo_create_update_lbl.setText("MVO met succes aangemaakt!");
+		} else if (newValue == 2)
+		{
+			mvo_create_update_lbl.setText("MVO met succes gewijzigd!");
+		} else if (newValue == 3)
+		{
+			mvo_create_update_lbl.setText("MVO met succes verwijderd!");
+		} else
+		{
+			mvo_create_update_lbl.setText("");
+		}
+
+		MvoCatListView.getItems().clear();
+		MvoListView.getItems().clear();
+		initialize();
+	}
+
 
 }

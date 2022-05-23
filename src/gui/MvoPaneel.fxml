@@ -18,6 +18,11 @@
                </font>
             </Label>
             <Button id="createBtn" fx:id="createMVO_btn" mnemonicParsing="false" onAction="#createMVO_OnAction" prefHeight="25.0" prefWidth="170.0" styleClass="Button" text="Nieuwe MVO aanmaken" />
+			<Label fx:id="mvo_create_update_lbl" textFill="#2a9716">
+               <VBox.margin>
+                  <Insets bottom="-10.0" top="-10.0" />
+               </VBox.margin>
+            </Label>
             <VBox alignment="CENTER" spacing="20.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="186.0" prefWidth="400.0">

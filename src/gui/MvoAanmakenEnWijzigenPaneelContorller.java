@@ -202,7 +202,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 				this.mc.update(selectedMvo);
 			else
 				this.mc.voegMvoToe(name, sdg, type, doel, null, superMvo);
-			melding.toonBevestiging("De MVO is aangemaakt.");
+			//melding.toonBevestiging("De MVO is aangemaakt.");
 		} catch (InformationRequiredException e)
 		{
 			informationRequiredExceptionHandling(e);

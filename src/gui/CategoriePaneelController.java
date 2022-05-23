@@ -67,24 +67,10 @@ public class CategoriePaneelController extends HBox implements PropertyChangeLis
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
-		} catch (IOException ex)
-		{
-
-			categorie_List = new ListView<>();
-
-			catItemList = FXCollections.observableArrayList(new ArrayList<>());
-
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("CategoriePaneel.fxml"));
-			loader.setController(this);
-			loader.setRoot(this);
-			try
-			{
-				loader.load();
-			} catch (IOException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} catch (IOException e)
+		{	
+			// TODO Auto-generated catch block
+			e.printStackTrace();		
 		}
 
 	}
