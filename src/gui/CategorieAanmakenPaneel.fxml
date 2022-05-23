@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="990.0" stylesheets="@Styles.css" type="GridPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="500.0" stylesheets="@Styles.css" type="GridPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="105.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="386.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="509.0" minWidth="10.0" prefWidth="21.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="651.0" minWidth="10.0" prefWidth="486.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.6000122070312" minWidth="10.0" prefWidth="111.19997177124023" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="779.1999969482422" minWidth="10.0" prefWidth="389.6000282287598" />
+      <ColumnConstraints />
+      <ColumnConstraints />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
@@ -53,12 +53,8 @@
       <Label prefHeight="36.0" prefWidth="394.0" text="Hou CTRL ingedrukt om meerdere rollen te selecteren" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <ListView fx:id="cat_Rol_List" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <Label fx:id="lblErrorLabel" alignment="CENTER" prefHeight="17.0" prefWidth="676.0" GridPane.columnSpan="4" GridPane.rowIndex="13" />
-      <Label fx:id="lblErrorName" prefHeight="55.0" prefWidth="588.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Label fx:id="lblErrorPic" prefHeight="39.0" prefWidth="511.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <Label fx:id="lblErrorSdg" prefHeight="156.0" prefWidth="484.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-      <Label fx:id="lblErrorRol" prefHeight="144.0" prefWidth="484.0" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="9" />
    </children>
    <padding>
-      <Insets top="10.0" />
+      <Insets left="70.0" top="10.0" />
    </padding>
 </fx:root>
