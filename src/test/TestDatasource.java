@@ -49,7 +49,7 @@ class TestDatasource {
 	public void testRaadpleegDatasources() {
 		List<Datasource> dats = controller.geefDatasources();
 		Assertions.assertFalse(dats.isEmpty());
-		Assertions.assertEquals(new Datasource("Algemeen", false), dats.get(0));
+		Assertions.assertEquals(new Datasource("Aalst", false), dats.get(0));
 	}
 
 	@ParameterizedTest
@@ -70,8 +70,8 @@ class TestDatasource {
 		Assertions.assertEquals("nieuwData", controller.geefDatasources().get(0).getName());
 		
 		//Terug naar originele waarde zetten
-		d.setName("Algemeen");
-		controller.updateDatasource(d, "Algemeen", false);		
+		d.setName("Aalst");
+		controller.updateDatasource(d, "Aalst", false);		
 	}
 
 	
