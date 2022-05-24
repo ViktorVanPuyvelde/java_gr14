@@ -25,13 +25,13 @@ public class CategorieBuilder
 		{
 			if (this.categorie.getSdgs() == null || this.categorie.getSdgs().isEmpty())
 			{
-				this.errorMap.put("lblErrorSdg", "Minstens ��n SDG is vereist.");
+				this.errorMap.put("lblErrorSdg", "Minstens \u00E9\u00E9n SDG is vereist.");
 			}
 		}
 		if (this.categorie.getRoles() == null || this.categorie.getRoles().equals("[]")
 				|| this.categorie.getRoles().equals("null"))
 		{
-			this.errorMap.put("lblErrorRol", "Minstens ��n rol is vereist.");
+			this.errorMap.put("lblErrorRol", "Minstens \u00E9\u00E9n rol is vereist.");
 		}
 		if (this.categorie.getIconName() == null || this.categorie.getIconName().isEmpty())
 		{
@@ -58,7 +58,8 @@ public class CategorieBuilder
 		this.isCategorie = isCategorie;
 	}
 
-	public void setIsCategorie(boolean isCategorie) {
+	public void setIsCategorie(boolean isCategorie)
+	{
 		this.isCategorie = isCategorie;
 	}
 
