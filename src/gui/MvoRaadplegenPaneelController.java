@@ -71,7 +71,7 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 		
 		goalValue.setText(selectedMvo.getGoalValue()+"");
 		
-		mvoNaam.setText(selectedMvo.getName());
+		mvoNaam.setText(selectedMvo.getName() + "     (" + selectedMvo.getEenheid()+")");
 		
 		Sdg sdg = sc.geefSdgVoorMvo(selectedMvo.getSdg().getId(),selectedMvo.getId());
 		
