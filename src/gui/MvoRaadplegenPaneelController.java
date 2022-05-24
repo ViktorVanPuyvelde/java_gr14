@@ -79,10 +79,13 @@ public class MvoRaadplegenPaneelController extends AnchorPane{
 		
 		sdg_naam.setText(sdg.getName());
 		
-		Datasource datasource = dc.geefDatasourceMetId(selectedMvo.getDatasource().getId());
-		
-		datasource_id.setText(selectedMvo.getDatasource().getId());
-		datasource_name.setText(datasource.getName());
+		if(selectedMvo.getDatasource() != null) {
+			Datasource datasource = dc.geefDatasourceMetId(selectedMvo.getDatasource().getId());
+			
+			datasource_id.setText(selectedMvo.getDatasource().getId());
+			datasource_name.setText(datasource.getName());
+		}
+
 		
 		Image i = new Image("/images/"+sdg.getImage());
 		
