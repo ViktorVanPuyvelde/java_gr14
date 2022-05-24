@@ -49,11 +49,11 @@ public class MvoController
 		return Collections.unmodifiableList(mvos);
 	}
 
-	public void voegMvoToe(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
+	public void voegMvoToe(String name, Sdg sdg, String eenheid, int goalValue, Datasource datasource, Mvo superMvo)
 			throws InformationRequiredException
 	{
 		createOrUpdateOrDelete = 1;
-		Mvo newMvo = createMvo(null, name, sdg, info, goalValue, datasource, superMvo);
+		Mvo newMvo = createMvo(null, name, sdg, eenheid, goalValue, datasource, superMvo);
 		MvoDaoJpa.startTransaction();
 		mvoRepo.insert(newMvo);
 		MvoDaoJpa.commitTransaction();
@@ -69,6 +69,7 @@ public class MvoController
 		mvoBuilder.setMvo(mvo);
 		Mvo updateMvo = mvoBuilder.getMvo();
 		MvoDaoJpa.startTransaction();
+		System.out.println("MVO wijzigen"+ updateMvo.getName());
 		mvoRepo.update(updateMvo);
 		MvoDaoJpa.commitTransaction();
 		mvos.set(index, updateMvo);
@@ -102,7 +103,7 @@ public class MvoController
 		MvoDaoJpa.closePersistency();
 	}
 
-	private Mvo createMvo(MvoBuilder mb, String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource,
+	private Mvo createMvo(MvoBuilder mb, String name, Sdg sdg, String eenheid, int goalValue, Datasource datasource,
 			Mvo superMvo) throws InformationRequiredException
 	{
 		if (mb == null)
@@ -113,7 +114,7 @@ public class MvoController
 		mb.buildId();
 		mb.buildName(name);
 		mb.buildSdg(sdg);
-		mb.buildInfo(info);
+		mb.buildEenheid(eenheid);
 		mb.buildGoalValue(goalValue);
 		mb.buildDatasource(datasource);
 		mb.buildSuperMvo(superMvo);

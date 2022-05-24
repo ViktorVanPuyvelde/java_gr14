@@ -27,10 +27,10 @@ open module java_gr14
 	requires org.apache.poi.ooxml;
 	requires org.apache.poi.poi;
 	requires org.apache.poi.ooxml.schemas;
-	requires org.mockito.junit.jupiter;
-	requires org.junit.jupiter.api;
-	requires org.mockito;
-	requires org.junit.jupiter.params;
+	//requires org.mockito.junit.jupiter;
+	//requires org.junit.jupiter.api;
+	//requires org.mockito;
+	//requires org.junit.jupiter.params;
 	
 
 }

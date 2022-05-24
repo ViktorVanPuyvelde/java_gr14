@@ -26,7 +26,7 @@ import com.google.gson.Gson;
 { @NamedQuery(name = "Mvo.geefMvosVoorCategorie", query = "SELECT m FROM Categorie c INNER JOIN c.sdgs s INNER JOIN s.mvos m WHERE c.name = :catNaam"),
 	@NamedQuery(name = "Mvo.geefMvoMetNaam", query = "SELECT m FROM Mvo m WHERE m.name = :mvoNaam"),
 	@NamedQuery(name = "Mvo.verwijderMvoMetID", query = "DELETE FROM Mvo m WHERE m.id = :mvoID"),
-	@NamedQuery(name = "Mvo.updateMvoMetID", query = "UPDATE Mvo m SET m.name = :mvoName, m.superMvo = :superMvoId, m.sdg = :sdgId, m.goalValue = :doel, m.datasource = :datasourceId, m.info = :type WHERE m.id = :mvoID"),
+	@NamedQuery(name = "Mvo.updateMvoMetID", query = "UPDATE Mvo m SET m.name = :mvoName, m.superMvo = :superMvoId, m.sdg = :sdgId, m.goalValue = :doel, m.datasource = :datasourceId, m.eenheid = :type WHERE m.id = :mvoID"),
 	@NamedQuery(name = "Mvo.geefAlleMVOS", query = "SELECT m FROM Mvo m"),
 	@NamedQuery(name = "Mvo.geefaantalMVOsDatasource", query = "SELECT COUNT(m) FROM Mvo m INNER JOIN m.datasource d where d.id = :datasource_id")
 	})
@@ -40,8 +40,8 @@ public class Mvo implements Serializable
 	private String id;
 	@Column(name = "mvo_name")
 	private String name;
-	@Column(name = "info")
-	private String info;
+	@Column(name = "eenheid")
+	private String eenheid;
 	@Column(name = "goal_val")
 	private int goalValue;
 	@OneToOne
@@ -58,11 +58,11 @@ public class Mvo implements Serializable
 
 	
 
-	public Mvo(String name, Sdg sdg, List<String> info, int goalValue, Datasource datasource, Mvo superMvo)
+	public Mvo(String name, Sdg sdg, String eenheid, int goalValue, Datasource datasource, Mvo superMvo)
 	{
 		setId(UUID.randomUUID().toString());
 		setName(name);
-		setInfo(info);
+		setEenheid(eenheid);
 		setGoalValue(goalValue);
 		setDatasource(datasource);
 		setSdg(sdg);
@@ -127,17 +127,15 @@ public class Mvo implements Serializable
 		this.superMvo = superMvo;
 	}
 
-	public String getInfo()
+	public String getEenheid()
 	{
-		return info;
+		return eenheid;
 	}
 
 	
-	public void setInfo(List<String> info)
+	public void setEenheid(String eenheid)
 	{
-		Gson gson = new Gson();
-		String infoasGSon = gson.toJson(info);
-		this.info = infoasGSon;
+		this.eenheid=eenheid;
 	}
 
 	public int getGoalValue()

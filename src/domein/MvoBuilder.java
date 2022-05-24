@@ -22,9 +22,9 @@ public class MvoBuilder
 		}
 		if (this.mvo.getSdg() == null)
 		{
-			this.errorMap.put("lblErrorSdg", "Er moet \u00E9\u00E9n SDG aangeduid zijn.");
+			this.errorMap.put("lblErrorSdg", "Er moet een SDG aangeduid zijn.");
 		}
-		if (this.mvo.getInfo().isEmpty() || this.mvo.getInfo().isBlank() || this.mvo.getInfo().equals("null"))
+		if (this.mvo.getEenheid().isEmpty() || this.mvo.getEenheid().isBlank() || this.mvo.getEenheid().equals("null"))
 		{
 			this.errorMap.put("lblErrorEenheid", "Er moet een eenheid meegegeven worden.");
 		}
@@ -78,9 +78,9 @@ public class MvoBuilder
 		this.mvo.setSuperMvo(superMvo);
 	}
 
-	public void buildInfo(List<String> info)
+	public void buildEenheid(String eenheid)
 	{
-		this.mvo.setInfo(info);
+		this.mvo.setEenheid(eenheid);
 	}
 
 	public void buildGoalValue(int goalValue)

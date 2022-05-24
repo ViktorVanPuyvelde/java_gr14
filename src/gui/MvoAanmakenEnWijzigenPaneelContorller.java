@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -60,12 +61,14 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	@FXML
 	private Label lblErrorEenheid;
 	@FXML
-	private Label lblTop;
+	private Label lblTop;	
+    @FXML
+    private Button btn_aanmaken;
 
 	// lokale attributen
 	private String name;
 	private Sdg sdg;
-	private ObservableList<String> type;
+	private String eenheid;
 	private int doel;
 	private Mvo superMvo;
 
@@ -98,7 +101,6 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		{
 			lvSdg = new ListView<>();
 			lvSuperMvo = new ListView<>();
-			type = FXCollections.observableArrayList(new ArrayList<>());
 			sdgItemList = FXCollections.observableArrayList(new ArrayList<>());
 			superMvoItemList = FXCollections.observableArrayList(new ArrayList<>());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("MvoAanmakenPaneel.fxml"));
@@ -123,14 +125,16 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 
 		if (wijzigen)
 		{
-			this.lblTop.setText("MVO aanpassen");
+			this.lblTop.setText("MVO doelstelling aanpassen");
 			txtMvoName.setText(selectedMvo.getName());
 
 			txtDoel.setText(selectedMvo.getGoalValue() + "");
 
-			txtType.setText(selectedMvo.getInfo());
+			txtType.setText(selectedMvo.getEenheid());
 
 			lvSdg.getSelectionModel().select(selectedMvo.getSdg().getName());
+			
+			btn_aanmaken.setText("Wijzigen");
 
 			if (selectedMvo.getSuperMvo() != null)
 			{
@@ -146,6 +150,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			collectChangesWijzigen();
 		else
 			collectChanges();
+		
 		verify();
 	}
 
@@ -155,7 +160,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		{
 			this.name = txtMvoName.getText();
 			this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
-			this.type.add(txtType.getText());
+			this.eenheid = txtType.getText();
 			this.doel = Integer.parseInt(txtDoel.getText());
 			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
 		} catch (EntityNotFoundException e)
@@ -171,7 +176,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		List<String> sdgNamen = this.sdgItemList.stream().map(Sdg::getName).collect(Collectors.toList());
 		int indexSdg = sdgNamen.indexOf(lvSdg.getSelectionModel().getSelectedItem());
 		this.sdg = this.sdgItemList.get(indexSdg);
-		this.type.add(txtType.getText());
+		this.eenheid = txtType.getText();
 		this.doel = Integer.parseInt(txtDoel.getText());
 
 		if (lvSuperMvo.getSelectionModel().getSelectedItem() != null)
@@ -198,10 +203,16 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 	{
 		try
 		{
-			if (wijzigen)
+			if (wijzigen) {
+				selectedMvo.setName(name);
+				selectedMvo.setSuperMvo(superMvo);
+				selectedMvo.setSdg(sdg);
+				selectedMvo.setGoalValue(doel);
+				selectedMvo.setEenheid(eenheid);
 				this.mc.update(selectedMvo);
+			}
 			else
-				this.mc.voegMvoToe(name, sdg, type, doel, null, superMvo);
+				this.mc.voegMvoToe(name, sdg, eenheid, doel, null, superMvo);
 			//melding.toonBevestiging("De MVO is aangemaakt.");
 		} catch (InformationRequiredException e)
 		{

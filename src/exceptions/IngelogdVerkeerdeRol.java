@@ -7,7 +7,7 @@ public class IngelogdVerkeerdeRol extends IllegalArgumentException
 
 	public IngelogdVerkeerdeRol()
 	{
-		super("Enkel de co\u00f6rdinator kan inloggen!");
+		super("Enkel de coördinator kan inloggen!");
 	}
 
 	public IngelogdVerkeerdeRol(String s)
