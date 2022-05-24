@@ -115,8 +115,8 @@ public class MvoPaneelController extends HBox implements PropertyChangeListener
 		{
 			verwijderRechterScherm();
 		}
-		if (MvoListView.getSelectionModel().getSelectedItem() != null)
-		{
+
+		if (MvoListView.getSelectionModel().getSelectedItem() != null) {
 			MvoAanmakenEnWijzigenPaneelContorller wijzigenMVOPaneel = new MvoAanmakenEnWijzigenPaneelContorller(true,
 					selectedMvo);
 			this.getChildren().add(wijzigenMVOPaneel);
