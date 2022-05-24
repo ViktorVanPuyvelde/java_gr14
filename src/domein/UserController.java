@@ -26,8 +26,9 @@ public class UserController
 	{
 		UserDaoJpa.closePersistency();
 	}
-	
-	public User getCoordinator() {
+
+	public User getCoordinator()
+	{
 		return coordinator;
 	}
 
@@ -47,11 +48,12 @@ public class UserController
 		Request<UserInfo> request2 = auth.userInfo(holder.getAccessToken());
 		UserInfo info = request2.execute();
 		String id = info.getValues().get("sub").toString().substring(6);
-		coordinator = new User(info.getValues().get("email").toString(), id, info.getValues().get("nickname").toString());
+		coordinator = new User(info.getValues().get("email").toString(), id,
+				info.getValues().get("nickname").toString());
 
 		// enkel coordinator kan inloggen
 		User u = repository.get(id);
-		if (!u.getRole().equals("coördinator"))
+		if (!u.getRole().equals("co\u00f6rdinator"))
 		{
 			meldAf();
 			throw new IngelogdVerkeerdeRol();
@@ -66,7 +68,8 @@ public class UserController
 		coordinator = null;
 	}
 
-	public String getUserInfo() {
+	public String getUserInfo()
+	{
 		return coordinator.getName();
 	}
 }
