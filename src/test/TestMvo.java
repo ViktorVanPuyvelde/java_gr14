@@ -34,10 +34,10 @@ class TestMvo {
 	
 	@Test
 	public void testCreateMvo() throws InformationRequiredException {
-		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 1, new Datasource("da", false), null);
+		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), "info", 1, new Datasource("da", false), null);
 
 		Assertions.assertFalse(controller.geefMvos().contains(mvo));
-		controller.voegMvoToe("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 1, new Datasource("da", false), null);
+		controller.voegMvoToe("mvo", new Sdg("sdg", null, null, null), "info", 1, new Datasource("da", false), null);
 		Assertions.assertTrue(controller.geefMvos().contains(mvo));		
 	}
 
@@ -47,17 +47,17 @@ class TestMvo {
 				Arguments.of("mvo", null, null, 100, null, null),
 				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, null, null),
 				Arguments.of("mvo", new Sdg("sdg", null, null, null), null, 100, new Datasource("da", false), null),
-				Arguments.of("mvo", null, new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),
+				Arguments.of("mvo", null, "info", 100, new Datasource("da", false), null),
 				Arguments.of(null, null, null, -1, null, null),
-				Arguments.of(null, new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),				
-				Arguments.of("", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 100, new Datasource("da", false), null),		
-				Arguments.of("", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), -1, new Datasource("da", false), null)		
+				Arguments.of(null, new Sdg("sdg", null, null, null), "info", 100, new Datasource("da", false), null),				
+				Arguments.of("", new Sdg("sdg", null, null, null), "info", 100, new Datasource("da", false), null),		
+				Arguments.of("", new Sdg("sdg", null, null, null), "info", -1, new Datasource("da", false), null)		
 			);
 	}
 	@ParameterizedTest
 	@MethodSource("fouteMvo")
-	public void testCreateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo) throws InformationRequiredException {
-		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList("info")), 0, new Datasource("da", false), null);
+	public void testCreateMvoWithException(String naam, Sdg sdg, String info, int goal, Datasource datasource, Mvo superMvo) throws InformationRequiredException {
+		Mvo mvo = new Mvo("mvo", new Sdg("sdg", null, null, null), "info", 0, new Datasource("da", false), null);
 
 		Assertions.assertFalse(controller.geefMvos().contains(mvo));
 		Assertions.assertThrows(InformationRequiredException.class, () -> controller.voegMvoToe(naam, sdg, info, goal, datasource, superMvo));
@@ -102,13 +102,13 @@ class TestMvo {
 	
 	@ParameterizedTest
 	@MethodSource("fouteMvo")
-	public void testUpdateMvoWithException(String naam, Sdg sdg, ArrayList<String> info, int goal, Datasource datasource, Mvo superMvo){
+	public void testUpdateMvoWithException(String naam, Sdg sdg, String info, int goal, Datasource datasource, Mvo superMvo){
 		Assertions.assertThrows(InformationRequiredException.class, () -> controller.update(new Mvo(naam, sdg, info, goal, datasource, superMvo)));
 	}
 	
 	@Test
 	public void testDeleteCategory() throws InformationRequiredException {
-		controller.voegMvoToe("nieuwMvo", new Sdg("sdg", null, null, null), new ArrayList<>(Arrays.asList(new String[] {"info"})), 50, new Datasource("d", false), null);
+		controller.voegMvoToe("nieuwMvo", new Sdg("sdg", null, null, null), "info", 50, new Datasource("d", false), null);
 
 		Mvo m = controller.get("nieuwMvo");
 		Assertions.assertTrue(controller.geefMvos().contains(m));

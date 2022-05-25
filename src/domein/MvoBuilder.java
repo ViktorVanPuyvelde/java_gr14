@@ -24,7 +24,7 @@ public class MvoBuilder
 		{
 			this.errorMap.put("lblErrorSdg", "Er moet \u00E9\u00E9n SDG aangeduid zijn.");
 		}
-		if (this.mvo.getEenheid().isEmpty() || this.mvo.getEenheid().isBlank() || this.mvo.getEenheid().equals("null"))
+		if (this.mvo.getEenheid() == null || this.mvo.getEenheid().isEmpty())
 		{
 			this.errorMap.put("lblErrorEenheid", "Er moet een eenheid meegegeven worden.");
 		}
