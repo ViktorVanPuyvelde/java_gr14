@@ -15,15 +15,16 @@
 <fx:root minHeight="300.0" prefHeight="346.0" prefWidth="600.0" stylesheets="@Styles.css" type="GridPane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="110.0" valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="28.0" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="50.599981689453124" minHeight="10.0" prefHeight="50.599981689453124" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="76.80002441406249" minHeight="10.0" prefHeight="51.400018310546855" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="159.60001220703126" minHeight="10.0" prefHeight="99.6" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="80.0" minHeight="10.800012207031244" prefHeight="11.599999999999994" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="95.20001220703125" minHeight="20.0" prefHeight="65.4" valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="43.0" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <columnConstraints>
       <ColumnConstraints halignment="CENTER" maxWidth="314.4" minWidth="300.0" prefWidth="314.4" />
-      <ColumnConstraints halignment="CENTER" minWidth="300.0" />
+      <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="300.0" />
    </columnConstraints>
    <children>
       <Label fx:id="titel_lbl" alignment="CENTER" prefHeight="18.0" prefWidth="314.0" text="Datasource aanmaken" textFill="#b2d234" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
@@ -55,7 +56,7 @@
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="6">
          <children>
             <Button fx:id="toevoegen_btn" mnemonicParsing="false" onAction="#toevoegen_wijzigen_OnAction" styleClass="Button" text="Toevoegen" />
             <Label fx:id="toevoegenLbl">
@@ -85,10 +86,9 @@
             <ListView fx:id="mvosList" prefHeight="110.0" prefWidth="241.0" />
          </children>
       </HBox>
-      <ChoiceBox fx:id="methodeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-         <GridPane.margin>
+      <ChoiceBox fx:id="aggregatieBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+         <padding>
             <Insets left="10.0" />
-         </GridPane.margin>
-      </ChoiceBox>
+         </padding></ChoiceBox>
    </children>
 </fx:root>

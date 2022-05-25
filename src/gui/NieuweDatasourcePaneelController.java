@@ -47,8 +47,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	@FXML
 	private TextField naam_textfield;
+	
 	@FXML
-	private ChoiceBox<Aggregatie> methodeBox;
+	private ChoiceBox<Aggregatie> aggregatieBox;
 	
 	@FXML
 	private Button upload_btn;
@@ -58,6 +59,8 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	@FXML
 	private ListView<String> mvosList;
+	@FXML
+	private ListView<String> methodeList;
 
 	@FXML
 	private Label toevoegenLbl;
@@ -67,6 +70,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private Button toevoegen_btn;
 
 	private ObservableList<Mvo> mvoList;
+	
 	private DatasourceController controller;
 	private Datasource datasource;
 
@@ -97,13 +101,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 		try
 		{
 			mvosList = new ListView<>();
-			// mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-			methodeBox = new ChoiceBox<>();
-			System.out.println(Aggregatie.values());
-			methodeBox.setItems(FXCollections.observableArrayList(Aggregatie.values()));
 			
-			mvoList = FXCollections.observableArrayList(new ArrayList<Mvo>());
+			// mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			
 			
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcePaneel.fxml"));
@@ -116,6 +116,12 @@ public class NieuweDatasourcePaneelController extends GridPane
 				titel_lbl.setText("Datasource wijzigen");
 				naam_textfield.setText(datasource.getName());
 			}
+			
+			
+			aggregatieBox.getItems().setAll(Aggregatie.values());
+			mvoList = FXCollections.observableArrayList(new ArrayList<Mvo>());
+		
+
 		} catch (IOException ex)
 		{
 			throw new RuntimeException(ex);
@@ -198,6 +204,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 		if (datasource == null) {
 			try {
 				controller.voegDatasourceToe(naam_textfield.getText(), false);
+				Datasource dezeDatasource = controller.geefDatasourceDoorNaam(naam_textfield.getText());
+				mvo.setDatasource(dezeDatasource);
+				mc.update(mvo);
 				toevoegenLbl.setText("Datasource toegevoegd!");
 			} catch (InformationRequiredException e) {
 				// TODO Auto-generated catch block
@@ -206,6 +215,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 		}else {
 			try {
 				controller.updateDatasource(datasource, naam_textfield.getText(), false);
+				
 				toevoegenLbl.setText("Datasource gewijzigd!");	
 			} catch (InformationRequiredException e) {
 				// TODO Auto-generated catch block
@@ -222,7 +232,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 		dataOpnemen();
 		mvo = mvoList.get(mvosList.getSelectionModel().getSelectedIndex());
-		Aggregatie methode = methodeBox.getSelectionModel().getSelectedItem();
+		Aggregatie methode = aggregatieBox.getSelectionModel().getSelectedItem();
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
 
