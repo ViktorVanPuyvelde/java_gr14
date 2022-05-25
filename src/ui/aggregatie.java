@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import gui.NieuweDatasourcePaneelController2;
+import gui.NieuweDatasourcePaneelController;
 import gui.tempMvoData;
 
 public class aggregatie {
@@ -14,7 +14,7 @@ public class aggregatie {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		NieuweDatasourcePaneelController2 d = new NieuweDatasourcePaneelController2();
+		NieuweDatasourcePaneelController d = new NieuweDatasourcePaneelController();
 		ArrayList<tempMvoData> al = new ArrayList<>();
 		ArrayList<tempMvoData> al2 = new ArrayList<>();
 		al.add(new tempMvoData(4.0,new Date(),1.0));
