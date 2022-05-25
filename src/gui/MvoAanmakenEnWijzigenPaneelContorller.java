@@ -120,7 +120,7 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		lvSuperMvo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
-		
+
 		superMvoItemList.stream().filter(mvo -> mvo.getSuperMvo() == null).forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 
 		if (wijzigen)
