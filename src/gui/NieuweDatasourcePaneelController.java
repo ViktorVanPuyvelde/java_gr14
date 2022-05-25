@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
 import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -31,6 +35,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -42,6 +47,8 @@ import javafx.stage.Stage;
 public class NieuweDatasourcePaneelController extends GridPane
 {
 
+
+
 	private MvoController mc;
 
 	@FXML
@@ -49,6 +56,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	@FXML
 	private Button upload_btn;
+	
+	@FXML
+	private ChoiceBox<Aggregatie> aggregatieBox;
 
 	@FXML
 	private Label fileLbl;
@@ -68,11 +78,12 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private Datasource datasource;
 
 	private File selectedFile;
-	HashMap<Double, List<List<Object>>> allDataFromFileMap = new HashMap<>();
-	TreeMap<Double, List<Object>> verwerkteData;
+	HashMap<Double, List<tempMvoData>> allDataFromFileMap = new HashMap<>();
+	HashMap<Double, tempMvoData> verwerkteData;
 
 	private MvoDataController mdc;
 	Mvo mvo;
+
 
 	public NieuweDatasourcePaneelController(Datasource d, DatasourceController controller)
 	{
@@ -83,6 +94,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 		buildGui();
 		setMvoList();
 
+	}
+
+	public NieuweDatasourcePaneelController() {
+		
 	}
 
 	private void buildGui()
@@ -104,6 +119,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 				titel_lbl.setText("Datasource wijzigen");
 				naam_textfield.setText(datasource.getName());
 			}
+			
+			aggregatieBox.getItems().setAll(Aggregatie.values());
+			aggregatieBox.setValue(Aggregatie.SOM);
+			
 		} catch (IOException ex)
 		{
 			throw new RuntimeException(ex);
@@ -160,13 +179,16 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private void update()
 	{
 
-		verwerkteData.forEach((key, val) -> System.out.println(val));
+		
 		verwerkteData.forEach((key, val) ->
 		{
 			try
 			{
-				mdc.voegMvoDataToe(mvo, String.valueOf(((OptionalDouble) val.get(0)).getAsDouble()), (Date) val.get(1),
-						(int) (Double.parseDouble(val.get(2).toString())));
+				System.out.print("toeveogen : ");
+				System.out.println(val);
+				System.out.print("aan :");
+				System.out.println(mvo.getName());
+				mdc.voegMvoDataToe(mvo, String.valueOf(val.getWaarde()),val.getDate(), (int) val.getQuarter());
 			} catch (InformationRequiredException e)
 			{
 
@@ -186,6 +208,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 		if (datasource == null) {
 			try {
 				controller.voegDatasourceToe(naam_textfield.getText(), false);
+				Datasource dezeDatasource = controller.geefDatasourceDoorNaam(naam_textfield.getText());
+				mvo.setDatasource(dezeDatasource);
+				mc.update(mvo);
 				toevoegenLbl.setText("Datasource toegevoegd!");
 			} catch (InformationRequiredException e) {
 				// TODO Auto-generated catch block
@@ -210,7 +235,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 		dataOpnemen();
 		mvo = mvoList.get(mvosList.getSelectionModel().getSelectedIndex());
-		Aggregatie methode = Aggregatie.GEMIDDELDE;
+		Aggregatie methode = aggregatieBox.getSelectionModel().getSelectedItem();
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
 
@@ -226,11 +251,13 @@ public class NieuweDatasourcePaneelController extends GridPane
 			XSSFSheet sheet = workbook.getSheetAt(0);
 
 			Iterator<Row> rowIterator = sheet.iterator();
+			//first row with colmnnames
 			rowIterator.next();
-			// loop each row
+			
+			// loop each row 
 			while (rowIterator.hasNext())
 			{
-				List<Object> data = new ArrayList<>();
+				
 
 				Row row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
@@ -240,12 +267,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 				Double dataCel = cellIterator.next().getNumericCellValue();
 				Date dateCel = cellIterator.next().getDateCellValue();
 				Double quarterCel = cellIterator.next().getNumericCellValue();
-				data.add(dataCel);
-				data.add(dateCel);
-				data.add(quarterCel);
 				// ------
 
-				// add datalist to hashmap
+				tempMvoData data = new tempMvoData(dataCel,dateCel,quarterCel);
+				// add data to hashmap
 				// -------------------------
 				if (allDataFromFileMap.get(quarterCel) != null)
 				{
@@ -253,12 +278,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 					allDataFromFileMap.get(quarterCel).add(data);
 				} else
 				{
-					// first dataList with column names
-					List<Object> firstDataList = new ArrayList<>(data);
-
 					// new List with first dataList for new key
-					List<List<Object>> filledStarterList = new ArrayList<>();
-					filledStarterList.add(firstDataList);
+					List<tempMvoData> filledStarterList = new ArrayList<>();
+					filledStarterList.add(data);
 
 					allDataFromFileMap.put(quarterCel, filledStarterList);
 				}
@@ -287,7 +309,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	}
 
-	private TreeMap<Double, List<Object>> verwerkDatasource(Aggregatie methode)
+	private HashMap<Double, tempMvoData> verwerkDatasource(Aggregatie methode)
 	{
 
 		switch (methode)
@@ -303,78 +325,51 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	}
 
-	private TreeMap<Double, List<Object>> verwerkDataAlsGem(HashMap<Double, List<List<Object>>> dataMap)
+	public  HashMap<Double, tempMvoData> verwerkDataAlsGem(HashMap<Double, List<tempMvoData>> dataMap)
+	{
+		// tempMvoData = {waarde, datum, quarter}
+
+		
+		
+		Map<Double, tempMvoData> aggregatedData = dataMap.entrySet()
+		        .stream()
+		        .collect(
+		            Collectors.toMap(
+		                Map.Entry::getKey, 
+		                e -> {
+		                	AtomicInteger count = new AtomicInteger();
+		                	return new tempMvoData(
+		                		e.getValue().stream().reduce( 0.0, (subtotal, element) -> { count.incrementAndGet(); return subtotal + element.getWaarde();}, Double::sum) / count.get(),
+		                		e.getValue().get(0).getDate(),
+		                		e.getKey());
+		                }
+		            		)
+		                
+		        );
+		System.out.println(aggregatedData);
+		return (HashMap<Double, tempMvoData>) aggregatedData;
+	}
+
+	public HashMap<Double, tempMvoData> verwerkDataAlsSom(HashMap<Double, List<tempMvoData>> dataMap)
 	{
 		// datalijst = [waarde, datum, quarter]
 
-		// begin Treemap voor uiteindelijke verwerkte data lijsten
-		TreeMap<Double, List<Object>> verwerkteDataTree = new TreeMap<>();
+		Map<Double, tempMvoData> aggregatedData = dataMap.entrySet()
+		        .stream()
+		        .collect(
+		            Collectors.toMap(
+		                Map.Entry::getKey, 
+		                e -> new tempMvoData(
+		                		e.getValue().stream().reduce( 0.0, (subtotal, element) -> subtotal + element.getWaarde(), Double::sum),
+		                		e.getValue().get(0).getDate(),
+		                		e.getKey()))
+		                
+		        );
 
-		// per key (quarter) de data lijsten ophalen
-		dataMap.entrySet().stream().forEach(dataLijstenPerKey ->
-		{
-
-			// elke datalijst waarde opslaan in nieuwe lijst (in treemap)
-			Double key = dataLijstenPerKey.getKey();
-			List<Double> waardeLijst = new ArrayList<>();
-			dataLijstenPerKey.getValue().stream().forEach(datalijst ->
-			{
-
-				waardeLijst.add((double) datalijst.get(0));
-			});
-
-			// bereken het gemmidelde van alle waarden per quarter
-			OptionalDouble gem = waardeLijst.stream().mapToDouble(a -> a).average();
-
-			// nieuwe entry maken voor treemap met gemmidelde
-			List<Object> newDataList = new ArrayList<>();
-			newDataList.add(gem);
-			newDataList.add(dataLijstenPerKey.getValue().get(0).get(1));
-			newDataList.add(key);
-
-			verwerkteDataTree.put(key, newDataList);
-		});
-
-		return verwerkteDataTree;
+		System.out.println(aggregatedData);
+		return (HashMap<Double, tempMvoData>) aggregatedData;
 	}
-
-	private TreeMap<Double, List<Object>> verwerkDataAlsSom(HashMap<Double, List<List<Object>>> dataMap)
-	{
-		// datalijst = [waarde, datum, quarter]
-
-		// begin Treemap voor uiteindelijke verwerkte data lijsten
-		TreeMap<Double, List<Object>> verwerkteDataTree = new TreeMap<>();
-
-		// per key (quarter) de data lijsten ophalen
-		dataMap.entrySet().stream().forEach(dataLijstenPerKey ->
-		{
-
-			// elke datalijst waarde optellen bij vorig totaal (in treemap)
-			dataLijstenPerKey.getValue().stream().forEach(datalijst ->
-			{
-				Double key = dataLijstenPerKey.getKey();
-				List<Object> treeValueLijst = verwerkteData.get(key);
-
-				// er zit al data voor deze quarter in de treemap
-				if (treeValueLijst != null)
-				{
-
-					// waarde optellen bij treemap waarde
-					treeValueLijst.set(0, (double) treeValueLijst.get(0) + (double) datalijst.get(0));
-					verwerkteDataTree.put(key, treeValueLijst);
-				}
-				// er zit nog geen data voor deze quarter in de treemap -> nieuwe entr
-				else
-				{
-
-					verwerkteDataTree.put(key, datalijst);
-				}
-			});
-
-		});
-
-		return verwerkteDataTree;
-	}
+	
 	
 	private void updateSuperMvo() {
 		Mvo superMvo = mvo.getSuperMvo();
@@ -395,15 +390,16 @@ public class NieuweDatasourcePaneelController extends GridPane
 				// er is al data voor dit kwartaal -> nieuwe data optellen bij bestaande data
 				if(tree.containsKey(quarter)) {			
 					MvoData newSuperMvoData = tree.get(quarter);
-					System.out.println(newSuperMvoData.getWaarde());
 					newSuperMvoData.setMvo_id(superMvo);
 					newSuperMvoData.setDatum(subMvoData.getDatum());
 					newSuperMvoData.setWaardeInt(subMvoData.getWaardeInt() + tree.get(quarter).getWaardeInt());
 					newSuperMvoData.setQuarter(quarter);
+					System.out.println("super mvo update");
 					mdc.update(newSuperMvoData);
 				}else {
 					// er is nog geen data voor dit kwartaal -> nieuwe MvoData
 					try {
+						System.out.println("nieuw voor super");
 						mdc.voegMvoDataToe(superMvo,String.valueOf(subMvoData.getWaardeInt()),subMvoData.getDatum(),quarter);
 					} catch (InformationRequiredException e) {
 						// TODO Auto-generated catch block
@@ -414,4 +410,42 @@ public class NieuweDatasourcePaneelController extends GridPane
 		}
 		
 	}
+	
+	public class tempMvoData {
+
+		private Double waarde;
+		private Date date;
+		private Double quarter;
+
+		private tempMvoData(Double dataCel, Date dateCel, Double quarterCel) {
+			this.waarde = dataCel;
+			this.date = dateCel;
+			this.quarter = quarterCel;
+		}
+		
+
+		private void setWaarde(Double waarde) {
+			this.waarde = waarde;
+		}
+		private void setDate(Date date) {
+			this.date = date;
+		}
+		private void setQuarter(Double quarter) {
+			this.waarde = quarter;
+		}
+		private double getQuarter() {
+			return this.quarter;
+		}
+		private Date getDate() {
+			return this.date;
+		}
+		private double getWaarde() {
+			return this.waarde;
+		}
+		
+		public String toString() {
+			return waarde.toString() + date.toString()+ quarter.toString();
+		}
+
+	} 
 }
