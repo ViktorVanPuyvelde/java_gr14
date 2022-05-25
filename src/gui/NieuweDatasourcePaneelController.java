@@ -31,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -46,7 +47,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	@FXML
 	private TextField naam_textfield;
-
+	@FXML
+	private ChoiceBox<Aggregatie> methodeBox;
+	
 	@FXML
 	private Button upload_btn;
 
@@ -74,6 +77,9 @@ public class NieuweDatasourcePaneelController extends GridPane
 	private MvoDataController mdc;
 	Mvo mvo;
 
+
+
+
 	public NieuweDatasourcePaneelController(Datasource d, DatasourceController controller)
 	{
 		this.mc = new MvoController();
@@ -85,6 +91,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 
 	}
 
+
 	private void buildGui()
 	{
 		try
@@ -92,7 +99,12 @@ public class NieuweDatasourcePaneelController extends GridPane
 			mvosList = new ListView<>();
 			// mvosList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+			methodeBox = new ChoiceBox<>();
+			System.out.println(Aggregatie.values());
+			methodeBox.setItems(FXCollections.observableArrayList(Aggregatie.values()));
+			
 			mvoList = FXCollections.observableArrayList(new ArrayList<Mvo>());
+			
 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("NieuweDatasourcePaneel.fxml"));
 			loader.setController(this);
@@ -210,7 +222,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 	{
 		dataOpnemen();
 		mvo = mvoList.get(mvosList.getSelectionModel().getSelectedIndex());
-		Aggregatie methode = Aggregatie.GEMIDDELDE;
+		Aggregatie methode = methodeBox.getSelectionModel().getSelectedItem();
 		String naam = naam_textfield.getText();
 		verwerkteData = verwerkDatasource(methode);
 
