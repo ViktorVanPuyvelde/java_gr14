@@ -226,8 +226,10 @@ public class NieuweDatasourcePaneelController extends GridPane
 			XSSFSheet sheet = workbook.getSheetAt(0);
 
 			Iterator<Row> rowIterator = sheet.iterator();
+			//first row with colmnnames
 			rowIterator.next();
-			// loop each row
+			
+			// loop each row and make list of data of each row
 			while (rowIterator.hasNext())
 			{
 				List<Object> data = new ArrayList<>();
@@ -253,7 +255,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 					allDataFromFileMap.get(quarterCel).add(data);
 				} else
 				{
-					// first dataList with column names
+					// first dataList
 					List<Object> firstDataList = new ArrayList<>(data);
 
 					// new List with first dataList for new key
