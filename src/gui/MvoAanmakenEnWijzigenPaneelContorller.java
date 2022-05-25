@@ -120,8 +120,8 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 		lvSuperMvo.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
 		sdgItemList.forEach(sdg -> lvSdg.getItems().add(sdg.getName()));
-
-		superMvoItemList.forEach(m -> lvSuperMvo.getItems().add(m.getName()));
+		
+		superMvoItemList.stream().filter(mvo -> mvo.getSuperMvo() == null).forEach(m -> lvSuperMvo.getItems().add(m.getName()));
 
 		if (wijzigen)
 		{
@@ -161,7 +161,10 @@ public class MvoAanmakenEnWijzigenPaneelContorller extends GridPane
 			this.sdg = this.sc.geefSdgDoorNaam(this.lvSdg.getSelectionModel().getSelectedItem());
 			this.eenheid = txtType.getText();
 			this.doel = Integer.parseInt(txtDoel.getText());
-			this.superMvo = this.mc.geefMvoMetNaam(this.lvSuperMvo.getSelectionModel().getSelectedItem());
+			String naamSuperMvo = this.lvSuperMvo.getSelectionModel().getSelectedItem();
+			if (naamSuperMvo != null && !naamSuperMvo.isBlank()) {
+				this.superMvo = this.mc.geefMvoMetNaam(naamSuperMvo);
+			}
 		} catch (EntityNotFoundException e)
 		{
 			System.out.println("error");
