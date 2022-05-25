@@ -29,7 +29,6 @@ import domein.MvoController;
 import domein.MvoData;
 import domein.MvoDataController;
 import exceptions.InformationRequiredException;
-import gui.tempMvoData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -122,6 +121,7 @@ public class NieuweDatasourcePaneelController extends GridPane
 			}
 			
 			aggregatieBox.getItems().setAll(Aggregatie.values());
+			aggregatieBox.setValue(Aggregatie.SOM);
 			
 		} catch (IOException ex)
 		{
@@ -410,4 +410,42 @@ public class NieuweDatasourcePaneelController extends GridPane
 		}
 		
 	}
+	
+	public class tempMvoData {
+
+		private Double waarde;
+		private Date date;
+		private Double quarter;
+
+		private tempMvoData(Double dataCel, Date dateCel, Double quarterCel) {
+			this.waarde = dataCel;
+			this.date = dateCel;
+			this.quarter = quarterCel;
+		}
+		
+
+		private void setWaarde(Double waarde) {
+			this.waarde = waarde;
+		}
+		private void setDate(Date date) {
+			this.date = date;
+		}
+		private void setQuarter(Double quarter) {
+			this.waarde = quarter;
+		}
+		private double getQuarter() {
+			return this.quarter;
+		}
+		private Date getDate() {
+			return this.date;
+		}
+		private double getWaarde() {
+			return this.waarde;
+		}
+		
+		public String toString() {
+			return waarde.toString() + date.toString()+ quarter.toString();
+		}
+
+	} 
 }
